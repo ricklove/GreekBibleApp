@@ -98,12 +98,12 @@ var Told;
 
                         var bcvRegex = /([0-9]{2})([0-9]{2})([0-9]{2})/;
                         var bcvMatch = bookChapterVerseCode.match(bcvRegex);
-                        var bookIndex = parseCode(bcvMatch[1]) - 1;
+                        var bookNumber = parseCode(bcvMatch[1]);
                         var chapter = parseCode(bcvMatch[2]);
                         var verse = parseCode(bcvMatch[3]);
 
                         return {
-                            bookIndex: bookIndex,
+                            bookNumber: bookNumber,
                             chapter: chapter,
                             verse: verse
                         };

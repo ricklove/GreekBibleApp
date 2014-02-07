@@ -13,7 +13,7 @@
     }
 
     export interface IPassageRef {
-        bookIndex: number;
+        bookNumber: number;
         chapter: number;
         verse: number;
     }

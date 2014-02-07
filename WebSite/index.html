@@ -14,15 +14,15 @@
     <script type='text/javascript' src="Scripts/js/External/knockout-3.0.0.js"></script>
 
     <script type="text/javascript" src="Scripts/js/External/linq.js"></script>
-    <script type="text/javascript" src="Scripts/js/External/linq.jquery.js"></script>
+    <script type="text/javascript" src="Scripts/js/External/jquery.linq.js"></script>
 
     <script type='text/javascript' src='Scripts/js/External/qunit-1.14.0.js'></script>
 
     <script type='text/javascript' src='Scripts/ts/System/ParsePassageText.js'></script>
     <script type='text/javascript' src='Scripts/ts/System/ParsePassageText_TestData.js'></script>
     <script type='text/javascript' src='Scripts/ts/System/ParsePassageText_Tests.js'></script>
-    <script type='text/javascript' src='Scripts/ts/User/DisplayGreekText.js'></script>
-    <script type='text/javascript' src='Scripts/ts/User/DisplayGreekText_Tests.js'></script>
+    <script type='text/javascript' src='Scripts/ts/User/DisplayPassageText.js'></script>
+    <script type='text/javascript' src='Scripts/ts/User/DisplayPassageText_Tests.js'></script>
 
 </head>
 <body>
@@ -31,7 +31,11 @@
             <h1>Header</h1>
         </div>
         <div data-role="content">
-            <p>Content goes here</p>
+            <h3>Passage:</h3>
+            <h4><span data-bind="text: passage().entries.length"></span>&nbsp;Entries</h4>
+            <div data-bind="foreach: passage().entries">
+                <span data-bind="text: rawText"></span>
+            </div>
 
             <div id="qunit"></div>
         </div>
@@ -39,5 +43,12 @@
             <h4>Footer</h4>
         </div>
     </div>
+
+    <script type="text/javascript">
+        var viewModel = new Told.GreekBible.UI.PassageViewModel();
+        viewModel.loadSample();
+
+        ko.applyBindings(viewModel);
+    </script>
 </body>
 </html>

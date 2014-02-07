@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../System/ParsePassageText.ts" />
+/// <reference path="../System/ParsePassageText_TestData.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
@@ -20,7 +21,12 @@ var Told;
 
             var PassageViewModel = (function () {
                 function PassageViewModel() {
+                    this.passage = ko.observable(null);
                 }
+                PassageViewModel.prototype.loadSample = function () {
+                    var sampleText = Told.GreekBible.Data.Tests.Sample.sampleText;
+                    this.passage(Told.GreekBible.Data.Parser.parsePassage(sampleText));
+                };
                 return PassageViewModel;
             })();
             UI.PassageViewModel = PassageViewModel;
