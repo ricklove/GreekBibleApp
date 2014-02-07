@@ -6,14 +6,15 @@
 	- Core:
 		- Passage Interfaces
 	- Tasks
+		- X: Refactor User and System File Structure
+			- X: Move Data Interfaces to Core Folder
+			- X: Move ParsePassageText to System Folder
+			- X: Move SampleData to ParsePassageText_TestData
+			- X: Rename DisplayGreekText to DisplayPassageText
 		- Create Tests for ParsePassageText
-			- Move Tests to correct file: "Will load first word from Sample - James 1"
-			- Move SampleData to ParsePassageText_TestData
+			- X: Move Tests to correct file: "Will load first word from Sample - James 1"
 		- Create Tests for DisplayPassageText
-		- Refactor User and System File Structure
-			- Move Data Interfaces to Core Folder
-			- Move ParsePassageText to System Folder
-			- Move SampleData to System Folder
+
 
 Future:
 - Allow User to select a book and chapter

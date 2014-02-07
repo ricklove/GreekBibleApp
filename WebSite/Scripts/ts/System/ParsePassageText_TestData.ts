@@ -1,4 +1,4 @@
-﻿module Told.GreekBible.Data {
+﻿module Told.GreekBible.Data.Tests {
 
     export class Sample {
         static sampleText = ""
