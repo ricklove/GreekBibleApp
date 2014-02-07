@@ -21,6 +21,11 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite", "WebSite\", "{AAB
 		VWDPort = "59027"
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{688244DF-C256-4689-93D9-1E3221739019}"
+	ProjectSection(SolutionItems) = preProject
+		Tools\TSTest.bat = Tools\TSTest.bat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

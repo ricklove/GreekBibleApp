@@ -1,4 +1,34 @@
-### Environment Setup (Pre-Project)
+### File Structure
+
+- Notes
+	- Developer Notes
+		- Required Tools
+		- Setup
+		- Interesting Techniques
+	- Release Notes
+		- Summary
+		- Feature Descriptions
+		- Version Changes
+	- ScreenShots
+- Scripts
+	- js
+		- Javascript Source Files (Not Generated)
+		- External: Code from outside sources and libraries
+	- ts
+		- TypeScript
+		- *.ts files: TypeScript Source Code
+		- *.js files: Generated Javascript
+		- External: Code from outside sources and libraries
+- Styles
+	- css
+		- CSS Source Files (not generated)
+	- sass
+		- Sass Files created using Compass
+		- *.scss - Sassy CSS source
+		- *.css - Generated CSS
+
+
+### Environment & Project Setup (Pre-Project)
 
 #### Tools
 
@@ -17,6 +47,7 @@
 		- chutzpah.console.exe ../WebSite/Scripts/ts /testMode TypeScript /openInBrowser
 	 
 #### Libraries
+
 - jQuery Mobile
 	- Copied Code from Demo to get started
 		- jQuery.js
@@ -24,10 +55,15 @@
 		- Default Theme Css
 		- Images
 	- TypeScript Definitions
-		- NuGet PM > Install-Package jquery.TypeScript.DefinitelyTyped
-		- FAILED: NuGet PM > Install-Package jquerymobile.TypeScript.DefinitelyTyped
-		- NuGet PM > Install-Package jquerymobile.TypeScript.DefinitelyTyped -Version 0.1.2
+		- NuGet PM> Install-Package jquery.TypeScript.DefinitelyTyped
+		- FAILED: NuGet PM> Install-Package jquerymobile.TypeScript.DefinitelyTyped
+		- NuGet PM> Install-Package jquerymobile.TypeScript.DefinitelyTyped -Version 0.1.2
 - qUnit
 	- qUnit JS & CSS
 	- TypeScript Definitions
-		- NuGet PM > Install-Package qunit.TypeScript.DefinitelyTyped
+		- NuGet PM> Install-Package qunit.TypeScript.DefinitelyTyped
+
+- KnockoutJS
+	- knockout JS
+	- TypeScript Definitions
+		- NuGet PM> Install-Package knockout.TypeScript.DefinitelyTyped
