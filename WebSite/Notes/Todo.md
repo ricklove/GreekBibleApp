@@ -2,5 +2,7 @@
 	- User Feature:
 		- Display the Greek Text
 			- Required System Features:
-				- Load and Parse Greek Data File
-		 
+				- X: Load and Parse Greek Data File
+	- Refactor User and System File Structure
+		- Move ParsePassageText to System Folder
+		- Move SampleData to System Folder
