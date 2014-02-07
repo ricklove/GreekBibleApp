@@ -33,13 +33,11 @@ var Told;
                 function Loader() {
                 }
                 Loader.loadPassage = function (text) {
-                    var passage = new PassageModel();
-
-                    passage.words = new Array();
-                    passage.words[0] = new WordModel();
-                    passage.words[0].text = "test";
-
-                    return passage;
+                    //var passage = new PassageModel();
+                    //passage.words = new Array<WordModel>();
+                    //passage.words[0] = new WordModel();
+                    //passage.words[0].text = "test";
+                    //return passage;
                 };
                 return Loader;
             })();

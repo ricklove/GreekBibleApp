@@ -41,10 +41,11 @@
 		- > Automatically Compile...
 	- TODO: Create a bat file to produce one js file for release (Indivudual files is good during Testing)
 - NuGet Package Manager - VS Extension
-- Chutzpah Console (Extensions not Enabled for VS Express)
+- FAIL: Chutzpah Console (Extensions not Enabled for VS Express)
 	- Download Console and unzipped to my Tools Folder
 	- Created a bat file to run all the tests in the ts directory
 		- chutzpah.console.exe ../WebSite/Scripts/ts /testMode TypeScript /openInBrowser
+	- FAIL: This takes a long time to run and it failed to run a valid test. Testing in browser with a qunit tag enables debugging in browser and is fast.
 	 
 #### Libraries
 

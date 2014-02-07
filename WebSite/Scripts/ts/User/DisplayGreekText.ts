@@ -22,13 +22,13 @@ module Told.GreekBible.UI {
 
     class Loader {
         static loadPassage(text: string): PassageModel {
-            var passage = new PassageModel();
+            //var passage = new PassageModel();
 
-            passage.words = new Array<WordModel>();
-            passage.words[0] = new WordModel();
-            passage.words[0].text = "test";
+            //passage.words = new Array<WordModel>();
+            //passage.words[0] = new WordModel();
+            //passage.words[0].text = "test";
 
-            return passage;
+            //return passage;
         }
     }
 }
