@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="Styles/css/External/themes/default/jquery.mobile-1.4.0.min.css">
     <link rel="stylesheet" href="Styles/css/External/qunit-1.14.0.css">
+    <link rel="stylesheet" href="Styles/css/App.css">
 
 
     <script type='text/javascript' src="Scripts/js/External/jquery.js"></script>
@@ -34,8 +35,24 @@
             <h3>Passage:</h3>
             <h4><span data-bind="text: passage().entries.length"></span>&nbsp;Entries</h4>
             <div data-bind="foreach: passage().entries">
-                <span data-bind="text: rawText"></span>
+                <div class="entry" >
+                    <div class="rawText" data-bind="text: rawText"></div>
+                    <div class="partOfSpeechColor" style="background-color: #953d8b"></div>
+                    <div class="parseColor" style="background-color: #37ae97"></div>
+                    <div class="lemma" data-bind="text: lemma"></div>
+                    <div class="partOfSpeechCode" data-bind="text: partOfSpeech.partOfSpeechCode" style="color: #953d8b"></div>
+                    <div class="morphCode" data-bind="text: morph.morphCode" style="color: #37ae97"></div>
+                    <!--<div class="entryPopupWrapper" style="display: none">
+                        <div class="entryPopup" ientry="5">
+                            <div class="entryPopupDebug" ientry="5"></div>
+                            <div class="entryPopupText" ientry="5"></div>
+                        </div>
+                    </div>-->
+                </div>
+
             </div>
+
+
 
             <div id="qunit"></div>
         </div>

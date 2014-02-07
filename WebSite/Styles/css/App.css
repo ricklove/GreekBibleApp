@@ -1,0 +1,92 @@
+﻿.entries
+{
+    margin-bottom: 200px;
+}
+
+.book
+{
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.chapter
+{
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
+.verse
+{
+    font-size: 0.7em;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 2px;
+}
+
+.entry
+{
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 10px;
+}
+
+.partOfSpeechColor
+{
+    height: 2px;
+}
+
+.parseColor
+{
+    height: 5px;
+}
+
+.rawText
+{
+    margin-top: 5px;
+}
+
+.lemma
+{
+    font-size: 0.7em;
+    color: #888;
+}
+
+.partOfSpeechCode
+{
+    font-size: 0.7em;
+}
+
+.parseCode
+{
+    font-size: 0.7em;
+}
+
+.entryPopupWrapper
+{
+    /*position: relative;*/
+}
+
+.entryPopup
+{
+    margin: 0;
+    position: absolute;
+    background: White;
+    left: 5px;
+    top: 5px;
+    width: 200px;
+    border: 1px solid black;
+    padding: 2px;
+}
+
+.strongsEntry
+{
+    margin-top: 5px;
+    margin-left: 10px;
+    color: Blue;
+}
+
+
+.downloadAllButton
+{
+
+}
