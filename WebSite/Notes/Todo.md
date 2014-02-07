@@ -16,7 +16,13 @@
 			- X: Test that the codes are loaded
 			- Test that the codes are parsed correctly
 		- Create Tests for DisplayPassageText
-		- x: Display Text on page
+		- X: Display Text on page
+		- X: Display Details on page as text
+		- Display the Book Chapter and Verse at proper divisions
+
+- Display Details on page with color
+	- Tasks
+		- Fix the color coding of the details
 
 
 Future:
