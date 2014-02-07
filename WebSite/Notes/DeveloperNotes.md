@@ -68,3 +68,8 @@
 	- knockout JS
 	- TypeScript Definitions
 		- NuGet PM> Install-Package knockout.TypeScript.DefinitelyTyped
+
+- LinqJS
+	- linq JS
+	- TypeScript Definitions
+		- NuGet PM> Install-Package linq.TypeScript.DefinitelyTyped

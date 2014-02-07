@@ -1,8 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite", "WebSite\", "{AAB9CE71-FBF6-47EA-8180-B22C5B0BB5F8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{688244DF-C256-4689-93D9-1E3221739019}"
+	ProjectSection(SolutionItems) = preProject
+		Tools\TSTest.bat = Tools\TSTest.bat
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite(1)", "http://localhost:59027", "{AAB9CE71-FBF6-47EA-8180-B22C5B0BB5F8}"
 	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/WebSite"
 		Debug.AspNetCompiler.PhysicalPath = "WebSite\"
@@ -18,12 +24,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite", "WebSite\", "{AAB
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "59027"
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{688244DF-C256-4689-93D9-1E3221739019}"
-	ProjectSection(SolutionItems) = preProject
-		Tools\TSTest.bat = Tools\TSTest.bat
+		SlnRelativePath = "WebSite\"
 	EndProjectSection
 EndProject
 Global

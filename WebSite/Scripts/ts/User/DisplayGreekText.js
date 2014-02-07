@@ -1,4 +1,5 @@
 ﻿/// <reference path="SampleData.ts" />
+/// <reference path="ParsePassageText.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
@@ -33,14 +34,12 @@ var Told;
                 function Loader() {
                 }
                 Loader.loadPassage = function (text) {
-                    //var passage = new PassageModel();
-                    //passage.words = new Array<WordModel>();
-                    //passage.words[0] = new WordModel();
-                    //passage.words[0].text = "test";
-                    //return passage;
+                    var passage = Told.GreekBible.Data.Parser.parsePassage(text);
+                    return passage;
                 };
                 return Loader;
             })();
+            UI.Loader = Loader;
         })(GreekBible.UI || (GreekBible.UI = {}));
         var UI = GreekBible.UI;
     })(Told.GreekBible || (Told.GreekBible = {}));

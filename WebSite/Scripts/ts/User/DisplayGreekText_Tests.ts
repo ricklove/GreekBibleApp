@@ -3,14 +3,24 @@
 
 module Told.GreekBible.UI.Tests {
 
-    test("will load first word from Sample - James 1", function () {
+    test("Will load first word from Sample - James 1", function () {
         var obj = new PassageViewModel();
 
         obj.loadSample();
 
-        var result = obj.passage.words[0].text;
+        var result = obj.passage.entries[0].rawText;
 
-        equal(result, "Ἰάκωβος", "The first word should be Ἰάκωβος");
+        equal(result, "Ἰάκωβος", "The first word is right");
+    });
+
+    test("Will load last word from Sample - James 1", function () {
+        var obj = new PassageViewModel();
+
+        obj.loadSample();
+
+        var result = obj.passage.entries[obj.passage.entries.length - 1].rawText;
+
+        equal(result, "κόσμου.", "The last word is right");
     });
 
 

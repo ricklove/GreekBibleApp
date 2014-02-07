@@ -1,4 +1,6 @@
 ﻿/// <reference path="SampleData.ts" />
+/// <reference path="ParsePassageText.ts" />
+
 
 // <reference path="../../typings/knockout/knockout.d.ts" />
 
@@ -8,7 +10,7 @@ module Told.GreekBible.UI {
     }
 
     export class PassageModel {
-        words: Array<WordModel>;
+        words: WordModel[];
     }
 
     export class PassageViewModel {
@@ -17,18 +19,15 @@ module Told.GreekBible.UI {
             this.passage = Loader.loadPassage(sampleText)
         }
 
-        passage: PassageModel;
+        passage: Data.IPassage;
     }
 
-    class Loader {
-        static loadPassage(text: string): PassageModel {
-            //var passage = new PassageModel();
-
-            //passage.words = new Array<WordModel>();
-            //passage.words[0] = new WordModel();
-            //passage.words[0].text = "test";
-
-            //return passage;
+    export class Loader {
+        static loadPassage(text: string): Data.IPassage {
+            var passage = Data.Parser.parsePassage(text);
+            return passage;
         }
+
+
     }
 }
