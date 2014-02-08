@@ -29,11 +29,12 @@
 		- [ ] LoadPassageText
 	- [ ] Tasks
 		- [X] Populate Book Names
-		- [ ] Populate Chapter Count when the Book is chosen
+		- [X] Populate Chapter Count when the Book is chosen
+		- [ ] Reset Chapter to 1 when the Book is chosen
 		- [ ] Focus on Chapter Choice after choosing Book
-		- [ ] Load Passage after choosing chapter
+		- [S] Load Passage after choosing chapter
 		- [ ] Apply jQueryMobile Template after repopulating
-		- [ ] Divide Data into Chapters
+		- [X] Divide Data into Chapters
 		- [ ] Download Chapter with Ajax
 
 - [ ] Publish

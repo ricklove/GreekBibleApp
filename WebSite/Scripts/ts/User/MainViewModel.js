@@ -7,10 +7,21 @@ var Told;
         (function (UI) {
             var MainViewModel = (function () {
                 function MainViewModel() {
-                    this.passage = ko.observable(null);
                     this.displayPassage = new Told.GreekBible.UI.MainViewModel_DisplayPassage(this);
                     this.choosePassage = new Told.GreekBible.UI.MainViewModel_ChoosePassage(this);
+                    this.passage = ko.observable(null);
                 }
+                MainViewModel.prototype.loadSample = function () {
+                    var sampleText = Told.GreekBible.Data.Tests.Sample.sampleText;
+                    this.passage(Told.GreekBible.Data.Parser.parsePassage(sampleText));
+                };
+
+                MainViewModel.prototype.loadPassage = function (bookNumber, chapter) {
+                    // TODO: Load this correctly
+                    var passageText = Told.GreekBible.Data.Tests.Sample.sampleText2;
+
+                    this.passage(Told.GreekBible.Data.Parser.parsePassage(passageText));
+                };
                 return MainViewModel;
             })();
             UI.MainViewModel = MainViewModel;

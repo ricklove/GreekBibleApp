@@ -9,10 +9,6 @@ var Told;
                 function MainViewModel_DisplayPassage(owner) {
                     this.owner = owner;
                 }
-                MainViewModel_DisplayPassage.prototype.loadSample = function () {
-                    var sampleText = Told.GreekBible.Data.Tests.Sample.sampleText;
-                    this.owner.passage(Told.GreekBible.Data.Parser.parsePassage(sampleText));
-                };
                 return MainViewModel_DisplayPassage;
             })();
             UI.MainViewModel_DisplayPassage = MainViewModel_DisplayPassage;

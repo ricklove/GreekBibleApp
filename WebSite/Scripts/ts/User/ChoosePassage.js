@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../Core/Passage.ts" />
-/// <reference path="DisplayPassage.ts" />
+/// <reference path="MainViewModel.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
@@ -14,10 +14,28 @@ var Told;
                         },
                         write: function (value) {
                             this.bookNumber(Told.GreekBible.Data.BookInfo.getBookNumber(value));
+
+                            // Reset Chapter
+                            this.chapter(1);
+                            // Change Passage done by Chapter
+                            //this.owner.loadPassage(this.bookNumber(), this.chapter());
                         },
                         owner: this
                     });
-                    this.chapter = ko.observable(1);
+                    this.chapterNumber = ko.observable(1);
+                    this.chapter = ko.computed({
+                        read: function () {
+                            return this.chapterNumber();
+                        },
+                        write: function (value) {
+                            // Reset Chapter
+                            this.chapterNumber(value);
+
+                            // Change Passage
+                            this.owner.loadPassage(this.bookNumber(), this.chapter());
+                        },
+                        owner: this
+                    });
                     this.bookChoices = ko.computed(function () {
                         return Told.GreekBible.Data.BookInfo.getBookNames().map(function (n) {
                             return { bookName: n };
@@ -26,8 +44,13 @@ var Told;
                     this.chapterChoices = ko.computed(function () {
                         var chapterCount = Told.GreekBible.Data.BookInfo.getChapterCount(this.bookNumber());
 
-                        // TODO: Finish this
-                        return [1, 2, 3].map(function (n) {
+                        var nums = [];
+
+                        for (var i = 0; i < chapterCount; i++) {
+                            nums.push(i + 1);
+                        }
+
+                        return nums.map(function (n) {
                             return { chapter: n };
                         });
                     }, this);

@@ -34,10 +34,10 @@
         </div>
         <div data-role="content">
             <h3>Select Passage:</h3>
-            <select data-bind="foreach: choosePassage.bookChoices()">
+            <select data-bind="foreach: choosePassage.bookChoices(), value:choosePassage.book">
                 <option data-bind="value: bookName, text: bookName"></option>
             </select>
-            <select data-bind="foreach: choosePassage.chapterChoices()">
+            <select data-bind="foreach: choosePassage.chapterChoices(), value:choosePassage.chapter">
                 <option data-bind="value: chapter, text: chapter"></option>
             </select>
             <h3>Text:</h3>
@@ -71,7 +71,7 @@
 
     <script type="text/javascript">
         var viewModel = new Told.GreekBible.UI.MainViewModel();
-        viewModel.displayPassage.loadSample();
+        viewModel.loadSample();
 
         ko.applyBindings(viewModel);
     </script>

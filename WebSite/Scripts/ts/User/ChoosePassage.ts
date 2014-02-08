@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../Core/Passage.ts" />
-/// <reference path="DisplayPassage.ts" />
+/// <reference path="MainViewModel.ts" />
 
 module Told.GreekBible.UI {
 
@@ -28,12 +28,31 @@ module Told.GreekBible.UI {
             },
             write: function (value) {
                 this.bookNumber(Data.BookInfo.getBookNumber(value));
+
+                // Reset Chapter
+                this.chapter(1);
+
+                // Change Passage done by Chapter
+                //this.owner.loadPassage(this.bookNumber(), this.chapter());
             },
             owner: this
         });
 
-        chapter = ko.observable<number>(1);
+        chapterNumber = ko.observable<number>(1);
 
+        chapter = ko.computed<number>({
+            read: function () {
+                return this.chapterNumber();
+            },
+            write: function (value) {
+                // Reset Chapter
+                this.chapterNumber(value);
+
+                // Change Passage
+                this.owner.loadPassage(this.bookNumber(), this.chapter());
+            },
+            owner: this
+        });
 
         bookChoices = ko.computed(function () {
             return Data.BookInfo.getBookNames().map(n=> <IBookChoice>{ bookName: n });
@@ -42,8 +61,13 @@ module Told.GreekBible.UI {
         chapterChoices = ko.computed(function () {
             var chapterCount = Data.BookInfo.getChapterCount(this.bookNumber());
 
-            // TODO: Finish this
-            return [1, 2, 3].map(n=> <IChapterChoice>{ chapter: n });
+            var nums : number[] = [];
+
+            for (var i = 0; i < chapterCount; i++) {
+                nums.push(i + 1);
+            }
+
+            return nums.map(n=> <IChapterChoice>{ chapter: n });
         }, this);
     }
 

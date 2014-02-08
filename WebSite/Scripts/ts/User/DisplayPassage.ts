@@ -13,10 +13,7 @@ module Told.GreekBible.UI {
             this.owner = owner;
         }
 
-        loadSample() {
-            var sampleText = Data.Tests.Sample.sampleText;
-            this.owner.passage(Data.Parser.parsePassage(sampleText));
-        }
+
 
     }
 
