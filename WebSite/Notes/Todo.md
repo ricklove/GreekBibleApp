@@ -5,6 +5,7 @@
 		- [X] DisplayPassage
 			- [X] DisplayEntryText
 			- [X] DisplayEntryDetails
+			- [X] DisplayEntryColors
 	- [X] System Features:
 		- [X] ParsePassageText
 	- [X] Core:
@@ -22,20 +23,19 @@
 		- [X] Display Details on page as text
 		- [X] Rename DisplayPassageText to DisplayPassage
 
-- [ ] Allow User to select a book and chapter
-	- [ ] User Features:
-		- [S] ChangePassage
+- [X] Allow User to select a book and chapter
+	- [X] User Features:
+		- [X] ChangePassage
 	- [X] System Features:
 		- [X] LoadPassageText
-	- [ ] Tasks
+	- [X] Tasks
 		- [X] Populate Book Names
 		- [X] Populate Chapter Count when the Book is chosen
-		- [S] Reset Chapter to 1 when the Book is chosen
+		- [X] Reset Chapter to 1 when the Book is chosen
 			- [X] Change to Options binding
 			- [X] BUG: jQueryMobile does not update select when the value has changed, trying selectOptions as workaround
-		- [ ] Focus on Chapter Choice after choosing Book
 		- [X] Load Passage after choosing chapter
-		- [ ] Apply jQueryMobile Template after repopulating
+		- [X] Apply jQueryMobile Template after repopulating
 			- [X] Create RefreshJQM binding
 		- [X] Divide Data into Chapters
 		- [X] Download Chapter with Ajax
@@ -48,12 +48,13 @@
 
 ### Version 2
 
+- [ ] Focus on Chapter Choice after choosing Book
+
 - [ ] Reload Last Passage (using localStorage)
 
 - [ ] Display Entry Details (James 1)
 	- [ ] User Features:
 		- [ ] DisplayPassage
-			- [ ] DisplayEntryColors
 			- [ ] DisplayEntryConcordancePopup
 	- [ ] System Features:
 		- [ ] LoadConcordance

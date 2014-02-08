@@ -21,6 +21,7 @@
     <script type='text/javascript' src='Scripts/ts/System/ParsePassageText.js'></script>
     <script type='text/javascript' src='Scripts/ts/System/ParsePassageText_TestData.js'></script>
     <script type='text/javascript' src='Scripts/ts/System/ParsePassageText_Tests.js'></script>
+    <script type='text/javascript' src='Scripts/ts/System/Colors.js'></script>
 
     <script type='text/javascript' src='Scripts/ts/User/MainViewModel.js'></script>
     <script type='text/javascript' src='Scripts/ts/User/DisplayPassage.js'></script>
@@ -48,11 +49,11 @@
             <div data-bind="foreach: passage().entries">
                 <div class="entry">
                     <div class="rawText" data-bind="text: rawText"></div>
-                    <div class="partOfSpeechColor" style="background-color: #953d8b"></div>
-                    <div class="morphColor" style="background-color: #37ae97"></div>
+                    <div class="partOfSpeechColor" data-bind="style: { backgroundColor: $root.displayPassage.getColorA(partOfSpeech.partOfSpeechCode) }"></div>
+                    <div class="morphColor" data-bind="style: { backgroundColor: $root.displayPassage.getColorB(morph.morphCode) }"></div>
                     <div class="lemma" data-bind="text: lemma"></div>
-                    <div class="partOfSpeechCode" data-bind="text: partOfSpeech.partOfSpeechCode" style="color: #953d8b"></div>
-                    <div class="morphCode" data-bind="text: morph.morphCode" style="color: #37ae97"></div>
+                    <div class="partOfSpeechCode" data-bind="text: partOfSpeech.partOfSpeechCode, style: { color: $root.displayPassage.getColorA(partOfSpeech.partOfSpeechCode) }"></div>
+                    <div class="morphCode" data-bind="text: morph.morphCode, style: { color: $root.displayPassage.getColorB(morph.morphCode) }"></div>
                     <!--<div class="entryPopupWrapper" style="display: none">
                         <div class="entryPopup" ientry="5">
                             <div class="entryPopupDebug" ientry="5"></div>

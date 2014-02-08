@@ -40,3 +40,9 @@
 
 - BUG: Chapter Select was not updating
 	- FIX (1 hour): Finally discovered it was jQueryMobile not refreshing the UI
+
+
+### Hour 7
+
+- Display Color Coding
+- Finished Up Tasks

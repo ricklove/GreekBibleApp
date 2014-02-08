@@ -23,7 +23,7 @@ var Told;
                         },
                         owner: this
                     });
-                    this.chapterNumber = ko.observable(5);
+                    this.chapterNumber = ko.observable(1);
                     this.chapter = ko.computed({
                         read: function () {
                             return this.chapterNumber();

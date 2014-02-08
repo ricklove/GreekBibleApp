@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../System/ParsePassageText.ts" />
 /// <reference path="../System/ParsePassageText_TestData.ts" />
+/// <reference path="../System/Colors.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
@@ -9,6 +10,15 @@ var Told;
                 function MainViewModel_DisplayPassage(owner) {
                     this.owner = owner;
                 }
+                MainViewModel_DisplayPassage.prototype.getColorA = function (text) {
+                    return MainViewModel_DisplayPassage.getUniqueColorA(text);
+                };
+
+                MainViewModel_DisplayPassage.prototype.getColorB = function (text) {
+                    return MainViewModel_DisplayPassage.getUniqueColorB(text);
+                };
+                MainViewModel_DisplayPassage.getUniqueColorA = Told.GreekBible.Colors.createGetUniqueColor(150, 150);
+                MainViewModel_DisplayPassage.getUniqueColorB = Told.GreekBible.Colors.createGetUniqueColor(175, 175);
                 return MainViewModel_DisplayPassage;
             })();
             UI.MainViewModel_DisplayPassage = MainViewModel_DisplayPassage;

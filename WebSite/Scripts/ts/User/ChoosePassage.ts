@@ -28,7 +28,7 @@ module Told.GreekBible.UI {
             owner: this
         });
 
-        chapterNumber = ko.observable<number>(5);
+        chapterNumber = ko.observable<number>(1);
 
         chapter = ko.computed<number>({
             read: function () {
