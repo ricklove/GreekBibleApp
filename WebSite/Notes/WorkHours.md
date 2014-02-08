@@ -4,8 +4,16 @@
 - Problems:
 	- Running the qunit test for loading the sample text fails using Chutzpah
 
+
 ### Hour 2
 
 - Parsed the data from a chapter of text
-	- Used old GreekBible project parsing code as a starting place
+	- Used oldGreekBible's parsing code as a starting place
 - Passing Tests
+
+
+### Hour 3
+
+- Displayed the passage text on screen with the details
+	- Used oldGreekBible's formatting of the details
+

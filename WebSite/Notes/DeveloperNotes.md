@@ -59,8 +59,8 @@
 		- NuGet PM> Install-Package jquery.TypeScript.DefinitelyTyped
 		- FAILED: NuGet PM> Install-Package jquerymobile.TypeScript.DefinitelyTyped
 		- NuGet PM> Install-Package jquerymobile.TypeScript.DefinitelyTyped -Version 0.1.2
-- qUnit
-	- qUnit JS & CSS
+- QUnit
+	- QUnit JS & CSS
 	- TypeScript Definitions
 		- NuGet PM> Install-Package qunit.TypeScript.DefinitelyTyped
 
@@ -73,3 +73,9 @@
 	- linq JS
 	- TypeScript Definitions
 		- NuGet PM> Install-Package linq.TypeScript.DefinitelyTyped
+
+### Notes
+
+- QUnit Pavlov Plugin - BDD
+	- This looks like a good plugin to enable Behavior Driven Design language for QUnit tests
+	- Would Require a TypeScript Definition File to be created
