@@ -17,3 +17,10 @@
 - Displayed the passage text on screen with the details
 	- Used oldGreekBible's formatting of the details
 
+
+### Hour 4
+
+- Started to implement ChoosePassage
+- Problems:
+	- TypeScript does not support Partial classes, so had to pause to think about how to implement that
+	- Slow Today

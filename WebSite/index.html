@@ -16,11 +16,15 @@
     <script type="text/javascript" src="Scripts/js/External/jquery.linq.min.js"></script>
     <script type='text/javascript' src='Scripts/js/External/qunit-1.14.0.min.js'></script>
 
+    <script type='text/javascript' src='Scripts/ts/Core/Passage.js'></script>
     <script type='text/javascript' src='Scripts/ts/System/ParsePassageText.js'></script>
     <script type='text/javascript' src='Scripts/ts/System/ParsePassageText_TestData.js'></script>
     <script type='text/javascript' src='Scripts/ts/System/ParsePassageText_Tests.js'></script>
-    <script type='text/javascript' src='Scripts/ts/User/DisplayPassageText.js'></script>
-    <script type='text/javascript' src='Scripts/ts/User/DisplayPassageText_Tests.js'></script>
+
+    <script type='text/javascript' src='Scripts/ts/User/MainViewModel.js'></script>
+    <script type='text/javascript' src='Scripts/ts/User/DisplayPassage.js'></script>
+    <script type='text/javascript' src='Scripts/ts/User/DisplayPassage_Tests.js'></script>
+    <script type='text/javascript' src='Scripts/ts/User/ChoosePassage.js'></script>
 
 </head>
 <body>
@@ -29,10 +33,17 @@
             <h1>Header</h1>
         </div>
         <div data-role="content">
-            <h3>Passage:</h3>
+            <h3>Select Passage:</h3>
+            <select data-bind="foreach: choosePassage.bookChoices()">
+                <option data-bind="value: bookName, text: bookName"></option>
+            </select>
+            <select data-bind="foreach: choosePassage.chapterChoices()">
+                <option data-bind="value: chapter, text: chapter"></option>
+            </select>
+            <h3>Text:</h3>
             <h4><span data-bind="text: passage().entries.length"></span>&nbsp;Entries</h4>
             <div data-bind="foreach: passage().entries">
-                <div class="entry" >
+                <div class="entry">
                     <div class="rawText" data-bind="text: rawText"></div>
                     <div class="partOfSpeechColor" style="background-color: #953d8b"></div>
                     <div class="morphColor" style="background-color: #37ae97"></div>
@@ -59,8 +70,8 @@
     </div>
 
     <script type="text/javascript">
-        var viewModel = new Told.GreekBible.UI.PassageViewModel();
-        viewModel.loadSample();
+        var viewModel = new Told.GreekBible.UI.MainViewModel();
+        viewModel.displayPassage.loadSample();
 
         ko.applyBindings(viewModel);
     </script>
