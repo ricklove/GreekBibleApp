@@ -25,20 +25,20 @@
 - [ ] Allow User to select a book and chapter
 	- [ ] User Features:
 		- [S] ChangePassage
-	- [ ] System Features:
-		- [S] LoadPassageText
+	- [X] System Features:
+		- [X] LoadPassageText
 	- [ ] Tasks
 		- [X] Populate Book Names
 		- [X] Populate Chapter Count when the Book is chosen
-		- [ ] Reset Chapter to 1 when the Book is chosen
+		- [S] Reset Chapter to 1 when the Book is chosen
 			- [X] Change to Options binding
+			- [ ] BUG: Knockout does not update select when the value has changed, trying selectOptions as workaround
 		- [ ] Focus on Chapter Choice after choosing Book
-		- [S] Load Passage after choosing chapter
+		- [X] Load Passage after choosing chapter
 		- [ ] Apply jQueryMobile Template after repopulating
 			- [X] Create RefreshJQM binding
 		- [X] Divide Data into Chapters
-		- [S] Download Chapter with Ajax
-			- [ ] Test
+		- [X] Download Chapter with Ajax
 
 - [ ] Publish
 	- [ ] Upload Source to Website
@@ -47,6 +47,8 @@
 
 
 ### Version 2
+
+- [ ] Reload Last Passage (using localStorage)
 
 - [ ] Display Entry Details (James 1)
 	- [ ] User Features:
