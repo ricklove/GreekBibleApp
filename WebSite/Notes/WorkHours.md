@@ -25,3 +25,9 @@
 	- TypeScript does not support Partial classes, so had to pause to think about how to implement that
 	- Slow Today
 	- Not finished implementing ChoosePassage
+
+### Hour 5
+
+- Divided Data into Chapters
+- Binding Book and Chapter values to UI
+- Triggering Reload on Book/Chapter change

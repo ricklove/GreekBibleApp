@@ -31,9 +31,11 @@
 		- [X] Populate Book Names
 		- [X] Populate Chapter Count when the Book is chosen
 		- [ ] Reset Chapter to 1 when the Book is chosen
+			- [ ] Change to Options binding
 		- [ ] Focus on Chapter Choice after choosing Book
 		- [S] Load Passage after choosing chapter
 		- [ ] Apply jQueryMobile Template after repopulating
+			- [ ] Create RefreshJQM binding
 		- [X] Divide Data into Chapters
 		- [ ] Download Chapter with Ajax
 
