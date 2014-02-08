@@ -37,14 +37,14 @@ module Told.GreekBible.UI {
 
         bookChoices = ko.computed(function () {
             return Data.BookInfo.getBookNames().map(n=> <IBookChoice>{ bookName: n });
-        });
+        }, this);
 
         chapterChoices = ko.computed(function () {
             var chapterCount = Data.BookInfo.getChapterCount(this.bookNumber());
 
             // TODO: Finish this
-            return [1, 2, 3];
-        });
+            return [1, 2, 3].map(n=> <IChapterChoice>{ chapter: n });
+        }, this);
     }
 
 }

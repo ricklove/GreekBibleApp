@@ -1,16 +1,15 @@
 ﻿### Version 1
 
-- [ ] Create simple UI for a single hardcoded Chapter (James 1)
-	- [ ] User Features:
-		- [ ] DisplayPassage
+- [X] Create simple UI for a single hardcoded Chapter (James 1)
+	- [X] User Features:
+		- [X] DisplayPassage
 			- [X] DisplayEntryText
 			- [X] DisplayEntryDetails
-			- [ ] DisplayEntryColors
-	- [ ] System Features:
+	- [X] System Features:
 		- [X] ParsePassageText
-	- [ ] Core:
+	- [X] Core:
 		- [X] Passage Definitions
-	- [ ] Tasks
+	- [X] Tasks
 		- [X] Refactor User and System File Structure
 			- [X] Move Data Interfaces to Core Folder
 			- [X] Move ParsePassageText to System Folder
@@ -19,25 +18,50 @@
 		- [X] Create Tests for ParsePassageText
 			- [X] Move Tests to correct file: "Will load first word from Sample - James 1"
 			- [X] Test that the codes are loaded
-			- [ ] Test that the codes are parsed correctly
 		- [X] Display Text on page
 		- [X] Display Details on page as text
+		- [X] Rename DisplayPassageText to DisplayPassage
+
+- [ ] Allow User to select a book and chapter
+	- [ ] User Features:
+		- [S] ChangePassage
+	- [ ] System Features:
+		- [ ] LoadPassageText
+	- [ ] Tasks
+		- [X] Populate Book Names
+		- [ ] Populate Chapter Count when the Book is chosen
+		- [ ] Focus on Chapter Choice after choosing Book
+		- [ ] Load Passage after choosing chapter
+		- [ ] Apply jQueryMobile Template after repopulating
+		- [ ] Divide Data into Chapters
+		- [ ] Download Chapter with Ajax
+
+- [ ] Publish
+	- [ ] Upload Source to Website
+	- [ ] Verify that App is Working Online
+	- [ ] Publish Blog about App
+
+
+### Version 2
+
+- [ ] Display Entry Details (James 1)
+	- [ ] User Features:
+		- [ ] DisplayPassage
+			- [ ] DisplayEntryColors
+			- [ ] DisplayEntryConcordancePopup
+	- [ ] System Features:
+		- [ ] LoadConcordance
+	- [ ] Core:
+		- [ ] Concordance Definitions
+	- [ ] Tasks
+		- [X] Create Tests for ParsePassageText
+			- [ ] Test that the codes are parsed correctly
 		- [ ] Display the Book Chapter and Verse at proper divisions
 		- [ ] Rename DisplayPassageText to DisplayPassage
 		- [ ] Create Tests for DisplayPassage
 		- [ ] Display the color coding of each entry
 
-
-- [ ] Allow User to select a book and chapter
-	- [ ] User Features:
-		- [ ] ChangePassage
-	- [ ] System Features:
-		- [ ] LoadPassageText
-
-- [ ] Publish
+- [ ] Enable Offline Mode
 	- [ ] Create AppManifest to allow offline 
 	- [ ] Add Device Metadata to enable web app features
 	- [ ] Use CDN for External sources where possible
-
-
-### Version 2

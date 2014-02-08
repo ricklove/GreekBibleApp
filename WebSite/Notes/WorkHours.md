@@ -24,3 +24,4 @@
 - Problems:
 	- TypeScript does not support Partial classes, so had to pause to think about how to implement that
 	- Slow Today
+	- Not finished implementing ChoosePassage

@@ -22,13 +22,15 @@ var Told;
                         return Told.GreekBible.Data.BookInfo.getBookNames().map(function (n) {
                             return { bookName: n };
                         });
-                    });
+                    }, this);
                     this.chapterChoices = ko.computed(function () {
                         var chapterCount = Told.GreekBible.Data.BookInfo.getChapterCount(this.bookNumber());
 
                         // TODO: Finish this
-                        return [1, 2, 3];
-                    });
+                        return [1, 2, 3].map(function (n) {
+                            return { chapter: n };
+                        });
+                    }, this);
                     this.owner = owner;
                 }
                 return MainViewModel_ChoosePassage;
