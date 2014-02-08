@@ -1,4 +1,5 @@
-﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
+﻿/// <reference path="../../typings/jQuery/jQuery.d.ts" />
+/// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="DisplayPassage.ts" />
 /// <reference path="ChoosePassage.ts" />
 var Told;
@@ -25,6 +26,18 @@ var Told;
                 return MainViewModel;
             })();
             UI.MainViewModel = MainViewModel;
+
+            ko.bindingHandlers["refreshJQM"] = {
+                update: function (element, valueAccessor) {
+                    ko.utils.unwrapObservable(valueAccessor()); // to subscribe
+
+                    setTimeout(function () {
+                        //$(element).trigger('create');
+                        //$(element).parent().trigger('create');
+                        $('#home').trigger('create');
+                    }, 0);
+                }
+            };
         })(GreekBible.UI || (GreekBible.UI = {}));
         var UI = GreekBible.UI;
     })(Told.GreekBible || (Told.GreekBible = {}));

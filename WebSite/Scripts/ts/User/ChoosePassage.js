@@ -36,11 +36,20 @@ var Told;
                         },
                         owner: this
                     });
+                    //bookChoices = ko.computed(function () {
+                    //    return Data.BookInfo.getBookNames().map(n=> <IBookChoice>{ bookName: n });
+                    //}, this);
                     this.bookChoices = ko.computed(function () {
-                        return Told.GreekBible.Data.BookInfo.getBookNames().map(function (n) {
-                            return { bookName: n };
-                        });
+                        return Told.GreekBible.Data.BookInfo.getBookNames();
                     }, this);
+                    //chapterChoices = ko.computed(function () {
+                    //    var chapterCount = Data.BookInfo.getChapterCount(this.bookNumber());
+                    //    var nums : number[] = [];
+                    //    for (var i = 0; i < chapterCount; i++) {
+                    //        nums.push(i + 1);
+                    //    }
+                    //    return nums.map(n=> <IChapterChoice>{ chapter: n });
+                    //}, this);
                     this.chapterChoices = ko.computed(function () {
                         var chapterCount = Told.GreekBible.Data.BookInfo.getChapterCount(this.bookNumber());
 
@@ -50,9 +59,7 @@ var Told;
                             nums.push(i + 1);
                         }
 
-                        return nums.map(function (n) {
-                            return { chapter: n };
-                        });
+                        return nums;
                     }, this);
                     this.owner = owner;
                 }

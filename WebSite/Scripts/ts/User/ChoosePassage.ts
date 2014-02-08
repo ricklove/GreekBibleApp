@@ -54,20 +54,36 @@ module Told.GreekBible.UI {
             owner: this
         });
 
+        //bookChoices = ko.computed(function () {
+        //    return Data.BookInfo.getBookNames().map(n=> <IBookChoice>{ bookName: n });
+        //}, this);
+
         bookChoices = ko.computed(function () {
-            return Data.BookInfo.getBookNames().map(n=> <IBookChoice>{ bookName: n });
+            return Data.BookInfo.getBookNames();
         }, this);
+
+        //chapterChoices = ko.computed(function () {
+        //    var chapterCount = Data.BookInfo.getChapterCount(this.bookNumber());
+
+        //    var nums : number[] = [];
+
+        //    for (var i = 0; i < chapterCount; i++) {
+        //        nums.push(i + 1);
+        //    }
+
+        //    return nums.map(n=> <IChapterChoice>{ chapter: n });
+        //}, this);
 
         chapterChoices = ko.computed(function () {
             var chapterCount = Data.BookInfo.getChapterCount(this.bookNumber());
 
-            var nums : number[] = [];
+            var nums: number[] = [];
 
             for (var i = 0; i < chapterCount; i++) {
                 nums.push(i + 1);
             }
 
-            return nums.map(n=> <IChapterChoice>{ chapter: n });
+            return nums;
         }, this);
     }
 

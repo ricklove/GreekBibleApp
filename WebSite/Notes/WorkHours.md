@@ -31,3 +31,5 @@
 - Divided Data into Chapters
 - Binding Book and Chapter values to UI
 - Triggering Reload on Book/Chapter change
+- Started: Debugging UI binding
+- Started: LoadPassage

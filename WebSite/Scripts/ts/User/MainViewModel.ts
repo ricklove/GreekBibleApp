@@ -1,4 +1,5 @@
-﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
+﻿/// <reference path="../../typings/jQuery/jQuery.d.ts" />
+/// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="DisplayPassage.ts" />
 /// <reference path="ChoosePassage.ts" />
 
@@ -25,4 +26,15 @@ module Told.GreekBible.UI {
 
     }
 
+    ko.bindingHandlers["refreshJQM"] = <KnockoutBindingHandler>{
+        update: function (element, valueAccessor) {
+            ko.utils.unwrapObservable(valueAccessor()); // to subscribe
+
+            setTimeout(function () {
+                //$(element).trigger('create');
+                //$(element).parent().trigger('create');
+                $('#home').trigger('create');
+            }, 0);
+        }
+    };
 }
