@@ -15,14 +15,15 @@ var Told;
                         write: function (value) {
                             this.bookNumber(Told.GreekBible.Data.BookInfo.getBookNumber(value));
 
-                            // Reset Chapter
-                            this.chapter(1);
-                            // Change Passage done by Chapter
-                            //this.owner.loadPassage(this.bookNumber(), this.chapter());
+                            // Reset Chapter (Async - this seems to help the UI refresh)
+                            var c = this.chapter;
+                            setTimeout(function () {
+                                c(1);
+                            }, 0);
                         },
                         owner: this
                     });
-                    this.chapterNumber = ko.observable(1);
+                    this.chapterNumber = ko.observable(5);
                     this.chapter = ko.computed({
                         read: function () {
                             return this.chapterNumber();
@@ -36,20 +37,9 @@ var Told;
                         },
                         owner: this
                     });
-                    //bookChoices = ko.computed(function () {
-                    //    return Data.BookInfo.getBookNames().map(n=> <IBookChoice>{ bookName: n });
-                    //}, this);
                     this.bookChoices = ko.computed(function () {
                         return Told.GreekBible.Data.BookInfo.getBookNames();
                     }, this);
-                    //chapterChoices = ko.computed(function () {
-                    //    var chapterCount = Data.BookInfo.getChapterCount(this.bookNumber());
-                    //    var nums : number[] = [];
-                    //    for (var i = 0; i < chapterCount; i++) {
-                    //        nums.push(i + 1);
-                    //    }
-                    //    return nums.map(n=> <IChapterChoice>{ chapter: n });
-                    //}, this);
                     this.chapterChoices = ko.computed(function () {
                         var chapterCount = Told.GreekBible.Data.BookInfo.getChapterCount(this.bookNumber());
 

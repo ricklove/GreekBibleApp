@@ -32,7 +32,7 @@
 		- [X] Populate Chapter Count when the Book is chosen
 		- [S] Reset Chapter to 1 when the Book is chosen
 			- [X] Change to Options binding
-			- [ ] BUG: Knockout does not update select when the value has changed, trying selectOptions as workaround
+			- [X] BUG: jQueryMobile does not update select when the value has changed, trying selectOptions as workaround
 		- [ ] Focus on Chapter Choice after choosing Book
 		- [X] Load Passage after choosing chapter
 		- [ ] Apply jQueryMobile Template after repopulating

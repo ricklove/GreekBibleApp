@@ -17,6 +17,7 @@
     <script type='text/javascript' src='Scripts/js/External/qunit-1.14.0.min.js'></script>
 
     <script type='text/javascript' src='Scripts/ts/Core/Passage.js'></script>
+    <script type='text/javascript' src='Scripts/ts/System/LoadPassageText.js'></script>
     <script type='text/javascript' src='Scripts/ts/System/ParsePassageText.js'></script>
     <script type='text/javascript' src='Scripts/ts/System/ParsePassageText_TestData.js'></script>
     <script type='text/javascript' src='Scripts/ts/System/ParsePassageText_Tests.js'></script>
@@ -30,7 +31,7 @@
 <body>
     <div data-role="page" id="home">
         <div data-role="header">
-            <h1>Header</h1>
+            <h1>Greek Bible</h1>
         </div>
         <div data-role="content">
             <h3>Select Passage:</h3>
@@ -40,10 +41,10 @@
                 <option>3</option>
             </select>-->
 
-            <select data-bind="options: choosePassage.bookChoices(), value:choosePassage.book, refreshJQM"></select>
-            <select data-bind="options: choosePassage.chapterChoices(), value:choosePassage.chapter, refreshJQM"></select>
-            <h3>Text:</h3>
-            <h4><span data-bind="text: passage().entries.length"></span>&nbsp;Entries</h4>
+            <select data-bind="options: choosePassage.bookChoices(), value:choosePassage.book, refreshJQM:choosePassage.book"></select>
+            <select id="selChapter" data-bind="options: choosePassage.chapterChoices(), value:choosePassage.chapter, refreshJQM:choosePassage.chapter"></select>
+            <h3><span data-bind="text: choosePassage.book() + ' ' + choosePassage.chapter()"></span></h3>
+            <!--<h4><span data-bind="text: passage().entries.length"></span>&nbsp;Words</h4>-->
             <div data-bind="foreach: passage().entries">
                 <div class="entry">
                     <div class="rawText" data-bind="text: rawText"></div>
@@ -67,14 +68,12 @@
             <div id="qunit"></div>
         </div>
         <div data-role="footer">
-            <h4>Footer</h4>
+            <h4>&copy; Told - Rick Love - 2014</h4>
         </div>
     </div>
 
     <script type="text/javascript">
         var viewModel = new Told.GreekBible.UI.MainViewModel();
-        viewModel.loadSample();
-
         ko.applyBindings(viewModel);
     </script>
 </body>

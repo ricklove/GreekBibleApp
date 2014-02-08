@@ -4,11 +4,14 @@ module Told.GreekBible.Data {
 
     export class Loader {
 
-        static baseUrl: string;
+        static baseUrl: string = "";
 
-        static loadPassage(bookNumber: number, chapter: number, onLoaded: (text: string) => void, onError: (text: string) => void) {
+        static loadPassage(bookNumber: number, chapter: number, onLoaded: (text: string) => void, onError?: (text: string) => void) {
 
-            var url = this.baseUrl + "/Data/Chapters/" + bookNumber + chapter + ".txt";
+            var pBookNumber = ('0' + bookNumber).slice(-2);
+            var pChapter = ('0' + chapter).slice(-2);
+
+            var url = this.baseUrl + "/Data/Chapters/" + pBookNumber + pChapter + ".txt";
 
             $.ajax(url,
                 {

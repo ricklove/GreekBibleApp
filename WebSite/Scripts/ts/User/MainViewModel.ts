@@ -2,6 +2,7 @@
 /// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="DisplayPassage.ts" />
 /// <reference path="ChoosePassage.ts" />
+/// <reference path="../System/LoadPassageText.ts" />
 
 module Told.GreekBible.UI {
 
@@ -10,18 +11,31 @@ module Told.GreekBible.UI {
         displayPassage = new MainViewModel_DisplayPassage(this);
         choosePassage = new MainViewModel_ChoosePassage(this);
 
+        constructor() {
+            this.loadDefault();
+        }
+
         passage = ko.observable<Data.IPassage>(null);
 
-        loadSample() {
+        loadDefault() {
             var sampleText = Data.Tests.Sample.sampleText;
             this.passage(Data.Parser.parsePassage(sampleText));
+
+            // TODO: Load Last Passage (local Storage)
+            this.loadPassage(1, 1);
         }
 
         loadPassage(bookNumber: number, chapter: number) {
-            // TODO: Load this correctly
-            var passageText = Data.Tests.Sample.sampleText2;
 
-            this.passage(Data.Parser.parsePassage(passageText));
+            var p = this.passage;
+
+            // Make Blank while waiting
+            p(<any>[]);
+
+            // Load Async
+            Data.Loader.loadPassage(bookNumber, chapter, function (passageText: string) {
+                p(Data.Parser.parsePassage(passageText));
+            });
         }
 
     }
@@ -31,9 +45,10 @@ module Told.GreekBible.UI {
             ko.utils.unwrapObservable(valueAccessor()); // to subscribe
 
             setTimeout(function () {
-                //$(element).trigger('create');
-                //$(element).parent().trigger('create');
-                $('#home').trigger('create');
+                $(element).trigger('create');
+                if ((<any>$(element)).selectmenu) {
+                    (<any>$(element)).selectmenu('refresh');
+                }
             }, 0);
         }
     };

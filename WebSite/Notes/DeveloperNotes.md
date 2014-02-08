@@ -79,3 +79,8 @@
 - QUnit Pavlov Plugin - BDD
 	- This looks like a good plugin to enable Behavior Driven Design language for QUnit tests
 	- Would Require a TypeScript Definition File to be created
+
+### Bugs
+
+- BUG: jQueryMobile was not updating the visible part of a select element (the native element was being updated, but the span on top was remaining an old value)
+	- FIX: (<any>$(element)).selectmenu('refresh');

@@ -7,7 +7,10 @@ var Told;
                 function Loader() {
                 }
                 Loader.loadPassage = function (bookNumber, chapter, onLoaded, onError) {
-                    var url = this.baseUrl + "/Data/Chapters/" + bookNumber + chapter + ".txt";
+                    var pBookNumber = ('0' + bookNumber).slice(-2);
+                    var pChapter = ('0' + chapter).slice(-2);
+
+                    var url = this.baseUrl + "/Data/Chapters/" + pBookNumber + pChapter + ".txt";
 
                     $.ajax(url, {
                         dataType: "text",
@@ -22,6 +25,7 @@ var Told;
                         }
                     });
                 };
+                Loader.baseUrl = "";
                 return Loader;
             })();
             Data.Loader = Loader;

@@ -26,6 +26,7 @@
 	- Slow Today
 	- Not finished implementing ChoosePassage
 
+
 ### Hour 5
 
 - Divided Data into Chapters
@@ -33,3 +34,9 @@
 - Triggering Reload on Book/Chapter change
 - Started: Debugging UI binding
 - Started: LoadPassage
+
+
+### Hour 6
+
+- BUG: Chapter Select was not updating
+	- FIX (1 hour): Finally discovered it was jQueryMobile not refreshing the UI

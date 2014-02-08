@@ -2,6 +2,7 @@
 /// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="DisplayPassage.ts" />
 /// <reference path="ChoosePassage.ts" />
+/// <reference path="../System/LoadPassageText.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
@@ -11,17 +12,26 @@ var Told;
                     this.displayPassage = new Told.GreekBible.UI.MainViewModel_DisplayPassage(this);
                     this.choosePassage = new Told.GreekBible.UI.MainViewModel_ChoosePassage(this);
                     this.passage = ko.observable(null);
+                    this.loadDefault();
                 }
-                MainViewModel.prototype.loadSample = function () {
+                MainViewModel.prototype.loadDefault = function () {
                     var sampleText = Told.GreekBible.Data.Tests.Sample.sampleText;
                     this.passage(Told.GreekBible.Data.Parser.parsePassage(sampleText));
+
+                    // TODO: Load Last Passage (local Storage)
+                    this.loadPassage(1, 1);
                 };
 
                 MainViewModel.prototype.loadPassage = function (bookNumber, chapter) {
-                    // TODO: Load this correctly
-                    var passageText = Told.GreekBible.Data.Tests.Sample.sampleText2;
+                    var p = this.passage;
 
-                    this.passage(Told.GreekBible.Data.Parser.parsePassage(passageText));
+                    // Make Blank while waiting
+                    p([]);
+
+                    // Load Async
+                    Told.GreekBible.Data.Loader.loadPassage(bookNumber, chapter, function (passageText) {
+                        p(Told.GreekBible.Data.Parser.parsePassage(passageText));
+                    });
                 };
                 return MainViewModel;
             })();
@@ -32,9 +42,10 @@ var Told;
                     ko.utils.unwrapObservable(valueAccessor()); // to subscribe
 
                     setTimeout(function () {
-                        //$(element).trigger('create');
-                        //$(element).parent().trigger('create');
-                        $('#home').trigger('create');
+                        $(element).trigger('create');
+                        if ($(element).selectmenu) {
+                            $(element).selectmenu('refresh');
+                        }
                     }, 0);
                 }
             };
