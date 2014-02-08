@@ -38,6 +38,7 @@
 			- [X] Create RefreshJQM binding
 		- [X] Divide Data into Chapters
 		- [S] Download Chapter with Ajax
+			- [ ] Test
 
 - [ ] Publish
 	- [ ] Upload Source to Website
