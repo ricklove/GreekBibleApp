@@ -40,8 +40,9 @@
 		- [X] Divide Data into Chapters
 		- [X] Download Chapter with Ajax
 
+
 - [ ] Publish
-	- [ ] Upload Source to Website
+	- [S] Upload Source to Website
 	- [ ] Verify that App is Working Online
 	- [ ] Publish Blog about App
 
