@@ -42,12 +42,14 @@
 
 
 - [ ] Publish
-	- [S] Upload Source to Website
-	- [ ] Verify that App is Working Online
+	- [X] Upload Source to Website
+	- [X] Verify that App is Working Online
 	- [ ] Publish Blog about App
 
 
 ### Version 2
+
+- [ ] Show loading... when waiting for the chapter to download
 
 - [ ] Focus on Chapter Choice after choosing Book
 

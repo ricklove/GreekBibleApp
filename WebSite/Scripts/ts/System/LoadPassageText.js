@@ -10,7 +10,7 @@ var Told;
                     var pBookNumber = ('0' + bookNumber).slice(-2);
                     var pChapter = ('0' + chapter).slice(-2);
 
-                    var url = this.baseUrl + "/Data/Chapters/" + pBookNumber + pChapter + ".txt";
+                    var url = this.baseUrl + "Data/Chapters/" + pBookNumber + pChapter + ".txt";
 
                     $.ajax(url, {
                         dataType: "text",

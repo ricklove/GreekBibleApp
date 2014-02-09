@@ -27,6 +27,15 @@
     <script type='text/javascript' src='Scripts/ts/User/DisplayPassage.js'></script>
     <script type='text/javascript' src='Scripts/ts/User/DisplayPassage_Tests.js'></script>
     <script type='text/javascript' src='Scripts/ts/User/ChoosePassage.js'></script>
+    <script type='text/javascript'>
+        QUnit.config.autostart = false;
+
+        if (document.URL.indexOf("test=true") >= 0) {
+            $(document).ready(function () { QUnit.start(); });
+        } else {
+            $(document).ready(function () { $("#qunit").remove() });
+        }
+    </script>
 
 </head>
 <body>
