@@ -42,12 +42,14 @@
 		- [X] Download Chapter with Ajax
 
 
-- [ ] Publish
-	- [S] Upload Source to Website
+- [X] Publish
 	- [X] Verify that App is Working Online
 	- [X] Create Release Branch
 	- [X] Write Blog Entry
-	- [ ] Publish Blog about App
+	- [X] Screen Shots
+	- [X] Publish Website
+	- [X] Publish Blog about App
+	- [ ] Push to GitHub
 
 
 ### Version 2

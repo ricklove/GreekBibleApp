@@ -55,6 +55,6 @@
 #### Goals:
 - [X] Display Verse Numbers
 - [X] Create Release Branch
-- [ ] Publish
 - [X] Write Blog
-- [ ] Publish Blog
+- [X] Publish
+- [X] Publish Blog
