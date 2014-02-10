@@ -6,6 +6,7 @@
 
     export interface IEntry {
         passageRef: IPassageRef;
+        isVerseStart: boolean;
         morph: IMorph;
         partOfSpeech: IPartOfSpeech;
         rawText: string;

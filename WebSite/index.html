@@ -56,6 +56,9 @@
             <h3><span data-bind="text: choosePassage.book() + ' ' + choosePassage.chapter()"></span></h3>
             <!--<h4><span data-bind="text: passage().entries.length"></span>&nbsp;Words</h4>-->
             <div data-bind="foreach: passage().entries">
+                <!-- ko if: isVerseStart -->
+                    <div class="verse" data-bind="text: passageRef.verse"></div>
+                <!-- /ko -->
                 <div class="entry">
                     <div class="rawText" data-bind="text: rawText"></div>
                     <div class="partOfSpeechColor" data-bind="style: { backgroundColor: $root.displayPassage.getColorA(partOfSpeech.partOfSpeechCode) }"></div>

@@ -53,7 +53,7 @@
 ### Hour 8
 
 #### Goals:
-- [ ] Display Verse Numbers
+- [X] Display Verse Numbers
 - [ ] Create Release Branch
 - [ ] Publish
 - [ ] Publish Blog

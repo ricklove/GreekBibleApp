@@ -11,6 +11,8 @@ var Told;
                     var lines = passageText.replace("\r\n", "\n").split("\n");
                     var lineData = [];
 
+                    var lastBookChapterVerseCode = null;
+
                     for (var iLine = 0; iLine < lines.length; iLine++) {
                         var line = lines[iLine].trim();
 
@@ -44,10 +46,13 @@ var Told;
                         var lineRegex = /(\S+)\s(\S+)\s(\S+)\s(\S+)\s(\S+)\s(\S+)\s(\S+)\s(\S+)/;
                         var m = line.match(lineRegex);
 
+                        var newEntryLine = null;
+
                         if (m) {
-                            lineData.push({
+                            newEntryLine = {
                                 rawLine: line,
                                 bookChapterVerseCode: m[1],
+                                hasChanged_BookChapterVerseCode: (m[1] != lastBookChapterVerseCode),
                                 partOfSpeechCode: m[2],
                                 morphCode: m[3],
                                 oldMorphCode: m[4],
@@ -55,16 +60,17 @@ var Told;
                                 word: m[6],
                                 normalizedWord: m[7],
                                 lemma: m[8]
-                            });
+                            };
                         } else {
                             // Use 7 column format
                             var lineRegex = /(\S+)\s(\S+)\s(\S+)\s(\S+)\s(\S+)\s(\S+)\s(\S+)/;
                             var m = line.match(lineRegex);
 
                             if (m) {
-                                lineData.push({
+                                newEntryLine = {
                                     rawLine: line,
                                     bookChapterVerseCode: m[1],
+                                    hasChanged_BookChapterVerseCode: (m[1] != lastBookChapterVerseCode),
                                     partOfSpeechCode: m[2],
                                     morphCode: m[3],
                                     oldMorphCode: null,
@@ -72,9 +78,13 @@ var Told;
                                     word: m[5],
                                     normalizedWord: m[6],
                                     lemma: m[7]
-                                });
+                                };
                             }
                         }
+
+                        lineData.push(newEntryLine);
+
+                        lastBookChapterVerseCode = newEntryLine.bookChapterVerseCode;
                     }
 
                     var entries = lineData.map(function (l) {
@@ -171,6 +181,7 @@ var Told;
 
                     var entry = {
                         passageRef: passageRef,
+                        isVerseStart: entryLine.hasChanged_BookChapterVerseCode,
                         morph: morph,
                         partOfSpeech: partOfSpeech,
                         rawText: entryLine.rawText,

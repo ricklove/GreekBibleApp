@@ -22,7 +22,7 @@
 		- [X] Display Text on page
 		- [X] Display Details on page as text
 		- [X] Rename DisplayPassageText to DisplayPassage
-		- [ ] Display Verse Numbers
+		- [X] Display Verse Numbers
 
 - [X] Allow User to select a book and chapter
 	- [X] User Features:
@@ -43,8 +43,9 @@
 
 
 - [ ] Publish
-	- [X] Upload Source to Website
+	- [S] Upload Source to Website
 	- [X] Verify that App is Working Online
+	- [ ] Create Release Branch
 	- [ ] Publish Blog about App
 
 
