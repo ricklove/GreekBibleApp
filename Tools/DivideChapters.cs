@@ -11,7 +11,10 @@ class Script
     static public void Main(string[] args)
     {
         var currentDir = Directory.GetCurrentDirectory();
-        //currentDir = @"D:\UserData\Projects\5HourApps\GreekBible\Data\sblgnt-master";
+        currentDir = Path.Combine(currentDir, args.FirstOrDefault());
+        currentDir = Path.GetFullPath(currentDir);
+
+        Console.WriteLine(args.FirstOrDefault());
 
         var targetDir = currentDir + @"\Chapters";
 
@@ -42,7 +45,9 @@ class Script
         {
             var fileContents = File.ReadAllText(file);
 
-            var lines = fileContents.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(l => l.Trim()).ToList();
+            var lines = fileContents.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(l => l.Trim()).ToList
+
+();
             var chapters = lines.GroupBy(l => l.Substring(0, 4)).Select(g => new
             {
                 BookChapterCode = g.Key,

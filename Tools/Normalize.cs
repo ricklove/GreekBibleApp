@@ -14,7 +14,8 @@ class Script
     static public void Main(string[] args)
     {
         var currentDir = Directory.GetCurrentDirectory();
-        //currentDir = @"D:\UserData\Projects\5HourApps\GreekBible\Data\sblgnt-master\Chapters";
+        currentDir = Path.Combine(currentDir, args.FirstOrDefault());
+        currentDir = Path.GetFullPath(currentDir);
 
         Console.WriteLine("Preparing to Normalize ...");
 

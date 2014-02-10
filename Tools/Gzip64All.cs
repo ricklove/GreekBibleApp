@@ -3,12 +3,15 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using System.Linq;
 
 class Script
 {
   static public void Main(string[] args)
   {
     var currentDir = Directory.GetCurrentDirectory();
+        currentDir = Path.Combine(currentDir, args.FirstOrDefault());
+        currentDir = Path.GetFullPath(currentDir);
 
     Console.WriteLine("Preparing to Gzip and base64 encode ...");
 

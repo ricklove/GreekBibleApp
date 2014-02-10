@@ -1,3 +1,2 @@
-pause
-cscs /l Normalize.cs
+cscs /l Normalize.cs "..\\Data"
 pause

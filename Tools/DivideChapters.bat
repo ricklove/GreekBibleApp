@@ -1,3 +1,2 @@
-pause
-cscs /l DivideChapters.cs
+cscs /l DivideChapters.cs "..\\Data"
 pause
