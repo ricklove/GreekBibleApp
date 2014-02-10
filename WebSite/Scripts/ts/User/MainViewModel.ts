@@ -3,6 +3,7 @@
 /// <reference path="DisplayPassage.ts" />
 /// <reference path="ChoosePassage.ts" />
 /// <reference path="../System/LoadPassageText.ts" />
+/// <reference path="../System/ParsePassageText_TestData.ts" />
 
 module Told.GreekBible.UI {
 

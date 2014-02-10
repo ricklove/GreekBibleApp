@@ -1,7 +1,6 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
-/// <reference path="../System/ParsePassageText.ts" />
-/// <reference path="../System/ParsePassageText_TestData.ts" />
 /// <reference path="../System/Colors.ts" />
+/// <reference path="MainViewModel.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
