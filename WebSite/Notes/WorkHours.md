@@ -46,3 +46,11 @@
 
 - Display Color Coding
 - Finished Up Tasks
+- Removed Unprintable Characters
+- Removed QUnit results
+
+
+### Hour 8
+
+#### Goals:
+- 

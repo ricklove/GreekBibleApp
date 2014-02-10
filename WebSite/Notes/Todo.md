@@ -22,6 +22,7 @@
 		- [X] Display Text on page
 		- [X] Display Details on page as text
 		- [X] Rename DisplayPassageText to DisplayPassage
+		- [ ] Display Verse Numbers
 
 - [X] Allow User to select a book and chapter
 	- [X] User Features:
