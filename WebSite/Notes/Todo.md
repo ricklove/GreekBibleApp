@@ -45,7 +45,8 @@
 - [ ] Publish
 	- [S] Upload Source to Website
 	- [X] Verify that App is Working Online
-	- [ ] Create Release Branch
+	- [X] Create Release Branch
+	- [X] Write Blog Entry
 	- [ ] Publish Blog about App
 
 

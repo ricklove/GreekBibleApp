@@ -1,3 +1,42 @@
+### Overview
+
+The project was a great success for my first 5HourApp. Although, it took about 8 hours plus some extra time researching tools and setting up the environment.
+
+I was able to rewrite the entire GreekBible. I only used a few pieces of logic from the oldGreekBible. 
+It was unneccesary to reuse code because the frameworks I used actually made the code very simple to write from scratch.
+
+Bottom Line: I was able to write a $5,000 web app that runs everywhere in about 8 hours. That's not bad!
+
+#### 5-Hour App
+
+This proves that the 5HourApp concept is valid. I can actually create a fully functioning app to release in around 5 hours. 
+The important part is to trim features and identify the most important user features to implement.
+
+#### Feature Oriented Software Development
+
+I feature organized my code files. This enabled me to focus on one feature at a time. It also allowed me to have a good separation of concerns between user features
+and the underlying system features that they need to function.
+
+I identified two possible ways to divide a ViewModel across multiple files. In this project I used a mainViewState with a sub object for each feature. 
+
+An alternative would be to use typescript interfaces and a static object that is gradually implemented.
+
+#### KnockoutJS
+
+KnockoutJS is great! This was my first time to use it and it was a pleasure. I highly recommend it! I will be using it as my UI framework of choice.
+
+#### jQueryMobile
+
+jQueryMobile worked fine with all the defaults in place. 
+However, one bug cost me about an hour because the generated jQueryMobile UI did not match the native UI behind it.
+
+Next time something is not changing, inspect the DOM and see if there is a lone SPAN tag that doesn't match the actual $(element).val() or $(element).text().
+Ensure that the proper refresh call is being made for jQueryMobile, which is different for each element type.
+
+I created a refreshJQM Knockout binding to deal with this. I will expand it to automatically call the proper refresh code according to the bound element type.
+
+
+
 ### File Structure
 
 - Notes
@@ -19,6 +58,9 @@
 		- *.ts files: TypeScript Source Code
 		- *.js files: Generated Javascript
 		- External: Code from outside sources and libraries
+		- Core: Definitions for core types
+		- System: Features that are invisible to the user, but provide functionality for the User Features
+		- User: Features which represent the user tasks and concerns
 - Styles
 	- css
 		- CSS Source Files (not generated)
@@ -74,7 +116,7 @@
 	- TypeScript Definitions
 		- NuGet PM> Install-Package linq.TypeScript.DefinitelyTyped
 
-### Notes
+### Future
 
 - QUnit Pavlov Plugin - BDD
 	- This looks like a good plugin to enable Behavior Driven Design language for QUnit tests
@@ -84,3 +126,4 @@
 
 - BUG: jQueryMobile was not updating the visible part of a select element (the native element was being updated, but the span on top was remaining an old value)
 	- FIX: (<any>$(element)).selectmenu('refresh');
+- FAIL: Chutzpah Console caused wasted time and is unneccessary

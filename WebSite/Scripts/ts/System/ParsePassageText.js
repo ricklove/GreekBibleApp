@@ -52,7 +52,7 @@ var Told;
                             newEntryLine = {
                                 rawLine: line,
                                 bookChapterVerseCode: m[1],
-                                hasChanged_BookChapterVerseCode: (m[1] != lastBookChapterVerseCode),
+                                hasChanged_BookChapterVerseCode: (m[1] !== lastBookChapterVerseCode),
                                 partOfSpeechCode: m[2],
                                 morphCode: m[3],
                                 oldMorphCode: m[4],
@@ -70,7 +70,7 @@ var Told;
                                 newEntryLine = {
                                     rawLine: line,
                                     bookChapterVerseCode: m[1],
-                                    hasChanged_BookChapterVerseCode: (m[1] != lastBookChapterVerseCode),
+                                    hasChanged_BookChapterVerseCode: (m[1] !== lastBookChapterVerseCode),
                                     partOfSpeechCode: m[2],
                                     morphCode: m[3],
                                     oldMorphCode: null,
