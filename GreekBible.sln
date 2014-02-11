@@ -3,6 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{688244DF-C256-4689-93D9-1E3221739019}"
 	ProjectSection(SolutionItems) = preProject
+		GitCommands.txt = GitCommands.txt
 		Tools\TSTest.bat = Tools\TSTest.bat
 	EndProjectSection
 EndProject
