@@ -1,4 +1,10 @@
-Removing folder from history:
+### Create Release Branch
+1. Create a local Release branch using GUI
+2. Create and push remote Release branch while creating an upstream link between the two release branches
+	- git push -u origin ReleaseV1
+
+
+### Removing folder from history:
 
 0. Copy the Entire root folder to create a backup
 1. Update gitignore and commit
