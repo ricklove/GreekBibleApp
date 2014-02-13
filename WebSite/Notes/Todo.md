@@ -54,7 +54,7 @@
 
 ### Version 2
 
-- [ ] Show loading screen
+- [S] Show loading screen
 	- [ ] Single file (all in html)
 		- [ ] No script dependencies
 		- [ ] No style dependencies
