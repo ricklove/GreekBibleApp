@@ -58,3 +58,19 @@
 - [X] Write Blog
 - [X] Publish
 - [X] Publish Blog
+
+### V 1.1
+
+- [S] Working on Loading Screen
+
+### V 1.2
+
+- [X] Working on Loading Screen
+
+### V 1.3
+
+- [X] Working on Offline App Cache
+
+### V 1.4
+
+- [X] Automatic Online to Offline Web App

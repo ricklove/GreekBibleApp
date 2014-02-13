@@ -1,0 +1,34 @@
+﻿<!DOCTYPE HTML>
+<html manifest="AppCache.ashx?appCache=true">
+<script type="text/javascript">
+
+    var offlineUrl = "Default?offline=true";
+
+    var promptRefresh = function () {
+        var result = confirm("A new version has downloaded. Do you want to refresh now?");
+
+        if (result) {
+            if (window.top.location.href.indexOf(offlineUrl) <= 0) {
+                window.top.location.href = offlineUrl;
+            } else {
+                window.top.location.href = window.top.location.href;
+            }
+        }
+
+    };
+
+    var gotoOfflinePage = function () {
+        if (window.top.location.href.indexOf(offlineUrl) <= 0) {
+            window.top.location.href = offlineUrl;
+        }
+    };
+
+    window.applicationCache.addEventListener("updateready", promptRefresh);
+    window.applicationCache.addEventListener("noupdate", gotoOfflinePage);
+
+</script>
+<body>
+    Test!
+</body>
+
+</html>

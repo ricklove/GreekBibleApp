@@ -1,45 +1,42 @@
 <!DOCTYPE html>
-<html>
+@{
+    var isOffline = false;
+
+    var manifestFile = "";
+
+    if( Request.Params["offline"] == "true" ){
+        manifestFile = "AppCache.ashx?appCache=true";
+        isOffline = true;
+    }
+
+    var manifestAttr = "";
+    if (!string.IsNullOrWhiteSpace(manifestFile))
+    {
+        manifestAttr = string.Format("manifest=\"{0}\"", manifestFile);
+    }
+}
+<html @Html.Raw(manifestAttr)>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Greek Bible</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="Styles/css/External/themes/default/jquery.mobile-1.4.0.min.css">
-    <link rel="stylesheet" href="Styles/css/External/qunit-1.14.0.css">
-    <link rel="stylesheet" href="Styles/css/App.css">
-
-    <script type='text/javascript' src="Scripts/js/External/jquery.min.js"></script>
-    <script type='text/javascript' src="Scripts/js/External/jquery.mobile-1.4.0.min.js"></script>
-    <script type='text/javascript' src="Scripts/js/External/knockout-3.0.0.min.js"></script>
-    <script type="text/javascript" src="Scripts/js/External/linq.min.js"></script>
-    <script type="text/javascript" src="Scripts/js/External/jquery.linq.min.js"></script>
-    <script type='text/javascript' src='Scripts/js/External/qunit-1.14.0.min.js'></script>
-
-    <script type='text/javascript' src='Scripts/ts/Core/Passage.js'></script>
-    <script type='text/javascript' src='Scripts/ts/System/LoadPassageText.js'></script>
-    <script type='text/javascript' src='Scripts/ts/System/ParsePassageText.js'></script>
-    <script type='text/javascript' src='Scripts/ts/System/ParsePassageText_TestData.js'></script>
-    <script type='text/javascript' src='Scripts/ts/System/ParsePassageText_Tests.js'></script>
-    <script type='text/javascript' src='Scripts/ts/System/Colors.js'></script>
-
-    <script type='text/javascript' src='Scripts/ts/User/MainViewModel.js'></script>
-    <script type='text/javascript' src='Scripts/ts/User/DisplayPassage.js'></script>
-    <script type='text/javascript' src='Scripts/ts/User/DisplayPassage_Tests.js'></script>
-    <script type='text/javascript' src='Scripts/ts/User/ChoosePassage.js'></script>
-    <script type='text/javascript'>
-        QUnit.config.autostart = false;
-
-        if (document.URL.indexOf("test=true") >= 0) {
-            $(document).ready(function () { QUnit.start(); });
-        } else {
-            $(document).ready(function () { $("#qunit").remove() });
-        }
-    </script>
-
+    <link rel="stylesheet" href="Styles/css/Loading.css">
 </head>
-<body>
-    <div data-role="page" id="home">
+<body class="loadingScreen">
+@if( !isOffline ){
+        <div style="display: none">
+            <iframe width="1" height="1" src="AppCacheLoader.html"></iframe>
+        </div>
+}
+    <div id="loadingScreen" class="loadingScreen">
+        <div style="height: 50px"></div>
+        <img src="Assets/images/mainLoader.gif" />
+        <div>Loading...</div>
+        <div id="loadingProgress"></div>
+    </div>
+
+    <div data-role="page" id="home" style="display: none">
         <div data-role="header">
             <h1>Greek Bible</h1>
         </div>
@@ -57,7 +54,7 @@
             <!--<h4><span data-bind="text: passage().entries.length"></span>&nbsp;Words</h4>-->
             <div data-bind="foreach: passage().entries">
                 <!-- ko if: isVerseStart -->
-                    <div class="verse" data-bind="text: passageRef.verse"></div>
+                <div class="verse" data-bind="text: passageRef.verse"></div>
                 <!-- /ko -->
                 <div class="entry">
                     <div class="rawText" data-bind="text: rawText"></div>
@@ -85,9 +82,45 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-        var viewModel = new Told.GreekBible.UI.MainViewModel();
-        ko.applyBindings(viewModel);
+    <script type='text/javascript'>
+
+        var text = "";
+        for (var i = 0; i < 1000000; i++) {
+            text += "." + i;
+        }
+
+    </script>
+
+    <script src="Scripts/js/requirements.js"></script>
+
+    <script type='text/javascript'>
+
+        var onProgress = function (p) {
+            var divProgress = document.getElementById("loadingProgress");
+            divProgress.textContent = (p * 100).toFixed(0) + "%";
+        }
+
+        //require(['Scripts/js/requirements'], function () {
+        loadRequirements(function () {
+            //alert('Requirements have been loaded');
+
+            QUnit.config.autostart = false;
+
+            if (document.URL.indexOf("test=true") >= 0) {
+                $(document).ready(function () { QUnit.start(); });
+            } else {
+                $(document).ready(function () { $("#qunit").remove() });
+            }
+
+            var viewModel = new Told.GreekBible.UI.MainViewModel();
+            ko.applyBindings(viewModel);
+
+            $("#home").show();
+            $("#loadingScreen").hide();
+            $(".loadingScreen").removeClass("loadingScreen");
+        }, onProgress);
+
+
     </script>
 </body>
 </html>
