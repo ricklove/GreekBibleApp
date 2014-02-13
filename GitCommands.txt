@@ -1,3 +1,6 @@
+### Update all branches
+- git push --all
+
 ### Create Release Branch
 1. Create a local Release branch using GUI
 2. Create and push remote Release branch while creating an upstream link between the two release branches

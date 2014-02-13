@@ -49,13 +49,16 @@
 	- [X] Screen Shots
 	- [X] Publish Website
 	- [X] Publish Blog about App
-	- [ ] Push to GitHub
+	- [X] Push to GitHub
 
 
 ### Version 2
 
+- [ ] Show loading screen
+	- [ ] Single file (all in html)
+		- [ ] No script dependencies
+		- [ ] No style dependencies
 - [ ] Show loading... when waiting for the chapter to download
-
 - [ ] Focus on Chapter Choice after choosing Book
 
 - [ ] Reload Last Passage (using localStorage)
@@ -71,12 +74,24 @@
 	- [ ] Tasks
 		- [X] Create Tests for ParsePassageText
 			- [ ] Test that the codes are parsed correctly
-		- [ ] Display the Book Chapter and Verse at proper divisions
-		- [ ] Rename DisplayPassageText to DisplayPassage
-		- [ ] Create Tests for DisplayPassage
-		- [ ] Display the color coding of each entry
 
 - [ ] Enable Offline Mode
 	- [ ] Create AppManifest to allow offline 
+	- [ ] Load in iframe from online app, then switch over with prompt
+		-  [ ] download all resources
 	- [ ] Add Device Metadata to enable web app features
 	- [ ] Use CDN for External sources where possible
+
+- [ ] Create Tests for Every Feature
+
+- [ ] Create Documentation for Every Feature
+
+- [ ] Enable PhoneGap
+
+- [ ] Publish
+	- [ ] WebApp
+		- [ ] Make ScreenShots
+	- [ ] PhoneGap
+	- [ ] GitHub
+	- [ ] Blog
+
