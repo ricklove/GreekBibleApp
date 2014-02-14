@@ -1,4 +1,4 @@
-﻿<%@  WebHandler Language="C#" Class="CommonAppHandler" %>
+﻿<%@ WebHandler Language="C#" Class="CommonAppHandler" %>
 
 using System;
 using System.Web;
@@ -46,10 +46,12 @@ public class CommonAppHandler : IHttpHandler
         var exts = "js,css,gif,jpg,png,html,txt".Split(',');
         var files = exts.SelectMany(ext => Directory.GetFiles(appRoot, "*." + ext, SearchOption.AllDirectories));
 
-        var extsToMonitor = "cshtml".Split(',');
+        var extsToMonitor = "cshtml,ashx".Split(',');
         var filesToMonitor = extsToMonitor.SelectMany(ext => Directory.GetFiles(appRoot, "*." + ext, SearchOption.AllDirectories));
 
-        var output = CreateAppCache(context, files, filesToMonitor, false);
+        var manualLines = new string[]{"Default?offline=true"};
+        
+        var output = CreateAppCache(context, files, filesToMonitor, manualLines, false);
 
         context.Response.ContentType = "text/cache-manifest";
         context.Response.Write(output);
@@ -57,7 +59,7 @@ public class CommonAppHandler : IHttpHandler
     }
 
 
-    private static string CreateAppCache(HttpContext context, IEnumerable<string> filesToInclude, IEnumerable<string> fileChangesToMonitor, bool isDebug)
+    private static string CreateAppCache(HttpContext context, IEnumerable<string> filesToInclude, IEnumerable<string> fileChangesToMonitor, IEnumerable<string> manualLines, bool isDebug)
     {
         var template =
     @"CACHE MANIFEST
@@ -135,7 +137,7 @@ https://*
 
         return template
             .Replace("{TOTALSIZE}", (totalSize / 1000.0).ToString("f0") + "kb")
-            .Replace("{CACHEFILES}", filesText.ToString())
+            .Replace("{CACHEFILES}", filesText.ToString() + "\r\n" + manualLines.Aggregate(new StringBuilder(), (b, l) => b.AppendLine(l)))
             .Replace("{FILECHANGES}", fcText);
     }
 }
