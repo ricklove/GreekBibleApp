@@ -54,10 +54,21 @@
 
 ### Version 2
 
-- [S] Show loading screen
-	- [ ] Single file (all in html)
-		- [ ] No script dependencies
-		- [ ] No style dependencies
+- [X] Show loading screen
+
+	- [X] Minimal files for loading (all in html)
+		- [X] Single script dependency
+		- [X] Single style dependency
+		- [X] Single image dependency
+
+- [X] Enable Offline Mode
+
+	- [X] Create AppManifest to allow offline 
+	- [X] Load in iframe from online app, then switch over with prompt
+		-  [X] download all resources
+	- [ ] Add Device Metadata to enable web app features
+	- [ ] Use CDN for External sources where possible
+
 - [ ] Show loading... when waiting for the chapter to download
 - [ ] Focus on Chapter Choice after choosing Book
 
@@ -75,12 +86,7 @@
 		- [X] Create Tests for ParsePassageText
 			- [ ] Test that the codes are parsed correctly
 
-- [ ] Enable Offline Mode
-	- [ ] Create AppManifest to allow offline 
-	- [ ] Load in iframe from online app, then switch over with prompt
-		-  [ ] download all resources
-	- [ ] Add Device Metadata to enable web app features
-	- [ ] Use CDN for External sources where possible
+
 
 - [ ] Create Tests for Every Feature
 

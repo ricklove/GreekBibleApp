@@ -74,3 +74,9 @@
 ### V 1.4
 
 - [X] Automatic Online to Offline Web App
+
+### V 1.5
+
+- [S] Show loading... when waiting for the chapter to download
+- [P] Focus on Chapter Choice after choosing Book
+- [P] Reload Last Passage (using localStorage)
