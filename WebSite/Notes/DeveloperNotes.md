@@ -127,3 +127,12 @@ I created a refreshJQM Knockout binding to deal with this. I will expand it to a
 - BUG: jQueryMobile was not updating the visible part of a select element (the native element was being updated, but the span on top was remaining an old value)
 	- FIX: (<any>$(element)).selectmenu('refresh');
 - FAIL: Chutzpah Console caused wasted time and is unneccessary
+- DESIGN BUG: Conflict with TypeScript and componentized view models and knockout:
+	- TypeScript does not run constructors until the field are constructed
+	- The viewModel components are given a reference to their "owner viewModel" in the constructor
+	- This "owner viewModel" is null while the component fields are being constructed
+	- Knockout computed properties run the "read" method at initializing in order to setup dependencies
+	- RESULT: Child components cannot have a computed field that accesses the viewModel in the "read" calculation
+	- SOLUTION: Consider alternative constructions for the viewModel
+		- Flat static view model object that that implements multiple interfaces
+		- Late construction of computed knockout fields

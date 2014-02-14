@@ -77,6 +77,10 @@
 
 ### V 1.5
 
-- [S] Show loading... when waiting for the chapter to download
+- [X] Show loading message when waiting for the chapter to download
+- [X] Show error message if failed to download
+
+### V 1.6
+
 - [P] Focus on Chapter Choice after choosing Book
 - [P] Reload Last Passage (using localStorage)

@@ -6,10 +6,10 @@ module Told.GreekBible.UI {
 
     export class MainViewModel_DisplayPassage {
 
-        private owner: MainViewModel;
+        private viewModel: MainViewModel;
 
-        constructor(owner: MainViewModel) {
-            this.owner = owner;
+        constructor(viewModel: MainViewModel) {
+            this.viewModel = viewModel;
         }
 
 
@@ -23,7 +23,7 @@ module Told.GreekBible.UI {
         getColorB(text: string): string {
             return MainViewModel_DisplayPassage.getUniqueColorB(text);
         }
-
+        
     }
 
 }

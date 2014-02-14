@@ -3,20 +3,19 @@
 /// <reference path="DisplayPassage.ts" />
 /// <reference path="ChoosePassage.ts" />
 /// <reference path="../System/LoadPassageText.ts" />
+/// <reference path="../System/ParsePassageText.ts" />
 /// <reference path="../System/ParsePassageText_TestData.ts" />
 
 module Told.GreekBible.UI {
 
     export class MainViewModel {
 
-        displayPassage = new MainViewModel_DisplayPassage(this);
-        choosePassage = new MainViewModel_ChoosePassage(this);
+        passage = ko.observable<Data.IPassage>(null);
+        hasPassageLoadingFailed = ko.observable<boolean>(false);
 
         constructor() {
             this.loadDefault();
         }
-
-        passage = ko.observable<Data.IPassage>(null);
 
         loadDefault() {
             var sampleText = Data.Tests.Sample.sampleText;
@@ -32,13 +31,33 @@ module Told.GreekBible.UI {
 
             // Make Blank while waiting
             p(<any>[]);
+            this.hasPassageLoadingFailed(false);
 
             // Load Async
             Data.Loader.loadPassage(bookNumber, chapter, function (passageText: string) {
                 p(Data.Parser.parsePassage(passageText));
-            });
+            }, function (errorMessage: string) {
+                    this.hasPassageLoadingFailed(true);
+                });
         }
 
+        isPassageLoaded = ko.computed<boolean>({
+            read: function () {
+                var passage = this.passage();
+                return passage != null && passage.entries != null && passage.entries.length > 0;
+            },
+            owner: this
+        });
+
+        isPassageLoading = ko.computed<boolean>({
+            read: function () {
+                return !this.isPassageLoaded() && !this.hasPassageLoadingFailed();
+            },
+            owner: this
+        });
+
+        displayPassage = new MainViewModel_DisplayPassage(this);
+        choosePassage = new MainViewModel_ChoosePassage(this);
     }
 
     ko.bindingHandlers["refreshJQM"] = <KnockoutBindingHandler>{

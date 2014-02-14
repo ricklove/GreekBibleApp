@@ -6,8 +6,8 @@ var Told;
     (function (GreekBible) {
         (function (UI) {
             var MainViewModel_DisplayPassage = (function () {
-                function MainViewModel_DisplayPassage(owner) {
-                    this.owner = owner;
+                function MainViewModel_DisplayPassage(viewModel) {
+                    this.viewModel = viewModel;
                 }
                 MainViewModel_DisplayPassage.prototype.getColorA = function (text) {
                     return MainViewModel_DisplayPassage.getUniqueColorA(text);

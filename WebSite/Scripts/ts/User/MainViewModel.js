@@ -3,6 +3,7 @@
 /// <reference path="DisplayPassage.ts" />
 /// <reference path="ChoosePassage.ts" />
 /// <reference path="../System/LoadPassageText.ts" />
+/// <reference path="../System/ParsePassageText.ts" />
 /// <reference path="../System/ParsePassageText_TestData.ts" />
 var Told;
 (function (Told) {
@@ -10,9 +11,23 @@ var Told;
         (function (UI) {
             var MainViewModel = (function () {
                 function MainViewModel() {
+                    this.passage = ko.observable(null);
+                    this.hasPassageLoadingFailed = ko.observable(false);
+                    this.isPassageLoaded = ko.computed({
+                        read: function () {
+                            var passage = this.passage();
+                            return passage != null && passage.entries != null && passage.entries.length > 0;
+                        },
+                        owner: this
+                    });
+                    this.isPassageLoading = ko.computed({
+                        read: function () {
+                            return !this.isPassageLoaded() && !this.hasPassageLoadingFailed();
+                        },
+                        owner: this
+                    });
                     this.displayPassage = new Told.GreekBible.UI.MainViewModel_DisplayPassage(this);
                     this.choosePassage = new Told.GreekBible.UI.MainViewModel_ChoosePassage(this);
-                    this.passage = ko.observable(null);
                     this.loadDefault();
                 }
                 MainViewModel.prototype.loadDefault = function () {
@@ -28,10 +43,13 @@ var Told;
 
                     // Make Blank while waiting
                     p([]);
+                    this.hasPassageLoadingFailed(false);
 
                     // Load Async
                     Told.GreekBible.Data.Loader.loadPassage(bookNumber, chapter, function (passageText) {
                         p(Told.GreekBible.Data.Parser.parsePassage(passageText));
+                    }, function (errorMessage) {
+                        this.hasPassageLoadingFailed(true);
                     });
                 };
                 return MainViewModel;

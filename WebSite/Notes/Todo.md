@@ -69,10 +69,12 @@
 	- [ ] Add Device Metadata to enable web app features
 	- [ ] Use CDN for External sources where possible
 
-- [ ] Show loading... when waiting for the chapter to download
-- [ ] Focus on Chapter Choice after choosing Book
+- [X] Show loading message when waiting for the chapter to download
+- [X] Show error message if failed to download
 
-- [ ] Reload Last Passage (using localStorage)
+- [P] Focus on Chapter Choice after choosing Book
+
+- [P] Reload Last Passage (using localStorage)
 
 - [ ] Display Entry Details (James 1)
 	- [ ] User Features:

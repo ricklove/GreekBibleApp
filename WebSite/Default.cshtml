@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 @{
     var isOffline = false;
+    //var isOffline = true;
 
     var manifestFile = "";
 
-    if( Request.Params["offline"] == "true" ){
+    if (Request.Params["offline"] == "true")
+    {
         manifestFile = "AppCache.ashx?appCache=true";
         isOffline = true;
     }
@@ -24,11 +26,12 @@
     <link rel="stylesheet" href="Styles/css/Loading.css">
 </head>
 <body class="loadingScreen">
-@if( !isOffline ){
+    @if (!isOffline)
+    {
         <div style="display: none">
             <iframe width="1" height="1" src="AppCacheLoader.html"></iframe>
         </div>
-}
+    }
     <div id="loadingScreen" class="loadingScreen">
         <div style="height: 50px"></div>
         <img src="Assets/images/mainLoader.gif" />
@@ -52,6 +55,20 @@
             <select id="selChapter" data-bind="options: choosePassage.chapterChoices(), value:choosePassage.chapter, refreshJQM:choosePassage.chapter"></select>
             <h3><span data-bind="text: choosePassage.book() + ' ' + choosePassage.chapter()"></span></h3>
             <!--<h4><span data-bind="text: passage().entries.length"></span>&nbsp;Words</h4>-->
+            <!-- ko if: isPassageLoading -->
+            <div>
+                <div>Loading Passage...</div>
+                <img src="Assets/images/mainLoader.gif" />
+            </div>
+            <!-- /ko -->
+            <!-- ko if: hasPassageLoadingFailed -->
+            <div>
+                <p>
+                    <img src="Assets/images/icons-png/alert-black.png" /> Passage Failed to Load.</p>
+                <p>Check your internet connection and change the chapter to try again.</p>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: isPassageLoaded -->
             <div data-bind="foreach: passage().entries">
                 <!-- ko if: isVerseStart -->
                 <div class="verse" data-bind="text: passageRef.verse"></div>
@@ -72,6 +89,7 @@
                 </div>
 
             </div>
+            <!-- /ko -->
 
 
 
