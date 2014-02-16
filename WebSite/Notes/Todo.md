@@ -87,8 +87,9 @@
 	- [X] Use #test for testing 
 		- [X] Put Testing on its own page
 		- [X] load with pure javascript with no server processing
+	- [ ] Refactor Yadda test runner and QUnit library
 
-- [ ] Refactor Offline App Caching
+- [X] Create Documentation for System Features
 
 
 - [ ] Refactor ViewModel
@@ -100,10 +101,13 @@
 	- [ ] Add Device Metadata to enable web app features
 	- [ ] Use CDN for External sources where possible
 
-- [ ] Create Documentation for Every Feature
+
+- [ ] Refactor Offline App Caching
 
 
 ### Version 2
+
+- [ ] Create Documentation for Every Feature
 
 - [X] Focus on Chapter Choice after choosing Book
 

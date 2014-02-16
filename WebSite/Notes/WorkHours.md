@@ -128,7 +128,7 @@
 		- [X] Put Testing on its own page
 		- [X] load with pure javascript with no server processing
 
-- [ ] 
+- [ ] Refactor Offline App Caching
 
 
 

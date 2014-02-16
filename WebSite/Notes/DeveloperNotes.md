@@ -1,4 +1,23 @@
-### Overview
+### 5HourAppSystem V1-V3
+
+I added a few system features to improve the usability:
+
+- App Loader:
+	- Display a simple loading splash screen while loading dependencies
+	- Load all css and javascript dependencies after loading page
+- Online to Offline Web App
+	- Load the offline web app files without slowing down the initial page visit
+	- Original page is Online web app
+	- It loads the appCache using an iframe
+	- Upon the appCache being loaded, it redirects to the offline version
+- BDD Testing
+	- Enable BDD "feature" testing with good QUnit formatting output
+	- Define features with Cucumber style .feature files
+	- Test features using step definitions as part of a step library
+	- User a Yadda/QUnit test runner
+
+
+### Greek Bible V1 Overview
 
 The project was a great success for my first 5HourApp. Although, it took about 8 hours plus some extra time researching tools and setting up the environment.
 
