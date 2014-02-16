@@ -1,95 +1,95 @@
 ﻿### Version 1
 
-- [X] Create simple UI for a single hardcoded Chapter (James 1)
-	- [X] User Features:
-		- [X] DisplayPassage
-			- [X] DisplayEntryText
-			- [X] DisplayEntryDetails
-			- [X] DisplayEntryColors
-	- [X] System Features:
-		- [X] ParsePassageText
-	- [X] Core:
-		- [X] Passage Definitions
-	- [X] Tasks
-		- [X] Refactor User and System File Structure
-			- [X] Move Data Interfaces to Core Folder
-			- [X] Move ParsePassageText to System Folder
-			- [X] Move SampleData to ParsePassageText_TestData
-			- [X] Rename DisplayGreekText to DisplayPassageText
-		- [X] Create Tests for ParsePassageText
-			- [X] Move Tests to correct file: "Will load first word from Sample - James 1"
-			- [X] Test that the codes are loaded
-		- [X] Display Text on page
-		- [X] Display Details on page as text
-		- [X] Rename DisplayPassageText to DisplayPassage
-		- [X] Display Verse Numbers
+- [x] Create simple UI for a single hardcoded Chapter (James 1)
+	- [x] User Features:
+		- [x] DisplayPassage
+			- [x] DisplayEntryText
+			- [x] DisplayEntryDetails
+			- [x] DisplayEntryColors
+	- [x] System Features:
+		- [x] ParsePassageText
+	- [x] Core:
+		- [x] Passage Definitions
+	- [x] Tasks
+		- [x] Refactor User and System File Structure
+			- [x] Move Data Interfaces to Core Folder
+			- [x] Move ParsePassageText to System Folder
+			- [x] Move SampleData to ParsePassageText_TestData
+			- [x] Rename DisplayGreekText to DisplayPassageText
+		- [x] Create Tests for ParsePassageText
+			- [x] Move Tests to correct file: "Will load first word from Sample - James 1"
+			- [x] Test that the codes are loaded
+		- [x] Display Text on page
+		- [x] Display Details on page as text
+		- [x] Rename DisplayPassageText to DisplayPassage
+		- [x] Display Verse Numbers
 
-- [X] Allow User to select a book and chapter
-	- [X] User Features:
-		- [X] ChangePassage
-	- [X] System Features:
-		- [X] LoadPassageText
-	- [X] Tasks
-		- [X] Populate Book Names
-		- [X] Populate Chapter Count when the Book is chosen
-		- [X] Reset Chapter to 1 when the Book is chosen
-			- [X] Change to Options binding
-			- [X] BUG: jQueryMobile does not update select when the value has changed, trying selectOptions as workaround
-		- [X] Load Passage after choosing chapter
-		- [X] Apply jQueryMobile Template after repopulating
-			- [X] Create RefreshJQM binding
-		- [X] Divide Data into Chapters
-		- [X] Download Chapter with Ajax
+- [x] Allow User to select a book and chapter
+	- [x] User Features:
+		- [x] ChangePassage
+	- [x] System Features:
+		- [x] LoadPassageText
+	- [x] Tasks
+		- [x] Populate Book Names
+		- [x] Populate Chapter Count when the Book is chosen
+		- [x] Reset Chapter to 1 when the Book is chosen
+			- [x] Change to Options binding
+			- [x] BUG: jQueryMobile does not update select when the value has changed, trying selectOptions as workaround
+		- [x] Load Passage after choosing chapter
+		- [x] Apply jQueryMobile Template after repopulating
+			- [x] Create RefreshJQM binding
+		- [x] Divide Data into Chapters
+		- [x] Download Chapter with Ajax
 
 
-- [X] Publish
-	- [X] Verify that App is Working Online
-	- [X] Create Release Branch
-	- [X] Write Blog Entry
-	- [X] Screen Shots
-	- [X] Publish Website
-	- [X] Publish Blog about App
-	- [X] Push to GitHub
+- [x] Publish
+	- [x] Verify that App is Working Online
+	- [x] Create Release Branch
+	- [x] Write Blog Entry
+	- [x] Screen Shots
+	- [x] Publish Website
+	- [x] Publish Blog about App
+	- [x] Push to GitHub
 
 
 ### 5HourApp System V1
 
-- [X] Show loading screen
+- [x] Show loading screen
 
-	- [X] Minimal files for loading (all in html)
-		- [X] Single script dependency
-		- [X] Single style dependency
-		- [X] Single image dependency
+	- [x] Minimal files for loading (all in html)
+		- [x] Single script dependency
+		- [x] Single style dependency
+		- [x] Single image dependency
 
-- [X] Enable Offline Mode
+- [x] Enable Offline Mode
 
-	- [X] Create AppManifest to allow offline 
-	- [X] Load in iframe from online app, then switch over with prompt
+	- [x] Create AppManifest to allow offline 
+	- [x] Load in iframe from online app, then switch over with prompt
 		-  [X] download all resources
 
-- [X] Show loading message when waiting for the chapter to download
-- [X] Show error message if failed to download
+- [x] Show loading message when waiting for the chapter to download
+- [x] Show error message if failed to download
 
 ### 5HourApp System V2
 
-- [X] Include Yadda BDD testing
+- [x] Include Yadda BDD testing
 
 ### 5HourApp System V3
 
-- [X] Rename "System" features to "Support" features
+- [x] Rename "System" features to "Support" features
 
-	- [X] Redefine "System Features": Features that provide non-app specific functionality
-	- [X] Define "Support Features": Features that provide underlying functionality for User features
+	- [x] Redefine "System Features": Features that provide non-app specific functionality
+	- [x] Define "Support Features": Features that provide underlying functionality for User features
 
-- [X] Refactor App Loader
+- [x] Refactor App Loader
 
-- [X] Refactor Testing Framework
-	- [X] Use #test for testing 
-		- [X] Put Testing on its own page
-		- [X] load with pure javascript with no server processing
-	- [ ] Refactor Yadda test runner and QUnit library
+- [x] Refactor Testing Framework
+	- [x] Use #test for testing 
+		- [x] Put Testing on its own page
+		- [x] load with pure javascript with no server processing
+	- [x] Refactor Yadda test runner and QUnit library
 
-- [X] Create Documentation for System Features in Developer's Notes
+- [x] Create Documentation for System Features in Developer's Notes
 
 
 - [ ] Refactor ViewModel
@@ -109,7 +109,7 @@
 
 - [ ] Create Documentation for Every Feature
 
-- [X] Focus on Chapter Choice after choosing Book
+- [x] Focus on Chapter Choice after choosing Book
 
 - [ ] Refactor ViewModel Passage Data
 	- [ ] Move Passage data to DisplayPassage
@@ -126,7 +126,7 @@
 	- [ ] Core:
 		- [ ] Concordance Definitions
 	- [ ] Tasks
-		- [X] Create Tests for ParsePassageText
+		- [x] Create Tests for ParsePassageText
 			- [ ] Test that the codes are parsed correctly
 
 
