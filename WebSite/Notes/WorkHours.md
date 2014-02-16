@@ -128,7 +128,13 @@
 		- [X] Put Testing on its own page
 		- [X] load with pure javascript with no server processing
 
-- [ ] Refactor Offline App Caching
+- [X] Create Documentation for System Features in Developer's Notes
+
+
+### V1 H2
+
+- [ ] Refactor Testing Framework
+	- [ ] Refactor Yadda test runner and QUnit library
 
 
 

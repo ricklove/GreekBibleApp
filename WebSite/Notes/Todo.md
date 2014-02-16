@@ -89,7 +89,7 @@
 		- [X] load with pure javascript with no server processing
 	- [ ] Refactor Yadda test runner and QUnit library
 
-- [X] Create Documentation for System Features
+- [X] Create Documentation for System Features in Developer's Notes
 
 
 - [ ] Refactor ViewModel
