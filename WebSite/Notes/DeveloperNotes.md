@@ -133,6 +133,4 @@ I created a refreshJQM Knockout binding to deal with this. I will expand it to a
 	- This "owner viewModel" is null while the component fields are being constructed
 	- Knockout computed properties run the "read" method at initializing in order to setup dependencies
 	- RESULT: Child components cannot have a computed field that accesses the viewModel in the "read" calculation
-	- SOLUTION: Consider alternative constructions for the viewModel
-		- Flat static view model object that that implements multiple interfaces
-		- Late construction of computed knockout fields
+	- SOLUTION: Static view model object that implements multiple interfaces, still using component structure

@@ -17,8 +17,12 @@ var Told;
 
                             // Reset Chapter (Async - this seems to help the UI refresh)
                             var c = this.chapter;
+                            var isCFocused = this.isChapterFocused;
                             setTimeout(function () {
                                 c(1);
+                                console.log("Before:Focus on Chapter");
+                                isCFocused(true);
+                                console.log("After:Focus on Chapter");
                             }, 0);
                         },
                         owner: this
@@ -51,6 +55,7 @@ var Told;
 
                         return nums;
                     }, this);
+                    this.isChapterFocused = ko.observable(false);
                     this.owner = owner;
                 }
                 return MainViewModel_ChoosePassage;

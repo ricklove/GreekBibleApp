@@ -66,15 +66,21 @@
 	- [X] Create AppManifest to allow offline 
 	- [X] Load in iframe from online app, then switch over with prompt
 		-  [X] download all resources
-	- [ ] Add Device Metadata to enable web app features
-	- [ ] Use CDN for External sources where possible
 
 - [X] Show loading message when waiting for the chapter to download
 - [X] Show error message if failed to download
 
-- [P] Focus on Chapter Choice after choosing Book
+- [X] Focus on Chapter Choice after choosing Book
 
-- [P] Reload Last Passage (using localStorage)
+
+### Version 3
+
+- [ ] Refactor ViewModel
+	- [ ] Move Passage data to DisplayPassage
+		- [ ] Change LoadPassage to ShowPassage
+		- [ ] Reload Last Passage (using localStorage)
+	- [ ] Change to static object with interfaces instead of classes
+
 
 - [ ] Display Entry Details (James 1)
 	- [ ] User Features:
@@ -88,9 +94,17 @@
 		- [X] Create Tests for ParsePassageText
 			- [ ] Test that the codes are parsed correctly
 
-
+- [ ] Improve Performance
+	- [ ] Add Device Metadata to enable web app features
+	- [ ] Use CDN for External sources where possible
 
 - [ ] Create Tests for Every Feature
+	- [ ] BDD Tests for every user feature
+	- [ ] TDD Tests for every system feature
+
+- [ ] Rename "System" features to "Support" features
+	- [ ] Redefine "System Features": Features that provide non-app specific functionality
+	- [ ] Define "Support Features": Features that provide underlying functionality for User features
 
 - [ ] Create Documentation for Every Feature
 

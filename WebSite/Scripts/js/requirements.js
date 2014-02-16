@@ -22,72 +22,77 @@
 //<script async="async" type='text/javascript' src='Scripts/ts/User/DisplayPassage_Tests.js'></script>
 //<script async="async" type='text/javascript' src='Scripts/ts/User/ChoosePassage.js'></script>
 
-function loadRequirements(onLoaded, onProgress) {
+function loadRequirements(onLoadedA, onProgressA) {
 
-    function loadScriptInner(url, onScriptLoad) {
-        // Based on jQuery.getScript
-        var head = document.getElementsByTagName("head")[0] || document.documentElement;
-        var script = document.createElement("script");
-        //if (s.scriptCharset) {
-        //    script.charset = s.scriptCharset;
-        //}
-        script.src = url;
+    function loadScripts(scriptList, onLoaded, onProgress) {
 
-        // Handle Script loading
-        var done = false;
+        function loadScriptInner(url, onScriptLoad) {
+            // Based on jQuery.getScript
+            var head = document.getElementsByTagName("head")[0] || document.documentElement;
+            var script = document.createElement("script");
+            //if (s.scriptCharset) {
+            //    script.charset = s.scriptCharset;
+            //}
+            script.src = url;
 
-        // Attach handlers for all browsers
-        script.onload = script.onreadystatechange = function () {
-            if (!done && (!this.readyState ||
-                    this.readyState === "loaded" || this.readyState === "complete")) {
-                done = true;
+            // Handle Script loading
+            var done = false;
 
-                onScriptLoad();
+            // Attach handlers for all browsers
+            script.onload = script.onreadystatechange = function () {
+                if (!done && (!this.readyState ||
+                        this.readyState === "loaded" || this.readyState === "complete")) {
+                    done = true;
 
-                // Handle memory leak in IE
-                script.onload = script.onreadystatechange = null;
-                if (head && script.parentNode) {
-                    head.removeChild(script);
+                    onScriptLoad();
+
+                    // Handle memory leak in IE
+                    script.onload = script.onreadystatechange = null;
+                    if (head && script.parentNode) {
+                        head.removeChild(script);
+                    }
                 }
+            };
+
+            // Use insertBefore instead of appendChild  to circumvent an IE6 bug.
+            // This arises when a base node is used (#2709 and #4378).
+            head.insertBefore(script, head.firstChild);
+        }
+
+        var scriptsToLoad = [];
+        var scriptCount = 0;
+        var isLoading = false;
+
+        var loadNextScript = function () {
+
+            if (onProgress) {
+                onProgress(1.0 - (scriptsToLoad.length / scriptCount));
+            }
+
+            if (scriptsToLoad.length > 0) {
+                var nextScript = scriptsToLoad.shift();
+                loadScriptInner(nextScript, loadNextScript);
+            } else {
+                isLoading = false;
+                if (onProgress) {
+                    onProgress(1);
+                }
+                onLoaded();
             }
         };
 
-        // Use insertBefore instead of appendChild  to circumvent an IE6 bug.
-        // This arises when a base node is used (#2709 and #4378).
-        head.insertBefore(script, head.firstChild);
-    }
+        function loadScript(url) {
+            scriptsToLoad.push(url);
+            scriptCount++;
 
-    var scriptsToLoad = [];
-    var scriptCount = 0;
-    var isLoading = false;
+            if (!isLoading) {
+                isLoading = true;
 
-    var loadNextScript = function () {
-
-        if (onProgress) {
-            onProgress(1.0 - (scriptsToLoad.length / scriptCount));
-        }
-
-        if (scriptsToLoad.length > 0) {
-            var nextScript = scriptsToLoad.shift();
-            loadScriptInner(nextScript, loadNextScript);
-        } else {
-            isLoading = false;
-            if (onProgress) {
-                onProgress(1);
+                setTimeout(loadNextScript, 0);
             }
-            onLoaded();
         }
-    };
 
-    function loadScript(url) {
-        scriptsToLoad.push(url);
-        scriptCount++;
-
-        if (!isLoading) {
-            isLoading = true;
-
-            setTimeout(loadNextScript, 0);
-        }
+        scriptList.map(function (s) { loadScript(s) });
     }
 
     function loadCss(url) {
@@ -98,6 +103,10 @@ function loadRequirements(onLoaded, onProgress) {
         document.getElementsByTagName("head")[0].appendChild(link);
     }
 
+    // Export methods
+    window.loadScripts = loadScripts;
+    window.loadCss = loadCss;
+
     //<link rel="stylesheet" href="Styles/css/External/themes/default/jquery.mobile-1.4.0.min.css">
     //<link rel="stylesheet" href="Styles/css/External/qunit-1.14.0.css">
     //<link rel="stylesheet" href="Styles/css/App.css">
@@ -105,77 +114,32 @@ function loadRequirements(onLoaded, onProgress) {
     loadCss('Styles/css/External/qunit-1.14.0.css');
     loadCss('Styles/css/App.css');
 
-    loadScript('Scripts/js/External/jquery.min.js');
-    loadScript('Scripts/js/External/jquery.mobile-1.4.0.min.js');
-    loadScript('Scripts/js/External/knockout-3.0.0.min.js');
-    loadScript('Scripts/js/External/linq.min.js');
-    loadScript('Scripts/js/External/jquery.linq.min.js');
-    loadScript('Scripts/js/External/qunit-1.14.0.min.js');
+    var scriptListA = [
+        'Scripts/js/External/jquery.min.js',
+        'Scripts/js/External/jquery.mobile-1.4.0.min.js',
+        'Scripts/js/External/knockout-3.0.0.min.js',
+        'Scripts/js/External/linq.min.js',
+        'Scripts/js/External/jquery.linq.min.js',
+        'Scripts/js/External/qunit-1.14.0.min.js',
+        'Scripts/js/External/yadda-0.9.8.js',
 
-    loadScript('Scripts/ts/Core/Passage.js');
+        'Scripts/ts/Core/Passage.js',
 
-    loadScript('Scripts/ts/System/LoadPassageText.js');
-    loadScript('Scripts/ts/System/ParsePassageText.js');
-    loadScript('Scripts/ts/System/ParsePassageText_TestData.js');
-    loadScript('Scripts/ts/System/ParsePassageText_Tests.js');
-    loadScript('Scripts/ts/System/Colors.js');
+        'Scripts/ts/System/LoadPassageText.js',
+        'Scripts/ts/System/ParsePassageText.js',
+        'Scripts/ts/System/ParsePassageText_TestData.js',
+        'Scripts/ts/System/ParsePassageText_Tests.js',
+        'Scripts/ts/System/Colors.js',
 
-    loadScript('Scripts/ts/User/MainViewModel.js');
-    loadScript('Scripts/ts/User/DisplayPassage.js');
-    loadScript('Scripts/ts/User/DisplayPassage_Tests.js');
-    loadScript('Scripts/ts/User/ChoosePassage.js');
+        'Scripts/ts/User/MainViewModel.js',
+        'Scripts/ts/User/DisplayPassage.js',
+        'Scripts/ts/User/DisplayPassage_Tests.js',
+        'Scripts/ts/User/ChoosePassage.js',
+
+        'Scripts/ts/YaddaRunner.js',
+    ];
+
+    loadScripts(scriptListA, onLoadedA, onProgressA);
+
 
 }
-
-//requirejs.config({
-//    //By default load any module IDs from js/lib
-//    baseUrl: 'Scripts',
-//    //except, if the module ID starts with "app",
-//    //load it from the js/app directory. paths
-//    //config is relative to the baseUrl, and
-//    //never includes a ".js" extension since
-//    //the paths config could be for a directory.
-//    paths: {
-//        ext: 'js/External',
-//        core: 'ts/Core',
-//        system: 'ts/System',
-//        user: 'ts/User',
-//        css: '../Styles/css',
-//        cssExt: '../Styles/css/External',
-//    },
-
-//    shim: {
-//        'jquery': { exports: '$' },
-//        'QUnit': { exports: 'QUnit' },
-//        'knockout-3.0.0.min': { exports: 'ko' },
-//        'MainViewModel': { deps: ['ko'] },
-//    }
-//});
-
-//define([
-//    'ext/jquery.min',
-//    'ext/jquery.mobile-1.4.0.min',
-//    'ext/knockout-3.0.0.min',
-//    'ext/linq.min',
-//    'ext/jquery.linq.min',
-//    'ext/qunit-1.14.0.min',
-
-//    'core/Passage',
-
-//    'system/LoadPassageText',
-//    'system/ParsePassageText',
-//    'system/ParsePassageText_TestData',
-//    'system/ParsePassageText_Tests',
-//    'system/Colors',
-
-//    'user/MainViewModel',
-//    'user/DisplayPassage',
-//    'user/DisplayPassage_Tests',
-//    'user/ChoosePassage',
-
-//    //'css!css/External/themes/default/jquery.mobile-1.4.0.min.css',
-//    //'css!css/External/qunit-1.14.0.css',
-//    //'css!css/App.css'
-//], function () {
-//    alert('Requirements have been loaded in Requirement.js');
-//});

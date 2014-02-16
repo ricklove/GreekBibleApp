@@ -1,4 +1,9 @@
-﻿.entries
+﻿
+#qunit-tests li li.pass {
+	white-space: pre;
+}
+
+.entries
 {
     margin-bottom: 200px;
 }

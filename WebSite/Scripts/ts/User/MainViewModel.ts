@@ -17,15 +17,15 @@ module Told.GreekBible.UI {
             this.loadDefault();
         }
 
-        loadDefault() {
+        loadDefault(onLoad?: () => void, onError?: (message: string) => void) {
             var sampleText = Data.Tests.Sample.sampleText;
             this.passage(Data.Parser.parsePassage(sampleText));
 
             // TODO: Load Last Passage (local Storage)
-            this.loadPassage(1, 1);
+            this.loadPassage(1, 1, onLoad, onError);
         }
 
-        loadPassage(bookNumber: number, chapter: number) {
+        loadPassage(bookNumber: number, chapter: number, onLoad?: () => void, onError?: (message: string) => void) {
 
             var p = this.passage;
 
@@ -34,10 +34,13 @@ module Told.GreekBible.UI {
             this.hasPassageLoadingFailed(false);
 
             // Load Async
-            Data.Loader.loadPassage(bookNumber, chapter, function (passageText: string) {
-                p(Data.Parser.parsePassage(passageText));
-            }, function (errorMessage: string) {
+            Data.Loader.loadPassage(bookNumber, chapter,
+                function (passageText: string) {
+                    p(Data.Parser.parsePassage(passageText));
+                    if (onLoad) { onLoad(); }
+                }, function (errorMessage: string) {
                     this.hasPassageLoadingFailed(true);
+                    if (onError) { onError(errorMessage); }
                 });
         }
 
@@ -62,12 +65,19 @@ module Told.GreekBible.UI {
 
     ko.bindingHandlers["refreshJQM"] = <KnockoutBindingHandler>{
         update: function (element, valueAccessor) {
+            console.log("refreshJQM Update:" + element.id);
+
             ko.utils.unwrapObservable(valueAccessor()); // to subscribe
 
             setTimeout(function () {
+                console.log("Before:Trigger Create");
                 $(element).trigger('create');
+                console.log("After:Trigger Create");
+
                 if ((<any>$(element)).selectmenu) {
+                    console.log("Before:SelectMenu Refresh");
                     (<any>$(element)).selectmenu('refresh');
+                    console.log("After:SelectMenu Refresh");
                 }
             }, 0);
         }

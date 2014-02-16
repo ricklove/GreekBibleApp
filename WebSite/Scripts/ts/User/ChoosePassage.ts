@@ -23,7 +23,13 @@ module Told.GreekBible.UI {
 
                 // Reset Chapter (Async - this seems to help the UI refresh)
                 var c = this.chapter;
-                setTimeout(function () { c(1); }, 0);
+                var isCFocused = this.isChapterFocused;
+                setTimeout(function () {
+                    c(1);
+                    console.log("Before:Focus on Chapter");
+                    isCFocused(true);
+                    console.log("After:Focus on Chapter");
+                }, 0);
             },
             owner: this
         });
@@ -59,6 +65,8 @@ module Told.GreekBible.UI {
 
             return nums;
         }, this);
+
+        isChapterFocused = ko.observable<boolean>(false);
     }
 
 }

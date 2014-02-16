@@ -30,15 +30,15 @@ var Told;
                     this.choosePassage = new Told.GreekBible.UI.MainViewModel_ChoosePassage(this);
                     this.loadDefault();
                 }
-                MainViewModel.prototype.loadDefault = function () {
+                MainViewModel.prototype.loadDefault = function (onLoad, onError) {
                     var sampleText = Told.GreekBible.Data.Tests.Sample.sampleText;
                     this.passage(Told.GreekBible.Data.Parser.parsePassage(sampleText));
 
                     // TODO: Load Last Passage (local Storage)
-                    this.loadPassage(1, 1);
+                    this.loadPassage(1, 1, onLoad, onError);
                 };
 
-                MainViewModel.prototype.loadPassage = function (bookNumber, chapter) {
+                MainViewModel.prototype.loadPassage = function (bookNumber, chapter, onLoad, onError) {
                     var p = this.passage;
 
                     // Make Blank while waiting
@@ -48,8 +48,14 @@ var Told;
                     // Load Async
                     Told.GreekBible.Data.Loader.loadPassage(bookNumber, chapter, function (passageText) {
                         p(Told.GreekBible.Data.Parser.parsePassage(passageText));
+                        if (onLoad) {
+                            onLoad();
+                        }
                     }, function (errorMessage) {
                         this.hasPassageLoadingFailed(true);
+                        if (onError) {
+                            onError(errorMessage);
+                        }
                     });
                 };
                 return MainViewModel;
@@ -58,12 +64,19 @@ var Told;
 
             ko.bindingHandlers["refreshJQM"] = {
                 update: function (element, valueAccessor) {
+                    console.log("refreshJQM Update:" + element.id);
+
                     ko.utils.unwrapObservable(valueAccessor()); // to subscribe
 
                     setTimeout(function () {
+                        console.log("Before:Trigger Create");
                         $(element).trigger('create');
+                        console.log("After:Trigger Create");
+
                         if ($(element).selectmenu) {
+                            console.log("Before:SelectMenu Refresh");
                             $(element).selectmenu('refresh');
+                            console.log("After:SelectMenu Refresh");
                         }
                     }, 0);
                 }
