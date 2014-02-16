@@ -114,29 +114,15 @@
     </div>
 
 
-    <script src="Scripts/js/requirements.js"></script>
+    <script src="Scripts/ts/System/AppLoader.js"></script>
 
     <script type='text/javascript'>
-
         var onProgress = function (p) {
             var divProgress = document.getElementById("loadingProgress");
             divProgress.textContent = (p * 100).toFixed(0) + "%";
         }
 
-        loadRequirements(function () {
-
-@if (isTest)
-{
-    <text>
-
-
-            Told.GreekBible.Tests.runTests(function () {
-                $(document).ready(function () {
-                    QUnit.load();
-                });
-            });
-    </text>
-}
+        Told.AppLoader.loadRequirements_Main(function () {
 
             var viewModel = new Told.GreekBible.UI.MainViewModel();
             ko.applyBindings(viewModel);
@@ -145,8 +131,26 @@
             $("#loadingScreen").hide();
             $(".loadingScreen").removeClass("loadingScreen");
         }, onProgress);
-
-
     </script>
+
+        @if (isTest)
+{
+    <text>
+    <script type='text/javascript'>
+        Told.AppLoader.loadRequirements_Testing(function () {
+
+            Told.GreekBible.Tests.runTests(function () {
+                $(document).ready(function () {
+                    QUnit.load();
+                });
+            });
+
+        });
+    </script>
+
+
+    </text>
+}
+
 </body>
 </html>

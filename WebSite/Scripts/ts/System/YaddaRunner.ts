@@ -1,9 +1,8 @@
-﻿/// <reference path="../typings/jQuery/jQuery.d.ts" />
-/// <reference path="../typings/qunit/qunit.d.ts" />
-/// <reference path="../typings/yadda/yadda.d.ts" />
-/// <reference path="../../Features/StepLibrary/MainLibrary.ts" />
-
-var loadScripts: any;
+﻿/// <reference path="../../typings/jQuery/jQuery.d.ts" />
+/// <reference path="../../typings/qunit/qunit.d.ts" />
+/// <reference path="../../typings/yadda/yadda.d.ts" />
+/// <reference path="AppLoader.ts" />
+/// <reference path="../../../Features/StepLibrary/MainLibrary.ts" />
 
 module Told.GreekBible.Tests {
 
@@ -60,7 +59,7 @@ module Told.GreekBible.Tests {
             //}
         }
 
-        loadScripts(stepsList().map(s=> "Features/StepLibrary/" + s + ".js"), function () {
+        Told.AppLoader.loadScripts(stepsList().map(s=> "Features/StepLibrary/" + s + ".js"), function () {
             featureList().map(f=> loadText("Features/" + f + ".feature", processFeatureText));
             onFinished();
         });

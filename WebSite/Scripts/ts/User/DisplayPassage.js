@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
-/// <reference path="../System/Colors.ts" />
+/// <reference path="../Support/Colors.ts" />
 /// <reference path="MainViewModel.ts" />
 var Told;
 (function (Told) {

@@ -1,5 +1,4 @@
 ﻿/// <reference path="../Core/Passage.ts" />
-/// <reference path="../../typings/linq/linq.d.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {

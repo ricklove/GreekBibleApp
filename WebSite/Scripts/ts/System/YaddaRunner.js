@@ -1,9 +1,8 @@
-﻿/// <reference path="../typings/jQuery/jQuery.d.ts" />
-/// <reference path="../typings/qunit/qunit.d.ts" />
-/// <reference path="../typings/yadda/yadda.d.ts" />
-/// <reference path="../../Features/StepLibrary/MainLibrary.ts" />
-var loadScripts;
-
+﻿/// <reference path="../../typings/jQuery/jQuery.d.ts" />
+/// <reference path="../../typings/qunit/qunit.d.ts" />
+/// <reference path="../../typings/yadda/yadda.d.ts" />
+/// <reference path="AppLoader.ts" />
+/// <reference path="../../../Features/StepLibrary/MainLibrary.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
@@ -55,7 +54,7 @@ var Told;
                     //}
                 };
 
-                loadScripts(stepsList().map(function (s) {
+                Told.AppLoader.loadScripts(stepsList().map(function (s) {
                     return "Features/StepLibrary/" + s + ".js";
                 }), function () {
                     featureList().map(function (f) {

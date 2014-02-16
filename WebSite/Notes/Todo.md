@@ -76,13 +76,13 @@
 
 ### 5HourApp System V3
 
-- [ ] Rename "System" features to "Support" features
+- [X] Rename "System" features to "Support" features
 
-	- [ ] Redefine "System Features": Features that provide non-app specific functionality
-	- [ ] Define "Support Features": Features that provide underlying functionality for User features
+	- [X] Redefine "System Features": Features that provide non-app specific functionality
+	- [X] Define "Support Features": Features that provide underlying functionality for User features
 
 
-- [ ] Refactor App Loader
+- [X] Refactor App Loader
 
 
 - [ ] Refactor Testing Framework

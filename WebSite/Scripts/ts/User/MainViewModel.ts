@@ -2,9 +2,8 @@
 /// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="DisplayPassage.ts" />
 /// <reference path="ChoosePassage.ts" />
-/// <reference path="../System/LoadPassageText.ts" />
-/// <reference path="../System/ParsePassageText.ts" />
-/// <reference path="../System/ParsePassageText_TestData.ts" />
+/// <reference path="../Support/LoadPassageText.ts" />
+/// <reference path="../Support/ParsePassageText.ts" />
 
 module Told.GreekBible.UI {
 
@@ -18,9 +17,6 @@ module Told.GreekBible.UI {
         }
 
         loadDefault(onLoad?: () => void, onError?: (message: string) => void) {
-            var sampleText = Data.Tests.Sample.sampleText;
-            this.passage(Data.Parser.parsePassage(sampleText));
-
             // TODO: Load Last Passage (local Storage)
             this.loadPassage(1, 1, onLoad, onError);
         }
