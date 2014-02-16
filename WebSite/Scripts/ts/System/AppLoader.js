@@ -113,6 +113,7 @@
                 'Scripts/ts/Support/ParsePassageText_TestData.js',
                 'Scripts/ts/Support/ParsePassageText_Tests.js',
                 'Scripts/js/External/yadda-0.9.8.js',
+                'Scripts/ts/System/YaddaQUnitLibrary.js',
                 'Scripts/ts/System/YaddaRunner.js'
             ];
 

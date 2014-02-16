@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../Scripts/typings/qunit/qunit.d.ts" />
 /// <reference path="../../Scripts/typings/yadda/yadda.d.ts" />
-/// <reference path="MainLibrary.ts" />
+/// <reference path="../../Scripts/ts/System/YaddaQUnitLibrary.ts" />
 /// <reference path="../../Scripts/ts/User/MainViewModel.ts" />
 
 module Told.GreekBible.Tests.Steps {
@@ -8,12 +8,14 @@ module Told.GreekBible.Tests.Steps {
     var isFirstRun: boolean = true;
     var viewModel: UI.MainViewModel;
 
-    mainLibrary
+    stepLibrary
     // This would require manually setting the UI value
         .given("this is not the first run", function () {
+            throw "pending";
             isFirstRun = false;
         })
         .given("this is the first run", function () {
+            throw "pending";
             isFirstRun = true;
         })
         .when("the app is loaded", function (next) {
@@ -47,27 +49,4 @@ module Told.GreekBible.Tests.Steps {
         //})
     ;
 
-    //var wall;
-
-    //library
-    //.given("$NUM green bottles are standing on the wall", function(number_of_bottles) {
-    //    wall = new Wall(number_of_bottles);
-    //})
-    //.when("$NUM green bottle accidentally falls", function(number_of_falling_bottles) {
-    //    wall.fall(number_of_falling_bottles);
-    //})
-    //.then("there (?:are|are still) $NUM green bottles standing on the wall", function(number_of_bottles) {
-    //    equal(number_of_bottles, wall.bottles);
-    //})
-    //;
-
-    //var Wall = function(bottles) {
-    //    this.bottles = bottles;
-    //    this.fall = function(n) {
-    //        this.bottles -= n;
-    //    }
-    //    this.returned = function() {
-    //        this.bottles++;
-    //    }
-    //}
 }

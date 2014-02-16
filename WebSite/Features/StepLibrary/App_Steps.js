@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../Scripts/typings/qunit/qunit.d.ts" />
 /// <reference path="../../Scripts/typings/yadda/yadda.d.ts" />
-/// <reference path="MainLibrary.ts" />
+/// <reference path="../../Scripts/ts/System/YaddaQUnitLibrary.ts" />
 /// <reference path="../../Scripts/ts/User/MainViewModel.ts" />
 var Told;
 (function (Told) {
@@ -10,9 +10,11 @@ var Told;
                 var isFirstRun = true;
                 var viewModel;
 
-                Told.GreekBible.Tests.Steps.mainLibrary.given("this is not the first run", function () {
+                Told.GreekBible.Tests.Steps.stepLibrary.given("this is not the first run", function () {
+                    throw "pending";
                     isFirstRun = false;
                 }).given("this is the first run", function () {
+                    throw "pending";
                     isFirstRun = true;
                 }).when("the app is loaded", function (next) {
                     viewModel = new Told.GreekBible.UI.MainViewModel();

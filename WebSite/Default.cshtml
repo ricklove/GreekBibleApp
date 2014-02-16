@@ -105,7 +105,7 @@
         </div>
     </div>
 
-    <div data-role="page" id="test" style="display: none">
+    <div id="test" style="display: none">
         <div data-role="header">
             <h1>Greek Bible - Testing</h1>
         </div>
@@ -131,12 +131,8 @@
             ko.applyBindings(viewModel);
 
             var hash = location.hash;
-
             if ($(hash).length === 0) { hash = "#home"; }
-
             $(hash).show();
-
-            //$('data-role:"page"').show();
 
             $("#loadingScreen").hide();
             $(".loadingScreen").removeClass("loadingScreen");
@@ -148,9 +144,12 @@
         if (location.href.indexOf("test") > 0) {
             Told.AppLoader.loadRequirements_Testing(function () {
 
+                QUnit.config.autostart = false;
+
                 Told.GreekBible.Tests.runTests(function () {
                     $(document).ready(function () {
                         QUnit.load();
+                        QUnit.start();
                     });
                 });
             });

@@ -1,7 +1,7 @@
-﻿interface ILibrary {
-    given(stepText: string, doResult: (args: any) => void): ILibrary;
-    when(stepText: string, doResult: (args: any) => void): ILibrary;
-    then(stepText: string, doResult: (args: any) => void): ILibrary;
+﻿interface IYaddaLibrary {
+    given(stepText: string, doResult: (args: any) => void): IYaddaLibrary;
+    when(stepText: string, doResult: (args: any) => void): IYaddaLibrary;
+    then(stepText: string, doResult: (args: any) => void): IYaddaLibrary;
 }
 
 declare var require: any;

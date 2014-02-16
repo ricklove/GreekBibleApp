@@ -133,8 +133,8 @@
 
 ### V1 H2
 
-- [ ] Refactor Testing Framework
-	- [ ] Refactor Yadda test runner and QUnit library
+- [X] Refactor Testing Framework
+	- [X] Refactor Yadda test runner and QUnit library
 
 
 

@@ -2,7 +2,7 @@
 /// <reference path="../../typings/qunit/qunit.d.ts" />
 /// <reference path="../../typings/yadda/yadda.d.ts" />
 /// <reference path="AppLoader.ts" />
-/// <reference path="../../../Features/StepLibrary/MainLibrary.ts" />
+/// <reference path="YaddaQUnitLibrary.ts" />
 
 module Told.GreekBible.Tests {
 
@@ -13,7 +13,7 @@ module Told.GreekBible.Tests {
 
         var processFeatureText = function (text: string) {
 
-            var yadda = new Yadda.Yadda(Steps.mainYaddaLibrary);
+            var yadda = new Yadda.Yadda(Steps.stepLibrary.yaddaLibrary);
             var feature = new FeatureParser().parse(text);
             var fScenarios = feature.scenarios;
 
@@ -59,6 +59,8 @@ module Told.GreekBible.Tests {
             //}
         }
 
+        Steps.initStepLibrary();
+
         Told.AppLoader.loadScripts(stepsList().map(s=> "Features/StepLibrary/" + s + ".js"), function () {
             featureList().map(f=> loadText("Features/" + f + ".feature", processFeatureText));
             onFinished();
@@ -83,7 +85,6 @@ module Told.GreekBible.Tests {
 
     function stepsList(): string[] {
         return [
-            "MainLibrary",
             "App_Steps",
         ];
     }
