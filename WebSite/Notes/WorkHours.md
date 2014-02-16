@@ -123,7 +123,12 @@
 
 - [X] Refactor App Loader
 
-- [ ] Refactor Testing Framework
+- [X] Refactor Testing Framework
+	- [X] Use #test for testing 
+		- [X] Put Testing on its own page
+		- [X] load with pure javascript with no server processing
+
+- [ ] 
 
 
 

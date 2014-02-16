@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 @{
-    var isTest = Request.Params["test"] == "true" ? true : false;
-
     //var isOffline = false;
     var isOffline = true;
 
@@ -101,18 +99,23 @@
 
             </div>
             <!-- /ko -->
-
-
-            @if (isTest)
-            {
-                <div id="qunit"></div>
-            }
         </div>
         <div data-role="footer">
             <h4>&copy; Told - Rick Love - 2014</h4>
         </div>
     </div>
 
+    <div data-role="page" id="test" style="display: none">
+        <div data-role="header">
+            <h1>Greek Bible - Testing</h1>
+        </div>
+        <div data-role="content">
+            <div id="qunit">Please refresh to load the testing system.</div>
+        </div>
+        <div data-role="footer">
+            <h4>&copy; Told - Rick Love - 2014</h4>
+        </div>
+    </div>
 
     <script src="Scripts/ts/System/AppLoader.js"></script>
 
@@ -127,30 +130,32 @@
             var viewModel = new Told.GreekBible.UI.MainViewModel();
             ko.applyBindings(viewModel);
 
-            $("#home").show();
+            var hash = location.hash;
+
+            if ($(hash).length === 0) { hash = "#home"; }
+
+            $(hash).show();
+
+            //$('data-role:"page"').show();
+
             $("#loadingScreen").hide();
             $(".loadingScreen").removeClass("loadingScreen");
         }, onProgress);
     </script>
 
-        @if (isTest)
-{
-    <text>
-    <script type='text/javascript'>
-        Told.AppLoader.loadRequirements_Testing(function () {
 
-            Told.GreekBible.Tests.runTests(function () {
-                $(document).ready(function () {
-                    QUnit.load();
+    <script type='text/javascript'>
+        if (location.href.indexOf("test") > 0) {
+            Told.AppLoader.loadRequirements_Testing(function () {
+
+                Told.GreekBible.Tests.runTests(function () {
+                    $(document).ready(function () {
+                        QUnit.load();
+                    });
                 });
             });
-
-        });
+        }
     </script>
-
-
-    </text>
-}
 
 </body>
 </html>

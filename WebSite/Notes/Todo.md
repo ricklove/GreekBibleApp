@@ -81,12 +81,12 @@
 	- [X] Redefine "System Features": Features that provide non-app specific functionality
 	- [X] Define "Support Features": Features that provide underlying functionality for User features
 
-
 - [X] Refactor App Loader
 
-
-- [ ] Refactor Testing Framework
-
+- [X] Refactor Testing Framework
+	- [X] Use #test for testing 
+		- [X] Put Testing on its own page
+		- [X] load with pure javascript with no server processing
 
 - [ ] Refactor Offline App Caching
 
