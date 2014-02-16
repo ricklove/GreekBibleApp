@@ -52,7 +52,7 @@
 	- [X] Push to GitHub
 
 
-### Version 2
+### 5HourApp System V1
 
 - [X] Show loading screen
 
@@ -70,23 +70,54 @@
 - [X] Show loading message when waiting for the chapter to download
 - [X] Show error message if failed to download
 
-- [X] Focus on Chapter Choice after choosing Book
+### 5HourApp System V2
+
+- [X] Include Yadda BDD testing
+
+### 5HourApp System V3
+
+- [ ] Rename "System" features to "Support" features
+
+	- [ ] Redefine "System Features": Features that provide non-app specific functionality
+	- [ ] Define "Support Features": Features that provide underlying functionality for User features
 
 
-### Version 3
+- [ ] Refactor App Loader
+
+
+- [ ] Refactor Testing Framework
+
+
+- [ ] Refactor Offline App Caching
+
 
 - [ ] Refactor ViewModel
+	- [ ] Change to static object with interfaces instead of classes
+
+- [ ] Enable PhoneGap
+
+- [ ] Improve Performance
+	- [ ] Add Device Metadata to enable web app features
+	- [ ] Use CDN for External sources where possible
+
+- [ ] Create Documentation for Every Feature
+
+
+### Version 2
+
+- [X] Focus on Chapter Choice after choosing Book
+
+- [ ] Refactor ViewModel Passage Data
 	- [ ] Move Passage data to DisplayPassage
 		- [ ] Change LoadPassage to ShowPassage
 		- [ ] Reload Last Passage (using localStorage)
-	- [ ] Change to static object with interfaces instead of classes
 
 
 - [ ] Display Entry Details (James 1)
 	- [ ] User Features:
 		- [ ] DisplayPassage
 			- [ ] DisplayEntryConcordancePopup
-	- [ ] System Features:
+	- [ ] Support Features:
 		- [ ] LoadConcordance
 	- [ ] Core:
 		- [ ] Concordance Definitions
@@ -94,21 +125,11 @@
 		- [X] Create Tests for ParsePassageText
 			- [ ] Test that the codes are parsed correctly
 
-- [ ] Improve Performance
-	- [ ] Add Device Metadata to enable web app features
-	- [ ] Use CDN for External sources where possible
 
 - [ ] Create Tests for Every Feature
 	- [ ] BDD Tests for every user feature
 	- [ ] TDD Tests for every system feature
 
-- [ ] Rename "System" features to "Support" features
-	- [ ] Redefine "System Features": Features that provide non-app specific functionality
-	- [ ] Define "Support Features": Features that provide underlying functionality for User features
-
-- [ ] Create Documentation for Every Feature
-
-- [ ] Enable PhoneGap
 
 - [ ] Publish
 	- [ ] WebApp

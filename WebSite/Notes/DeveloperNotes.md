@@ -116,11 +116,10 @@ I created a refreshJQM Knockout binding to deal with this. I will expand it to a
 	- TypeScript Definitions
 		- NuGet PM> Install-Package linq.TypeScript.DefinitelyTyped
 
-### Future
+- Yadda - BDD - Behavior Driven Design Testing in Browser (similar to cucumber)
+	- yadda JS
+	- Created own simple TypeScript Definition placeholders using "any"
 
-- QUnit Pavlov Plugin - BDD
-	- This looks like a good plugin to enable Behavior Driven Design language for QUnit tests
-	- Would Require a TypeScript Definition File to be created
 
 ### Bugs
 
