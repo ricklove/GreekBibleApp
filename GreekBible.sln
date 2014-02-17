@@ -7,25 +7,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{688244DF
 		Tools\TSTest.bat = Tools\TSTest.bat
 	EndProjectSection
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite(1)", "http://localhost:59027", "{AAB9CE71-FBF6-47EA-8180-B22C5B0BB5F8}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "www", "http://localhost:53030", "{1141A21C-E7CB-467A-8991-EA6F0EBB1131}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/WebSite"
-		Debug.AspNetCompiler.PhysicalPath = "WebSite\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\WebSite\"
+		Debug.AspNetCompiler.VirtualPath = "/www"
+		Debug.AspNetCompiler.PhysicalPath = "www\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\www\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/WebSite"
-		Release.AspNetCompiler.PhysicalPath = "WebSite\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\WebSite\"
+		Release.AspNetCompiler.VirtualPath = "/www"
+		Release.AspNetCompiler.PhysicalPath = "www\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\www\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "WebSite\"
+		SlnRelativePath = "www\"
 	EndProjectSection
 EndProject
 Global
@@ -33,8 +33,8 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AAB9CE71-FBF6-47EA-8180-B22C5B0BB5F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAB9CE71-FBF6-47EA-8180-B22C5B0BB5F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1141A21C-E7CB-467A-8991-EA6F0EBB1131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1141A21C-E7CB-467A-8991-EA6F0EBB1131}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
