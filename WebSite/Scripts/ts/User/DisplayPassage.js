@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../Support/Colors.ts" />
+/// <reference path="../Support/AccessUserSettings.ts" />
 /// <reference path="MainViewModel.ts" />
 var Told;
 (function (Told) {
@@ -8,6 +9,8 @@ var Told;
             var MainViewModel_DisplayPassage = (function () {
                 function MainViewModel_DisplayPassage(viewModel) {
                     this.passage = ko.observable(null);
+                    this.book = ko.observable(null);
+                    this.chapter = ko.observable(null);
                     this.hasPassageLoadingFailed = ko.observable(false);
                     this.isPassageLoaded = ko.computed({
                         read: function () {
@@ -29,19 +32,36 @@ var Told;
                 }
                 MainViewModel_DisplayPassage.prototype.showDefault = function (onLoad, onError) {
                     // TODO: Load Last Passage (local Storage)
-                    this.showPassage(1, 1, onLoad, onError);
+                    var lastBook = parseInt(Told.GreekBible.Data.AccessUserSettings.getUserSetting("bookChoice"));
+                    var lastChapter = parseInt(Told.GreekBible.Data.AccessUserSettings.getUserSetting("chapterChoice"));
+
+                    if (isNaN(lastBook) || isNaN(lastChapter)) {
+                        lastBook = 1;
+                        lastChapter = 1;
+                    }
+
+                    this.showPassage(lastBook, lastChapter, onLoad, onError);
                 };
 
                 MainViewModel_DisplayPassage.prototype.showPassage = function (bookNumber, chapter, onLoad, onError) {
                     var p = this.passage;
+                    var b = this.book;
+                    var c = this.chapter;
 
                     // Make Blank while waiting
                     p([]);
                     this.hasPassageLoadingFailed(false);
 
+                    // Set choice
+                    Told.GreekBible.Data.AccessUserSettings.setUserSetting("bookChoice", bookNumber.toString());
+                    Told.GreekBible.Data.AccessUserSettings.setUserSetting("chapterChoice", chapter.toString());
+                    b(Told.GreekBible.Data.BookInfo.getBookName(bookNumber));
+                    c(chapter);
+
                     // Load Async
                     Told.GreekBible.Data.Loader.loadPassage(bookNumber, chapter, function (passageText) {
                         p(Told.GreekBible.Data.Parser.parsePassage(passageText));
+
                         if (onLoad) {
                             onLoad();
                         }

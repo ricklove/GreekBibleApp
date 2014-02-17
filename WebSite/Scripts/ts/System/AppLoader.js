@@ -94,6 +94,7 @@
                 'Scripts/ts/Core/Passage.js',
                 'Scripts/ts/Support/LoadPassageText.js',
                 'Scripts/ts/Support/ParsePassageText.js',
+                'Scripts/ts/Support/AccessUserSettings.js',
                 'Scripts/ts/Support/Colors.js',
                 'Scripts/ts/User/MainViewModel.js',
                 'Scripts/ts/User/DisplayPassage.js',

@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../Core/Passage.ts" />
 /// <reference path="MainViewModel.ts" />
+/// <reference path="DisplayPassage.ts" />
 
 module Told.GreekBible.UI {
 
@@ -10,6 +11,8 @@ module Told.GreekBible.UI {
 
         constructor(owner: MainViewModel) {
             this.owner = owner;
+            this.bookNumber(Data.BookInfo.getBookNumber(this.owner.displayPassage.book()));
+            this.chapterNumber(this.owner.displayPassage.chapter());
         }
 
         bookNumber = ko.observable<number>(1);

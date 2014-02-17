@@ -139,12 +139,16 @@
 
 ## Greek Bible V2
 
-### V1 H1
+### V2 H1
 
 - [x] Show loading message when waiting for the chapter to download
 - [x] Show error message if failed to download
 
-### V1 H6
+### V2 H2
 
-- [P] Focus on Chapter Choice after choosing Book
-- [P] Reload Last Passage (using localStorage)
+- [x] Focus on Chapter Choice after choosing Book
+
+### V2 H3
+
+- [x] Refactor ViewModel Passage Data
+- [x] Reload Last Passage (using localStorage)

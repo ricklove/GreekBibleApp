@@ -54,7 +54,6 @@
 
             <select data-bind="options: choosePassage.bookChoices(), value:choosePassage.book, refreshJQM:choosePassage.book"></select>
             <select id="selChapter" data-bind="options: choosePassage.chapterChoices(), value:choosePassage.chapter, refreshJQM:choosePassage.chapter, refreshJQM:choosePassage.book, hasFocus: choosePassage.isChapterFocused"></select>
-            <h3><span data-bind="text: choosePassage.book() + ' ' + choosePassage.chapter()"></span></h3>
             <!--<h4><span data-bind="text: passage().entries.length"></span>&nbsp;Words</h4>-->
             <!-- ko if: displayPassage.isPassageLoading -->
             <div>
@@ -78,6 +77,7 @@
             </div>
             <!-- /ko -->
             <!-- ko if: displayPassage.isPassageLoaded -->
+            <h3><span data-bind="text: displayPassage.book() + ' ' + displayPassage.chapter()"></span></h3>
             <div data-bind="foreach: displayPassage.passage().entries">
                 <!-- ko if: isVerseStart -->
                 <div class="verse" data-bind="text: passageRef.verse"></div>

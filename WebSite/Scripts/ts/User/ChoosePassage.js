@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../Core/Passage.ts" />
 /// <reference path="MainViewModel.ts" />
+/// <reference path="DisplayPassage.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
@@ -59,6 +60,8 @@ var Told;
                     }, this);
                     this.isChapterFocused = ko.observable(false);
                     this.owner = owner;
+                    this.bookNumber(Told.GreekBible.Data.BookInfo.getBookNumber(this.owner.displayPassage.book()));
+                    this.chapterNumber(this.owner.displayPassage.chapter());
                 }
                 return MainViewModel_ChoosePassage;
             })();

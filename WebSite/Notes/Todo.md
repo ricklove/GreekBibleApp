@@ -96,11 +96,14 @@
 
 - [x] Focus on Chapter Choice after choosing Book
 
-- [ ] Refactor ViewModel Passage Data
-	- [X] Set "deferEvaluation: true" on ko.computed which should initialize after viewModel constructor
-	- [X] Move Passage data to DisplayPassage
-		- [X] Change LoadPassage to ShowPassage
-		- [ ] Reload Last Passage (using localStorage)
+- [x] Refactor ViewModel Passage Data
+	- [x] Set "deferEvaluation: true" on ko.computed which should initialize after viewModel constructor
+	- [x] Move Passage data to DisplayPassage
+		- [x] Change LoadPassage to ShowPassage
+		- [x] Reload Last Passage (using localStorage)
+	- [x] Show Book and Chapter from Display Passage instead of Choose Passage
+
+- [ ] Refactor Book and Chapter with Display Passage and Choose Passage
 
 - [ ] BUG: Chapter is not returning to 1 after change of book (after Set "deferEvaluation: true")
 
