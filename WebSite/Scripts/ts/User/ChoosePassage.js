@@ -25,7 +25,8 @@ var Told;
                                 console.log("After:Focus on Chapter");
                             }, 0);
                         },
-                        owner: this
+                        owner: this,
+                        deferEvaluation: true
                     });
                     this.chapterNumber = ko.observable(1);
                     this.chapter = ko.computed({
@@ -37,9 +38,10 @@ var Told;
                             this.chapterNumber(value);
 
                             // Change Passage
-                            this.owner.loadPassage(this.bookNumber(), this.chapter());
+                            this.owner.displayPassage.showPassage(this.bookNumber(), this.chapter());
                         },
-                        owner: this
+                        owner: this,
+                        deferEvaluation: true
                     });
                     this.bookChoices = ko.computed(function () {
                         return Told.GreekBible.Data.BookInfo.getBookNames();

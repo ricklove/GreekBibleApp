@@ -31,7 +31,8 @@ module Told.GreekBible.UI {
                     console.log("After:Focus on Chapter");
                 }, 0);
             },
-            owner: this
+            owner: this,
+            deferEvaluation: true
         });
 
         chapterNumber = ko.observable<number>(1);
@@ -45,9 +46,10 @@ module Told.GreekBible.UI {
                 this.chapterNumber(value);
 
                 // Change Passage
-                this.owner.loadPassage(this.bookNumber(), this.chapter());
+                this.owner.displayPassage.showPassage(this.bookNumber(), this.chapter());
             },
-            owner: this
+            owner: this,
+            deferEvaluation: true
         });
 
         bookChoices = ko.computed(function () {

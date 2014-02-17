@@ -136,10 +136,6 @@
 - [x] Refactor Testing Framework
 	- [x] Refactor Yadda test runner and QUnit library
 
-### V3 H3
-
-
-
 
 ## Greek Bible V2
 

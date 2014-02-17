@@ -56,7 +56,7 @@
             <select id="selChapter" data-bind="options: choosePassage.chapterChoices(), value:choosePassage.chapter, refreshJQM:choosePassage.chapter, refreshJQM:choosePassage.book, hasFocus: choosePassage.isChapterFocused"></select>
             <h3><span data-bind="text: choosePassage.book() + ' ' + choosePassage.chapter()"></span></h3>
             <!--<h4><span data-bind="text: passage().entries.length"></span>&nbsp;Words</h4>-->
-            <!-- ko if: isPassageLoading -->
+            <!-- ko if: displayPassage.isPassageLoading -->
             <div>
 
                 <div>
@@ -65,7 +65,7 @@
                 </div>
             </div>
             <!-- /ko -->
-            <!-- ko if: hasPassageLoadingFailed -->
+            <!-- ko if: displayPassage.hasPassageLoadingFailed -->
             <div>
                 <p>
                     <img src="Assets/images/icons-png/alert-black.png" />
@@ -77,8 +77,8 @@
                 </p>
             </div>
             <!-- /ko -->
-            <!-- ko if: isPassageLoaded -->
-            <div data-bind="foreach: passage().entries">
+            <!-- ko if: displayPassage.isPassageLoaded -->
+            <div data-bind="foreach: displayPassage.passage().entries">
                 <!-- ko if: isVerseStart -->
                 <div class="verse" data-bind="text: passageRef.verse"></div>
                 <!-- /ko -->

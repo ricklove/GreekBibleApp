@@ -9,52 +9,6 @@ module Told.GreekBible.UI {
 
     export class MainViewModel {
 
-        passage = ko.observable<Data.IPassage>(null);
-        hasPassageLoadingFailed = ko.observable<boolean>(false);
-
-        constructor() {
-            this.loadDefault();
-        }
-
-        loadDefault(onLoad?: () => void, onError?: (message: string) => void) {
-            // TODO: Load Last Passage (local Storage)
-            this.loadPassage(1, 1, onLoad, onError);
-        }
-
-        loadPassage(bookNumber: number, chapter: number, onLoad?: () => void, onError?: (message: string) => void) {
-
-            var p = this.passage;
-
-            // Make Blank while waiting
-            p(<any>[]);
-            this.hasPassageLoadingFailed(false);
-
-            // Load Async
-            Data.Loader.loadPassage(bookNumber, chapter,
-                function (passageText: string) {
-                    p(Data.Parser.parsePassage(passageText));
-                    if (onLoad) { onLoad(); }
-                }, function (errorMessage: string) {
-                    this.hasPassageLoadingFailed(true);
-                    if (onError) { onError(errorMessage); }
-                });
-        }
-
-        isPassageLoaded = ko.computed<boolean>({
-            read: function () {
-                var passage = this.passage();
-                return passage != null && passage.entries != null && passage.entries.length > 0;
-            },
-            owner: this
-        });
-
-        isPassageLoading = ko.computed<boolean>({
-            read: function () {
-                return !this.isPassageLoaded() && !this.hasPassageLoadingFailed();
-            },
-            owner: this
-        });
-
         displayPassage = new MainViewModel_DisplayPassage(this);
         choosePassage = new MainViewModel_ChoosePassage(this);
     }
