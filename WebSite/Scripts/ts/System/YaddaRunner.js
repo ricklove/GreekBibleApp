@@ -84,13 +84,15 @@ var Told;
 
             function featureList() {
                 return [
-                    "ViewPassage"
+                    "Support/ParsePassageText",
+                    "User/ViewPassage"
                 ];
             }
 
             function stepsList() {
                 return [
-                    "App_Steps"
+                    "App_Steps",
+                    "ParseGreekText_Steps"
                 ];
             }
         })(GreekBible.Tests || (GreekBible.Tests = {}));

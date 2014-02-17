@@ -79,13 +79,15 @@ module Told.GreekBible.Tests {
 
     function featureList(): string[] {
         return [
-            "ViewPassage",
+            "Support/ParsePassageText",
+            "User/ViewPassage",
         ];
     }
 
     function stepsList(): string[] {
         return [
             "App_Steps",
+            "ParseGreekText_Steps",
         ];
     }
 }

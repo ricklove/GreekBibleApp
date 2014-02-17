@@ -101,7 +101,6 @@ module Told.AppLoader {
 
             'Scripts/ts/User/MainViewModel.js',
             'Scripts/ts/User/DisplayPassage.js',
-            'Scripts/ts/User/DisplayPassage_Tests.js',
             'Scripts/ts/User/ChoosePassage.js',
         ];
 

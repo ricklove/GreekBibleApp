@@ -1,5 +1,4 @@
 ﻿/// <reference path="../../Scripts/typings/qunit/qunit.d.ts" />
-/// <reference path="../../Scripts/typings/yadda/yadda.d.ts" />
 /// <reference path="../../Scripts/ts/System/YaddaQUnitLibrary.ts" />
 /// <reference path="../../Scripts/ts/User/MainViewModel.ts" />
 
