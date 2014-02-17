@@ -103,9 +103,15 @@
 		- [x] Reload Last Passage (using localStorage)
 	- [x] Show Book and Chapter from Display Passage instead of Choose Passage
 
+- [ ] Change "WebSite" folder to "www" folder
+
+- [ ] Add _featureList.txt
+	- [ ] Feature: Choose 2 passages quickly and first is late loaded
+
 - [ ] Refactor Book and Chapter with Display Passage and Choose Passage
 
-- [ ] BUG: Chapter is not returning to 1 after change of book (after Set "deferEvaluation: true")
+- [ ] BUG: Chapter is not returning to "1" after change of book (after Set "deferEvaluation: true")
+	- [ ] RefreshJQM is not being called at the right time
 
 - [ ] Display Entry Details (James 1)
 	- [ ] User Features:
@@ -138,13 +144,14 @@
 
 ### 5HourApp System V3B
 
-- [ ] Change to external modules using RequireJS
-
 - [ ] Enable PhoneGap
 
-- [ ] Improve Performance
-	- [ ] Add Device Metadata to enable web app features
-	- [ ] Use CDN for External sources where possible
+- [ ] Browser App Performance
 
+	- [ ] Improve Performance
+		- [ ] Add Device Metadata to enable web app features
+		- [ ] Use CDN for External sources where possible
 
-- [ ] Refactor Offline App Caching
+	- [ ] Refactor Offline App Caching
+
+	- [ ] Change to external modules using RequireJS

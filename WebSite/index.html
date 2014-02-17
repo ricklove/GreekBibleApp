@@ -1,23 +1,5 @@
 <!DOCTYPE html>
-@{
-    //var isOffline = false;
-    var isOffline = true;
-
-    var manifestFile = "";
-
-    if (Request.Params["offline"] == "true")
-    {
-        manifestFile = "AppCache.ashx?appCache=true";
-        isOffline = true;
-    }
-
-    var manifestAttr = "";
-    if (!string.IsNullOrWhiteSpace(manifestFile))
-    {
-        manifestAttr = string.Format("manifest=\"{0}\"", manifestFile);
-    }
-}
-<html @Html.Raw(manifestAttr)>
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,12 +9,6 @@
 </head>
 <body class="loadingScreen">
 
-    @if (!isOffline)
-    {
-        <div style="display: none">
-            <iframe width="1" height="1" src="AppCacheLoader.html"></iframe>
-        </div>
-    }
     <div id="loadingScreen" class="loadingScreen">
         <div style="height: 50px"></div>
         <img src="Assets/images/mainLoader.gif" />

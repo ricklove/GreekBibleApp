@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+@{
+    var isOffline = Request.Params["offline"] == "true";
+
+    var html = File.ReadAllText(Server.MapPath("index.html"));
+    html = html.Replace("<!DOCTYPE html>", "");
+
+    if (isOffline)
+    {
+
+        html = html.Replace(
+            "<html>", 
+            "<html manifest='AppCache.ashx?appCache=true'>");
+    }
+    else
+    {
+
+        html = html.Replace(
+            "</body>",
+@"
+    <div style='display: none'>
+        <iframe width='1' height='1' src='AppCacheLoader.html'></iframe>
+    </div>
+</body>"
+        );
+
+    }
+}
+@Html.Raw(html);

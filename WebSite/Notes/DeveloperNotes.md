@@ -227,6 +227,21 @@ I created a refreshJQM Knockout binding to deal with this. I will expand it to a
 	- Created own simple TypeScript Definition placeholders using "any"
 
 
+
+#### Optional
+
+- requirejs
+	- Advantages:
+		- Async script loading as needed
+	- Disadvantages:
+		- Complexity
+			- Namespaces works fine and is simple
+		- Difficult to concat and min js
+		- Problems with PhoneGap:
+		- Workaround for PhoneGap basically requires concatenating and removing require dependencies
+		- https://www.nothing.ch/en/research/using-optimised-requirejs-combination-phonegap
+
+
 ### Bugs
 
 - BUG: jQueryMobile was not updating the visible part of a select element (the native element was being updated, but the span on top was remaining an old value)
