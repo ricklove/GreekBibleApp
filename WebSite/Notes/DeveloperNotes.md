@@ -1,3 +1,90 @@
+### Testing Organization
+
+#### Types
+
+- Behavior Tests
+
+	- The user concerns: 
+		- "What does the user want to accomplish?"
+		- "Are we creating the right feature?"
+	- ".feature" files with Gherkin language using GWT scenarios
+		- Given ...
+		- When ...
+		- Then ...
+	- "_Steps" files to provide Step Definitions for the .feature files
+	- Run by YaddaRunner using QUnit
+
+- Unit Tests
+
+	- Verification of correctness for a single unit (method)
+		- "Does this work correctly?"
+	- "_Tests" file paired with each code file
+	- Using QUnit directly
+	- If possible, indicate GWT in comments:
+		- //Given ...
+		- //When ...
+		- //Then ...
+
+- Integration Tests
+
+	- Tests whole system to verify all parts are working
+	- Use real system components instead of using mock objects
+	- Built on basic step definitions, but overrides steps to remove mock objects
+		- "_ITSteps"
+	- Alternatively can be built as Unit Tests
+		- "_ITTests"
+	- Example:
+		- Test Browser DOM (intead of just the ViewModel)
+		- Load data from files (instead of hard-coded data)
+		- Call web services (instead of mock services)
+
+
+#### Naming
+
+- User concern's
+	- Named from user's perspective
+	- "What does the user want to accomplish?"
+	- I want to [NAME]
+	- Examples: 
+		- ViewPassage
+		- ChoosePassage
+- Feature Implementations
+	- Named from program's perspective
+	- "What does the program do?"
+	- Examples
+		- DisplayPassage
+		- ChangePassage
+
+#### File Organization
+
+- Feature Folder
+
+	- .feature files
+		- Named after UserConcern
+	- StepLibrary Folder
+		- "_Steps" Step Definition files
+			- Named after FeatureImplementation
+	- IntegrationStepLibrary Folder
+		- "_ITSteps" Step Definition files
+			- Override default step definitions as needed to remove use of mock objects
+			 
+- Code Folders
+
+	- System
+		- System Feature Implementations
+		- "_Tests" Unit Tests
+		- "_ITTests" Integration Unit Tests
+	- Core
+		- Core Definitions
+	- Support
+		- Support Feature Implementations
+		- "_Tests" Unit Tests
+		- "_ITTests" Integration Unit Tests
+	- User
+		- User Feature Implementations
+		- Testing done by Behavior tests	
+
+
 ### 5HourAppSystem V1-V3 Overview
 
 I added a few system features to improve the usability:
@@ -151,7 +238,9 @@ I created a refreshJQM Knockout binding to deal with this. I will expand it to a
 	- This "owner viewModel" is null while the component fields are being constructed
 	- Knockout computed properties run the "read" method at initializing in order to setup dependencies
 	- RESULT: Child components cannot have a computed field that accesses the viewModel in the "read" calculation
-	- SOLUTION: Static view model object that implements multiple interfaces, still using component structure
+	- SOLUTION: Set "deferEvaluation: true" on the computed object 
+		- X Static view model object that implements multiple interfaces, still using component structure
+			- NO: Static does not enable us to create a view model to work with in testing
 
 
 ### Git Commit Messages Format

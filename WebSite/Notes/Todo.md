@@ -1,4 +1,4 @@
-﻿### Version 1
+﻿### Greak Bible V1
 
 - [x] Create simple UI for a single hardcoded Chapter (James 1)
 	- [x] User Features:
@@ -92,26 +92,12 @@
 - [x] Create Documentation for System Features in Developer's Notes
 
 
-- [ ] Refactor ViewModel
-	- [ ] Change to static object with interfaces instead of classes
-
-- [ ] Enable PhoneGap
-
-- [ ] Improve Performance
-	- [ ] Add Device Metadata to enable web app features
-	- [ ] Use CDN for External sources where possible
-
-
-- [ ] Refactor Offline App Caching
-
-
-### Version 2
-
-- [ ] Create Documentation for Every Feature
+### Greek Bible V2
 
 - [x] Focus on Chapter Choice after choosing Book
 
 - [ ] Refactor ViewModel Passage Data
+	- [ ] Set "deferEvaluation: true" on ko.computed which should initialize after viewModel constructor
 	- [ ] Move Passage data to DisplayPassage
 		- [ ] Change LoadPassage to ShowPassage
 		- [ ] Reload Last Passage (using localStorage)
@@ -134,6 +120,9 @@
 	- [ ] BDD Tests for every user feature
 	- [ ] TDD Tests for every system feature
 
+- [ ] Create Documentation for Every Feature
+	- [ ] Create tool to extract Documentation from .feature files
+
 
 - [ ] Publish
 	- [ ] WebApp
@@ -142,3 +131,16 @@
 	- [ ] GitHub
 	- [ ] Blog
 
+
+### 5HourApp System V3B
+
+- [ ] Change to external modules using RequireJS
+
+- [ ] Enable PhoneGap
+
+- [ ] Improve Performance
+	- [ ] Add Device Metadata to enable web app features
+	- [ ] Use CDN for External sources where possible
+
+
+- [ ] Refactor Offline App Caching
