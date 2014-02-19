@@ -56,13 +56,22 @@ var Told;
 
                 Told.GreekBible.Tests.Steps.initStepLibrary();
 
-                Told.AppLoader.loadScripts(stepsList().map(function (s) {
-                    return "Features/StepLibrary/" + s + ".js";
-                }), function () {
-                    featureList().map(function (f) {
-                        return loadText("Features/" + f + ".feature", processFeatureText);
+                loadText("Features/_featureList.txt", function (featureListText) {
+                    var parts = featureListText.split("#STEPS");
+                    parts[0] = parts[0].trim();
+                    parts[1] = parts[1].trim();
+
+                    var featureList = parts[0].replace("\r\n", "\n").split("\n");
+                    var stepList = parts[1].replace("\r\n", "\n").split("\n");
+
+                    Told.AppLoader.loadScripts(stepList.map(function (s) {
+                        return "Features/StepLibrary/" + s + ".js";
+                    }), function () {
+                        featureList.map(function (f) {
+                            return loadText("Features/" + f + ".feature", processFeatureText);
+                        });
+                        onFinished();
                     });
-                    onFinished();
                 });
             }
             Tests.runTests = runTests;
@@ -80,20 +89,6 @@ var Told;
                         }
                     }
                 });
-            }
-
-            function featureList() {
-                return [
-                    "Support/ParsePassageText",
-                    "User/ViewPassage"
-                ];
-            }
-
-            function stepsList() {
-                return [
-                    "App_Steps",
-                    "ParseGreekText_Steps"
-                ];
             }
         })(GreekBible.Tests || (GreekBible.Tests = {}));
         var Tests = GreekBible.Tests;

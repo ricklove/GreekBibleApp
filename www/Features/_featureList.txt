@@ -1,0 +1,7 @@
+﻿User/ViewPassage
+User/ChoosePassage
+Support/ParsePassageText
+
+#STEPS
+App_Steps
+ParseGreekText_Steps

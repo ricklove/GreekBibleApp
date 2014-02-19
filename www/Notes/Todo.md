@@ -108,8 +108,11 @@
 - [x] Improve rendering performance for passage
 	- [x] Change to dust template for passage
 
-- [ ] Add _featureList.txt
-	- [ ] Feature: Choose 2 passages quickly and first is late loaded
+- [x] Add _featureList.txt
+
+- [x] Define a Feature: Choose 2 passages quickly and first is late loaded
+
+- [ ] Complete all the defined features
 
 - [ ] Refactor Book and Chapter with Display Passage and Choose Passage
 

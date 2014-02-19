@@ -152,3 +152,9 @@
 
 - [x] Refactor ViewModel Passage Data
 - [x] Reload Last Passage (using localStorage)
+
+### V2 H4
+
+- Use dust template for passage rendering
+- Load feature list
+- Define choose passage feature
