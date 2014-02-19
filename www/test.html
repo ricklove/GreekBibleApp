@@ -1,0 +1,311 @@
+﻿<html>
+<head></head>
+<body>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/knockout/3.0.0/knockout-min.js'></script>
+    <script src='https://rawgithub.com/olado/doT/master/doT.min.js'></script>
+    <script src='https://rawgithub.com/akdubya/dustjs/master/dist/dust-full-0.3.0.js'></script>
+
+    <script>
+        ko.underscoreTemplateEngine = function () {
+            var engine = this;
+
+            this.getTemplateNode = function (template) {
+                return document.getElementById(template);
+            };
+            this.renderTemplate = function (templateId, data, options) {
+                var tmpl = engine.getTemplateNode(templateId).text;
+                var html = _.template(tmpl)(data);
+                return ko.utils.parseHtmlFragment(html);
+            };
+            this.rewriteTemplate = function (template, rewriterCallback) {
+                var templateNode = engine.getTemplateNode(template);
+
+                // default rewrite
+                var rewritten = rewriterCallback(templateNode.text);
+
+                // custom rewrite to set context ie. insert with(data) after _.each
+                var each = /(_\s*\.\s*each\s*\(\s*[^,]+\s*,\s*function\s*\(\s*)([^)]+)(\s*\)\s*{)/gi;
+
+                rewritten = rewritten.replace(each, '$1$2$3 with($2)');
+
+                templateNode.text = rewritten;
+                templateNode.isRewritten = true;
+            };
+            this.isTemplateRewritten = function (templateId) {
+                return engine.getTemplateNode(templateId).isRewritten === true;
+            };
+            this.createJavaScriptEvaluatorBlock = function (script) {
+                return '<%= ' + script + ' %>';
+            };
+        };
+        ko.underscoreTemplateEngine.prototype = new ko.templateEngine();
+    </script>
+
+    <script>
+        ko.handlebarsTemplateEngine = function () { }
+        ko.handlebarsTemplateEngine.prototype = ko.utils.extend(new ko.templateEngine(), {
+            templates: {},
+            renderTemplateSource: function (templateSource, bindingContext, options) {
+                var data = bindingContext.$data,
+                    templateId = options,
+                    templateText = templateSource.text(),
+                    compiledTemplate = this.templates[templateId];
+
+                // only compile the template once on the client
+                if (compiledTemplate == null) {
+                    compiledTemplate = Handlebars.compile(templateText);
+                    this.templates[templateId] = compiledTemplate;
+                }
+
+                return ko.utils.parseHtmlFragment(compiledTemplate(data));
+            },
+            allowTemplateRewriting: false
+        });
+    </script>
+
+    <script>
+        ko.dotTemplateEngine = function () { }
+        ko.dotTemplateEngine.prototype = ko.utils.extend(new ko.templateEngine(), {
+            templates: {},
+            renderTemplateSource: function (templateSource, bindingContext, options) {
+                var data = bindingContext.$data,
+                    templateId = options,
+                    templateText = templateSource.text(),
+                    compiledTemplate = this.templates[templateId];
+
+                // only compile the template once on the client
+                if (compiledTemplate == null) {
+                    compiledTemplate = doT.template(templateText);
+                    this.templates[templateId] = compiledTemplate;
+                }
+
+                return ko.utils.parseHtmlFragment(compiledTemplate(data));
+            },
+            allowTemplateRewriting: false
+        });
+    </script>
+
+    <script>
+        ko.dotSimpleTemplateEngine = function () { }
+        ko.dotSimpleTemplateEngine.prototype = ko.utils.extend(new ko.templateEngine(), {
+            templates: {},
+            renderTemplateSource: function (templateSource, bindingContext, options) {
+                var data = bindingContext.$data,
+                    templateId = options,
+                    templateText = templateSource.text(),
+                    compiledTemplate = this.templates[templateId];
+
+                // only compile the template once on the client
+                if (compiledTemplate == null) {
+                    compiledTemplate = doT.template(templateText);
+                    this.templates[templateId] = compiledTemplate;
+                }
+
+                // Fair comparison to dust with simpleData
+                var simpleData = ko.toJS(data);
+                return ko.utils.parseHtmlFragment(compiledTemplate(simpleData));
+            },
+            allowTemplateRewriting: false
+        });
+    </script>
+
+    <script>
+        ko.dustTemplateEngine = function () { }
+        ko.dustTemplateEngine.prototype = ko.utils.extend(new ko.templateEngine(), {
+            templates: {},
+            renderTemplateSource: function (templateSource, bindingContext, options) {
+                var data = bindingContext.$data,
+                    templateId = options,
+                    templateText = templateSource.text(),
+                    compiledTemplate = this.templates[templateId];
+
+                // only compile the template once on the client
+                if (compiledTemplate == null) {
+                    compiledTemplate = dust.compile(templateText, "dustCompiled");
+                    this.templates[templateId] = compiledTemplate;
+
+                    dust.loadSource(compiledTemplate);
+                }
+
+                // Dust cannot process knockout observables because they look like functions
+                // So we must convert it to a simple JS object
+                var simpleData = ko.toJS(data);
+
+                // The output will be filled synchronously if all resources are loaded
+                var output = "";
+                dust.render("dustCompiled", simpleData, function (err, out) {
+                    output = out;
+                })
+
+                //return "<div id='dustPlaceholder'>Loading...</div>";
+                return ko.utils.parseHtmlFragment(output);
+            },
+            allowTemplateRewriting: false
+        });
+    </script>
+
+
+    <!-- View Model Regions -->
+    <div id="native-test-virtual">
+        <h2>Native (virtual foreach)</h2>
+        <div class="messages" data-bind="template:'ko-native'"></div>
+    </div>
+    <div id="handlebars-test">
+        <h2>Handlebars</h2>
+        <div class="messages" data-bind="template:'ko-handlebars'"></div>
+    </div>
+    <div id="underscore-test">
+        <h2>Underscore</h2>
+        <div class="messages" data-bind="template:'ko-underscore'"></div>
+    </div>
+    <div id="dot-test">
+        <h2>doT</h2>
+        <div class="messages" data-bind="template:'ko-dot'"></div>
+    </div>
+    <div id="dotSimple-test">
+        <h2>doT Simple</h2>
+        <div class="messages" data-bind="template:'ko-dotSimple'"></div>
+    </div>
+    <div id="dust-test">
+        <h2>dust</h2>
+        <div class="messages" data-bind="template:'ko-dust'"></div>
+    </div>
+
+
+    <!-- Templates -->
+    <script id="ko-native" type="text/html">
+        <!-- ko foreach: items -->
+        <div>
+            <span data-bind="text: $data.name"></span>, 
+    <span data-bind="text:$data.age"></span>
+            <br>
+            <ul data-bind="foreach: $data.likes">
+                <li data-bind="text: $data"></li>
+            </ul>
+        </div>
+        <!-- /ko -->
+    </script>
+
+    <script id="ko-underscore" type="text/html">
+        <% _.each($root.items(), function(item) { %>
+  <div>
+      <span data-bind="text: item.name"></span>, 
+    <span data-bind="text: item.age"></span>
+      <br>
+      <ul>
+          <% _.each(item.likes(), function (like) { %>
+        <li data-bind="text: like"></li>
+          <% }); %>
+      </ul>
+  </div>
+        <% }); %>
+    </script>
+
+    <script id="ko-handlebars" type="text/x-handlebars-template">
+{{# each items }}
+  <div>
+    <span data-bind="text: '{{this.name}}'"></span>, 
+    <span data-bind="text: '{{this.age}}'"></span><br>
+    <ul>
+      {{# each likes }}
+        <li data-bind="text: '{{this}}'"></li>
+      {{/ each }}
+    </ul>
+  </div>
+{{/ each }}
+    </script>
+
+    <script id="ko-dot" type="text/html">
+        {{~ it.items() :item }}
+  <div>
+      <span>{{=item.name()}}</span>, 
+    <span>{{=item.age()}}</span><br>
+      <ul>
+          {{~ item.likes() :like }}
+        <li>{{= like}}</li>
+          {{~}}
+      </ul>
+  </div>
+        {{~}}
+    </script>
+
+    <script id="ko-dotSimple" type="text/html">
+{{~it.items:item}}
+  <div>
+      <span>{{=item.name}}</span>, 
+    <span>{{=item.age}}</span><br>
+      <ul>
+          {{~item.likes:like}}
+        <li>{{=like}}</li>
+          {{~}}
+      </ul>
+  </div>
+{{~}}
+    </script>
+
+    <script id="ko-dust" type="text/html">
+        {#items}
+    <div>
+        <span>{name}</span>,
+        <span>{age}</span><br>
+        <ul>
+            {#likes}
+            <li>{.}</li>
+            {/likes}
+        </ul>
+    </div>
+        {/items}
+    </script>
+
+
+    <!--Setup-->
+
+
+    <script>
+var nativeNodeVirtual = document.getElementById('native-test-virtual');
+var handlebarsNode = document.getElementById('handlebars-test');
+var underscoreNode = document.getElementById('underscore-test');
+var dotNode = document.getElementById('dot-test');
+var dotSimpleNode = document.getElementById('dotSimple-test');
+var dustNode = document.getElementById('dust-test');
+
+var nativeTemplateEngine = new ko.nativeTemplateEngine();
+var handlebarsTemplateEngine = new ko.handlebarsTemplateEngine();
+var underscoreTemplateEngine = new ko.underscoreTemplateEngine();
+var dotTemplateEngine = new ko.dotTemplateEngine();
+var dotSimpleTemplateEngine = new ko.dotSimpleTemplateEngine();
+var dustTemplateEngine = new ko.dustTemplateEngine();
+
+var data = (function (n) {
+    var data = [],
+        i;
+    for (i = 0; i < n; i++) {
+        data.push({
+            name: ko.observable('Greg'),
+            age: ko.observable(i),
+            likes: ko.observableArray(['movies', 'reading'])
+        });
+    }
+    return data;
+}(10));
+
+var viewmodel = {
+    items: ko.observableArray(data)
+};
+
+    </script>
+
+    <!--Tests-->
+
+    <script>
+ko.setTemplateEngine(dotSimpleTemplateEngine);
+ko.applyBindings(viewmodel, dotSimpleNode);
+viewmodel.items()[0].name("Foo");
+ko.cleanNode(dotSimpleNode);
+    </script>
+
+</body>
+</html>

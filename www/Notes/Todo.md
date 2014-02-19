@@ -103,7 +103,9 @@
 		- [x] Reload Last Passage (using localStorage)
 	- [x] Show Book and Chapter from Display Passage instead of Choose Passage
 
-- [ ] Change "WebSite" folder to "www" folder
+- [x] Change "WebSite" folder to "www" folder
+
+- [ ] Improve rendering performance for passage
 
 - [ ] Add _featureList.txt
 	- [ ] Feature: Choose 2 passages quickly and first is late loaded

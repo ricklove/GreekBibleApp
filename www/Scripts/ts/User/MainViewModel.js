@@ -36,6 +36,31 @@ var Told;
                     }, 0);
                 }
             };
+
+            var dustTemplatesCache = [];
+
+            ko.bindingHandlers["dustTemplate"] = {
+                update: function (element, valueAccessor) {
+                    console.log("dustTemplate:" + element);
+
+                    var templateText = $(element).text();
+                    var templateId = 'ID' + dustTemplatesCache.length;
+
+                    if (dustTemplatesCache[templateId] == null) {
+                        var compiledTemplate = dust.compile(templateText, templateId);
+                        dustTemplatesCache[templateId] = compiledTemplate;
+                        dust.loadSource(compiledTemplate);
+                    }
+
+                    var simpleData = ko.toJS(valueAccessor());
+
+                    dust.render(templateId, simpleData, function (err, out) {
+                        $(element).append(out);
+                    });
+                    ////return "<div id='dustPlaceholder'>Loading...</div>";
+                    //return ko.utils.parseHtmlFragment(output);
+                }
+            };
         })(GreekBible.UI || (GreekBible.UI = {}));
         var UI = GreekBible.UI;
     })(Told.GreekBible || (Told.GreekBible = {}));

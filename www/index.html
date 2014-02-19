@@ -54,6 +54,19 @@
             <!-- /ko -->
             <!-- ko if: displayPassage.isPassageLoaded -->
             <h3><span data-bind="text: displayPassage.book() + ' ' + displayPassage.chapter()"></span></h3>
+
+            Dust Template:
+
+            <div data-bind="dustTemplate: displayPassage.passage()">
+                {#entries}
+                {?isVerseStart}
+                <div class="verse">{passageRef.verse}</div>
+                {/isVerseStart}
+                {/entries}
+            </div>
+
+            Knockout Native Template:
+
             <div data-bind="foreach: displayPassage.passage().entries">
                 <!-- ko if: isVerseStart -->
                 <div class="verse" data-bind="text: passageRef.verse"></div>

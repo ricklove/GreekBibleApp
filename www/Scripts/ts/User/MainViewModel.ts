@@ -32,4 +32,33 @@ module Told.GreekBible.UI {
             }, 0);
         }
     };
+
+    var dustTemplatesCache = [];
+    declare var dust: any;
+
+    ko.bindingHandlers["dustTemplate"] = <KnockoutBindingHandler>{
+        update: function (element, valueAccessor) {
+
+            console.log("dustTemplate:" + element);
+
+            var templateText = $(element).text();
+            var templateId = 'ID' + dustTemplatesCache.length;
+
+            if (dustTemplatesCache[templateId] == null) {
+
+                var compiledTemplate = dust.compile(templateText, templateId);
+                dustTemplatesCache[templateId] = compiledTemplate;
+                dust.loadSource(compiledTemplate);
+            }
+
+            var simpleData = ko.toJS(valueAccessor());
+
+            dust.render(templateId, simpleData, function (err, out) {
+                $(element).append(out);
+            })
+
+                ////return "<div id='dustPlaceholder'>Loading...</div>";
+                //return ko.utils.parseHtmlFragment(output);
+        }
+    };
 }

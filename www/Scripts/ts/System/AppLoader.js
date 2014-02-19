@@ -91,6 +91,7 @@
                 'Scripts/js/External/jquery.min.js',
                 'Scripts/js/External/jquery.mobile-1.4.0.min.js',
                 'Scripts/js/External/knockout-3.0.0.min.js',
+                'Scripts/js/External/dust-full-0.3.0.min.js',
                 'Scripts/ts/Core/Passage.js',
                 'Scripts/ts/Support/LoadPassageText.js',
                 'Scripts/ts/Support/ParsePassageText.js',
