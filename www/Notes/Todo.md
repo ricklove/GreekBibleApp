@@ -105,7 +105,8 @@
 
 - [x] Change "WebSite" folder to "www" folder
 
-- [ ] Improve rendering performance for passage
+- [x] Improve rendering performance for passage
+	- [x] Change to dust template for passage
 
 - [ ] Add _featureList.txt
 	- [ ] Feature: Choose 2 passages quickly and first is late loaded

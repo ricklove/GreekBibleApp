@@ -34,31 +34,40 @@ module Told.GreekBible.UI {
             this.showPassage(lastBook, lastChapter, onLoad, onError);
         }
 
+        formatPassage(passage: Data.IPassage): Data.IPassage {
+
+            for (var i = 0; i < passage.entries.length; i++) {
+                var e = passage.entries[i];
+                e.partOfSpeech['color'] = this.getColorA(e.partOfSpeech.partOfSpeechCode);
+                e.morph['color'] = this.getColorB(e.morph.morphCode);
+            }
+
+            return passage;
+        }
+
         showPassage(bookNumber: number, chapter: number, onLoad?: () => void, onError?: (message: string) => void) {
 
-            var p = this.passage;
-            var b = this.book;
-            var c = this.chapter;
+            var self = this;
 
             // Make Blank while waiting
-            p(<any>[]);
-            this.hasPassageLoadingFailed(false);
+            self.passage(<any>[]);
+            self.hasPassageLoadingFailed(false);
 
             // Set choice
             Data.AccessUserSettings.setUserSetting("bookChoice", bookNumber.toString());
             Data.AccessUserSettings.setUserSetting("chapterChoice", chapter.toString());
-            b(Data.BookInfo.getBookName(bookNumber));
-            c(chapter);
+            self.book(Data.BookInfo.getBookName(bookNumber));
+            self.chapter(chapter);
 
             // Load Async
             Data.Loader.loadPassage(bookNumber, chapter,
                 function (passageText: string) {
 
-                    p(Data.Parser.parsePassage(passageText));
+                    self.passage(self.formatPassage(Data.Parser.parsePassage(passageText)));
 
                     if (onLoad) { onLoad(); }
                 }, function (errorMessage: string) {
-                    this.hasPassageLoadingFailed(true);
+                    self.hasPassageLoadingFailed(true);
                     if (onError) { onError(errorMessage); }
                 });
         }
@@ -92,5 +101,70 @@ module Told.GreekBible.UI {
             return MainViewModel_DisplayPassage.getUniqueColorB(text);
         }
     }
+
+    // TODO: Move bindings to display
+    ko.bindingHandlers["refreshJQM"] = <KnockoutBindingHandler>{
+        update: function (element, valueAccessor) {
+            console.log("refreshJQM Update:" + element.id);
+
+            ko.utils.unwrapObservable(valueAccessor()); // to subscribe
+
+            setTimeout(function () {
+                console.log("Before:Trigger Create");
+                $(element).trigger('create');
+                console.log("After:Trigger Create");
+
+                if ((<any>$(element)).selectmenu) {
+                    console.log("Before:SelectMenu Refresh");
+                    (<any>$(element)).selectmenu('refresh');
+                    console.log("After:SelectMenu Refresh");
+                }
+            }, 0);
+        }
+    };
+
+    var dustTemplatesCache = [];
+    declare var dust: any;
+
+    ko.bindingHandlers["dustTemplate"] = <KnockoutBindingHandler>{
+        init: function (element, valueAccessor) {
+
+            var templateText = $(element).html();
+            var templateId = element.id;
+
+            if (templateId == null || templateId == "") {
+                templateId = element.id = 'DUST_ID' + dustTemplatesCache.length;
+            }
+
+            console.log("dustTemplate init:" + templateId);
+
+            if (dustTemplatesCache[templateId] == null) {
+                var compiledTemplate = dust.compile(templateText, templateId);
+                dustTemplatesCache[templateId] = compiledTemplate;
+                dust.loadSource(compiledTemplate);
+            }
+
+            var simpleData = ko.toJS(ko.unwrap(valueAccessor()));
+
+            $(element).text("");
+            dust.render(templateId, simpleData, function (err, out) {
+                console.log("dustTemplate render:" + templateId);
+                $(element).append(out);
+            })
+        },
+        update: function (element, valueAccessor) {
+
+            var templateId = element.id;
+            console.log("dustTemplate update:" + templateId);
+
+            var simpleData = ko.toJS(ko.unwrap(valueAccessor()));
+
+            $(element).text("");
+            dust.render(templateId, simpleData, function (err, out) {
+                console.log("dustTemplate render:" + templateId);
+                $(element).append(out);
+            })
+        }
+    };
 
 }
