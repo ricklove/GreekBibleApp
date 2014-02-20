@@ -91,11 +91,11 @@ module Told.AppLoader {
             'Scripts/js/External/jquery.mobile-1.4.0.min.js',
             'Scripts/js/External/knockout-3.0.0.min.js',
 
-            //'Scripts/js/External/dust-core-0.3.0.min.js',
+        //'Scripts/js/External/dust-core-0.3.0.min.js',
             'Scripts/js/External/dust-full-0.3.0.min.js',
 
-            //'Scripts/js/External/linq.min.js',
-            //'Scripts/js/External/jquery.linq.min.js',
+        //'Scripts/js/External/linq.min.js',
+        //'Scripts/js/External/jquery.linq.min.js',
 
             'Scripts/ts/Core/Passage.js',
             'Scripts/ts/Support/LoadPassageText.js',
@@ -118,8 +118,6 @@ module Told.AppLoader {
 
         var scriptList = [
             'Scripts/js/External/qunit-1.14.0.min.js',
-            'Scripts/ts/Support/ParsePassageText_TestData.js',
-            'Scripts/ts/Support/ParsePassageText_Tests.js',
             'Scripts/js/External/yadda-0.9.8.js',
             'Scripts/ts/System/YaddaQUnitLibrary.js',
             'Scripts/ts/System/YaddaRunner.js',
@@ -128,5 +126,17 @@ module Told.AppLoader {
         loadScripts(scriptList, onLoaded, onProgress);
 
     }
+
+    export function loadRequirements_UnitTests(onLoaded?: () => void, onProgress?: (double) => void) {
+
+        var scriptList = [
+            'Scripts/ts/Support/ParsePassageText_TestData.js',
+            'Scripts/ts/Support/ParsePassageText_Tests.js',
+        ];
+
+        loadScripts(scriptList, onLoaded, onProgress);
+    }
+
+
 
 }

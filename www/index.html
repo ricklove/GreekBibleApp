@@ -117,12 +117,27 @@
         if (location.href.indexOf("test") > 0) {
             Told.AppLoader.loadRequirements_Testing(function () {
 
-                QUnit.config.autostart = false;
+                console.log("Loaded Test Framework");
 
-                Told.GreekBible.Tests.runTests(function () {
-                    $(document).ready(function () {
-                        QUnit.load();
-                        QUnit.start();
+                QUnit.config.autostart = false;
+                QUnit.load();
+
+                QUnit.module("UnitTests");
+
+                // Load Unit Tests first
+                Told.AppLoader.loadRequirements_UnitTests(function () {
+
+                    console.log("Loaded Unit Tests");
+
+                    // Load Yadda Tests
+                    Told.GreekBible.Tests.runTests(function () {
+
+                        console.log("Loaded Yadda Tests");
+
+                        $(document).ready(function () {
+                            //QUnit.load();
+                            QUnit.start();
+                        });
                     });
                 });
             });

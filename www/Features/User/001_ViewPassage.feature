@@ -1,4 +1,4 @@
-﻿Feature: View a Greek Passage
+﻿Feature: 001 - View a Greek Passage
 As a user,
 I can view a passage of greek
 So that I can examine the greek words and their details

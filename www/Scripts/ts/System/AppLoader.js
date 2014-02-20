@@ -111,8 +111,6 @@
 
             var scriptList = [
                 'Scripts/js/External/qunit-1.14.0.min.js',
-                'Scripts/ts/Support/ParsePassageText_TestData.js',
-                'Scripts/ts/Support/ParsePassageText_Tests.js',
                 'Scripts/js/External/yadda-0.9.8.js',
                 'Scripts/ts/System/YaddaQUnitLibrary.js',
                 'Scripts/ts/System/YaddaRunner.js'
@@ -121,6 +119,16 @@
             loadScripts(scriptList, onLoaded, onProgress);
         }
         AppLoader.loadRequirements_Testing = loadRequirements_Testing;
+
+        function loadRequirements_UnitTests(onLoaded, onProgress) {
+            var scriptList = [
+                'Scripts/ts/Support/ParsePassageText_TestData.js',
+                'Scripts/ts/Support/ParsePassageText_Tests.js'
+            ];
+
+            loadScripts(scriptList, onLoaded, onProgress);
+        }
+        AppLoader.loadRequirements_UnitTests = loadRequirements_UnitTests;
     })(Told.AppLoader || (Told.AppLoader = {}));
     var AppLoader = Told.AppLoader;
 })(Told || (Told = {}));

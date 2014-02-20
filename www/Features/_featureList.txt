@@ -1,5 +1,6 @@
-﻿User/ViewPassage
-User/ChoosePassage
+﻿User/001_ViewPassage
+User/002_ChoosePassage
+User/003_ViewEntryColorCoding
 Support/ParsePassageText
 
 #STEPS

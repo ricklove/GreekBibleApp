@@ -112,6 +112,13 @@
 
 - [x] Define a Feature: Choose 2 passages quickly and first is late loaded
 
+- [x] Define and organize features
+
+- [ ] Define User Settings as mockable
+
+
+- [ ] Load Features in order
+
 - [ ] Complete all the defined features
 
 - [ ] Refactor Book and Chapter with Display Passage and Choose Passage
