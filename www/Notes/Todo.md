@@ -121,6 +121,8 @@
 	- [ ] 002 - Choose Passage
 	- [ ] 003 - View Entry Color Coding
 
+- [ ] Modify Feature tests to share a context
+
 - [ ] Load Features in order
 
 
