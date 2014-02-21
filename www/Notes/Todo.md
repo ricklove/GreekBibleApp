@@ -114,12 +114,15 @@
 
 - [x] Define and organize features
 
-- [ ] Define User Settings as mockable
+- [x] Define User Settings as mockable
 
+- [ ] Complete all the defined features that have been implemented
+	- [x] 001 - View Passage
+	- [ ] 002 - Choose Passage
+	- [ ] 003 - View Entry Color Coding
 
 - [ ] Load Features in order
 
-- [ ] Complete all the defined features
 
 - [ ] Refactor Book and Chapter with Display Passage and Choose Passage
 

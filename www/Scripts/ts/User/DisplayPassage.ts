@@ -2,6 +2,8 @@
 /// <reference path="../Support/Colors.ts" />
 /// <reference path="../Support/AccessUserSettings.ts" />
 /// <reference path="MainViewModel.ts" />
+/// <reference path="../Support/LoadPassageText.ts" />
+/// <reference path="../Support/ParsePassageText.ts" />
 
 
 module Told.GreekBible.UI {
@@ -9,6 +11,8 @@ module Told.GreekBible.UI {
     export class MainViewModel_DisplayPassage {
 
         private viewModel: MainViewModel;
+
+        private get userSettings() { return this.viewModel.providers.userSettings;}
 
         constructor(viewModel: MainViewModel) {
             this.viewModel = viewModel;
@@ -23,8 +27,8 @@ module Told.GreekBible.UI {
         showDefault(onLoad?: () => void, onError?: (message: string) => void) {
             // TODO: Load Last Passage (local Storage)
 
-            var lastBook = parseInt(Data.AccessUserSettings.getUserSetting("bookChoice"));
-            var lastChapter = parseInt(Data.AccessUserSettings.getUserSetting("chapterChoice"));
+            var lastBook = parseInt(this.userSettings.bookChoice);
+            var lastChapter = parseInt(this.userSettings.chapterChoice);
 
             if (isNaN(lastBook) || isNaN(lastChapter)) {
                 lastBook = 1;
@@ -54,8 +58,8 @@ module Told.GreekBible.UI {
             self.hasPassageLoadingFailed(false);
 
             // Set choice
-            Data.AccessUserSettings.setUserSetting("bookChoice", bookNumber.toString());
-            Data.AccessUserSettings.setUserSetting("chapterChoice", chapter.toString());
+            this.userSettings.bookChoice = bookNumber.toString();
+            this.userSettings.chapterChoice = chapter.toString();
             self.book(Data.BookInfo.getBookName(bookNumber));
             self.chapter(chapter);
 

@@ -2,7 +2,12 @@
 
 module Told.GreekBible.Data {
 
-    export class AccessUserSettings {
+    export interface IUserSettings {
+        bookChoice: string;
+        chapterChoice: string;
+    }
+
+    export class UserSettings_LocalStorage implements IUserSettings {
 
         /*
          * Get User Settings from local storage provider
@@ -20,6 +25,12 @@ module Told.GreekBible.Data {
             localStorage.setItem(key, value);
             console.log("Set User Setting:" + key + "=" + value);
         }
+
+        get bookChoice() { return UserSettings_LocalStorage.getUserSetting("bookChoice"); }
+        set bookChoice(value: string) { UserSettings_LocalStorage.setUserSetting("bookChoice", value); }
+
+        get chapterChoice() { return UserSettings_LocalStorage.getUserSetting("chapterChoice"); }
+        set chapterChoice(value: string) { UserSettings_LocalStorage.setUserSetting("chapterChoice", value); }
 
     }
 }

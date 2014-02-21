@@ -2,6 +2,8 @@
 /// <reference path="../Support/Colors.ts" />
 /// <reference path="../Support/AccessUserSettings.ts" />
 /// <reference path="MainViewModel.ts" />
+/// <reference path="../Support/LoadPassageText.ts" />
+/// <reference path="../Support/ParsePassageText.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
@@ -30,10 +32,18 @@ var Told;
                     this.viewModel = viewModel;
                     this.showDefault();
                 }
+                Object.defineProperty(MainViewModel_DisplayPassage.prototype, "userSettings", {
+                    get: function () {
+                        return this.viewModel.providers.userSettings;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+
                 MainViewModel_DisplayPassage.prototype.showDefault = function (onLoad, onError) {
                     // TODO: Load Last Passage (local Storage)
-                    var lastBook = parseInt(Told.GreekBible.Data.AccessUserSettings.getUserSetting("bookChoice"));
-                    var lastChapter = parseInt(Told.GreekBible.Data.AccessUserSettings.getUserSetting("chapterChoice"));
+                    var lastBook = parseInt(this.userSettings.bookChoice);
+                    var lastChapter = parseInt(this.userSettings.chapterChoice);
 
                     if (isNaN(lastBook) || isNaN(lastChapter)) {
                         lastBook = 1;
@@ -61,8 +71,8 @@ var Told;
                     self.hasPassageLoadingFailed(false);
 
                     // Set choice
-                    Told.GreekBible.Data.AccessUserSettings.setUserSetting("bookChoice", bookNumber.toString());
-                    Told.GreekBible.Data.AccessUserSettings.setUserSetting("chapterChoice", chapter.toString());
+                    this.userSettings.bookChoice = bookNumber.toString();
+                    this.userSettings.chapterChoice = chapter.toString();
                     self.book(Told.GreekBible.Data.BookInfo.getBookName(bookNumber));
                     self.chapter(chapter);
 

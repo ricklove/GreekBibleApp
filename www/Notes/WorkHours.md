@@ -158,3 +158,13 @@
 - Use dust template for passage rendering
 - Load feature list
 - Define choose passage feature
+
+### V2 H5
+
+- Defines features
+- Adding Provider Model for UserSettings
+
+### V2 H6
+
+- Add Provide Model
+- Pass Feature 001 - View Passage

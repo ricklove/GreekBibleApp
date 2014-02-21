@@ -1,15 +1,19 @@
 ﻿/// <reference path="../../typings/jQuery/jQuery.d.ts" />
 /// <reference path="../../typings/knockout/knockout.d.ts" />
+/// <reference path="../Support/AccessProviders.ts" />
 /// <reference path="DisplayPassage.ts" />
 /// <reference path="ChoosePassage.ts" />
-/// <reference path="../Support/LoadPassageText.ts" />
-/// <reference path="../Support/ParsePassageText.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
         (function (UI) {
             var MainViewModel = (function () {
-                function MainViewModel() {
+                function MainViewModel(providers) {
+                    if (providers == null) {
+                        providers = Told.GreekBible.Data.createDefaultProviders();
+                    }
+
+                    this.providers = providers;
                     this.displayPassage = new Told.GreekBible.UI.MainViewModel_DisplayPassage(this);
                     this.choosePassage = new Told.GreekBible.UI.MainViewModel_ChoosePassage(this);
                 }

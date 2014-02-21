@@ -97,10 +97,13 @@ module Told.AppLoader {
         //'Scripts/js/External/linq.min.js',
         //'Scripts/js/External/jquery.linq.min.js',
 
+            'Scripts/ts/Support/AccessUserSettings.js',
+            'Scripts/ts/Support/AccessProviders.js',
+
+
             'Scripts/ts/Core/Passage.js',
             'Scripts/ts/Support/LoadPassageText.js',
             'Scripts/ts/Support/ParsePassageText.js',
-            'Scripts/ts/Support/AccessUserSettings.js',
             'Scripts/ts/Support/Colors.js',
 
             'Scripts/ts/User/MainViewModel.js',
