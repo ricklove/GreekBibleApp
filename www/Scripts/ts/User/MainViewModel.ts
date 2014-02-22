@@ -2,7 +2,7 @@
 /// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../Support/AccessProviders.ts" />
 /// <reference path="DisplayPassage.ts" />
-/// <reference path="ChoosePassage.ts" />
+/// <reference path="ChangePassage.ts" />
 
 module Told.GreekBible.UI {
 
@@ -10,7 +10,7 @@ module Told.GreekBible.UI {
 
         public providers: Data.IProviders;
         public displayPassage: MainViewModel_DisplayPassage;
-        public choosePassage: MainViewModel_ChoosePassage;
+        public changePassage: MainViewModel_ChangePassage;
 
         constructor(providers?: Data.IProviders) {
 
@@ -20,7 +20,7 @@ module Told.GreekBible.UI {
 
             this.providers = providers;
             this.displayPassage = new MainViewModel_DisplayPassage(this);
-            this.choosePassage = new MainViewModel_ChoosePassage(this);
+            this.changePassage = new MainViewModel_ChangePassage(this);
         }
     }
 

@@ -28,6 +28,7 @@ var Told;
 
                         (function () {
                             var _scenario = scenario;
+                            var scenarioContext = {};
 
                             asyncTest(_scenario.title, function () {
                                 var text = "STEPS:\r\n";
@@ -38,7 +39,7 @@ var Told;
 
                                 ok(true, text);
 
-                                return yadda.yadda(_scenario.steps, done);
+                                return yadda.yadda(_scenario.steps, scenarioContext, done);
                             });
                         }());
                     }

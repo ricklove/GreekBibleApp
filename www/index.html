@@ -28,8 +28,8 @@
                 <option>3</option>
             </select>-->
 
-            <select data-bind="options: choosePassage.bookChoices(), value:choosePassage.book, refreshJQM:choosePassage.book"></select>
-            <select id="selChapter" data-bind="options: choosePassage.chapterChoices(), value:choosePassage.chapter, refreshJQM:choosePassage.chapter, refreshJQM:choosePassage.book, hasFocus: choosePassage.isChapterFocused"></select>
+            <select data-bind="options: changePassage.bookChoices(), value:changePassage.book, refreshJQM:changePassage.book"></select>
+            <select id="selChapter" data-bind="options: changePassage.chapterChoices(), value:changePassage.chapter, refreshJQM:changePassage.chapter, refreshJQM:changePassage.book, hasFocus: changePassage.isChapterFocused"></select>
             <!--<h4><span data-bind="text: passage().entries.length"></span>&nbsp;Words</h4>-->
             <!-- ko if: displayPassage.isPassageLoading -->
             <div>

@@ -122,6 +122,7 @@
 	- [ ] 003 - View Entry Color Coding
 
 - [ ] Modify Feature tests to share a context
+	- [ ] Modified YaddaRunner and YaddaQUnit to support a context
 
 - [ ] Load Features in order
 

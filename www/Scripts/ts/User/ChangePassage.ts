@@ -5,7 +5,7 @@
 
 module Told.GreekBible.UI {
 
-    export class MainViewModel_ChoosePassage {
+    export class MainViewModel_ChangePassage {
 
         private owner: MainViewModel;
 

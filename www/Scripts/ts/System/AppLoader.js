@@ -100,7 +100,7 @@
                 'Scripts/ts/Support/Colors.js',
                 'Scripts/ts/User/MainViewModel.js',
                 'Scripts/ts/User/DisplayPassage.js',
-                'Scripts/ts/User/ChoosePassage.js'
+                'Scripts/ts/User/ChangePassage.js'
             ];
 
             loadScripts(scriptList, onLoaded, onProgress);

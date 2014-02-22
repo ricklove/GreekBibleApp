@@ -17,10 +17,11 @@ Scenario: should display a default passage
 	Then a default passage should be displayed
 
 
-Scenario: should display the last passage
+Scenario: should display the passage entries
 
 	Given this is not the first run
 	When the app is loaded
-	Then the last passage should be displayed
+	Then the first entry should be displayed
+	And the last entry should be displayed
 
 

@@ -6,8 +6,8 @@ var Told;
 (function (Told) {
     (function (GreekBible) {
         (function (UI) {
-            var MainViewModel_ChoosePassage = (function () {
-                function MainViewModel_ChoosePassage(owner) {
+            var MainViewModel_ChangePassage = (function () {
+                function MainViewModel_ChangePassage(owner) {
                     this.bookNumber = ko.observable(1);
                     this.book = ko.computed({
                         read: function () {
@@ -63,9 +63,9 @@ var Told;
                     this.bookNumber(Told.GreekBible.Data.BookInfo.getBookNumber(this.owner.displayPassage.book()));
                     this.chapterNumber(this.owner.displayPassage.chapter());
                 }
-                return MainViewModel_ChoosePassage;
+                return MainViewModel_ChangePassage;
             })();
-            UI.MainViewModel_ChoosePassage = MainViewModel_ChoosePassage;
+            UI.MainViewModel_ChangePassage = MainViewModel_ChangePassage;
         })(GreekBible.UI || (GreekBible.UI = {}));
         var UI = GreekBible.UI;
     })(Told.GreekBible || (Told.GreekBible = {}));

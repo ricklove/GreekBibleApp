@@ -5,11 +5,18 @@ module Told.GreekBible.Tests.Steps {
 
     export var stepLibrary: IQUnitStepLibrary;
 
+    export interface IQUnitStepArgs {
+        captures: string[];
+        context: {};
+        shouldWaitForNextStepCall: () => void;
+        nextStep: () => void;
+    }
+
     export interface IQUnitStepLibrary {
         yaddaLibrary: IYaddaLibrary;
-        given: (title: string, doStep: (args: any) => void) => IQUnitStepLibrary;
-        when: (title: string, doStep: (args: any) => void) => IQUnitStepLibrary;
-        then: (title: string, doStep: (args: any) => void) => IQUnitStepLibrary;
+        given: (title: string, doStep: (args: IQUnitStepArgs) => void) => IQUnitStepLibrary;
+        when: (title: string, doStep: (args: IQUnitStepArgs) => void) => IQUnitStepLibrary;
+        then: (title: string, doStep: (args: IQUnitStepArgs) => void) => IQUnitStepLibrary;
     }
 
     export var initStepLibrary = function () {
@@ -23,11 +30,13 @@ module Told.GreekBible.Tests.Steps {
         var yaddaLibrary: IYaddaLibrary = <any> English.library(dictionary);
 
 
-        var stepWrapper = function (stepType: string): (title: string, doStep: (args: any) => void) => IQUnitStepLibrary {
+        var stepWrapper = function (stepType: string): (title: string, doStep: (args: IQUnitStepArgs) => void) => IQUnitStepLibrary {
 
             var _stepType = stepType;
 
-            return function (title: string, doStep: (args: any) => void): IQUnitStepLibrary {
+            return function (title: string, doStep: (args: IQUnitStepArgs) => void): IQUnitStepLibrary {
+
+                var scenarioContext = this;
 
                 var doStepWrapper = function () {
 
@@ -51,19 +60,36 @@ module Told.GreekBible.Tests.Steps {
                     var nextTimeLimit = 5000;
                     var timeoutID;
                     var next = arguments[arguments.length - 1];
+                    //var nextThis = this;
+
                     var nextWrapper = function () {
                         clearTimeout(timeoutID);
                         start();
 
                         doReport();
-                        next.apply(this, arguments);
+                        next();
                     };
 
                     arguments[arguments.length - 1] = nextWrapper;
 
+                    var captures: string[] = [];
+
+                    for (var i = 0; i < arguments.length - 1; i++) {
+                        captures[i] = arguments[i];
+                    }
+
+                    var shouldWaitCallback = () => { shouldWait = true; }
+
+                    var args: IQUnitStepArgs = {
+                        captures: captures,
+                        context: scenarioContext,
+                        shouldWaitForNextStepCall: shouldWaitCallback,
+                        nextStep: nextWrapper
+                    };
+
                     try {
                         ok(true, "START: " + stepTitle);
-                        shouldWait = doStep.apply(this, arguments);
+                        doStep(args);
                     } catch (ex) {
                         hasFailed = true;
                         failMessage = ex;

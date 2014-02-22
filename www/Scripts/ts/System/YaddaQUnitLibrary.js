@@ -19,6 +19,8 @@ var Told;
                         var _stepType = stepType;
 
                         return function (title, doStep) {
+                            var scenarioContext = this;
+
                             var doStepWrapper = function () {
                                 var stepTitle = _stepType + " '" + title + "'";
                                 var hasFailed = false;
@@ -40,19 +42,38 @@ var Told;
                                 var nextTimeLimit = 5000;
                                 var timeoutID;
                                 var next = arguments[arguments.length - 1];
+
+                                //var nextThis = this;
                                 var nextWrapper = function () {
                                     clearTimeout(timeoutID);
                                     start();
 
                                     doReport();
-                                    next.apply(this, arguments);
+                                    next();
                                 };
 
                                 arguments[arguments.length - 1] = nextWrapper;
 
+                                var captures = [];
+
+                                for (var i = 0; i < arguments.length - 1; i++) {
+                                    captures[i] = arguments[i];
+                                }
+
+                                var shouldWaitCallback = function () {
+                                    shouldWait = true;
+                                };
+
+                                var args = {
+                                    captures: captures,
+                                    context: scenarioContext,
+                                    shouldWaitForNextStepCall: shouldWaitCallback,
+                                    nextStep: nextWrapper
+                                };
+
                                 try  {
                                     ok(true, "START: " + stepTitle);
-                                    shouldWait = doStep.apply(this, arguments);
+                                    doStep(args);
                                 } catch (ex) {
                                     hasFailed = true;
                                     failMessage = ex;

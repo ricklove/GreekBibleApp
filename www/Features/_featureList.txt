@@ -4,5 +4,6 @@ User/003_ViewEntryColorCoding
 Support/ParsePassageText
 
 #STEPS
-App_Steps
+DisplayPassage_Steps
+ChangePassage_Steps
 ParseGreekText_Steps

@@ -4,7 +4,6 @@
 
 module Told.GreekBible.Tests.Steps {
 
-    var isFirstRun: boolean = true;
     var viewModel: UI.MainViewModel;
 
     var providers: Data.IProviders = {
@@ -26,34 +25,34 @@ module Told.GreekBible.Tests.Steps {
             providers.userSettings.bookChoice = "5";
             providers.userSettings.chapterChoice = "10";
         })
-        .when("the app is loaded", function (next) {
+        .when("the app is loaded", function (args) {
 
             viewModel = new UI.MainViewModel(providers);
 
             var onReady = function () {
-                next();
+                args.nextStep();
             }
 
             var onError = function (message: string) {
                 ok(false, "ERROR:" + message);
-                next();
+                args.nextStep();
             }
 
             viewModel.displayPassage.showDefault(onReady, onError);
 
-            return true;
+            args.shouldWaitForNextStepCall();
         })
         .then("a (?:default )?passage should be displayed", function () {
             ok(viewModel.displayPassage.passage(), "The passage is displayed");
             ok(viewModel.displayPassage.passage().entries, "The entries are displayed");
-            ok(viewModel.displayPassage.passage().entries[0].rawText, "A first entry is displayed");
+            ok(viewModel.displayPassage.passage().entries[0].rawText, "An entry is displayed");
         })
-        .then("the first passage should be displayed", function () {
+        .then("the first entry should be displayed", function () {
             ok(viewModel.displayPassage.passage(), "The passage is displayed");
             ok(viewModel.displayPassage.passage().entries, "The entries are displayed");
             equal(viewModel.displayPassage.passage().entries[0].rawText, "Ἀνὴρ", "The first entry is displayed");
         })
-        .then("the last passage should be displayed", function () {
+        .then("the last entry should be displayed", function () {
             ok(viewModel.displayPassage.passage(), "The passage is displayed");
             ok(viewModel.displayPassage.passage().entries, "The entries are displayed");
 

@@ -29,6 +29,7 @@ module Told.GreekBible.Tests {
 
                 (function () {
                     var _scenario = scenario;
+                    var scenarioContext = {};
 
                     asyncTest(_scenario.title, function () {
 
@@ -40,7 +41,7 @@ module Told.GreekBible.Tests {
 
                         ok(true, text);
 
-                        return yadda.yadda(_scenario.steps, done);
+                        return yadda.yadda(_scenario.steps, scenarioContext, done);
                     });
                 } ());
             }
