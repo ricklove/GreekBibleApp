@@ -119,10 +119,13 @@
 - [ ] Complete all the defined features that have been implemented
 	- [x] 001 - View Passage
 	- [ ] 002 - Choose Passage
+		- [x] - Choose Passage - simple scenario
+		- [ ] - Choose Passage - other scenarios
 	- [ ] 003 - View Entry Color Coding
 
-- [ ] Modify Feature tests to share a context
-	- [ ] Modified YaddaRunner and YaddaQUnit to support a context
+- [x] Modify Feature tests to share a context
+	- [x] Modified YaddaRunner and YaddaQUnit to support a context
+	- [x] Use the context in existing steps
 
 - [ ] Load Features in order
 

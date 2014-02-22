@@ -1,32 +1,32 @@
 ﻿/// <reference path="../../Scripts/typings/qunit/qunit.d.ts" />
 /// <reference path="../../Scripts/ts/System/YaddaQUnitLibrary.ts" />
 /// <reference path="../../Scripts/ts/User/MainViewModel.ts" />
+/// <reference path="DisplayPassage_Steps.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
         (function (Tests) {
             (function (Steps) {
-                var viewModel;
-
-                var providers = {
-                    userSettings: { bookChoice: "", chapterChoice: "" }
-                };
-
-                Told.GreekBible.Tests.Steps.stepLibrary.given("user chooses a passage", function () {
+                Told.GreekBible.Tests.Steps.stepLibrary.given("user chooses a passage", function (args) {
                     // Acts 10
                     // First entry:
                     // 051001 N- ----NSM- Ἀνὴρ Ἀνὴρ ἀνήρ ἀνήρ
                     // Last entry:
                     // 051048 RI ----APF- τινάς. τινάς τινάς τις
-                    viewModel = new Told.GreekBible.UI.MainViewModel(providers);
+                    var c = args.context;
 
-                    viewModel.changePassage.book("Acts");
-                    viewModel.changePassage.chapter(10);
+                    c.providers = { userSettings: { bookChoice: "", chapterChoice: "" } };
+                    c.viewModel = new Told.GreekBible.UI.MainViewModel(c.providers);
+
+                    c.viewModel.changePassage.book("Acts");
+                    c.viewModel.changePassage.chapter(10);
                 }).when("the passage is loaded", function (args) {
+                    var c = args.context;
+
                     var attempt = 0;
 
                     var checkIsReady = function () {
-                        if (viewModel.displayPassage.isPassageLoaded) {
+                        if (c.viewModel.displayPassage.isPassageLoaded()) {
                             args.nextStep();
                         } else if (attempt < 10) {
                             setTimeout(checkIsReady, 500);

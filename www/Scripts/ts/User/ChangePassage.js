@@ -16,15 +16,10 @@ var Told;
                         write: function (value) {
                             this.bookNumber(Told.GreekBible.Data.BookInfo.getBookNumber(value));
 
-                            // Reset Chapter (Async - this seems to help the UI refresh)
-                            var c = this.chapter;
-                            var isCFocused = this.isChapterFocused;
-                            setTimeout(function () {
-                                c(1);
-                                console.log("Before:Focus on Chapter");
-                                isCFocused(true);
-                                console.log("After:Focus on Chapter");
-                            }, 0);
+                            this.chapter(1);
+                            console.log("Before:Focus on Chapter");
+                            this.isChapterFocused(true);
+                            console.log("After:Focus on Chapter");
                         },
                         owner: this,
                         deferEvaluation: true
@@ -39,7 +34,7 @@ var Told;
                             this.chapterNumber(value);
 
                             // Change Passage
-                            this.owner.displayPassage.showPassage(this.bookNumber(), this.chapter());
+                            this.owner.displayPassage.showPassage(this.bookNumber(), this.chapterNumber());
                         },
                         owner: this,
                         deferEvaluation: true

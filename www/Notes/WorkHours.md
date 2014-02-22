@@ -172,4 +172,6 @@
 
 ### V2 H7
 
-- 
+- Modify Feature tests to share a context
+- Implement 002 - Choose Passage - Simple Scenario
+- Fix major Bug in choose passage implementation
