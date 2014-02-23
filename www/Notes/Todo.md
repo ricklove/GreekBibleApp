@@ -118,10 +118,13 @@
 
 - [ ] Complete all the defined features that have been implemented
 	- [x] 001 - View Passage
-	- [ ] 002 - Choose Passage
-		- [x] - Choose Passage - simple scenario
-		- [ ] - Choose Passage - other scenarios
+	- [x] 002 - Choose Passage
+		- [x] simple scenario
+		- [x] other scenarios
+		- [ ] SOLVE RACE CONDITION: If the user chooses two passages quickly, it should display the last chosen passage
 	- [ ] 003 - View Entry Color Coding
+		- [x] Same Morph Code
+		- [ ] Others
 
 - [x] Modify Feature tests to share a context
 	- [x] Modified YaddaRunner and YaddaQUnit to support a context

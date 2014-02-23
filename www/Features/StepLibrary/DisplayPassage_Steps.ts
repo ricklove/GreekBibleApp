@@ -34,16 +34,7 @@ module Told.GreekBible.Tests.Steps {
     ];
 
     stepLibrary
-        .given("this is the first run", function (args) {
-
-            var c = <IDisplayPassageStepsContext> args.context;
-
-            c.providers = {
-                userSettings: { bookChoice: "", chapterChoice: "" },
-            };
-        })
-        .given("this is not the first run", function (args) {
-
+        .given("a sample", function (args) {
 
             var c = <IDisplayPassageStepsContext> args.context;
 
@@ -55,6 +46,17 @@ module Told.GreekBible.Tests.Steps {
                     chapterChoice: c.sample.chapter.toString(),
                 },
             };
+        })
+        .given("this is the first run", function (args) {
+
+            var c = <IDisplayPassageStepsContext> args.context;
+
+            c.providers = {
+                userSettings: { bookChoice: "", chapterChoice: "" },
+            };
+        })
+        .given("this is not the first run", function (args) {
+            stepLibrary.callStep("a sample", args);
         })
         .when("the app is loaded", function (args) {
 

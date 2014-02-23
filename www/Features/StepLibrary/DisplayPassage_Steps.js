@@ -21,13 +21,7 @@ var Told;
                     }
                 ];
 
-                Told.GreekBible.Tests.Steps.stepLibrary.given("this is the first run", function (args) {
-                    var c = args.context;
-
-                    c.providers = {
-                        userSettings: { bookChoice: "", chapterChoice: "" }
-                    };
-                }).given("this is not the first run", function (args) {
+                Told.GreekBible.Tests.Steps.stepLibrary.given("a sample", function (args) {
                     var c = args.context;
 
                     c.sample = Steps.samples[0];
@@ -38,6 +32,14 @@ var Told;
                             chapterChoice: c.sample.chapter.toString()
                         }
                     };
+                }).given("this is the first run", function (args) {
+                    var c = args.context;
+
+                    c.providers = {
+                        userSettings: { bookChoice: "", chapterChoice: "" }
+                    };
+                }).given("this is not the first run", function (args) {
+                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("a sample", args);
                 }).when("the app is loaded", function (args) {
                     var c = args.context;
 

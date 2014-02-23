@@ -6,4 +6,5 @@ Support/ParsePassageText
 #STEPS
 DisplayPassage_Steps
 ChangePassage_Steps
+DisplayEntryColorCoding_Steps
 ParseGreekText_Steps
