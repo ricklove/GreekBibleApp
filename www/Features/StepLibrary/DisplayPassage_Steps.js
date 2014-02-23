@@ -6,6 +6,21 @@ var Told;
     (function (GreekBible) {
         (function (Tests) {
             (function (Steps) {
+                Steps.samples = [
+                    {
+                        // Acts 10
+                        // First entry:
+                        // 051001 N- ----NSM- Ἀνὴρ Ἀνὴρ ἀνήρ ἀνήρ
+                        // Last entry:
+                        // 051048 RI ----APF- τινάς. τινάς τινάς τις
+                        bookName: "Acts",
+                        bookNumber: 5,
+                        chapter: 10,
+                        firstEntryText: "Ἀνὴρ",
+                        lastEntryText: "τινάς."
+                    }
+                ];
+
                 Told.GreekBible.Tests.Steps.stepLibrary.given("this is the first run", function (args) {
                     var c = args.context;
 
@@ -13,17 +28,14 @@ var Told;
                         userSettings: { bookChoice: "", chapterChoice: "" }
                     };
                 }).given("this is not the first run", function (args) {
-                    // Acts 10
-                    // First entry:
-                    // 051001 N- ----NSM- Ἀνὴρ Ἀνὴρ ἀνήρ ἀνήρ
-                    // Last entry:
-                    // 051048 RI ----APF- τινάς. τινάς τινάς τις
                     var c = args.context;
+
+                    c.sample = Steps.samples[0];
 
                     c.providers = {
                         userSettings: {
-                            bookChoice: "5",
-                            chapterChoice: "10"
+                            bookChoice: c.sample.bookNumber.toString(),
+                            chapterChoice: c.sample.chapter.toString()
                         }
                     };
                 }).when("the app is loaded", function (args) {
@@ -56,9 +68,9 @@ var Told;
 
                     ok(viewModel.displayPassage.passage(), "The passage is displayed");
                     ok(viewModel.displayPassage.passage().entries, "The entries are displayed");
-                    equal(viewModel.displayPassage.passage().entries[0].passageRef.bookNumber, 5, "The correct Book is displayed");
-                    equal(viewModel.displayPassage.passage().entries[0].passageRef.chapter, 10, "The correct Chapter is displayed");
-                    equal(viewModel.displayPassage.passage().entries[0].rawText, "Ἀνὴρ", "The first entry is displayed");
+                    equal(viewModel.displayPassage.passage().entries[0].passageRef.bookNumber, c.sample.bookNumber, "The correct Book is displayed");
+                    equal(viewModel.displayPassage.passage().entries[0].passageRef.chapter, c.sample.chapter, "The correct Chapter is displayed");
+                    equal(viewModel.displayPassage.passage().entries[0].rawText, c.sample.firstEntryText, "The first entry is displayed");
                 }).then("the last entry should be displayed", function (args) {
                     var c = args.context;
                     var viewModel = c.viewModel;
@@ -68,9 +80,9 @@ var Told;
 
                     var iLast = viewModel.displayPassage.passage().entries.length - 1;
 
-                    equal(viewModel.displayPassage.passage().entries[iLast].passageRef.bookNumber, 5, "The correct Book is displayed");
-                    equal(viewModel.displayPassage.passage().entries[iLast].passageRef.chapter, 10, "The correct Chapter is displayed");
-                    equal(viewModel.displayPassage.passage().entries[iLast].rawText, "τινάς.", "The last entry is displayed");
+                    equal(viewModel.displayPassage.passage().entries[iLast].passageRef.bookNumber, c.sample.bookNumber, "The correct Book is displayed");
+                    equal(viewModel.displayPassage.passage().entries[iLast].passageRef.chapter, c.sample.chapter, "The correct Chapter is displayed");
+                    equal(viewModel.displayPassage.passage().entries[iLast].rawText, c.sample.lastEntryText, "The last entry is displayed");
                 });
             })(Tests.Steps || (Tests.Steps = {}));
             var Steps = Tests.Steps;

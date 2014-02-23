@@ -6,7 +6,6 @@
 module Told.GreekBible.Tests.Steps {
 
     stepLibrary
-    // This would require manually setting the UI value
         .given("user chooses a passage", function (args) {
             // Acts 10
             // First entry: 
@@ -18,8 +17,34 @@ module Told.GreekBible.Tests.Steps {
             c.providers = { userSettings: { bookChoice: "", chapterChoice: "" } };
             c.viewModel = new UI.MainViewModel(c.providers);
 
-            c.viewModel.changePassage.book("Acts");
-            c.viewModel.changePassage.chapter(10);
+            c.sample = samples[0];
+            c.viewModel.changePassage.book(c.sample.bookName);
+            c.viewModel.changePassage.chapter(c.sample.chapter);
+        })
+        .given("user chooses two passages quickly", function (args) {
+            // Acts 10
+            // First entry: 
+            // 051001 N- ----NSM- Ἀνὴρ Ἀνὴρ ἀνήρ ἀνήρ
+            // Last entry: 
+            // 051048 RI ----APF- τινάς. τινάς τινάς τις
+            var c = <IDisplayPassageStepsContext> args.context;
+
+            c.providers = { userSettings: { bookChoice: "", chapterChoice: "" } };
+            c.viewModel = new UI.MainViewModel(c.providers);
+            c.sample = samples[0];
+
+            // Any other passage
+            c.viewModel.changePassage.book("Romans");
+            c.viewModel.changePassage.chapter(5);
+
+            setTimeout(function () {
+                c.viewModel.changePassage.book(c.sample.bookName);
+                c.viewModel.changePassage.chapter(c.sample.chapter);
+
+                args.nextStep();
+            }, 100);
+
+            args.shouldWaitForNextStepCall();
         })
         .when("the passage is loaded", function (args) {
             var c = <IDisplayPassageStepsContext> args.context;
@@ -45,24 +70,8 @@ module Told.GreekBible.Tests.Steps {
 
             args.shouldWaitForNextStepCall();
         })
-    //.then("a (?:default )?passage should be displayed", function () {
-    //    ok(viewModel.displayPassage.passage(), "The passage is displayed");
-    //    ok(viewModel.displayPassage.passage().entries, "The entries are displayed");
-    //    ok(viewModel.displayPassage.passage().entries[0].rawText, "A first entry is displayed");
-    //})
-    //.then("the first passage should be displayed", function () {
-    //    ok(viewModel.displayPassage.passage(), "The passage is displayed");
-    //    ok(viewModel.displayPassage.passage().entries, "The entries are displayed");
-    //    equal(viewModel.displayPassage.passage().entries[0].rawText, "Ἀνὴρ", "The first entry is displayed");
-    //})
-    //.then("the last passage should be displayed", function () {
-    //    ok(viewModel.displayPassage.passage(), "The passage is displayed");
-    //    ok(viewModel.displayPassage.passage().entries, "The entries are displayed");
-
-    //    var iLast = viewModel.displayPassage.passage().entries.length - 1;
-    //    equal(viewModel.displayPassage.passage().entries[iLast].rawText, "τινάς.", "The last entry is displayed");
-    //})
-
+        .then("the last chosen passage should be displayed", function (args) {
+            stepLibrary.callStep("the first entry should be displayed", args);
+        })
     ;
-
 }

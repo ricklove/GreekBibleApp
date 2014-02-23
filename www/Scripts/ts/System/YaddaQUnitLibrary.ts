@@ -17,6 +17,7 @@ module Told.GreekBible.Tests.Steps {
         given: (title: string, doStep: (args: IQUnitStepArgs) => void) => IQUnitStepLibrary;
         when: (title: string, doStep: (args: IQUnitStepArgs) => void) => IQUnitStepLibrary;
         then: (title: string, doStep: (args: IQUnitStepArgs) => void) => IQUnitStepLibrary;
+        callStep: (title: string, args: IQUnitStepArgs) => void;
     }
 
     export var initStepLibrary = function () {
@@ -28,13 +29,19 @@ module Told.GreekBible.Tests.Steps {
             .define('NUM', /(\d+)/);
 
         var yaddaLibrary: IYaddaLibrary = <any> English.library(dictionary);
+        var _rawSteps = [];
 
+        var _callStep = function (title: string, args: IQUnitStepArgs) {
+            _rawSteps[title](args);
+        };
 
         var stepWrapper = function (stepType: string): (title: string, doStep: (args: IQUnitStepArgs) => void) => IQUnitStepLibrary {
 
             var _stepType = stepType;
 
             return function (title: string, doStep: (args: IQUnitStepArgs) => void): IQUnitStepLibrary {
+
+                _rawSteps[title] = doStep;
 
                 var scenarioContext = this;
 
@@ -126,6 +133,7 @@ module Told.GreekBible.Tests.Steps {
             given: stepWrapper("given"),
             when: stepWrapper("when"),
             then: stepWrapper("then"),
+            callStep: _callStep,
         };
     };
 }

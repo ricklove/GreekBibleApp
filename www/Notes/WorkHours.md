@@ -175,3 +175,15 @@
 - Modify Feature tests to share a context
 - Implement 002 - Choose Passage - Simple Scenario
 - Fix major Bug in choose passage implementation
+
+### V2 H8
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+So that I can ensure the program is highest quality,
+I should ensure all the feature tests are passing 100%
+
+#### Completed
+
+- Complete 002 - Choose Passage feature tests
+- Enable calling of a step from within another step

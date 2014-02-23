@@ -127,8 +127,9 @@
 	- [x] Modified YaddaRunner and YaddaQUnit to support a context
 	- [x] Use the context in existing steps
 
-- [ ] Load Features in order
+- [x] Enable calling of a step from within another step
 
+- [ ] Load Features in order
 
 - [ ] Refactor Book and Chapter with Display Passage and Choose Passage
 

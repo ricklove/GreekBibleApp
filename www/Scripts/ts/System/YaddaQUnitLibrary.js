@@ -14,11 +14,18 @@ var Told;
                     var dictionary = new Dictionary().define('NUM', /(\d+)/);
 
                     var yaddaLibrary = English.library(dictionary);
+                    var _rawSteps = [];
+
+                    var _callStep = function (title, args) {
+                        _rawSteps[title](args);
+                    };
 
                     var stepWrapper = function (stepType) {
                         var _stepType = stepType;
 
                         return function (title, doStep) {
+                            _rawSteps[title] = doStep;
+
                             var scenarioContext = this;
 
                             var doStepWrapper = function () {
@@ -107,7 +114,8 @@ var Told;
                         yaddaLibrary: yaddaLibrary,
                         given: stepWrapper("given"),
                         when: stepWrapper("when"),
-                        then: stepWrapper("then")
+                        then: stepWrapper("then"),
+                        callStep: _callStep
                     };
                 };
             })(Tests.Steps || (Tests.Steps = {}));
