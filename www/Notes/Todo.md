@@ -131,6 +131,8 @@
 	- [x] Use the context in existing steps
 
 - [x] Enable calling of a step from within another step
+	- [x] BUG: Fails for async
+	
 
 - [ ] Load Features in order
 

@@ -6,10 +6,8 @@ So that I can see the entries which have a commonality
 
 Scenario: should display the same color coding for the same code
 
-	Given a passage is loaded
-	When two entries have the same [PART] code
-	Then the color for the [PART] should be the same
-
+	Given a passage is displayed
+	Then entries with the same [PART] code should have the same color
 	Where:
 		PART
 		PartOfSpeech
@@ -17,10 +15,8 @@ Scenario: should display the same color coding for the same code
 
 Scenario: should display a different color coding for a different code
 
-	Given a passage is loaded
-	When two entries have a different [PART] code
-	Then the color for the [PART] should be different
-	
+	Given a passage is displayed
+	Then entries with a different [PART] code should have the same color
 	Where:
 		PART
 		PartOfSpeech

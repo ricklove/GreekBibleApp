@@ -18,10 +18,28 @@ var Told;
                         chapter: 10,
                         firstEntryText: "Ἀνὴρ",
                         lastEntryText: "τινάς."
+                    },
+                    {
+                        // John 3
+                        // First entry:
+                        // 040301 V- 3IAI-S-- Ἦν Ἦν ἦν εἰμί
+                        // Last entry:
+                        // 040336 RP ----ASM- αὐτόν. αὐτόν αὐτόν αὐτός
+                        bookName: "John",
+                        bookNumber: 4,
+                        chapter: 3,
+                        firstEntryText: "Ἦν",
+                        lastEntryText: "αὐτόν."
                     }
                 ];
 
-                Told.GreekBible.Tests.Steps.stepLibrary.given("a sample", function (args) {
+                Told.GreekBible.Tests.Steps.stepLibrary.given("this is the first run", function (args) {
+                    var c = args.context;
+
+                    c.providers = {
+                        userSettings: { bookChoice: "", chapterChoice: "" }
+                    };
+                }).given("this is not the first run", function (args) {
                     var c = args.context;
 
                     c.sample = Steps.samples[0];
@@ -32,14 +50,6 @@ var Told;
                             chapterChoice: c.sample.chapter.toString()
                         }
                     };
-                }).given("this is the first run", function (args) {
-                    var c = args.context;
-
-                    c.providers = {
-                        userSettings: { bookChoice: "", chapterChoice: "" }
-                    };
-                }).given("this is not the first run", function (args) {
-                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("a sample", args);
                 }).when("the app is loaded", function (args) {
                     var c = args.context;
 
@@ -57,6 +67,34 @@ var Told;
                     c.viewModel.displayPassage.showDefault(onReady, onError);
 
                     args.shouldWaitForNextStepCall();
+                }).when("the passage is loaded", function (args) {
+                    var c = args.context;
+
+                    var attempt = 0;
+
+                    var checkIsReady = function () {
+                        if (c.viewModel.displayPassage.isPassageLoaded()) {
+                            args.nextStep();
+                        } else if (attempt < 10) {
+                            setTimeout(checkIsReady, 500);
+                        } else {
+                            ok(false, "ERROR: Passage did not load");
+                            args.nextStep();
+                        }
+
+                        attempt++;
+                    };
+
+                    setTimeout(checkIsReady, 500);
+
+                    args.shouldWaitForNextStepCall();
+                }).when("the passage is displayed", function (args) {
+                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("the app is loaded", args);
+                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("the passage is loaded", args);
+                }).when("a passage is displayed", function (args) {
+                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("this is not the first run", args);
+                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("the app is loaded", args);
+                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("the passage is loaded", args);
                 }).then("a (?:default )?passage should be displayed", function (args) {
                     var c = args.context;
                     var viewModel = c.viewModel;

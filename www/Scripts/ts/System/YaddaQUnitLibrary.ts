@@ -17,7 +17,7 @@ module Told.GreekBible.Tests.Steps {
         given: (title: string, doStep: (args: IQUnitStepArgs) => void) => IQUnitStepLibrary;
         when: (title: string, doStep: (args: IQUnitStepArgs) => void) => IQUnitStepLibrary;
         then: (title: string, doStep: (args: IQUnitStepArgs) => void) => IQUnitStepLibrary;
-        callStep: (title: string, args: IQUnitStepArgs) => void;
+        callStep: (title: string, args: IQUnitStepArgs, onDone: () => void) => void;
     }
 
     export var initStepLibrary = function () {
@@ -31,8 +31,28 @@ module Told.GreekBible.Tests.Steps {
         var yaddaLibrary: IYaddaLibrary = <any> English.library(dictionary);
         var _rawSteps = [];
 
-        var _callStep = function (title: string, args: IQUnitStepArgs) {
-            _rawSteps[title](args);
+        var _callStep = function (title: string, args: IQUnitStepArgs, onDone: () => void) {
+
+            if (onDone == null) { onDone = () => { }; }
+
+            var shouldWait = false;
+            var onWaitForNextStep = () => { shouldWait = true; };
+            var onNextStep = () => {
+                onDone();
+            };
+
+            var argsInner: IQUnitStepArgs = {
+                captures: args.captures,
+                context: args.context,
+                shouldWaitForNextStepCall: onWaitForNextStep,
+                nextStep: onNextStep,
+            };
+
+            _rawSteps[title](argsInner);
+
+            if (!shouldWait) {
+                onDone();
+            }
         };
 
         var stepWrapper = function (stepType: string): (title: string, doStep: (args: IQUnitStepArgs) => void) => IQUnitStepLibrary {
@@ -71,6 +91,8 @@ module Told.GreekBible.Tests.Steps {
 
                     var nextWrapper = function () {
                         clearTimeout(timeoutID);
+
+                        ok(true, "Calling-Start");
                         start();
 
                         doReport();
@@ -108,10 +130,14 @@ module Told.GreekBible.Tests.Steps {
                         var nextToCall = next;
                         nextToCall();
                     } else {
+
+                        ok(true, "Calling-Stop");
                         stop();
 
                         // SetTimeout for test fail
                         timeoutID = setTimeout(function () {
+
+                            ok(true, "Calling-Start");
                             start();
                             hasFailed = true;
                             failMessage = "TIMEOUT: The test timed out!";

@@ -11,8 +11,9 @@ var Told;
                 //    shouldCompareEntries: (entryA: Data.IEntry, entryB: Data.IEntry) => boolean;
                 //}
                 Told.GreekBible.Tests.Steps.stepLibrary.given("a passage is loaded", function (args) {
-                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("a sample", args);
-                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("the app is loaded", args);
+                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("a sample", args, function () {
+                        Told.GreekBible.Tests.Steps.stepLibrary.callStep("the app is loaded", args, null);
+                    });
                 }).when("two entries have the same Morph code", function (args) {
                     var c = args.context;
 
@@ -24,10 +25,12 @@ var Told;
                     var entries = c.viewModel.displayPassage.passage().entries;
 
                     for (var i = 0; i < entries.length; i++) {
-                        for (var j = 0; j < entries.length; j++) {
+                        for (var j = i + 1; j < entries.length; j++) {
                             if (c.shouldCompareEntries(entries[i], entries[j])) {
-                                equal(entries[i].morph.color, entries[j].morph.color, "The morph colors match");
-                                return;
+                                equal(entries[i].morph.color, entries[j].morph.color, "The morph colors match for " + entries[i].morph.morphCode);
+
+                                // Continue
+                                j = 1000 * 1000;
                             }
                         }
                     }

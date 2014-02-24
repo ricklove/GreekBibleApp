@@ -23,7 +23,7 @@ module Told.GreekBible.Tests {
                 var scenario = fScenarios[i];
 
                 var done = function () {
-                    //console.log("I'm done!");
+                    ok(true, "Calling-Start");
                     start();
                 };
 

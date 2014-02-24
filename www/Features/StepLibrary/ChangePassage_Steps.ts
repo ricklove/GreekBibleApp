@@ -7,71 +7,46 @@ module Told.GreekBible.Tests.Steps {
 
     stepLibrary
         .given("user chooses a passage", function (args) {
-            // Acts 10
-            // First entry: 
-            // 051001 N- ----NSM- Ἀνὴρ Ἀνὴρ ἀνήρ ἀνήρ
-            // Last entry: 
-            // 051048 RI ----APF- τινάς. τινάς τινάς τις
-            var c = <IDisplayPassageStepsContext> args.context;
 
-            c.providers = { userSettings: { bookChoice: "", chapterChoice: "" } };
-            c.viewModel = new UI.MainViewModel(c.providers);
+            stepLibrary.callStep("a passage is displayed", args, () => {
+                var c = <IDisplayPassageStepsContext> args.context;
 
-            c.sample = samples[0];
-            c.viewModel.changePassage.book(c.sample.bookName);
-            c.viewModel.changePassage.chapter(c.sample.chapter);
-        })
-        .given("user chooses two passages quickly", function (args) {
-            // Acts 10
-            // First entry: 
-            // 051001 N- ----NSM- Ἀνὴρ Ἀνὴρ ἀνήρ ἀνήρ
-            // Last entry: 
-            // 051048 RI ----APF- τινάς. τινάς τινάς τις
-            var c = <IDisplayPassageStepsContext> args.context;
-
-            c.providers = { userSettings: { bookChoice: "", chapterChoice: "" } };
-            c.viewModel = new UI.MainViewModel(c.providers);
-            c.sample = samples[0];
-
-            // Any other passage
-            c.viewModel.changePassage.book("Romans");
-            c.viewModel.changePassage.chapter(5);
-
-            setTimeout(function () {
+                c.sample = samples[1];
                 c.viewModel.changePassage.book(c.sample.bookName);
                 c.viewModel.changePassage.chapter(c.sample.chapter);
+            });
 
-                args.nextStep();
-            }, 100);
-
-            args.shouldWaitForNextStepCall();
         })
-        .when("the passage is loaded", function (args) {
-            var c = <IDisplayPassageStepsContext> args.context;
+        .given("user chooses two passages quickly", function (args) {
 
-            var attempt = 0;
+            stepLibrary.callStep("a passage is displayed", args, () => {
+                var c = <IDisplayPassageStepsContext> args.context;
 
+                // Many other passages to try to cause a race condition
+                c.viewModel.changePassage.book("Mark");
+                c.viewModel.changePassage.chapter(2);
+                c.viewModel.changePassage.book("Luke");
+                c.viewModel.changePassage.chapter(3);
+                c.viewModel.changePassage.book("John");
+                c.viewModel.changePassage.chapter(4);
+                c.viewModel.changePassage.book("Acts");
+                c.viewModel.changePassage.chapter(5);
 
-            var checkIsReady = function () {
-                if (c.viewModel.displayPassage.isPassageLoaded()) {
+                setTimeout(function () {
+                    c.sample = samples[1];
+
+                    c.viewModel.changePassage.book(c.sample.bookName);
+                    c.viewModel.changePassage.chapter(c.sample.chapter);
+
                     args.nextStep();
-                } else if (attempt < 10) {
-                    setTimeout(checkIsReady, 500);
-                }
-                else {
-                    ok(false, "ERROR: Passage did not load");
-                    args.nextStep();
-                }
+                }, 100);
 
-                attempt++;
-            };
+                args.shouldWaitForNextStepCall();
+            });
 
-            setTimeout(checkIsReady, 500);
-
-            args.shouldWaitForNextStepCall();
         })
         .then("the last chosen passage should be displayed", function (args) {
-            stepLibrary.callStep("the first entry should be displayed", args);
+            stepLibrary.callStep("the first entry should be displayed", args, null);
         })
     ;
 }

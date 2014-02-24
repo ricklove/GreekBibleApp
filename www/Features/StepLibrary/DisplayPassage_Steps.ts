@@ -30,12 +30,31 @@ module Told.GreekBible.Tests.Steps {
             chapter: 10,
             firstEntryText: "Ἀνὴρ",
             lastEntryText: "τινάς."
+        },
+        {
+            // John 3
+            // First entry: 
+            // 040301 V- 3IAI-S-- Ἦν Ἦν ἦν εἰμί
+            // Last entry: 
+            // 040336 RP ----ASM- αὐτόν. αὐτόν αὐτόν αὐτός
+            bookName: "John",
+            bookNumber: 4,
+            chapter: 3,
+            firstEntryText: "Ἦν",
+            lastEntryText: "αὐτόν."
         }
     ];
 
     stepLibrary
-        .given("a sample", function (args) {
+        .given("this is the first run", function (args) {
 
+            var c = <IDisplayPassageStepsContext> args.context;
+
+            c.providers = {
+                userSettings: { bookChoice: "", chapterChoice: "" },
+            };
+        })
+        .given("this is not the first run", function (args) {
             var c = <IDisplayPassageStepsContext> args.context;
 
             c.sample = samples[0];
@@ -46,17 +65,6 @@ module Told.GreekBible.Tests.Steps {
                     chapterChoice: c.sample.chapter.toString(),
                 },
             };
-        })
-        .given("this is the first run", function (args) {
-
-            var c = <IDisplayPassageStepsContext> args.context;
-
-            c.providers = {
-                userSettings: { bookChoice: "", chapterChoice: "" },
-            };
-        })
-        .given("this is not the first run", function (args) {
-            stepLibrary.callStep("a sample", args);
         })
         .when("the app is loaded", function (args) {
 
@@ -76,6 +84,38 @@ module Told.GreekBible.Tests.Steps {
             c.viewModel.displayPassage.showDefault(onReady, onError);
 
             args.shouldWaitForNextStepCall();
+        })
+        .when("the passage is loaded", function (args) {
+            var c = <IDisplayPassageStepsContext> args.context;
+
+            var attempt = 0;
+
+            var checkIsReady = function () {
+                if (c.viewModel.displayPassage.isPassageLoaded()) {
+                    args.nextStep();
+                } else if (attempt < 10) {
+                    setTimeout(checkIsReady, 500);
+                }
+                else {
+                    ok(false, "ERROR: Passage did not load");
+                    args.nextStep();
+                }
+
+                attempt++;
+            };
+
+            setTimeout(checkIsReady, 500);
+
+            args.shouldWaitForNextStepCall();
+        })
+        .when("the passage is displayed", function (args) {
+            stepLibrary.callStep("the app is loaded", args);
+            stepLibrary.callStep("the passage is loaded", args);
+        })
+        .when("a passage is displayed", function (args) {
+            stepLibrary.callStep("this is not the first run", args);
+            stepLibrary.callStep("the app is loaded", args);
+            stepLibrary.callStep("the passage is loaded", args);
         })
         .then("a (?:default )?passage should be displayed", function (args) {
             var c = <IDisplayPassageStepsContext> args.context;

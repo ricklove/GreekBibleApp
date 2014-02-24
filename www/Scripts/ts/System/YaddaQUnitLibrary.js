@@ -16,8 +16,32 @@ var Told;
                     var yaddaLibrary = English.library(dictionary);
                     var _rawSteps = [];
 
-                    var _callStep = function (title, args) {
-                        _rawSteps[title](args);
+                    var _callStep = function (title, args, onDone) {
+                        if (onDone == null) {
+                            onDone = function () {
+                            };
+                        }
+
+                        var shouldWait = false;
+                        var onWaitForNextStep = function () {
+                            shouldWait = true;
+                        };
+                        var onNextStep = function () {
+                            onDone();
+                        };
+
+                        var argsInner = {
+                            captures: args.captures,
+                            context: args.context,
+                            shouldWaitForNextStepCall: onWaitForNextStep,
+                            nextStep: onNextStep
+                        };
+
+                        _rawSteps[title](argsInner);
+
+                        if (!shouldWait) {
+                            onDone();
+                        }
                     };
 
                     var stepWrapper = function (stepType) {
@@ -53,6 +77,8 @@ var Told;
                                 //var nextThis = this;
                                 var nextWrapper = function () {
                                     clearTimeout(timeoutID);
+
+                                    ok(true, "Calling-Start");
                                     start();
 
                                     doReport();
@@ -92,10 +118,12 @@ var Told;
                                     var nextToCall = next;
                                     nextToCall();
                                 } else {
+                                    ok(true, "Calling-Stop");
                                     stop();
 
                                     // SetTimeout for test fail
                                     timeoutID = setTimeout(function () {
+                                        ok(true, "Calling-Start");
                                         start();
                                         hasFailed = true;
                                         failMessage = "TIMEOUT: The test timed out!";

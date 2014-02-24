@@ -187,4 +187,4 @@ I should ensure all the feature tests are passing 100%
 
 - Complete 002 - Choose Passage feature tests
 - Enable calling of a step from within another step
-- Began 003- View Entry Color Coding
+- Began 003 - View Entry Color Coding
