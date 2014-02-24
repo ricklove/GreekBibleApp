@@ -37,7 +37,8 @@
 
 .partOfSpeechColor
 {
-    height: 2px;
+    height: 3px;
+    margin-bottom: 1px;
 }
 
 .morphColor
