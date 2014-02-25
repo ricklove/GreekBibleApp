@@ -120,10 +120,10 @@
 
 - [ ] Complete all the defined features that have been implemented
 	- [x] 001 - View Passage
-	- [ ] 002 - Choose Passage
-		- [ ] simple scenario
-		- [ ] other scenarios
-		- [ ] SOLVE RACE CONDITION: If the user chooses two passages quickly, it should display the last chosen passage
+	- [x] 002 - Choose Passage
+		- [x] simple scenario
+		- [x] other scenarios
+		- [x] SOLVE RACE CONDITION: If the user chooses two passages quickly, it should display the last chosen passage
 	- [ ] 003 - View Entry Color Coding
 		- [ ] Same Morph Code
 		- [ ] Others

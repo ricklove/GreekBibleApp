@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../Support/Colors.ts" />
 /// <reference path="../Support/AccessUserSettings.ts" />
-/// <reference path="MainViewModel.ts" />
+/// <reference path="000_MainViewModel.ts" />
 /// <reference path="../Support/LoadPassageText.ts" />
 /// <reference path="../Support/ParsePassageText.ts" />
 var Told;
@@ -78,10 +78,12 @@ var Told;
 
                     // Load Async
                     Told.GreekBible.Data.Loader.loadPassage(bookNumber, chapter, function (passageText) {
-                        self.passage(self.formatPassage(Told.GreekBible.Data.Parser.parsePassage(passageText)));
-
-                        if (onLoad) {
-                            onLoad();
+                        // Ensure that this was the last chosen passage
+                        if (bookNumber === Told.GreekBible.Data.BookInfo.getBookNumber(self.book()) && chapter === self.chapter()) {
+                            self.passage(self.formatPassage(Told.GreekBible.Data.Parser.parsePassage(passageText)));
+                            if (onLoad) {
+                                onLoad();
+                            }
                         }
                     }, function (errorMessage) {
                         self.hasPassageLoadingFailed(true);

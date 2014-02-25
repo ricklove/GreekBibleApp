@@ -1,10 +1,9 @@
 ﻿/// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../Support/Colors.ts" />
 /// <reference path="../Support/AccessUserSettings.ts" />
-/// <reference path="MainViewModel.ts" />
+/// <reference path="000_MainViewModel.ts" />
 /// <reference path="../Support/LoadPassageText.ts" />
 /// <reference path="../Support/ParsePassageText.ts" />
-
 
 module Told.GreekBible.UI {
 
@@ -12,7 +11,7 @@ module Told.GreekBible.UI {
 
         private viewModel: MainViewModel;
 
-        private get userSettings() { return this.viewModel.providers.userSettings;}
+        private get userSettings() { return this.viewModel.providers.userSettings; }
 
         constructor(viewModel: MainViewModel) {
             this.viewModel = viewModel;
@@ -67,9 +66,15 @@ module Told.GreekBible.UI {
             Data.Loader.loadPassage(bookNumber, chapter,
                 function (passageText: string) {
 
-                    self.passage(self.formatPassage(Data.Parser.parsePassage(passageText)));
+                    // Ensure that this was the last chosen passage
+                    if (bookNumber === Data.BookInfo.getBookNumber(self.book())
+                        && chapter === self.chapter()) {
 
-                    if (onLoad) { onLoad(); }
+                            self.passage(self.formatPassage(Data.Parser.parsePassage(passageText)));
+                            if (onLoad) { onLoad(); }
+
+                    }
+                    
                 }, function (errorMessage: string) {
                     self.hasPassageLoadingFailed(true);
                     if (onError) { onError(errorMessage); }

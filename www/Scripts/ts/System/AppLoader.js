@@ -98,9 +98,9 @@
                 'Scripts/ts/Support/LoadPassageText.js',
                 'Scripts/ts/Support/ParsePassageText.js',
                 'Scripts/ts/Support/Colors.js',
-                'Scripts/ts/User/MainViewModel.js',
-                'Scripts/ts/User/DisplayPassage.js',
-                'Scripts/ts/User/ChangePassage.js'
+                'Scripts/ts/User/000_MainViewModel.js',
+                'Scripts/ts/User/001_DisplayPassage.js',
+                'Scripts/ts/User/002_ChangePassage.js'
             ];
 
             loadScripts(scriptList, onLoaded, onProgress);
@@ -123,7 +123,9 @@
             var scriptList = [
                 'Scripts/ts/Support/ParsePassageText_TestData.js',
                 'Scripts/ts/Support/ParsePassageText_Tests.js',
-                'Scripts/ts/User/DisplayPassage_Tests.js'
+                'Scripts/ts/User/001_DisplayPassage_Tests.js',
+                'Scripts/ts/User/002_ChangePassage_Tests.js',
+                'Scripts/ts/User/003_DisplayEntryColorCoding_Tests.js'
             ];
 
             loadScripts(scriptList, onLoaded, onProgress);

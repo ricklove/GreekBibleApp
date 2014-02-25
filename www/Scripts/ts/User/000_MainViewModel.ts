@@ -1,8 +1,8 @@
 ﻿/// <reference path="../../typings/jQuery/jQuery.d.ts" />
 /// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../Support/AccessProviders.ts" />
-/// <reference path="DisplayPassage.ts" />
-/// <reference path="ChangePassage.ts" />
+/// <reference path="001_DisplayPassage.ts" />
+/// <reference path="002_ChangePassage.ts" />
 
 module Told.GreekBible.UI {
 

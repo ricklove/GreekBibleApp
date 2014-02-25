@@ -17,23 +17,20 @@ module Told.FeatureTests {
             });
         }
 
-        public scenario(title: string, expectedSteps: number, execute: (step: (title: string) => void, done: () => void) => void) {
+        public scenario(title: string, expectedSteps: string[], execute: (step: (title: string) => void, done: () => void) => void) {
 
-            var stepCount = 0;
+            var steps: string[] = [];
             var stepSummary = "Scenario: " + title + "\r\n";
 
             var step = function (title: string) {
                 testLog("\tSTEP: " + title);
                 stepSummary += "\t" + title + "\r\n";
-
-                stepCount++;
+                steps.push(title);
             }
 
             var done = function () {
 
-                if (stepCount != expectedSteps) {
-                    equal(expectedSteps, stepCount, "Step Count should be correct");
-                }
+                deepEqual(expectedSteps, steps, "Actual steps match the expected steps");
 
                 testLog(stepSummary);
 

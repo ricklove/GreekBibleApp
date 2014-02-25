@@ -1,10 +1,10 @@
 ﻿/// <reference path="../../typings/qunit/qunit.d.ts" />
 /// <reference path="../System/FeatureTests.ts" />
-/// <reference path="DisplayPassage.ts" />
+/// <reference path="001_DisplayPassage.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
-        (function (Data) {
+        (function (UI) {
             (function (Tests) {
                 Tests.samples = [
                     {
@@ -39,7 +39,10 @@ var Told;
                     "So that I can examine the greek words and their details"
                 ]);
 
-                f.scenario("Should display a passage", 2, function (step, done) {
+                f.scenario("Should display a passage", [
+                    "When the app is loaded",
+                    "Then a passage should be displayed"
+                ], function (step, done) {
                     step("When the app is loaded");
 
                     var providers = {
@@ -66,7 +69,11 @@ var Told;
                     viewModel.displayPassage.showDefault(onReady, onError);
                 });
 
-                f.scenario("Should display a default passage", 3, function (step, done) {
+                f.scenario("Should display a default passage", [
+                    "Given this is the first run",
+                    "When the app is loaded",
+                    "Then a default passage should be displayed"
+                ], function (step, done) {
                     step("Given this is the first run");
 
                     var providers = {
@@ -95,7 +102,27 @@ var Told;
                     viewModel.displayPassage.showDefault(onReady, onError);
                 });
 
-                f.scenario("Should display the passage entries", 4, function (step, done) {
+                Tests.thenCheckEntries = function (viewModel, sample, step) {
+                    step("Then the first entry should be displayed");
+
+                    equal(viewModel.displayPassage.passage().entries[0].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
+                    equal(viewModel.displayPassage.passage().entries[0].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
+                    equal(viewModel.displayPassage.passage().entries[0].rawText, sample.firstEntryText, "The first entry text is displayed");
+
+                    step("And the last entry should be displayed");
+
+                    var iLast = viewModel.displayPassage.passage().entries.length - 1;
+                    equal(viewModel.displayPassage.passage().entries[iLast].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
+                    equal(viewModel.displayPassage.passage().entries[iLast].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
+                    equal(viewModel.displayPassage.passage().entries[iLast].rawText, sample.lastEntryText, "The last entry text is displayed");
+                };
+
+                f.scenario("Should display the passage entries", [
+                    "Given this is not the first run",
+                    "When the app is loaded",
+                    "Then the first entry should be displayed",
+                    "And the last entry should be displayed"
+                ], function (step, done) {
                     step("Given this is not the first run");
 
                     var sample = Tests.samples[0];
@@ -112,18 +139,7 @@ var Told;
                     var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
 
                     var onReady = function () {
-                        step("Then the first entry should be displayed");
-
-                        equal(viewModel.displayPassage.passage().entries[0].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
-                        equal(viewModel.displayPassage.passage().entries[0].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
-                        equal(viewModel.displayPassage.passage().entries[0].rawText, sample.firstEntryText, "The first entry text is displayed");
-
-                        step("And the last entry should be displayed");
-
-                        var iLast = viewModel.displayPassage.passage().entries.length - 1;
-                        equal(viewModel.displayPassage.passage().entries[iLast].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
-                        equal(viewModel.displayPassage.passage().entries[iLast].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
-                        equal(viewModel.displayPassage.passage().entries[iLast].rawText, sample.lastEntryText, "The last entry text is displayed");
+                        Tests.thenCheckEntries(viewModel, sample, step);
 
                         done();
                     };
@@ -135,10 +151,10 @@ var Told;
 
                     viewModel.displayPassage.showDefault(onReady, onError);
                 });
-            })(Data.Tests || (Data.Tests = {}));
-            var Tests = Data.Tests;
-        })(GreekBible.Data || (GreekBible.Data = {}));
-        var Data = GreekBible.Data;
+            })(UI.Tests || (UI.Tests = {}));
+            var Tests = UI.Tests;
+        })(GreekBible.UI || (GreekBible.UI = {}));
+        var UI = GreekBible.UI;
     })(Told.GreekBible || (Told.GreekBible = {}));
     var GreekBible = Told.GreekBible;
 })(Told || (Told = {}));

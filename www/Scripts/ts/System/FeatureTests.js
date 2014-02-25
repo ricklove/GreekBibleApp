@@ -16,20 +16,17 @@ var Told;
                 });
             }
             Feature.prototype.scenario = function (title, expectedSteps, execute) {
-                var stepCount = 0;
+                var steps = [];
                 var stepSummary = "Scenario: " + title + "\r\n";
 
                 var step = function (title) {
                     testLog("\tSTEP: " + title);
                     stepSummary += "\t" + title + "\r\n";
-
-                    stepCount++;
+                    steps.push(title);
                 };
 
                 var done = function () {
-                    if (stepCount != expectedSteps) {
-                        equal(expectedSteps, stepCount, "Step Count should be correct");
-                    }
+                    deepEqual(expectedSteps, steps, "Actual steps match the expected steps");
 
                     testLog(stepSummary);
 
