@@ -3,6 +3,8 @@
 
 module Told.GreekBible.Tests.Steps {
 
+    export var DEBUG_QUNIT_RUNNER = true;
+
     export var stepLibrary: IQUnitStepLibrary;
 
     export interface IQUnitStepArgs {
@@ -10,6 +12,7 @@ module Told.GreekBible.Tests.Steps {
         context: {};
         shouldWaitForNextStepCall: () => void;
         nextStep: () => void;
+        _indent: number;
     }
 
     export interface IQUnitStepLibrary {
@@ -31,14 +34,46 @@ module Told.GreekBible.Tests.Steps {
         var yaddaLibrary: IYaddaLibrary = <any> English.library(dictionary);
         var _rawSteps = [];
 
+        var indent = function (level: number) {
+            var text = "";
+
+            for (var i = 0; i < level; i++) {
+                text += "\t";
+            }
+
+            return text;
+        }
+
         var _callStep = function (title: string, args: IQUnitStepArgs, onDone: () => void) {
 
             if (onDone == null) { onDone = () => { }; }
 
-            var shouldWait = false;
-            var onWaitForNextStep = () => { shouldWait = true; };
+            var shouldWaitCount = 0;
+            var hasWaitedCount = 0;
+
+            var onWaitForNextStep = () => {
+
+                if (shouldWaitCount == 0) {
+                    if (DEBUG_QUNIT_RUNNER) { ok(true, "QUNIT-CALLING-STOP"); }
+                    stop();
+                }
+
+                args.shouldWaitForNextStepCall();
+                shouldWaitCount++;
+            };
+
             var onNextStep = () => {
-                onDone();
+                if (hasWaitedCount >= shouldWaitCount) {
+                    if (shouldWaitCount != 0) {
+                        if (DEBUG_QUNIT_RUNNER) { ok(true, "QUNIT-CALLING-START"); }
+                        start();
+                    }
+
+                    ok(true, indent(args._indent + 1) + "END: " + title);
+                    onDone();
+                }
+
+                args.nextStep();
             };
 
             var argsInner: IQUnitStepArgs = {
@@ -46,12 +81,15 @@ module Told.GreekBible.Tests.Steps {
                 context: args.context,
                 shouldWaitForNextStepCall: onWaitForNextStep,
                 nextStep: onNextStep,
+                _indent: args._indent + 1,
             };
+
+            ok(true, indent(args._indent + 1) + "START: " + title);
 
             _rawSteps[title](argsInner);
 
-            if (!shouldWait) {
-                onDone();
+            if (shouldWaitCount == 0) {
+                onNextStep();
             }
         };
 
@@ -70,15 +108,16 @@ module Told.GreekBible.Tests.Steps {
                     var stepTitle = _stepType + " '" + title + "'";
                     var hasFailed = false;
                     var failMessage = "";
-                    var shouldWait = false;
+                    var shouldWaitCount = 0;
+                    var hasWaitedCount = 0;
 
                     var doReport = function () {
                         var message: string;
 
                         if (hasFailed) {
-                            message = "FAILED: " + stepTitle + "\r\n" + failMessage;
+                            message = indent(args._indent) + "FAILED: " + stepTitle + "\r\n" + failMessage;
                         } else {
-                            message = "END: " + stepTitle;
+                            message = indent(args._indent) + "END: " + stepTitle;
                         }
 
                         ok(!hasFailed, message);
@@ -90,13 +129,18 @@ module Told.GreekBible.Tests.Steps {
                     //var nextThis = this;
 
                     var nextWrapper = function () {
-                        clearTimeout(timeoutID);
 
-                        ok(true, "Calling-Start");
-                        start();
+                        if (hasWaitedCount >= shouldWaitCount) {
+                            clearTimeout(timeoutID);
 
-                        doReport();
-                        next();
+                            if (DEBUG_QUNIT_RUNNER) { ok(true, "QUNIT-CALLING-START"); }
+                            start();
+
+                            doReport();
+                            next();
+                        }
+
+                        hasWaitedCount++;
                     };
 
                     arguments[arguments.length - 1] = nextWrapper;
@@ -107,37 +151,38 @@ module Told.GreekBible.Tests.Steps {
                         captures[i] = arguments[i];
                     }
 
-                    var shouldWaitCallback = () => { shouldWait = true; }
+                    var shouldWaitCallback = () => { shouldWaitCount++; }
 
                     var args: IQUnitStepArgs = {
                         captures: captures,
                         context: scenarioContext,
                         shouldWaitForNextStepCall: shouldWaitCallback,
-                        nextStep: nextWrapper
+                        nextStep: nextWrapper,
+                        _indent: 2,
                     };
 
                     try {
-                        ok(true, "START: " + stepTitle);
+                        ok(true, indent(args._indent) + "START: " + stepTitle);
                         doStep(args);
                     } catch (ex) {
                         hasFailed = true;
                         failMessage = ex;
                     }
 
-                    if (!shouldWait) {
+                    if (shouldWaitCount == 0) {
                         doReport();
 
                         var nextToCall = next;
                         nextToCall();
                     } else {
 
-                        ok(true, "Calling-Stop");
+                        if (DEBUG_QUNIT_RUNNER) { ok(true, "QUNIT-CALLING-STOP"); }
                         stop();
 
                         // SetTimeout for test fail
                         timeoutID = setTimeout(function () {
 
-                            ok(true, "Calling-Start");
+                            if (DEBUG_QUNIT_RUNNER) { ok(true, "QUNIT-CALLING-START"); }
                             start();
                             hasFailed = true;
                             failMessage = "TIMEOUT: The test timed out!";

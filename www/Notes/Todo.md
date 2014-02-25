@@ -126,15 +126,8 @@
 		- [x] Same Morph Code
 		- [ ] Others
 
-- [x] Modify Feature tests to share a context
-	- [x] Modified YaddaRunner and YaddaQUnit to support a context
-	- [x] Use the context in existing steps
+- [ ] !Separate System Project out of GreekBible to enable focus apart from system features
 
-- [x] Enable calling of a step from within another step
-	- [x] BUG: Fails for async
-	
-
-- [ ] Load Features in order
 
 - [ ] Refactor Book and Chapter with Display Passage and Choose Passage
 

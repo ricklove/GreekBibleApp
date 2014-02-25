@@ -120,6 +120,7 @@
                 console.log("Loaded Test Framework");
 
                 QUnit.config.autostart = false;
+                QUnit.config.timeout = 5000;
                 QUnit.load();
 
                 QUnit.module("UnitTests");

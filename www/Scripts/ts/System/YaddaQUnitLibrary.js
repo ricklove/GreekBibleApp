@@ -5,6 +5,8 @@ var Told;
     (function (GreekBible) {
         (function (Tests) {
             (function (Steps) {
+                Steps.DEBUG_QUNIT_RUNNER = true;
+
                 Steps.stepLibrary;
 
                 Steps.initStepLibrary = function () {
@@ -16,31 +18,67 @@ var Told;
                     var yaddaLibrary = English.library(dictionary);
                     var _rawSteps = [];
 
+                    var indent = function (level) {
+                        var text = "";
+
+                        for (var i = 0; i < level; i++) {
+                            text += "\t";
+                        }
+
+                        return text;
+                    };
+
                     var _callStep = function (title, args, onDone) {
                         if (onDone == null) {
                             onDone = function () {
                             };
                         }
 
-                        var shouldWait = false;
+                        var shouldWaitCount = 0;
+                        var hasWaitedCount = 0;
+
                         var onWaitForNextStep = function () {
-                            shouldWait = true;
+                            if (shouldWaitCount == 0) {
+                                if (Steps.DEBUG_QUNIT_RUNNER) {
+                                    ok(true, "QUNIT-CALLING-STOP");
+                                }
+                                stop();
+                            }
+
+                            args.shouldWaitForNextStepCall();
+                            shouldWaitCount++;
                         };
+
                         var onNextStep = function () {
-                            onDone();
+                            if (hasWaitedCount >= shouldWaitCount) {
+                                if (shouldWaitCount != 0) {
+                                    if (Steps.DEBUG_QUNIT_RUNNER) {
+                                        ok(true, "QUNIT-CALLING-START");
+                                    }
+                                    start();
+                                }
+
+                                ok(true, indent(args._indent + 1) + "END: " + title);
+                                onDone();
+                            }
+
+                            args.nextStep();
                         };
 
                         var argsInner = {
                             captures: args.captures,
                             context: args.context,
                             shouldWaitForNextStepCall: onWaitForNextStep,
-                            nextStep: onNextStep
+                            nextStep: onNextStep,
+                            _indent: args._indent + 1
                         };
+
+                        ok(true, indent(args._indent + 1) + "START: " + title);
 
                         _rawSteps[title](argsInner);
 
-                        if (!shouldWait) {
-                            onDone();
+                        if (shouldWaitCount == 0) {
+                            onNextStep();
                         }
                     };
 
@@ -56,15 +94,16 @@ var Told;
                                 var stepTitle = _stepType + " '" + title + "'";
                                 var hasFailed = false;
                                 var failMessage = "";
-                                var shouldWait = false;
+                                var shouldWaitCount = 0;
+                                var hasWaitedCount = 0;
 
                                 var doReport = function () {
                                     var message;
 
                                     if (hasFailed) {
-                                        message = "FAILED: " + stepTitle + "\r\n" + failMessage;
+                                        message = indent(args._indent) + "FAILED: " + stepTitle + "\r\n" + failMessage;
                                     } else {
-                                        message = "END: " + stepTitle;
+                                        message = indent(args._indent) + "END: " + stepTitle;
                                     }
 
                                     ok(!hasFailed, message);
@@ -76,13 +115,19 @@ var Told;
 
                                 //var nextThis = this;
                                 var nextWrapper = function () {
-                                    clearTimeout(timeoutID);
+                                    if (hasWaitedCount >= shouldWaitCount) {
+                                        clearTimeout(timeoutID);
 
-                                    ok(true, "Calling-Start");
-                                    start();
+                                        if (Steps.DEBUG_QUNIT_RUNNER) {
+                                            ok(true, "QUNIT-CALLING-START");
+                                        }
+                                        start();
 
-                                    doReport();
-                                    next();
+                                        doReport();
+                                        next();
+                                    }
+
+                                    hasWaitedCount++;
                                 };
 
                                 arguments[arguments.length - 1] = nextWrapper;
@@ -94,36 +139,41 @@ var Told;
                                 }
 
                                 var shouldWaitCallback = function () {
-                                    shouldWait = true;
+                                    shouldWaitCount++;
                                 };
 
                                 var args = {
                                     captures: captures,
                                     context: scenarioContext,
                                     shouldWaitForNextStepCall: shouldWaitCallback,
-                                    nextStep: nextWrapper
+                                    nextStep: nextWrapper,
+                                    _indent: 2
                                 };
 
                                 try  {
-                                    ok(true, "START: " + stepTitle);
+                                    ok(true, indent(args._indent) + "START: " + stepTitle);
                                     doStep(args);
                                 } catch (ex) {
                                     hasFailed = true;
                                     failMessage = ex;
                                 }
 
-                                if (!shouldWait) {
+                                if (shouldWaitCount == 0) {
                                     doReport();
 
                                     var nextToCall = next;
                                     nextToCall();
                                 } else {
-                                    ok(true, "Calling-Stop");
+                                    if (Steps.DEBUG_QUNIT_RUNNER) {
+                                        ok(true, "QUNIT-CALLING-STOP");
+                                    }
                                     stop();
 
                                     // SetTimeout for test fail
                                     timeoutID = setTimeout(function () {
-                                        ok(true, "Calling-Start");
+                                        if (Steps.DEBUG_QUNIT_RUNNER) {
+                                            ok(true, "QUNIT-CALLING-START");
+                                        }
                                         start();
                                         hasFailed = true;
                                         failMessage = "TIMEOUT: The test timed out!";

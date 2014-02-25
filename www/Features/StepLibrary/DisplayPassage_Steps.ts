@@ -109,13 +109,16 @@ module Told.GreekBible.Tests.Steps {
             args.shouldWaitForNextStepCall();
         })
         .when("the passage is displayed", function (args) {
-            stepLibrary.callStep("the app is loaded", args);
-            stepLibrary.callStep("the passage is loaded", args);
+            stepLibrary.callStep("the app is loaded", args, () => {
+                stepLibrary.callStep("the passage is loaded", args, null);
+            });
         })
         .when("a passage is displayed", function (args) {
-            stepLibrary.callStep("this is not the first run", args);
-            stepLibrary.callStep("the app is loaded", args);
-            stepLibrary.callStep("the passage is loaded", args);
+            stepLibrary.callStep("this is not the first run", args, () => {
+                stepLibrary.callStep("the app is loaded", args, () => {
+                    stepLibrary.callStep("the passage is loaded", args, null);
+                });
+            });
         })
         .then("a (?:default )?passage should be displayed", function (args) {
             var c = <IDisplayPassageStepsContext> args.context;

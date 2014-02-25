@@ -22,7 +22,9 @@ var Told;
                         var scenario = fScenarios[i];
 
                         var done = function () {
-                            ok(true, "Calling-Start");
+                            if (Told.GreekBible.Tests.Steps.DEBUG_QUNIT_RUNNER) {
+                                ok(true, "QUNIT-CALLING-START");
+                            }
                             start();
                         };
 

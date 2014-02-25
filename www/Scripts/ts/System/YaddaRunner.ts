@@ -23,7 +23,7 @@ module Told.GreekBible.Tests {
                 var scenario = fScenarios[i];
 
                 var done = function () {
-                    ok(true, "Calling-Start");
+                    if (Steps.DEBUG_QUNIT_RUNNER) { ok(true, "QUNIT-CALLING-START"); }
                     start();
                 };
 

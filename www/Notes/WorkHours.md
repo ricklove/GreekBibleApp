@@ -188,3 +188,13 @@ I should ensure all the feature tests are passing 100%
 - Complete 002 - Choose Passage feature tests
 - Enable calling of a step from within another step
 - Began 003 - View Entry Color Coding
+
+### V2 H9
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+Refocus on the app and remove the system features that are causing trouble (Cucumber/Yadda Testing)
+Replace this framework with simple QUnit tests
+
+#### Completed
+

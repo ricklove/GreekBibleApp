@@ -89,12 +89,15 @@ var Told;
 
                     args.shouldWaitForNextStepCall();
                 }).when("the passage is displayed", function (args) {
-                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("the app is loaded", args);
-                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("the passage is loaded", args);
+                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("the app is loaded", args, function () {
+                        Told.GreekBible.Tests.Steps.stepLibrary.callStep("the passage is loaded", args, null);
+                    });
                 }).when("a passage is displayed", function (args) {
-                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("this is not the first run", args);
-                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("the app is loaded", args);
-                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("the passage is loaded", args);
+                    Told.GreekBible.Tests.Steps.stepLibrary.callStep("this is not the first run", args, function () {
+                        Told.GreekBible.Tests.Steps.stepLibrary.callStep("the app is loaded", args, function () {
+                            Told.GreekBible.Tests.Steps.stepLibrary.callStep("the passage is loaded", args, null);
+                        });
+                    });
                 }).then("a (?:default )?passage should be displayed", function (args) {
                     var c = args.context;
                     var viewModel = c.viewModel;

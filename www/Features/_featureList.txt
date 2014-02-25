@@ -1,10 +1,8 @@
-﻿User/001_ViewPassage
-User/002_ChoosePassage
-User/003_ViewEntryColorCoding
-Support/ParsePassageText
+﻿001_ViewPassage
+002_ChoosePassage
+003_ViewEntryColorCoding
 
 #STEPS
 DisplayPassage_Steps
 ChangePassage_Steps
 DisplayEntryColorCoding_Steps
-ParseGreekText_Steps
