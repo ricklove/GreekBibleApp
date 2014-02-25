@@ -198,3 +198,5 @@ Replace this framework with simple QUnit tests
 
 #### Completed
 
+- Remove yadda runner
+- Reimplement first feature as simple qunit feature

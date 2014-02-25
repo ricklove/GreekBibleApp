@@ -112,9 +112,7 @@
 
             var scriptList = [
                 'Scripts/js/External/qunit-1.14.0.min.js',
-                'Scripts/js/External/yadda-0.9.8.js',
-                'Scripts/ts/System/YaddaQUnitLibrary.js',
-                'Scripts/ts/System/YaddaRunner.js'
+                'Scripts/ts/System/FeatureTests.js'
             ];
 
             loadScripts(scriptList, onLoaded, onProgress);
@@ -124,7 +122,8 @@
         function loadRequirements_UnitTests(onLoaded, onProgress) {
             var scriptList = [
                 'Scripts/ts/Support/ParsePassageText_TestData.js',
-                'Scripts/ts/Support/ParsePassageText_Tests.js'
+                'Scripts/ts/Support/ParsePassageText_Tests.js',
+                'Scripts/ts/User/DisplayPassage_Tests.js'
             ];
 
             loadScripts(scriptList, onLoaded, onProgress);

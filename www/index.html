@@ -62,11 +62,11 @@
                 {/isVerseStart}
                 <div class="entry">
                     <div class="rawText">{rawText}</div>
-                    <div class="partOfSpeechColor" style="background-color:{partOfSpeech.color}"></div>
-                    <div class="morphColor" style="background-color:{morph.color}"></div>
+                    <div class="partOfSpeechColor" style="background-color: {partOfSpeech.color}"></div>
+                    <div class="morphColor" style="background-color: {morph.color}"></div>
                     <div class="lemma">{lemma}</div>
-                    <div class="partOfSpeechCode" style="color:{partOfSpeech.color}">{partOfSpeech.partOfSpeechCode}</div>
-                    <div class="morphCode" style="color:{morph.color}">{morph.morphCode}</div>
+                    <div class="partOfSpeechCode" style="color: {partOfSpeech.color}">{partOfSpeech.partOfSpeechCode}</div>
+                    <div class="morphCode" style="color: {morph.color}">{morph.morphCode}</div>
                 </div>
                 &nbsp;
                 {/entries}
@@ -130,15 +130,9 @@
 
                     console.log("Loaded Unit Tests");
 
-                    // Load Yadda Tests
-                    Told.GreekBible.Tests.runTests(function () {
-
-                        console.log("Loaded Yadda Tests");
-
-                        $(document).ready(function () {
-                            //QUnit.load();
-                            QUnit.start();
-                        });
+                    $(document).ready(function () {
+                        //QUnit.load();
+                        QUnit.start();
                     });
                 });
             });

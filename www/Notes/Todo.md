@@ -116,17 +116,18 @@
 
 - [x] Define User Settings as mockable
 
+- [x] !Separate System Project out of GreekBible to enable focus apart from system features
+
 - [ ] Complete all the defined features that have been implemented
 	- [x] 001 - View Passage
-	- [x] 002 - Choose Passage
-		- [x] simple scenario
-		- [x] other scenarios
+	- [ ] 002 - Choose Passage
+		- [ ] simple scenario
+		- [ ] other scenarios
 		- [ ] SOLVE RACE CONDITION: If the user chooses two passages quickly, it should display the last chosen passage
 	- [ ] 003 - View Entry Color Coding
-		- [x] Same Morph Code
+		- [ ] Same Morph Code
 		- [ ] Others
 
-- [ ] !Separate System Project out of GreekBible to enable focus apart from system features
 
 
 - [ ] Refactor Book and Chapter with Display Passage and Choose Passage
