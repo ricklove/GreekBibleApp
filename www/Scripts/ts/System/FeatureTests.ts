@@ -22,22 +22,25 @@ module Told.FeatureTests {
             var steps: string[] = [];
             var stepSummary = "Scenario: " + title + "\r\n";
 
+            for (var i = 0; i < expectedSteps.length; i++) {
+                stepSummary += "\t" + expectedSteps[i] + "\r\n";
+            }
+
+
             var step = function (title: string) {
                 testLog("\tSTEP: " + title);
-                stepSummary += "\t" + title + "\r\n";
                 steps.push(title);
             }
 
             var done = function () {
-
-                deepEqual(expectedSteps, steps, "Actual steps match the expected steps");
-
-                testLog(stepSummary);
-
+                deepEqual(steps, expectedSteps, "Actual steps match the expected steps");
                 start();
             };
 
-            asyncTest(title, () => execute(step, done));
+            asyncTest(title, () => {
+                testLog(stepSummary);
+                execute(step, done);
+            });
         }
     }
 }

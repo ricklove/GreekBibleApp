@@ -215,3 +215,16 @@ I should ensure all the feature tests are passing 100%
 
 - Rewrite 002 - Choose Passage
 - Fix Choose Passage to always display last chosen passage
+
+### V2 H11
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+- Finish rewriting the feature steps as feature unit tests
+- Remove the feature steps folder
+- Extend features: Add Verse to DisplayPassage and ChangePassage
+
+#### Completed
+
+- Rewrite 003 - DisplayEntryColorCoding
+- Pass 003 - DisplayEntryColorCoding

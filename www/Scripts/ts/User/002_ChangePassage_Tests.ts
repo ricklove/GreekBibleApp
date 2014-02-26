@@ -11,7 +11,7 @@ module Told.GreekBible.UI.Tests {
         "So that I can read a certain greek passage",
     ]);
 
-    var whenPassageIsLoaded_ThenCheckEntries =
+    var step_WhenThePassageIsLoaded_ThenTheFirstEntry__AndTheLastEntry__ =
         function (viewModel: MainViewModel, sample: ISample, step: (title: string) => void, done: () => void) {
             step("When the passage is loaded");
 
@@ -20,7 +20,8 @@ module Told.GreekBible.UI.Tests {
             var checkIsReady = function () {
                 if (viewModel.displayPassage.isPassageLoaded()) {
 
-                    thenCheckEntries(viewModel, sample, step);
+                    step_ThenTheFirstEntryShouldBeDisplayed(viewModel, sample, step);
+                    step_AndTheLastEntryShouldBeDisplayed(viewModel, sample, step);
 
                     done();
                 } else if (attempt < 10) {
@@ -63,7 +64,7 @@ module Told.GreekBible.UI.Tests {
                 viewModel.changePassage.book(sample.bookName);
                 viewModel.changePassage.chapter(sample.chapter);
 
-                whenPassageIsLoaded_ThenCheckEntries(viewModel, sample, step, done);
+                step_WhenThePassageIsLoaded_ThenTheFirstEntry__AndTheLastEntry__(viewModel, sample, step, done);
 
             }, onError);
         });
@@ -104,7 +105,7 @@ module Told.GreekBible.UI.Tests {
                 viewModel.changePassage.book(sample.bookName);
                 viewModel.changePassage.chapter(sample.chapter);
 
-                whenPassageIsLoaded_ThenCheckEntries(viewModel, sample, step, done);
+                step_WhenThePassageIsLoaded_ThenTheFirstEntry__AndTheLastEntry__(viewModel, sample, step, done);
 
             }, onError);
         });

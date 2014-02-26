@@ -39,6 +39,38 @@ module Told.GreekBible.UI.Tests {
         }
     ];
 
+    export var step_WhenTheAppIsLoaded = function (viewModel: UI.MainViewModel, step: (title: string) => void, onLoaded: () => void, onFail: () => void) {
+        step("When the app is loaded");
+
+        var onReady = function () {
+            onLoaded();
+        };
+
+        var onError = function (message: string) {
+            ok(false, "ERROR:" + message);
+            onFail();
+        };
+
+        viewModel.displayPassage.showDefault(onReady, onError);
+    };
+
+    export var step_ThenTheFirstEntryShouldBeDisplayed = function (viewModel: UI.MainViewModel, sample: ISample, step: (title: string) => void) {
+        step("Then the first entry should be displayed");
+
+        equal(viewModel.displayPassage.passage().entries[0].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
+        equal(viewModel.displayPassage.passage().entries[0].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
+        equal(viewModel.displayPassage.passage().entries[0].rawText, sample.firstEntryText, "The first entry text is displayed");
+    };
+
+    export var step_AndTheLastEntryShouldBeDisplayed = function (viewModel: UI.MainViewModel, sample: ISample, step: (title: string) => void) {
+        step("And the last entry should be displayed");
+
+        var iLast = viewModel.displayPassage.passage().entries.length - 1;
+        equal(viewModel.displayPassage.passage().entries[iLast].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
+        equal(viewModel.displayPassage.passage().entries[iLast].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
+        equal(viewModel.displayPassage.passage().entries[iLast].rawText, sample.lastEntryText, "The last entry text is displayed");
+    };
+
     var f = new FeatureTests.Feature("001 - View a Greek Passage", [
         "As a user,",
         "I can view a passage of greek",
@@ -50,15 +82,13 @@ module Told.GreekBible.UI.Tests {
         "Then a passage should be displayed"
     ], function (step, done) {
 
-            step("When the app is loaded");
-
             var providers: Data.IProviders = {
                 userSettings: { bookChoice: "", chapterChoice: "" },
             };
 
             var viewModel = new UI.MainViewModel(providers);
 
-            var onReady = function () {
+            step_WhenTheAppIsLoaded(viewModel, step, function () {
                 step("Then a passage should be displayed");
 
                 ok(viewModel.displayPassage.passage(), "The passage is displayed");
@@ -66,14 +96,8 @@ module Told.GreekBible.UI.Tests {
                 ok(viewModel.displayPassage.passage().entries[0].rawText, "An entry is displayed");
 
                 done();
-            }
+            }, done);
 
-        var onError = function (message: string) {
-                ok(false, "ERROR:" + message);
-                done();
-            }
-
-        viewModel.displayPassage.showDefault(onReady, onError);
         });
 
     f.scenario("Should display a default passage", [
@@ -88,11 +112,9 @@ module Told.GreekBible.UI.Tests {
                 userSettings: { bookChoice: "", chapterChoice: "" },
             };
 
-            step("When the app is loaded");
-
             var viewModel = new UI.MainViewModel(providers);
 
-            var onReady = function () {
+            step_WhenTheAppIsLoaded(viewModel, step, function () {
                 step("Then a default passage should be displayed");
 
                 ok(viewModel.displayPassage.passage(), "The passage is displayed");
@@ -100,30 +122,11 @@ module Told.GreekBible.UI.Tests {
                 ok(viewModel.displayPassage.passage().entries[0].rawText, "An entry is displayed");
 
                 done();
-            }
+            }, done);
 
-            var onError = function (message: string) {
-                ok(false, "ERROR:" + message);
-                done();
-            }
-
-            viewModel.displayPassage.showDefault(onReady, onError);
         });
 
-    export var thenCheckEntries = function (viewModel: UI.MainViewModel, sample: ISample, step: (title: string) => void) {
-        step("Then the first entry should be displayed");
 
-        equal(viewModel.displayPassage.passage().entries[0].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
-        equal(viewModel.displayPassage.passage().entries[0].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
-        equal(viewModel.displayPassage.passage().entries[0].rawText, sample.firstEntryText, "The first entry text is displayed");
-
-        step("And the last entry should be displayed");
-
-        var iLast = viewModel.displayPassage.passage().entries.length - 1;
-        equal(viewModel.displayPassage.passage().entries[iLast].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
-        equal(viewModel.displayPassage.passage().entries[iLast].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
-        equal(viewModel.displayPassage.passage().entries[iLast].rawText, sample.lastEntryText, "The last entry text is displayed");
-    };
 
     f.scenario("Should display the passage entries", [
         "Given this is not the first run",
@@ -144,23 +147,14 @@ module Told.GreekBible.UI.Tests {
                 },
             };
 
-            step("When the app is loaded");
-
             var viewModel = new UI.MainViewModel(providers);
 
-            var onReady = function () {
-
-                thenCheckEntries(viewModel, sample, step);
-
+            step_WhenTheAppIsLoaded(viewModel, step, function () {
+                step_ThenTheFirstEntryShouldBeDisplayed(viewModel, sample, step);
+                step_AndTheLastEntryShouldBeDisplayed(viewModel, sample, step);
                 done();
-            }
+            }, done);
 
-            var onError = function (message: string) {
-                ok(false, "ERROR:" + message);
-                done();
-            }
-
-            viewModel.displayPassage.showDefault(onReady, onError);
         });
 
 }

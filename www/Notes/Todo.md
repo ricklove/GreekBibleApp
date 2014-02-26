@@ -118,17 +118,23 @@
 
 - [x] !Separate System Project out of GreekBible to enable focus apart from system features
 
-- [ ] Complete all the defined features that have been implemented
+- [x] Complete all the defined features that have been implemented
 	- [x] 001 - View Passage
 	- [x] 002 - Choose Passage
 		- [x] simple scenario
 		- [x] other scenarios
 		- [x] SOLVE RACE CONDITION: If the user chooses two passages quickly, it should display the last chosen passage
-	- [ ] 003 - View Entry Color Coding
-		- [ ] Same Morph Code
-		- [ ] Others
+	- [x] 003 - View Entry Color Coding
+		- [x] Same code same color
+		- [x] Different Code different color
 
+- [x] Finish rewriting the feature steps as feature unit tests
+- [ ] Remove the feature steps folder
+- [ ] Extend features: Add Verse to DisplayPassage and ChangePassage
 
+---
+
+- [ ] ?Delay loading of passage if chapter 1 to allow for user to choose a different chapter
 
 - [ ] Refactor Book and Chapter with Display Passage and Choose Passage
 
