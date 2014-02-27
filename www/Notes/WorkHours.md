@@ -246,3 +246,8 @@ I should ensure all the feature tests are passing 100%
 	- Remove the feature steps folder
 	- Refactor Display Entry Color Coding
 	- Fix "refresh" error
+- Publish
+	- GitHub
+	- Phone Gap
+	- Web App
+	- Blog

@@ -133,12 +133,13 @@
 - [x] Refactor Display Entry Color Coding
 - [x] Fix "refresh" error
 
-- [ ] Publish as V2
-	- [ ] WebApp
-		- [ ] Make ScreenShots
-	- [ ] PhoneGap
-	- [ ] GitHub
-	- [ ] Blog
+- [x] Publish as V2
+	- [x] WebApp
+		- [ ] Verify Upload and change to V2
+	- [x] PhoneGap
+	- [x] GitHub
+	- [x] Blog
+		- [x] Use Same Screen Shots
 
 ---
 
