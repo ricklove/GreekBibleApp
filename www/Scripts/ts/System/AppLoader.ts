@@ -109,6 +109,7 @@ module Told.AppLoader {
             'Scripts/ts/User/000_MainViewModel.js',
             'Scripts/ts/User/001_DisplayPassage.js',
             'Scripts/ts/User/002_ChangePassage.js',
+            'Scripts/ts/User/003_DisplayEntryColorCoding.js',
         ];
 
         loadScripts(scriptList, onLoaded, onProgress);

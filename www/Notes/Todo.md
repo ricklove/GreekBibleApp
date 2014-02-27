@@ -129,10 +129,20 @@
 		- [x] Different Code different color
 
 - [x] Finish rewriting the feature steps as feature unit tests
-- [ ] Remove the feature steps folder
-- [ ] Extend features: Add Verse to DisplayPassage and ChangePassage
+- [x] Remove the feature steps folder
+- [x] Refactor Display Entry Color Coding
+- [x] Fix "refresh" error
+
+- [ ] Publish as V2
+	- [ ] WebApp
+		- [ ] Make ScreenShots
+	- [ ] PhoneGap
+	- [ ] GitHub
+	- [ ] Blog
 
 ---
+
+- [ ] Extend features: Add Verse to DisplayPassage and ChangePassage
 
 - [ ] ?Delay loading of passage if chapter 1 to allow for user to choose a different chapter
 
@@ -172,7 +182,9 @@
 
 ### 5HourApp System V3B
 
-- [ ] Enable PhoneGap
+- [x] Enable PhoneGap
+
+- [ ] Implement App Reporting
 
 - [ ] Browser App Performance
 

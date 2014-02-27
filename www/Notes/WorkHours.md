@@ -228,3 +228,21 @@ I should ensure all the feature tests are passing 100%
 
 - Rewrite 003 - DisplayEntryColorCoding
 - Pass 003 - DisplayEntryColorCoding
+
+### V2 H12
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+- Clean Up
+- Publish the app
+	- GitHub
+	- WebApp
+	- PhoneGap
+	- Blog
+
+#### Completed
+
+- Clean Up
+	- Remove the feature steps folder
+	- Refactor Display Entry Color Coding
+	- Fix "refresh" error
