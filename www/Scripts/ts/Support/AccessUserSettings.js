@@ -44,6 +44,17 @@ var Told;
                     enumerable: true,
                     configurable: true
                 });
+
+                Object.defineProperty(UserSettings_LocalStorage.prototype, "verseChoice", {
+                    get: function () {
+                        return UserSettings_LocalStorage.getUserSetting("verseChoice");
+                    },
+                    set: function (value) {
+                        UserSettings_LocalStorage.setUserSetting("verseChoice", value);
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
                 return UserSettings_LocalStorage;
             })();
             Data.UserSettings_LocalStorage = UserSettings_LocalStorage;

@@ -262,4 +262,4 @@ Focus on one verse with context to improve usability
 #### Completed
 
 - Show loading message briefly every time when passage is changed
--
+- Add verse to passage choosing

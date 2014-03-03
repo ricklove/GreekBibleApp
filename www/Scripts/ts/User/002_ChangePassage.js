@@ -17,9 +17,7 @@ var Told;
                             this.bookNumber(Told.GreekBible.Data.BookInfo.getBookNumber(value));
 
                             this.chapter(1);
-                            console.log("Before:Focus on Chapter");
                             this.isChapterFocused(true);
-                            console.log("After:Focus on Chapter");
                         },
                         owner: this,
                         deferEvaluation: true
@@ -30,11 +28,24 @@ var Told;
                             return this.chapterNumber();
                         },
                         write: function (value) {
-                            // Reset Chapter
                             this.chapterNumber(value);
 
+                            this.verse(1);
+                            this.isVerseFocused(true);
+                        },
+                        owner: this,
+                        deferEvaluation: true
+                    });
+                    this.verseNumber = ko.observable(1);
+                    this.verse = ko.computed({
+                        read: function () {
+                            return this.verseNumber();
+                        },
+                        write: function (value) {
+                            this.verseNumber(value);
+
                             // Change Passage
-                            this.owner.displayPassage.showPassage(this.bookNumber(), this.chapterNumber());
+                            this.owner.displayPassage.showPassage(this.bookNumber(), this.chapterNumber(), this.verseNumber());
                         },
                         owner: this,
                         deferEvaluation: true
@@ -54,9 +65,11 @@ var Told;
                         return nums;
                     }, this);
                     this.isChapterFocused = ko.observable(false);
+                    this.isVerseFocused = ko.observable(false);
                     this.owner = owner;
                     this.bookNumber(Told.GreekBible.Data.BookInfo.getBookNumber(this.owner.displayPassage.book()));
                     this.chapterNumber(this.owner.displayPassage.chapter());
+                    this.verseNumber(this.owner.displayPassage.verse());
                 }
                 return MainViewModel_ChangePassage;
             })();

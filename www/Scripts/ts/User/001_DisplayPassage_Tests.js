@@ -8,30 +8,54 @@ var Told;
             (function (Tests) {
                 Tests.samples = [
                     {
-                        // Acts 10
-                        // First entry:
-                        // 051001 N- ----NSM- Ἀνὴρ Ἀνὴρ ἀνήρ ἀνήρ
-                        // Last entry:
-                        // 051048 RI ----APF- τινάς. τινάς τινάς τις
+                        //// Acts 10
+                        //// First entry:
+                        //// 051001 N- ----NSM- Ἀνὴρ Ἀνὴρ ἀνήρ ἀνήρ
+                        //// Last entry:
+                        //// 051048 RI ----APF- τινάς. τινάς τινάς τις
+                        // One Verse: Acts 10:15
+                        // 051015 C- -------- καὶ καὶ καί καί
+                        // 051015 V- 2PAD-S-- κοίνου. κοίνου κοίνου κοινόω
                         bookName: "Acts",
                         bookNumber: 5,
                         chapter: 10,
-                        firstEntryText: "Ἀνὴρ",
-                        lastEntryText: "τινάς."
+                        verse: 15,
+                        firstEntryText: "καὶ",
+                        lastEntryText: "κοίνου."
                     },
                     {
-                        // John 3
-                        // First entry:
-                        // 040301 V- 3IAI-S-- Ἦν Ἦν ἦν εἰμί
-                        // Last entry:
-                        // 040336 RP ----ASM- αὐτόν. αὐτόν αὐτόν αὐτός
+                        //// John 3
+                        //// First entry:
+                        //// 040301 V- 3IAI-S-- Ἦν Ἦν ἦν εἰμί
+                        //// Last entry:
+                        //// 040336 RP ----ASM- αὐτόν. αὐτόν αὐτόν αὐτός
+                        // One Verse: John 3:7
+                        //040307 D- -------- μὴ μὴ μή μή
+                        //040307 D- -------- ἄνωθεν. ἄνωθεν ἄνωθεν ἄνωθεν
                         bookName: "John",
                         bookNumber: 4,
                         chapter: 3,
-                        firstEntryText: "Ἦν",
-                        lastEntryText: "αὐτόν."
+                        verse: 7,
+                        firstEntryText: "μὴ",
+                        lastEntryText: "ἄνωθεν."
                     }
                 ];
+
+                Tests.providers_Empty = {
+                    userSettings: { bookChoice: "", chapterChoice: "", verseChoice: "" },
+                    config: { minTimeForLoadingMessage: 10 }
+                };
+
+                Tests.getProvidersWithSample = function (sample) {
+                    return {
+                        userSettings: {
+                            bookChoice: sample.bookNumber.toString(),
+                            chapterChoice: sample.chapter.toString(),
+                            verseChoice: sample.verse.toString()
+                        },
+                        config: { minTimeForLoadingMessage: 10 }
+                    };
+                };
 
                 Tests.step_WhenTheAppIsLoaded = function (viewModel, step, onLoaded, onFail) {
                     step("When the app is loaded");
@@ -53,6 +77,7 @@ var Told;
 
                     equal(viewModel.displayPassage.passage().entries[0].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
                     equal(viewModel.displayPassage.passage().entries[0].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
+                    equal(viewModel.displayPassage.passage().entries[0].passageRef.verse, sample.verse, "The correct Verse is displayed");
                     equal(viewModel.displayPassage.passage().entries[0].rawText, sample.firstEntryText, "The first entry text is displayed");
                 };
 
@@ -62,6 +87,7 @@ var Told;
                     var iLast = viewModel.displayPassage.passage().entries.length - 1;
                     equal(viewModel.displayPassage.passage().entries[iLast].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
                     equal(viewModel.displayPassage.passage().entries[iLast].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
+                    equal(viewModel.displayPassage.passage().entries[iLast].passageRef.verse, sample.verse, "The correct Verse is displayed");
                     equal(viewModel.displayPassage.passage().entries[iLast].rawText, sample.lastEntryText, "The last entry text is displayed");
                 };
 
@@ -75,12 +101,7 @@ var Told;
                     "When the app is loaded",
                     "Then a passage should be displayed"
                 ], function (step, done) {
-                    var providers = {
-                        userSettings: { bookChoice: "", chapterChoice: "" },
-                        config: { minTimeForLoadingMessage: 10 }
-                    };
-
-                    var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
+                    var viewModel = new Told.GreekBible.UI.MainViewModel(this.providers_Empty);
 
                     Tests.step_WhenTheAppIsLoaded(viewModel, step, function () {
                         step("Then a passage should be displayed");
@@ -100,12 +121,7 @@ var Told;
                 ], function (step, done) {
                     step("Given this is the first run");
 
-                    var providers = {
-                        userSettings: { bookChoice: "", chapterChoice: "" },
-                        config: { minTimeForLoadingMessage: 10 }
-                    };
-
-                    var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
+                    var viewModel = new Told.GreekBible.UI.MainViewModel(this.providers_Empty);
 
                     Tests.step_WhenTheAppIsLoaded(viewModel, step, function () {
                         step("Then a default passage should be displayed");
@@ -127,15 +143,7 @@ var Told;
                     step("Given this is not the first run");
 
                     var sample = Tests.samples[0];
-
-                    var providers = {
-                        userSettings: {
-                            bookChoice: sample.bookNumber.toString(),
-                            chapterChoice: sample.chapter.toString()
-                        },
-                        config: { minTimeForLoadingMessage: 10 }
-                    };
-
+                    var providers = Tests.getProvidersWithSample(sample);
                     var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
 
                     Tests.step_WhenTheAppIsLoaded(viewModel, step, function () {

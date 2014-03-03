@@ -5,6 +5,7 @@ module Told.GreekBible.Data {
     export interface IUserSettings {
         bookChoice: string;
         chapterChoice: string;
+        verseChoice: string;
     }
 
     export class UserSettings_LocalStorage implements IUserSettings {
@@ -32,5 +33,7 @@ module Told.GreekBible.Data {
         get chapterChoice() { return UserSettings_LocalStorage.getUserSetting("chapterChoice"); }
         set chapterChoice(value: string) { UserSettings_LocalStorage.setUserSetting("chapterChoice", value); }
 
+        get verseChoice() { return UserSettings_LocalStorage.getUserSetting("verseChoice"); }
+        set verseChoice(value: string) { UserSettings_LocalStorage.setUserSetting("verseChoice", value); }
     }
 }

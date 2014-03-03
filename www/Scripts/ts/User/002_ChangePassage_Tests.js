@@ -43,7 +43,9 @@ var Told;
                     "And the loading message should display briefly"
                 ], function (step, done) {
                     var providers = {
-                        userSettings: { bookChoice: "", chapterChoice: "" },
+                        userSettings: {
+                            bookChoice: "", chapterChoice: "", verseChoice: ""
+                        },
                         config: { minTimeForLoadingMessage: 500 }
                     };
 
@@ -78,12 +80,7 @@ var Told;
                     "Then the first entry should be displayed",
                     "And the last entry should be displayed"
                 ], function (step, done) {
-                    var providers = {
-                        userSettings: { bookChoice: "", chapterChoice: "" },
-                        config: { minTimeForLoadingMessage: 10 }
-                    };
-
-                    var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
+                    var viewModel = new Told.GreekBible.UI.MainViewModel(Told.GreekBible.UI.Tests.providers_Empty);
 
                     var onError = function (message) {
                         ok(false, "ERROR:" + message);
@@ -96,6 +93,7 @@ var Told;
                         var sample = Told.GreekBible.UI.Tests.samples[1];
                         viewModel.changePassage.book(sample.bookName);
                         viewModel.changePassage.chapter(sample.chapter);
+                        viewModel.changePassage.verse(sample.verse);
 
                         step_WhenThePassageIsLoaded_ThenTheFirstEntry__AndTheLastEntry__(viewModel, sample, step, done);
                     }, onError);
@@ -107,12 +105,7 @@ var Told;
                     "Then the first entry should be displayed",
                     "And the last entry should be displayed"
                 ], function (step, done) {
-                    var providers = {
-                        userSettings: { bookChoice: "", chapterChoice: "" },
-                        config: { minTimeForLoadingMessage: 10 }
-                    };
-
-                    var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
+                    var viewModel = new Told.GreekBible.UI.MainViewModel(Told.GreekBible.UI.Tests.providers_Empty);
 
                     var onError = function (message) {
                         ok(false, "ERROR:" + message);
@@ -125,16 +118,21 @@ var Told;
                         // Choose many passages to try to trigger a race condition
                         viewModel.changePassage.book("Mark");
                         viewModel.changePassage.chapter(2);
+                        viewModel.changePassage.verse(2);
                         viewModel.changePassage.book("Luke");
                         viewModel.changePassage.chapter(3);
+                        viewModel.changePassage.verse(2);
                         viewModel.changePassage.book("John");
                         viewModel.changePassage.chapter(4);
+                        viewModel.changePassage.verse(2);
                         viewModel.changePassage.book("Acts");
                         viewModel.changePassage.chapter(5);
+                        viewModel.changePassage.verse(2);
 
                         var sample = Told.GreekBible.UI.Tests.samples[1];
                         viewModel.changePassage.book(sample.bookName);
                         viewModel.changePassage.chapter(sample.chapter);
+                        viewModel.changePassage.verse(sample.verse);
 
                         step_WhenThePassageIsLoaded_ThenTheFirstEntry__AndTheLastEntry__(viewModel, sample, step, done);
                     }, onError);

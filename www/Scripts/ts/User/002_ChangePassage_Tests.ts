@@ -44,7 +44,9 @@ module Told.GreekBible.UI.Tests {
         "And the loading message should display briefly",
     ], function (step, done) {
             var providers: Data.IProviders = {
-                userSettings: { bookChoice: "", chapterChoice: "" },
+                userSettings: {
+                    bookChoice: "", chapterChoice: "", verseChoice: ""
+                },
                 config: { minTimeForLoadingMessage: 500 },
             };
 
@@ -82,12 +84,7 @@ module Told.GreekBible.UI.Tests {
         "And the last entry should be displayed",
     ], function (step, done) {
 
-            var providers: Data.IProviders = {
-                userSettings: { bookChoice: "", chapterChoice: "" },
-                config: { minTimeForLoadingMessage: 10 },
-            };
-
-            var viewModel = new UI.MainViewModel(providers);
+            var viewModel = new UI.MainViewModel(providers_Empty);
 
             var onError = function (message: string) {
                 ok(false, "ERROR:" + message);
@@ -101,6 +98,7 @@ module Told.GreekBible.UI.Tests {
                 var sample = samples[1];
                 viewModel.changePassage.book(sample.bookName);
                 viewModel.changePassage.chapter(sample.chapter);
+                viewModel.changePassage.verse(sample.verse);
 
                 step_WhenThePassageIsLoaded_ThenTheFirstEntry__AndTheLastEntry__(viewModel, sample, step, done);
 
@@ -114,12 +112,7 @@ module Told.GreekBible.UI.Tests {
         "And the last entry should be displayed",
     ], function (step, done) {
 
-            var providers: Data.IProviders = {
-                userSettings: { bookChoice: "", chapterChoice: "" },
-                config: { minTimeForLoadingMessage: 10 },
-            };
-
-            var viewModel = new UI.MainViewModel(providers);
+            var viewModel = new UI.MainViewModel(providers_Empty);
 
             var onError = function (message: string) {
                 ok(false, "ERROR:" + message);
@@ -133,16 +126,21 @@ module Told.GreekBible.UI.Tests {
                 // Choose many passages to try to trigger a race condition
                 viewModel.changePassage.book("Mark");
                 viewModel.changePassage.chapter(2);
+                viewModel.changePassage.verse(2);
                 viewModel.changePassage.book("Luke");
                 viewModel.changePassage.chapter(3);
+                viewModel.changePassage.verse(2);
                 viewModel.changePassage.book("John");
                 viewModel.changePassage.chapter(4);
+                viewModel.changePassage.verse(2);
                 viewModel.changePassage.book("Acts");
                 viewModel.changePassage.chapter(5);
+                viewModel.changePassage.verse(2);
 
                 var sample = samples[1];
                 viewModel.changePassage.book(sample.bookName);
                 viewModel.changePassage.chapter(sample.chapter);
+                viewModel.changePassage.verse(sample.verse);
 
                 step_WhenThePassageIsLoaded_ThenTheFirstEntry__AndTheLastEntry__(viewModel, sample, step, done);
 

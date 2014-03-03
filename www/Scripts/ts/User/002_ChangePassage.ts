@@ -13,6 +13,7 @@ module Told.GreekBible.UI {
             this.owner = owner;
             this.bookNumber(Data.BookInfo.getBookNumber(this.owner.displayPassage.book()));
             this.chapterNumber(this.owner.displayPassage.chapter());
+            this.verseNumber(this.owner.displayPassage.verse());
         }
 
         bookNumber = ko.observable<number>(1);
@@ -25,9 +26,7 @@ module Told.GreekBible.UI {
                 this.bookNumber(Data.BookInfo.getBookNumber(value));
 
                 this.chapter(1);
-                console.log("Before:Focus on Chapter");
                 this.isChapterFocused(true);
-                console.log("After:Focus on Chapter");
             },
             owner: this,
             deferEvaluation: true
@@ -40,15 +39,31 @@ module Told.GreekBible.UI {
                 return this.chapterNumber();
             },
             write: function (value) {
-                // Reset Chapter
                 this.chapterNumber(value);
 
-                // Change Passage
-                this.owner.displayPassage.showPassage(this.bookNumber(), this.chapterNumber());
+                this.verse(1);
+                this.isVerseFocused(true);
             },
             owner: this,
             deferEvaluation: true
         });
+
+        verseNumber = ko.observable<number>(1);
+
+        verse = ko.computed<number>({
+            read: function () {
+                return this.verseNumber();
+            },
+            write: function (value) {
+                this.verseNumber(value);
+
+                // Change Passage
+                this.owner.displayPassage.showPassage(this.bookNumber(), this.chapterNumber(), this.verseNumber());
+            },
+            owner: this,
+            deferEvaluation: true
+        });
+
 
         bookChoices = ko.computed(function () {
             return Data.BookInfo.getBookNames();
@@ -67,6 +82,7 @@ module Told.GreekBible.UI {
         }, this);
 
         isChapterFocused = ko.observable<boolean>(false);
+        isVerseFocused = ko.observable<boolean>(false);
     }
 
 }

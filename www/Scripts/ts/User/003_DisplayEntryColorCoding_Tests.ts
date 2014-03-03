@@ -15,15 +15,7 @@ module Told.GreekBible.UI.Tests {
         step("Given a passage is displayed");
 
         var sample = samples[0];
-
-        var providers = {
-            userSettings: {
-                bookChoice: sample.bookNumber.toString(),
-                chapterChoice: sample.chapter.toString(),
-            },
-            config: { minTimeForLoadingMessage: 10 },
-        };
-
+        var providers = getProvidersWithSample(sample);
         var viewModel = new UI.MainViewModel(providers);
 
         step_WhenTheAppIsLoaded(viewModel, () => { }, function () {

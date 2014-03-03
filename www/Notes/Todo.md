@@ -143,6 +143,7 @@
 
 - [x] Delay loading of passage a split second to allow for loading... to display
 - [ ] Extend features: Add Verse to DisplayPassage and ChangePassage
+	- [ ] Show only one verse
 
 ---
 

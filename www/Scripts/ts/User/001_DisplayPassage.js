@@ -12,6 +12,7 @@ var Told;
                     this.passage = ko.observable(null);
                     this.book = ko.observable(null);
                     this.chapter = ko.observable(null);
+                    this.verse = ko.observable(null);
                     this.hasPassageLoadingFailed = ko.observable(false);
                     this.isPassageLoaded = ko.computed({
                         read: function () {
@@ -50,16 +51,18 @@ var Told;
                     // TODO: Load Last Passage (local Storage)
                     var lastBook = parseInt(this.userSettings.bookChoice);
                     var lastChapter = parseInt(this.userSettings.chapterChoice);
+                    var lastVerse = parseInt(this.userSettings.verseChoice);
 
-                    if (isNaN(lastBook) || isNaN(lastChapter)) {
+                    if (isNaN(lastBook) || isNaN(lastChapter) || isNaN(lastVerse)) {
                         lastBook = 1;
                         lastChapter = 1;
+                        lastVerse = 1;
                     }
 
-                    this.showPassage(lastBook, lastChapter, onLoad, onError);
+                    this.showPassage(lastBook, lastChapter, lastVerse, onLoad, onError);
                 };
 
-                MainViewModel_DisplayPassage.prototype.showPassage = function (bookNumber, chapter, onLoad, onError) {
+                MainViewModel_DisplayPassage.prototype.showPassage = function (bookNumber, chapter, verse, onLoad, onError) {
                     var self = this;
 
                     // Make Blank while waiting
@@ -69,8 +72,11 @@ var Told;
                     // Set choice
                     this.userSettings.bookChoice = bookNumber.toString();
                     this.userSettings.chapterChoice = chapter.toString();
+                    this.userSettings.verseChoice = verse.toString();
+
                     self.book(Told.GreekBible.Data.BookInfo.getBookName(bookNumber));
                     self.chapter(chapter);
+                    self.verse(verse);
 
                     // Ensure this call is made async to give a change for UI to update
                     setTimeout(function () {
@@ -79,7 +85,13 @@ var Told;
                             setTimeout(function () {
                                 // Ensure that this was the last chosen passage
                                 if (bookNumber === Told.GreekBible.Data.BookInfo.getBookNumber(self.book()) && chapter === self.chapter()) {
-                                    self.passage(self.viewModel.displayEntryColorCoding.formatPassage(Told.GreekBible.Data.Parser.parsePassage(passageText)));
+                                    var passageChapter = Told.GreekBible.Data.Parser.parsePassage(passageText);
+                                    var entriesVerse = passageChapter.entries.filter(function (e) {
+                                        return e.passageRef.verse === verse;
+                                    });
+                                    var passageVerse = { entries: entriesVerse };
+
+                                    self.passage(self.viewModel.displayEntryColorCoding.formatPassage(passageVerse));
                                     if (onLoad) {
                                         onLoad();
                                     }
