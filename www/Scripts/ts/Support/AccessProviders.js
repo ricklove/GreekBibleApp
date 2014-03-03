@@ -5,7 +5,8 @@ var Told;
         (function (Data) {
             function createDefaultProviders() {
                 return {
-                    userSettings: new Told.GreekBible.Data.UserSettings_LocalStorage()
+                    userSettings: new Told.GreekBible.Data.UserSettings_LocalStorage(),
+                    config: { minTimeForLoadingMessage: 500 }
                 };
             }
             Data.createDefaultProviders = createDefaultProviders;

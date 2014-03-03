@@ -38,6 +38,13 @@ var Told;
                     enumerable: true,
                     configurable: true
                 });
+                Object.defineProperty(MainViewModel_DisplayPassage.prototype, "minTimeForLoadingMessage", {
+                    get: function () {
+                        return this.viewModel.providers.config.minTimeForLoadingMessage;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
 
                 MainViewModel_DisplayPassage.prototype.showDefault = function (onLoad, onError) {
                     // TODO: Load Last Passage (local Storage)
@@ -65,21 +72,26 @@ var Told;
                     self.book(Told.GreekBible.Data.BookInfo.getBookName(bookNumber));
                     self.chapter(chapter);
 
-                    // Load Async
-                    Told.GreekBible.Data.Loader.loadPassage(bookNumber, chapter, function (passageText) {
-                        // Ensure that this was the last chosen passage
-                        if (bookNumber === Told.GreekBible.Data.BookInfo.getBookNumber(self.book()) && chapter === self.chapter()) {
-                            self.passage(self.viewModel.displayEntryColorCoding.formatPassage(Told.GreekBible.Data.Parser.parsePassage(passageText)));
-                            if (onLoad) {
-                                onLoad();
+                    // Ensure this call is made async to give a change for UI to update
+                    setTimeout(function () {
+                        Told.GreekBible.Data.Loader.loadPassage(bookNumber, chapter, function (passageText) {
+                            // Ensure loading message can display to prevent flicker
+                            setTimeout(function () {
+                                // Ensure that this was the last chosen passage
+                                if (bookNumber === Told.GreekBible.Data.BookInfo.getBookNumber(self.book()) && chapter === self.chapter()) {
+                                    self.passage(self.viewModel.displayEntryColorCoding.formatPassage(Told.GreekBible.Data.Parser.parsePassage(passageText)));
+                                    if (onLoad) {
+                                        onLoad();
+                                    }
+                                }
+                            }, self.minTimeForLoadingMessage);
+                        }, function (errorMessage) {
+                            self.hasPassageLoadingFailed(true);
+                            if (onError) {
+                                onError(errorMessage);
                             }
-                        }
-                    }, function (errorMessage) {
-                        self.hasPassageLoadingFailed(true);
-                        if (onError) {
-                            onError(errorMessage);
-                        }
-                    });
+                        });
+                    }, 0);
                 };
                 return MainViewModel_DisplayPassage;
             })();

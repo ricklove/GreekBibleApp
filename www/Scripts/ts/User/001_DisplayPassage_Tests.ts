@@ -84,6 +84,7 @@ module Told.GreekBible.UI.Tests {
 
             var providers: Data.IProviders = {
                 userSettings: { bookChoice: "", chapterChoice: "" },
+                config: { minTimeForLoadingMessage: 10 },
             };
 
             var viewModel = new UI.MainViewModel(providers);
@@ -110,6 +111,7 @@ module Told.GreekBible.UI.Tests {
 
             var providers: Data.IProviders = {
                 userSettings: { bookChoice: "", chapterChoice: "" },
+                config: { minTimeForLoadingMessage: 10 },
             };
 
             var viewModel = new UI.MainViewModel(providers);
@@ -145,6 +147,7 @@ module Told.GreekBible.UI.Tests {
                     bookChoice: sample.bookNumber.toString(),
                     chapterChoice: sample.chapter.toString(),
                 },
+                config: { minTimeForLoadingMessage: 10 },
             };
 
             var viewModel = new UI.MainViewModel(providers);

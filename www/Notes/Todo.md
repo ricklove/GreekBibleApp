@@ -135,17 +135,17 @@
 
 - [x] Publish as V2
 	- [x] WebApp
-		- [ ] Verify Upload and change to V2
+		- [x] Verify Upload
 	- [x] PhoneGap
 	- [x] GitHub
 	- [x] Blog
 		- [x] Use Same Screen Shots
 
----
-
+- [x] Delay loading of passage a split second to allow for loading... to display
 - [ ] Extend features: Add Verse to DisplayPassage and ChangePassage
 
-- [ ] ?Delay loading of passage if chapter 1 to allow for user to choose a different chapter
+---
+
 
 - [ ] Refactor Book and Chapter with Display Passage and Choose Passage
 

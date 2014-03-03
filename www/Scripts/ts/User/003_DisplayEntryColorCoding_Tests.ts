@@ -21,6 +21,7 @@ module Told.GreekBible.UI.Tests {
                 bookChoice: sample.bookNumber.toString(),
                 chapterChoice: sample.chapter.toString(),
             },
+            config: { minTimeForLoadingMessage: 10 },
         };
 
         var viewModel = new UI.MainViewModel(providers);
@@ -144,43 +145,43 @@ module Told.GreekBible.UI.Tests {
         "Given a passage is displayed",
         "Then entries with a different Morph code should have a different color",
     ], function (step, done) {
-            
-        step_GivenAPassageIsDisplayed(step, function (viewModel) {
-            step("Then entries with a different Morph code should have a different color");
-            var entries = viewModel.displayPassage.passage().entries;
 
-            var firstColors: { [key: string]: string } = {};
-            var keys: string[] = [];
+            step_GivenAPassageIsDisplayed(step, function (viewModel) {
+                step("Then entries with a different Morph code should have a different color");
+                var entries = viewModel.displayPassage.passage().entries;
 
-            for (var i = 0; i < entries.length; i++) {
-                if (firstColors[entries[i].morph.morphCode] == null) {
-                    firstColors[entries[i].morph.morphCode] = entries[i].morph["color"];
-                }
-            }
+                var firstColors: { [key: string]: string } = {};
+                var keys: string[] = [];
 
-
-            for (var i = 0; i < entries.length; i++) {
-                var entryColor = entries[i].morph["color"];
-
-                var otherColors = "";
-
-                for (var iKey = 0; iKey < keys.length; iKey++) {
-                    if (keys[iKey] != entries[i].morph.morphCode) {
-                        otherColors += firstColors[keys[iKey]] + " ";
+                for (var i = 0; i < entries.length; i++) {
+                    if (firstColors[entries[i].morph.morphCode] == null) {
+                        firstColors[entries[i].morph.morphCode] = entries[i].morph["color"];
                     }
                 }
 
-                // FAIL
-                if (otherColors.indexOf(entryColor) >= 0) {
-                    ok(false, "The unique morphs have different colors");
-                    done();
+
+                for (var i = 0; i < entries.length; i++) {
+                    var entryColor = entries[i].morph["color"];
+
+                    var otherColors = "";
+
+                    for (var iKey = 0; iKey < keys.length; iKey++) {
+                        if (keys[iKey] != entries[i].morph.morphCode) {
+                            otherColors += firstColors[keys[iKey]] + " ";
+                        }
+                    }
+
+                    // FAIL
+                    if (otherColors.indexOf(entryColor) >= 0) {
+                        ok(false, "The unique morphs have different colors");
+                        done();
+                    }
                 }
-            }
 
-            ok(true, "The unique morphs have different colors");
+                ok(true, "The unique morphs have different colors");
 
-            done();
-        }, done);
+                done();
+            }, done);
 
         });
 

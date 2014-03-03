@@ -251,3 +251,15 @@ I should ensure all the feature tests are passing 100%
 	- Phone Gap
 	- Web App
 	- Blog
+
+
+### V3 H1
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+Focus on one verse with context to improve usability
+
+#### Completed
+
+- Show loading message briefly every time when passage is changed
+-

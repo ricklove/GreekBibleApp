@@ -76,7 +76,8 @@ var Told;
                     "Then a passage should be displayed"
                 ], function (step, done) {
                     var providers = {
-                        userSettings: { bookChoice: "", chapterChoice: "" }
+                        userSettings: { bookChoice: "", chapterChoice: "" },
+                        config: { minTimeForLoadingMessage: 10 }
                     };
 
                     var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
@@ -100,7 +101,8 @@ var Told;
                     step("Given this is the first run");
 
                     var providers = {
-                        userSettings: { bookChoice: "", chapterChoice: "" }
+                        userSettings: { bookChoice: "", chapterChoice: "" },
+                        config: { minTimeForLoadingMessage: 10 }
                     };
 
                     var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
@@ -130,7 +132,8 @@ var Told;
                         userSettings: {
                             bookChoice: sample.bookNumber.toString(),
                             chapterChoice: sample.chapter.toString()
-                        }
+                        },
+                        config: { minTimeForLoadingMessage: 10 }
                     };
 
                     var viewModel = new Told.GreekBible.UI.MainViewModel(providers);

@@ -4,6 +4,13 @@ I can choose which passage to display
 So that I can read a certain greek passage 
 
 
+Scenario: should display loading after choosing passage
+
+	When user chooses a passage
+	Then the user should see that a passage is loading
+    And the loading message should display briefly
+
+
 Scenario: should display chosen passage
 
 	Given user chooses a passage
@@ -18,3 +25,4 @@ Scenario: should display last chosen passage
 	Given user chooses two passages quickly
 	When the passage is loaded
 	Then the last chosen passage should be displayed
+

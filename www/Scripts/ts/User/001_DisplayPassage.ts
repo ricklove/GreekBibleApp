@@ -11,11 +11,13 @@ module Told.GreekBible.UI {
         private viewModel: MainViewModel;
 
         private get userSettings() { return this.viewModel.providers.userSettings; }
+        private get minTimeForLoadingMessage() { return this.viewModel.providers.config.minTimeForLoadingMessage; }
 
         constructor(viewModel: MainViewModel) {
             this.viewModel = viewModel;
             this.showDefault();
         }
+
 
         passage = ko.observable<Data.IPassage>(null);
         book = ko.observable<string>(null);
@@ -50,23 +52,28 @@ module Told.GreekBible.UI {
             self.book(Data.BookInfo.getBookName(bookNumber));
             self.chapter(chapter);
 
-            // Load Async
-            Data.Loader.loadPassage(bookNumber, chapter,
-                function (passageText: string) {
+            // Ensure this call is made async to give a change for UI to update
+            setTimeout(() => {
+                Data.Loader.loadPassage(bookNumber, chapter,
+                    function (passageText: string) {
 
-                    // Ensure that this was the last chosen passage
-                    if (bookNumber === Data.BookInfo.getBookNumber(self.book())
-                        && chapter === self.chapter()) {
+                        // Ensure loading message can display to prevent flicker
+                        setTimeout(() => {
+                            // Ensure that this was the last chosen passage
+                            if (bookNumber === Data.BookInfo.getBookNumber(self.book())
+                                && chapter === self.chapter()) {
 
-                        self.passage(self.viewModel.displayEntryColorCoding.formatPassage(Data.Parser.parsePassage(passageText)));
-                        if (onLoad) { onLoad(); }
+                                self.passage(self.viewModel.displayEntryColorCoding.formatPassage(Data.Parser.parsePassage(passageText)));
+                                if (onLoad) { onLoad(); }
 
-                    }
+                            }
+                        }, self.minTimeForLoadingMessage);
 
-                }, function (errorMessage: string) {
-                    self.hasPassageLoadingFailed(true);
-                    if (onError) { onError(errorMessage); }
-                });
+                    }, function (errorMessage: string) {
+                        self.hasPassageLoadingFailed(true);
+                        if (onError) { onError(errorMessage); }
+                    });
+            }, 0);
         }
 
         isPassageLoaded = ko.computed<boolean>({

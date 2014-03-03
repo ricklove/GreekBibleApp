@@ -38,6 +38,43 @@ module Told.GreekBible.UI.Tests {
             setTimeout(checkIsReady, 500);
         };
 
+    f.scenario("Should display loading after choosing passage", [
+        "When a user chooses a passage",
+        "Then the user should see that a passage is loading",
+        "And the loading message should display briefly",
+    ], function (step, done) {
+            var providers: Data.IProviders = {
+                userSettings: { bookChoice: "", chapterChoice: "" },
+                config: { minTimeForLoadingMessage: 500 },
+            };
+
+            var viewModel = new UI.MainViewModel(providers);
+
+            var onError = function (message: string) {
+                ok(false, "ERROR:" + message);
+                done();
+            };
+
+            viewModel.displayPassage.showDefault(function () {
+
+                step("When a user chooses a passage");
+
+                var sample = samples[1];
+                viewModel.changePassage.book(sample.bookName);
+                viewModel.changePassage.chapter(sample.chapter);
+
+                step("Then the user should see that a passage is loading");
+
+                equal(viewModel.displayPassage.isPassageLoading(), true, "A passage is loading immediately after changing the passage");
+                setTimeout(() => {
+                    step("And the loading message should display briefly");
+                    equal(viewModel.displayPassage.isPassageLoading(), true, "A passage is still loading");
+                    done();
+                }, 400);
+
+            }, onError);
+        });
+
     f.scenario("Should display a chosen passage", [
         "Given a user chooses a passage",
         "When the passage is loaded",
@@ -47,6 +84,7 @@ module Told.GreekBible.UI.Tests {
 
             var providers: Data.IProviders = {
                 userSettings: { bookChoice: "", chapterChoice: "" },
+                config: { minTimeForLoadingMessage: 10 },
             };
 
             var viewModel = new UI.MainViewModel(providers);
@@ -78,6 +116,7 @@ module Told.GreekBible.UI.Tests {
 
             var providers: Data.IProviders = {
                 userSettings: { bookChoice: "", chapterChoice: "" },
+                config: { minTimeForLoadingMessage: 10 },
             };
 
             var viewModel = new UI.MainViewModel(providers);

@@ -37,6 +37,41 @@ var Told;
                     setTimeout(checkIsReady, 500);
                 };
 
+                f.scenario("Should display loading after choosing passage", [
+                    "When a user chooses a passage",
+                    "Then the user should see that a passage is loading",
+                    "And the loading message should display briefly"
+                ], function (step, done) {
+                    var providers = {
+                        userSettings: { bookChoice: "", chapterChoice: "" },
+                        config: { minTimeForLoadingMessage: 500 }
+                    };
+
+                    var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
+
+                    var onError = function (message) {
+                        ok(false, "ERROR:" + message);
+                        done();
+                    };
+
+                    viewModel.displayPassage.showDefault(function () {
+                        step("When a user chooses a passage");
+
+                        var sample = Told.GreekBible.UI.Tests.samples[1];
+                        viewModel.changePassage.book(sample.bookName);
+                        viewModel.changePassage.chapter(sample.chapter);
+
+                        step("Then the user should see that a passage is loading");
+
+                        equal(viewModel.displayPassage.isPassageLoading(), true, "A passage is loading immediately after changing the passage");
+                        setTimeout(function () {
+                            step("And the loading message should display briefly");
+                            equal(viewModel.displayPassage.isPassageLoading(), true, "A passage is still loading");
+                            done();
+                        }, 400);
+                    }, onError);
+                });
+
                 f.scenario("Should display a chosen passage", [
                     "Given a user chooses a passage",
                     "When the passage is loaded",
@@ -44,7 +79,8 @@ var Told;
                     "And the last entry should be displayed"
                 ], function (step, done) {
                     var providers = {
-                        userSettings: { bookChoice: "", chapterChoice: "" }
+                        userSettings: { bookChoice: "", chapterChoice: "" },
+                        config: { minTimeForLoadingMessage: 10 }
                     };
 
                     var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
@@ -72,7 +108,8 @@ var Told;
                     "And the last entry should be displayed"
                 ], function (step, done) {
                     var providers = {
-                        userSettings: { bookChoice: "", chapterChoice: "" }
+                        userSettings: { bookChoice: "", chapterChoice: "" },
+                        config: { minTimeForLoadingMessage: 10 }
                     };
 
                     var viewModel = new Told.GreekBible.UI.MainViewModel(providers);

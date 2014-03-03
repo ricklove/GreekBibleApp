@@ -22,7 +22,8 @@ var Told;
                         userSettings: {
                             bookChoice: sample.bookNumber.toString(),
                             chapterChoice: sample.chapter.toString()
-                        }
+                        },
+                        config: { minTimeForLoadingMessage: 10 }
                     };
 
                     var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
