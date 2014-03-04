@@ -141,9 +141,15 @@
 	- [x] Blog
 		- [x] Use Same Screen Shots
 
+### Greek Bible V0.3
+
 - [x] Delay loading of passage a split second to allow for loading... to display
 - [ ] Extend features: Add Verse to DisplayPassage and ChangePassage
-	- [ ] Show only one verse
+	- [x] Show only one verse
+		- [x] Add verse to ViewModel
+		- [x] Modify tests to check for verse
+		- [x] Pass tests
+		- [x] Display verse choice on UI
 
 ---
 

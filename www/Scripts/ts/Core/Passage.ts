@@ -49,6 +49,11 @@
             return this.booksWithAbbreviations[bookNumber - 1].chapterCount;
         }
 
+        //static getVerseCount(bookNumber: number, chapterNumber: number) {
+        //    return 100;
+        //    //return this.booksWithAbbreviations[bookNumber - 1].chapterCount;
+        //}
+
         static getBookName(bookNumber: number) {
             return this.booksWithAbbreviations[bookNumber - 1].book;
         }

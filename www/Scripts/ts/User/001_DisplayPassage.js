@@ -9,14 +9,31 @@ var Told;
         (function (UI) {
             var MainViewModel_DisplayPassage = (function () {
                 function MainViewModel_DisplayPassage(viewModel) {
-                    this.passage = ko.observable(null);
+                    this.passageRaw = ko.observable(null);
                     this.book = ko.observable(null);
                     this.chapter = ko.observable(null);
                     this.verse = ko.observable(null);
+                    this.passageVisible = ko.computed({
+                        read: function () {
+                            var self = this;
+
+                            var passageChapter = self.passageRaw();
+                            var entriesVerse = passageChapter.entries.filter(function (e) {
+                                return e.passageRef.verse === self.verse();
+                            });
+                            var passageVerse = { entries: entriesVerse };
+
+                            var passageFormatted = self.viewModel.displayEntryColorCoding.formatPassage(passageVerse);
+
+                            return passageFormatted;
+                        },
+                        owner: this,
+                        deferEvaluation: true
+                    });
                     this.hasPassageLoadingFailed = ko.observable(false);
                     this.isPassageLoaded = ko.computed({
                         read: function () {
-                            var passage = this.passage();
+                            var passage = this.passageVisible();
                             return passage != null && passage.entries != null && passage.entries.length > 0;
                         },
                         owner: this,
@@ -66,7 +83,7 @@ var Told;
                     var self = this;
 
                     // Make Blank while waiting
-                    self.passage([]);
+                    self.passageRaw({ entries: [] });
                     self.hasPassageLoadingFailed(false);
 
                     // Set choice
@@ -84,14 +101,9 @@ var Told;
                             // Ensure loading message can display to prevent flicker
                             setTimeout(function () {
                                 // Ensure that this was the last chosen passage
-                                if (bookNumber === Told.GreekBible.Data.BookInfo.getBookNumber(self.book()) && chapter === self.chapter()) {
-                                    var passageChapter = Told.GreekBible.Data.Parser.parsePassage(passageText);
-                                    var entriesVerse = passageChapter.entries.filter(function (e) {
-                                        return e.passageRef.verse === verse;
-                                    });
-                                    var passageVerse = { entries: entriesVerse };
+                                if (bookNumber === Told.GreekBible.Data.BookInfo.getBookNumber(self.book()) && chapter === self.chapter() && verse === self.verse()) {
+                                    self.passageRaw(Told.GreekBible.Data.Parser.parsePassage(passageText));
 
-                                    self.passage(self.viewModel.displayEntryColorCoding.formatPassage(passageVerse));
                                     if (onLoad) {
                                         onLoad();
                                     }

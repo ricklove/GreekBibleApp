@@ -32,7 +32,7 @@ var Told;
                 ], function (step, done) {
                     Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
                         step("Then entries with the same PartOfSpeech code should have the same color");
-                        var entries = viewModel.displayPassage.passage().entries;
+                        var entries = viewModel.displayPassage.passageVisible().entries;
 
                         var firstColors = {};
 
@@ -62,7 +62,7 @@ var Told;
                 ], function (step, done) {
                     Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
                         step("Then entries with the same Morph code should have the same color");
-                        var entries = viewModel.displayPassage.passage().entries;
+                        var entries = viewModel.displayPassage.passageVisible().entries;
 
                         var firstColors = {};
 
@@ -92,7 +92,7 @@ var Told;
                 ], function (step, done) {
                     Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
                         step("Then entries with a different PartOfSpeech code should have a different color");
-                        var entries = viewModel.displayPassage.passage().entries;
+                        var entries = viewModel.displayPassage.passageVisible().entries;
 
                         var firstColors = {};
                         var keys = [];
@@ -133,7 +133,7 @@ var Told;
                 ], function (step, done) {
                     Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
                         step("Then entries with a different Morph code should have a different color");
-                        var entries = viewModel.displayPassage.passage().entries;
+                        var entries = viewModel.displayPassage.passageVisible().entries;
 
                         var firstColors = {};
                         var keys = [];

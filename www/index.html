@@ -30,6 +30,7 @@
 
             <select data-bind="options: changePassage.bookChoices(), value:changePassage.book, refreshJQM:changePassage.book"></select>
             <select id="selChapter" data-bind="options: changePassage.chapterChoices(), value:changePassage.chapter, refreshJQM:changePassage.chapter, refreshJQM:changePassage.book, hasFocus: changePassage.isChapterFocused"></select>
+            <select id="selVerse" data-bind="options: changePassage.verseChoices(), value:changePassage.verse, refreshJQM:changePassage.verse, refreshJQM:changePassage.chapter, refreshJQM:changePassage.book, hasFocus: changePassage.isVerseFocused"></select>
             <!--<h4><span data-bind="text: passage().entries.length"></span>&nbsp;Words</h4>-->
             <!-- ko if: displayPassage.isPassageLoading -->
             <div>
@@ -55,7 +56,7 @@
             <!-- ko if: displayPassage.isPassageLoaded -->
             <h3><span data-bind="text: displayPassage.book() + ' ' + displayPassage.chapter()"></span></h3>
 
-            <div data-bind="dustTemplate: displayPassage.passage">
+            <div data-bind="dustTemplate: displayPassage.passageVisible">
                 {#entries}
                 {?isVerseStart}
                 <div class="verse">{passageRef.verse}</div>
@@ -102,6 +103,8 @@
 
             var viewModel = new Told.GreekBible.UI.MainViewModel();
             ko.applyBindings(viewModel);
+
+            window['viewModel'] = viewModel;
 
             var hash = location.hash;
             if ($(hash).length === 0) { hash = "#home"; }

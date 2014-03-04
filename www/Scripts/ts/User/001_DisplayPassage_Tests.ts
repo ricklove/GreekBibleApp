@@ -82,20 +82,20 @@ module Told.GreekBible.UI.Tests {
     export var step_ThenTheFirstEntryShouldBeDisplayed = function (viewModel: UI.MainViewModel, sample: ISample, step: (title: string) => void) {
         step("Then the first entry should be displayed");
 
-        equal(viewModel.displayPassage.passage().entries[0].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
-        equal(viewModel.displayPassage.passage().entries[0].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
-        equal(viewModel.displayPassage.passage().entries[0].passageRef.verse, sample.verse, "The correct Verse is displayed");
-        equal(viewModel.displayPassage.passage().entries[0].rawText, sample.firstEntryText, "The first entry text is displayed");
+        equal(viewModel.displayPassage.passageVisible().entries[0].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
+        equal(viewModel.displayPassage.passageVisible().entries[0].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
+        equal(viewModel.displayPassage.passageVisible().entries[0].passageRef.verse, sample.verse, "The correct Verse is displayed");
+        equal(viewModel.displayPassage.passageVisible().entries[0].rawText, sample.firstEntryText, "The first entry text is displayed");
     };
 
     export var step_AndTheLastEntryShouldBeDisplayed = function (viewModel: UI.MainViewModel, sample: ISample, step: (title: string) => void) {
         step("And the last entry should be displayed");
 
-        var iLast = viewModel.displayPassage.passage().entries.length - 1;
-        equal(viewModel.displayPassage.passage().entries[iLast].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
-        equal(viewModel.displayPassage.passage().entries[iLast].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
-        equal(viewModel.displayPassage.passage().entries[iLast].passageRef.verse, sample.verse, "The correct Verse is displayed");
-        equal(viewModel.displayPassage.passage().entries[iLast].rawText, sample.lastEntryText, "The last entry text is displayed");
+        var iLast = viewModel.displayPassage.passageVisible().entries.length - 1;
+        equal(viewModel.displayPassage.passageVisible().entries[iLast].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
+        equal(viewModel.displayPassage.passageVisible().entries[iLast].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
+        equal(viewModel.displayPassage.passageVisible().entries[iLast].passageRef.verse, sample.verse, "The correct Verse is displayed");
+        equal(viewModel.displayPassage.passageVisible().entries[iLast].rawText, sample.lastEntryText, "The last entry text is displayed");
     };
 
     var f = new FeatureTests.Feature("001 - View a Greek Passage", [
@@ -114,9 +114,9 @@ module Told.GreekBible.UI.Tests {
             step_WhenTheAppIsLoaded(viewModel, step, function () {
                 step("Then a passage should be displayed");
 
-                ok(viewModel.displayPassage.passage(), "The passage is displayed");
-                ok(viewModel.displayPassage.passage().entries, "The entries are displayed");
-                ok(viewModel.displayPassage.passage().entries[0].rawText, "An entry is displayed");
+                ok(viewModel.displayPassage.passageVisible(), "The passage is displayed");
+                ok(viewModel.displayPassage.passageVisible().entries, "The entries are displayed");
+                ok(viewModel.displayPassage.passageVisible().entries[0].rawText, "An entry is displayed");
 
                 done();
             }, done);
@@ -136,9 +136,9 @@ module Told.GreekBible.UI.Tests {
             step_WhenTheAppIsLoaded(viewModel, step, function () {
                 step("Then a default passage should be displayed");
 
-                ok(viewModel.displayPassage.passage(), "The passage is displayed");
-                ok(viewModel.displayPassage.passage().entries, "The entries are displayed");
-                ok(viewModel.displayPassage.passage().entries[0].rawText, "An entry is displayed");
+                ok(viewModel.displayPassage.passageVisible(), "The passage is displayed");
+                ok(viewModel.displayPassage.passageVisible().entries, "The entries are displayed");
+                ok(viewModel.displayPassage.passageVisible().entries[0].rawText, "An entry is displayed");
 
                 done();
             }, done);

@@ -263,3 +263,14 @@ Focus on one verse with context to improve usability
 
 - Show loading message briefly every time when passage is changed
 - Add verse to passage choosing
+
+
+### V0.3 H2
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+Ensure the single verse is displayed with context
+
+#### Completed
+
+- Show only one verse

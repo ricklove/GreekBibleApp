@@ -83,7 +83,11 @@ var Told;
                     $(element).text("");
                     dust.render(templateId, simpleData, function (err, out) {
                         console.log("dustTemplate render:" + templateId);
-                        $(element).append(out);
+
+                        // Build dom offscreen first
+                        var outDom = $(out);
+
+                        $(element).append(outDom);
                     });
                 }
             };

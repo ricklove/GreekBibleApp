@@ -57,6 +57,11 @@ module Told.GreekBible.UI {
             write: function (value) {
                 this.verseNumber(value);
 
+                console.log("Verse=" + value);
+                if (value === 1) {
+                    var breakdance = true;
+                }
+
                 // Change Passage
                 this.owner.displayPassage.showPassage(this.bookNumber(), this.chapterNumber(), this.verseNumber());
             },
@@ -65,21 +70,55 @@ module Told.GreekBible.UI {
         });
 
 
-        bookChoices = ko.computed(function () {
-            return Data.BookInfo.getBookNames();
-        }, this);
+        bookChoices = ko.computed({
+            read: function () {
+                return Data.BookInfo.getBookNames();
+            },
+            owner: this,
+            deferEvaluation: true
+        });
 
-        chapterChoices = ko.computed(function () {
-            var chapterCount = Data.BookInfo.getChapterCount(this.bookNumber());
+        chapterChoices = ko.computed({
+            read: function () {
+                var chapterCount = Data.BookInfo.getChapterCount(this.bookNumber());
 
-            var nums: number[] = [];
+                var nums: number[] = [];
 
-            for (var i = 0; i < chapterCount; i++) {
-                nums.push(i + 1);
-            }
+                for (var i = 0; i < chapterCount; i++) {
+                    nums.push(i + 1);
+                }
 
-            return nums;
-        }, this);
+                return nums;
+            },
+            owner: this,
+            deferEvaluation: true
+        });
+
+
+        verseChoices = ko.computed({
+            read: function () {
+                // Make sure verse number is included in choices 
+                // (so verse does not get limited back to 1 by the UI in case it was just chosen)
+                var verseCount = this.verseNumber();
+
+                var vm = <MainViewModel>this.owner;
+                var passage = vm.displayPassage.passageRaw();
+                if (passage != null && passage.entries != null && passage.entries.length > 0) {
+                    var entries = vm.displayPassage.passageRaw().entries;
+                    verseCount = entries[entries.length - 1].passageRef.verse;
+                }
+
+                var nums: number[] = [];
+
+                for (var i = 0; i < verseCount; i++) {
+                    nums.push(i + 1);
+                }
+
+                return nums;
+            },
+            owner: this,
+            deferEvaluation: true
+        });
 
         isChapterFocused = ko.observable<boolean>(false);
         isVerseFocused = ko.observable<boolean>(false);

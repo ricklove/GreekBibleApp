@@ -19,10 +19,28 @@ module Told.GreekBible.UI {
         }
 
 
-        passage = ko.observable<Data.IPassage>(null);
+        passageRaw = ko.observable<Data.IPassage>(null);
         book = ko.observable<string>(null);
         chapter = ko.observable<number>(null);
         verse = ko.observable<number>(null);
+
+        passageVisible = ko.computed<Data.IPassage>({
+            read: function () {
+
+                var self = <MainViewModel_DisplayPassage> this;
+
+                var passageChapter = self.passageRaw();
+                var entriesVerse = passageChapter.entries.filter(e=> e.passageRef.verse === self.verse());
+                var passageVerse = { entries: entriesVerse };
+
+                var passageFormatted = self.viewModel.displayEntryColorCoding.formatPassage(passageVerse);
+
+                return passageFormatted;
+            },
+            owner: this,
+            deferEvaluation: true
+        });
+
 
         hasPassageLoadingFailed = ko.observable<boolean>(false);
 
@@ -47,7 +65,7 @@ module Told.GreekBible.UI {
             var self = this;
 
             // Make Blank while waiting
-            self.passage(<any>[]);
+            self.passageRaw({ entries: [] });
             self.hasPassageLoadingFailed(false);
 
             // Set choice
@@ -68,13 +86,11 @@ module Told.GreekBible.UI {
                         setTimeout(() => {
                             // Ensure that this was the last chosen passage
                             if (bookNumber === Data.BookInfo.getBookNumber(self.book())
-                                && chapter === self.chapter()) {
+                                && chapter === self.chapter()
+                                && verse === self.verse()) {
 
-                                var passageChapter = Data.Parser.parsePassage(passageText);
-                                var entriesVerse = passageChapter.entries.filter(e=> e.passageRef.verse === verse);
-                                var passageVerse = { entries: entriesVerse };
+                                self.passageRaw(Data.Parser.parsePassage(passageText));
 
-                                self.passage(self.viewModel.displayEntryColorCoding.formatPassage(passageVerse));
                                 if (onLoad) { onLoad(); }
 
                             }
@@ -89,7 +105,7 @@ module Told.GreekBible.UI {
 
         isPassageLoaded = ko.computed<boolean>({
             read: function () {
-                var passage = this.passage();
+                var passage = this.passageVisible();
                 return passage != null && passage.entries != null && passage.entries.length > 0;
             },
             owner: this,
