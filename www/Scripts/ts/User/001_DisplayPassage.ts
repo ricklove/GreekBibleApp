@@ -30,10 +30,23 @@ module Told.GreekBible.UI {
                 var self = <MainViewModel_DisplayPassage> this;
 
                 var passageChapter = self.passageRaw();
-                var entriesVerse = passageChapter.entries.filter(e=> e.passageRef.verse === self.verse());
+
+                var v = self.verse();
+                var entriesVerse = passageChapter.entries.filter(e=> e.passageRef.verse >= v - 2 && e.passageRef.verse <= v + 2);
                 var passageVerse = { entries: entriesVerse };
 
                 var passageFormatted = self.viewModel.displayEntryColorCoding.formatPassage(passageVerse);
+
+                // Format entries
+                for (var i = 0; i < entriesVerse.length; i++) {
+                    var entry = entriesVerse[i];
+
+                    if (entry.passageRef.verse === v) {
+                        entry["verseWrapperClassName"] = "verseWrapperMain";
+                    } else {
+                        entry["verseWrapperClassName"] = "verseWrapperContext";
+                    }
+                }
 
                 return passageFormatted;
             },

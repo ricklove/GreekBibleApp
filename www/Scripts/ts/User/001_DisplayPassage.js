@@ -18,12 +18,24 @@ var Told;
                             var self = this;
 
                             var passageChapter = self.passageRaw();
+
+                            var v = self.verse();
                             var entriesVerse = passageChapter.entries.filter(function (e) {
-                                return e.passageRef.verse === self.verse();
+                                return e.passageRef.verse >= v - 2 && e.passageRef.verse <= v + 2;
                             });
                             var passageVerse = { entries: entriesVerse };
 
                             var passageFormatted = self.viewModel.displayEntryColorCoding.formatPassage(passageVerse);
+
+                            for (var i = 0; i < entriesVerse.length; i++) {
+                                var entry = entriesVerse[i];
+
+                                if (entry.passageRef.verse === v) {
+                                    entry["verseWrapperClassName"] = "verseWrapperMain";
+                                } else {
+                                    entry["verseWrapperClassName"] = "verseWrapperContext";
+                                }
+                            }
 
                             return passageFormatted;
                         },

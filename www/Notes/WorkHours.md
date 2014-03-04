@@ -274,3 +274,4 @@ Ensure the single verse is displayed with context
 #### Completed
 
 - Show only one verse
+- Show adjacent verses in chapter

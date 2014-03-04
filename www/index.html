@@ -57,20 +57,25 @@
             <h3><span data-bind="text: displayPassage.book() + ' ' + displayPassage.chapter()"></span></h3>
 
             <div data-bind="dustTemplate: displayPassage.passageVisible">
-                {#entries}
-                {?isVerseStart}
-                <div class="verse">{passageRef.verse}</div>
-                {/isVerseStart}
-                <div class="entry">
-                    <div class="rawText">{rawText}</div>
-                    <div class="partOfSpeechColor" style="background-color: {partOfSpeech.color}"></div>
-                    <div class="morphColor" style="background-color: {morph.color}"></div>
-                    <div class="lemma">{lemma}</div>
-                    <div class="partOfSpeechCode" style="color: {partOfSpeech.color}">{partOfSpeech.partOfSpeechCode}</div>
-                    <div class="morphCode" style="color: {morph.color}">{morph.morphCode}</div>
+                <div>
+                    {#entries}
+                    {?isVerseStart}
                 </div>
-                &nbsp;
+                <div class="{verseWrapperClassName}">
+                    <div class="verse">{passageRef.verse}</div>
+                    {/isVerseStart}
+                    <div class="entry">
+                        <div class="rawText">{rawText}</div>
+                        <div class="partOfSpeechColor" style="background-color: {partOfSpeech.color}"></div>
+                        <div class="morphColor" style="background-color: {morph.color}"></div>
+                        <div class="lemma">{lemma}</div>
+                        <div class="partOfSpeechCode" style="color: {partOfSpeech.color}">{partOfSpeech.partOfSpeechCode}</div>
+                        <div class="morphCode" style="color: {morph.color}">{morph.morphCode}</div>
+                    </div>
+                    &nbsp;
                 {/entries}
+                </div>
+
             </div>
             <!-- /ko -->
         </div>

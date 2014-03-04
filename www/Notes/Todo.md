@@ -150,6 +150,9 @@
 		- [x] Modify tests to check for verse
 		- [x] Pass tests
 		- [x] Display verse choice on UI
+	- [ ] Show one verse with context (2 verses above and below)
+		- [x] Show context from current chapter
+		- [ ] Show context from adjacent chapter
 
 ---
 
