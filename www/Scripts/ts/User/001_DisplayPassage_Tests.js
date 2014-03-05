@@ -75,20 +75,32 @@ var Told;
                 Tests.step_ThenTheFirstEntryShouldBeDisplayed = function (viewModel, sample, step) {
                     step("Then the first entry should be displayed");
 
-                    equal(viewModel.displayPassage.passageVisible().entries[0].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
-                    equal(viewModel.displayPassage.passageVisible().entries[0].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
-                    equal(viewModel.displayPassage.passageVisible().entries[0].passageRef.verse, sample.verse, "The correct Verse is displayed");
-                    equal(viewModel.displayPassage.passageVisible().entries[0].rawText, sample.firstEntryText, "The first entry text is displayed");
+                    var entriesFiltered = viewModel.displayPassage.passageVisible().entries.filter(function (e) {
+                        return e.passageRef.verse === sample.verse;
+                    });
+
+                    ok(entriesFiltered.length > 0, "The correct verse is visible");
+
+                    equal(entriesFiltered[0].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
+                    equal(entriesFiltered[0].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
+                    equal(entriesFiltered[0].passageRef.verse, sample.verse, "The correct Verse is displayed");
+                    equal(entriesFiltered[0].rawText, sample.firstEntryText, "The first entry text is displayed");
                 };
 
                 Tests.step_AndTheLastEntryShouldBeDisplayed = function (viewModel, sample, step) {
                     step("And the last entry should be displayed");
 
-                    var iLast = viewModel.displayPassage.passageVisible().entries.length - 1;
-                    equal(viewModel.displayPassage.passageVisible().entries[iLast].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
-                    equal(viewModel.displayPassage.passageVisible().entries[iLast].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
-                    equal(viewModel.displayPassage.passageVisible().entries[iLast].passageRef.verse, sample.verse, "The correct Verse is displayed");
-                    equal(viewModel.displayPassage.passageVisible().entries[iLast].rawText, sample.lastEntryText, "The last entry text is displayed");
+                    var entriesFiltered = viewModel.displayPassage.passageVisible().entries.filter(function (e) {
+                        return e.passageRef.verse === sample.verse;
+                    });
+
+                    ok(entriesFiltered.length > 0, "The correct verse is visible");
+
+                    var iLast = entriesFiltered.length - 1;
+                    equal(entriesFiltered[iLast].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
+                    equal(entriesFiltered[iLast].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
+                    equal(entriesFiltered[iLast].passageRef.verse, sample.verse, "The correct Verse is displayed");
+                    equal(entriesFiltered[iLast].rawText, sample.lastEntryText, "The last entry text is displayed");
                 };
 
                 var f = new Told.FeatureTests.Feature("001 - View a Greek Passage", [
