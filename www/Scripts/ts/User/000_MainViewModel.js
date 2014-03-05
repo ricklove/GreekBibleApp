@@ -23,7 +23,7 @@ var Told;
 
                     this.changePassage = new Told.GreekBible.UI.MainViewModel_ChangePassage(this);
 
-                    this.displayEntryDefinition = new Told.GreekBible.UI.MainViewModel_DisplayEntryDetails(this);
+                    this.displayEntryDetails = new Told.GreekBible.UI.MainViewModel_DisplayEntryDetails(this);
                 }
                 return MainViewModel;
             })();

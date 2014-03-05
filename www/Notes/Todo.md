@@ -155,7 +155,7 @@
 		- [ ] Show context from adjacent chapter
 
 - [ ] Display Entry Popup
-
+- [ ] Fix spacing between words
 
 ---
 
