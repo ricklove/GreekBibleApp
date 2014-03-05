@@ -137,6 +137,7 @@ module Told.AppLoader {
             'Scripts/ts/User/001_DisplayPassage_Tests.js',
             'Scripts/ts/User/002_ChangePassage_Tests.js',
             'Scripts/ts/User/003_DisplayEntryColorCoding_Tests.js',
+            'Scripts/ts/User/004_DisplayEntryDefinition_Tests.js',
         ];
 
         loadScripts(scriptList, onLoaded, onProgress);

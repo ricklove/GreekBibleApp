@@ -275,3 +275,13 @@ Ensure the single verse is displayed with context
 
 - Show only one verse
 - Show adjacent verses in chapter
+
+
+### V0.3 H3
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+Display Entry Popup with definition and details
+
+#### Completed
+

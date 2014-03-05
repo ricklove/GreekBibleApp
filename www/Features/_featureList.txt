@@ -1,8 +1,4 @@
 ﻿001_ViewPassage
 002_ChoosePassage
 003_ViewEntryColorCoding
-
-#STEPS
-DisplayPassage_Steps
-ChangePassage_Steps
-DisplayEntryColorCoding_Steps
+004_ViewEntryDefinition

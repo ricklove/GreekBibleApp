@@ -154,6 +154,9 @@
 		- [x] Show context from current chapter
 		- [ ] Show context from adjacent chapter
 
+- [ ] Display Entry Popup
+
+
 ---
 
 
