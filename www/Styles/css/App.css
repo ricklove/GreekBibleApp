@@ -8,10 +8,13 @@
 }
 
 .verseWrapperMain, .verseWrapperContext {
-
+    display: inline;
 }
 
 .verseWrapperContext {
+}
+
+.verseWrapperContext > div {
     background-color: lightgray;
 }
 
@@ -29,7 +32,8 @@
     font-size: 0.7em;
     display: inline-block;
     vertical-align: top;
-    margin-right: 2px;
+    margin-left: 5px;
+    padding-right: 2px;
 }
 
 .entry {
