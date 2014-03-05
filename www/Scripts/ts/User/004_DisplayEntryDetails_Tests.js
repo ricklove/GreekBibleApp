@@ -1,23 +1,15 @@
 ﻿/// <reference path="../../typings/qunit/qunit.d.ts" />
 /// <reference path="../System/FeatureTests.ts" />
-/// <reference path="003_DisplayEntryColorCoding.ts" />
+/// <reference path="004_DisplayEntryDetails.ts" />
 /// <reference path="001_DisplayPassage_Tests.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
         (function (UI) {
             (function (Tests) {
-                //Feature: 004 - View Entry Definition
-                //As a user,
-                //I can view the definition for an entry
-                //So that I can understand the meaning of the greek word
-                //Scenario: should display the definition of an entry
-                //	Given a passage is loaded
-                //	When the user selects an entry
-                //	Then the definition should be displayed
-                var f = new Told.FeatureTests.Feature("004 - View Entry Definition", [
+                var f = new Told.FeatureTests.Feature("004 - View Entry Details", [
                     "As a user,",
-                    "I can view the definition for an entry",
+                    "I can view the details for an entry",
                     "So that I can understand the meaning of the greek word"
                 ]);
 
@@ -26,7 +18,17 @@ var Told;
                     "When the user selects an entry",
                     "Then the definition should be displayed"
                 ], function (step, done) {
-                    done();
+                    Told.GreekBible.UI.Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
+                        step("When the user selects an entry");
+
+                        var entries = viewModel.displayPassage.passageVisible().entries;
+
+                        viewModel.displayEntryDetails.showDetails(entries[0]);
+
+                        step("Then the definition should be displayed");
+                        equal(entries[0].details.isVisible, true, "Details are displayed");
+                        ok(entries[0].details.definition != "", "Definition is displayed");
+                    }, done);
                 });
             })(UI.Tests || (UI.Tests = {}));
             var Tests = UI.Tests;

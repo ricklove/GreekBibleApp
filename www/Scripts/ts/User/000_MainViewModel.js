@@ -1,9 +1,11 @@
 ﻿/// <reference path="../../typings/jQuery/jQuery.d.ts" />
 /// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../Support/AccessProviders.ts" />
+/// <reference path="_Model.ts" />
 /// <reference path="001_DisplayPassage.ts" />
 /// <reference path="002_ChangePassage.ts" />
 /// <reference path="003_DisplayEntryColorCoding.ts" />
+/// <reference path="004_DisplayEntryDetails.ts" />
 var Told;
 (function (Told) {
     (function (GreekBible) {
@@ -18,7 +20,10 @@ var Told;
 
                     this.displayEntryColorCoding = new Told.GreekBible.UI.MainViewModel_DisplayEntryColorCoding(this);
                     this.displayPassage = new Told.GreekBible.UI.MainViewModel_DisplayPassage(this);
+
                     this.changePassage = new Told.GreekBible.UI.MainViewModel_ChangePassage(this);
+
+                    this.displayEntryDefinition = new Told.GreekBible.UI.MainViewModel_DisplayEntryDetails(this);
                 }
                 return MainViewModel;
             })();

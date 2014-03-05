@@ -24,12 +24,12 @@ module Told.GreekBible.UI {
         chapter = ko.observable<number>(null);
         verse = ko.observable<number>(null);
 
-        passageVisible = ko.computed<Data.IPassage>({
+        passageVisible = ko.computed<IPassageUI>({
             read: function () {
 
                 var self = <MainViewModel_DisplayPassage> this;
 
-                var passageChapter = self.passageRaw();
+                var passageChapter = <IPassageUI> self.passageRaw();
 
                 var v = self.verse();
                 var entriesVerse = passageChapter.entries.filter(e=> e.passageRef.verse >= v - 2 && e.passageRef.verse <= v + 2);
@@ -42,9 +42,9 @@ module Told.GreekBible.UI {
                     var entry = entriesVerse[i];
 
                     if (entry.passageRef.verse === v) {
-                        entry["verseWrapperClassName"] = "verseWrapperMain";
+                        entry.verseWrapperClassName = "verseWrapperMain";
                     } else {
-                        entry["verseWrapperClassName"] = "verseWrapperContext";
+                        entry.verseWrapperClassName = "verseWrapperContext";
                     }
                 }
 

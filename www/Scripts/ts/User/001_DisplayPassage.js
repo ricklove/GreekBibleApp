@@ -31,9 +31,9 @@ var Told;
                                 var entry = entriesVerse[i];
 
                                 if (entry.passageRef.verse === v) {
-                                    entry["verseWrapperClassName"] = "verseWrapperMain";
+                                    entry.verseWrapperClassName = "verseWrapperMain";
                                 } else {
-                                    entry["verseWrapperClassName"] = "verseWrapperContext";
+                                    entry.verseWrapperClassName = "verseWrapperContext";
                                 }
                             }
 

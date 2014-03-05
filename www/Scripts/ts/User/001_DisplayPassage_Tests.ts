@@ -79,6 +79,19 @@ module Told.GreekBible.UI.Tests {
         viewModel.displayPassage.showDefault(onReady, onError);
     };
 
+    export var step_GivenAPassageIsDisplayed = function (step: (title: string) => void, onReady: (viewModel: MainViewModel) => void, onFail: () => void) {
+        step("Given a passage is displayed");
+
+        var sample = samples[0];
+        var providers = getProvidersWithSample(sample);
+        var viewModel = new UI.MainViewModel(providers);
+
+        step_WhenTheAppIsLoaded(viewModel, () => { }, function () {
+            onReady(viewModel);
+
+        }, onFail);
+    };
+
     export var step_ThenTheFirstEntryShouldBeDisplayed = function (viewModel: UI.MainViewModel, sample: ISample, step: (title: string) => void) {
         step("Then the first entry should be displayed");
 

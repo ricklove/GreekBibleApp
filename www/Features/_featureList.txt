@@ -1,4 +1,4 @@
 ﻿001_ViewPassage
 002_ChoosePassage
 003_ViewEntryColorCoding
-004_ViewEntryDefinition
+004_ViewEntryDetails

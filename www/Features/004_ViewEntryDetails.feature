@@ -1,10 +1,10 @@
-﻿Feature: 004 - View Entry Definition
+﻿Feature: 004 - View Entry Details
 As a user,
-I can view the definition for an entry
+I can view the details for an entry
 So that I can understand the meaning of the greek word
 
 
-Scenario: should display the definition of an entry
+Scenario: Should display the definition of an entry
 
 	Given a passage is loaded
 	When the user selects an entry

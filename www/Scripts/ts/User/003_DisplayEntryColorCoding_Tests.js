@@ -13,24 +13,11 @@ var Told;
                     "So that I can see the entries which have a commonality"
                 ]);
 
-                Tests.step_GivenAPassageIsDisplayed = function (step, onReady, onFail) {
-                    step("Given a passage is displayed");
-
-                    var sample = Told.GreekBible.UI.Tests.samples[0];
-                    var providers = Told.GreekBible.UI.Tests.getProvidersWithSample(sample);
-                    var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
-
-                    Told.GreekBible.UI.Tests.step_WhenTheAppIsLoaded(viewModel, function () {
-                    }, function () {
-                        onReady(viewModel);
-                    }, onFail);
-                };
-
                 f.scenario("Should display the same color coding for the same PartOfSpeech code", [
                     "Given a passage is displayed",
                     "Then entries with the same PartOfSpeech code should have the same color"
                 ], function (step, done) {
-                    Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
+                    Told.GreekBible.UI.Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
                         step("Then entries with the same PartOfSpeech code should have the same color");
                         var entries = viewModel.displayPassage.passageVisible().entries;
 
@@ -38,7 +25,7 @@ var Told;
 
                         for (var i = 0; i < entries.length; i++) {
                             if (firstColors[entries[i].partOfSpeech.partOfSpeechCode] == null) {
-                                firstColors[entries[i].partOfSpeech.partOfSpeechCode] = entries[i].partOfSpeech["color"];
+                                firstColors[entries[i].partOfSpeech.partOfSpeechCode] = entries[i].partOfSpeech.color;
                             }
                         }
 
@@ -46,7 +33,7 @@ var Told;
                         var expected = [];
 
                         for (var i = 0; i < entries.length; i++) {
-                            actual[i] = entries[i].partOfSpeech["color"];
+                            actual[i] = entries[i].partOfSpeech.color;
                             expected[i] = firstColors[entries[i].partOfSpeech.partOfSpeechCode];
                         }
 
@@ -60,7 +47,7 @@ var Told;
                     "Given a passage is displayed",
                     "Then entries with the same Morph code should have the same color"
                 ], function (step, done) {
-                    Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
+                    Told.GreekBible.UI.Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
                         step("Then entries with the same Morph code should have the same color");
                         var entries = viewModel.displayPassage.passageVisible().entries;
 
@@ -68,7 +55,7 @@ var Told;
 
                         for (var i = 0; i < entries.length; i++) {
                             if (firstColors[entries[i].morph.morphCode] == null) {
-                                firstColors[entries[i].morph.morphCode] = entries[i].morph["color"];
+                                firstColors[entries[i].morph.morphCode] = entries[i].morph.color;
                             }
                         }
 
@@ -76,7 +63,7 @@ var Told;
                         var expected = [];
 
                         for (var i = 0; i < entries.length; i++) {
-                            actual[i] = entries[i].morph["color"];
+                            actual[i] = entries[i].morph.color;
                             expected[i] = firstColors[entries[i].morph.morphCode];
                         }
 
@@ -90,7 +77,7 @@ var Told;
                     "Given a passage is displayed",
                     "Then entries with a different PartOfSpeech code should have a different color"
                 ], function (step, done) {
-                    Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
+                    Told.GreekBible.UI.Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
                         step("Then entries with a different PartOfSpeech code should have a different color");
                         var entries = viewModel.displayPassage.passageVisible().entries;
 
@@ -99,12 +86,12 @@ var Told;
 
                         for (var i = 0; i < entries.length; i++) {
                             if (firstColors[entries[i].partOfSpeech.partOfSpeechCode] == null) {
-                                firstColors[entries[i].partOfSpeech.partOfSpeechCode] = entries[i].partOfSpeech["color"];
+                                firstColors[entries[i].partOfSpeech.partOfSpeechCode] = entries[i].partOfSpeech.color;
                             }
                         }
 
                         for (var i = 0; i < entries.length; i++) {
-                            var entryColor = entries[i].partOfSpeech["color"];
+                            var entryColor = entries[i].partOfSpeech.color;
 
                             var otherColors = "";
 
@@ -131,7 +118,7 @@ var Told;
                     "Given a passage is displayed",
                     "Then entries with a different Morph code should have a different color"
                 ], function (step, done) {
-                    Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
+                    Told.GreekBible.UI.Tests.step_GivenAPassageIsDisplayed(step, function (viewModel) {
                         step("Then entries with a different Morph code should have a different color");
                         var entries = viewModel.displayPassage.passageVisible().entries;
 
@@ -140,12 +127,12 @@ var Told;
 
                         for (var i = 0; i < entries.length; i++) {
                             if (firstColors[entries[i].morph.morphCode] == null) {
-                                firstColors[entries[i].morph.morphCode] = entries[i].morph["color"];
+                                firstColors[entries[i].morph.morphCode] = entries[i].morph.color;
                             }
                         }
 
                         for (var i = 0; i < entries.length; i++) {
-                            var entryColor = entries[i].morph["color"];
+                            var entryColor = entries[i].morph.color;
 
                             var otherColors = "";
 

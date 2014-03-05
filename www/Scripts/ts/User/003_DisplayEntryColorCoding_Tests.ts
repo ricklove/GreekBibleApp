@@ -11,20 +11,6 @@ module Told.GreekBible.UI.Tests {
         "So that I can see the entries which have a commonality",
     ]);
 
-    export var step_GivenAPassageIsDisplayed = function (step: (title: string) => void, onReady: (viewModel: MainViewModel) => void, onFail: () => void) {
-        step("Given a passage is displayed");
-
-        var sample = samples[0];
-        var providers = getProvidersWithSample(sample);
-        var viewModel = new UI.MainViewModel(providers);
-
-        step_WhenTheAppIsLoaded(viewModel, () => { }, function () {
-            onReady(viewModel);
-
-        }, onFail);
-    };
-
-
     f.scenario("Should display the same color coding for the same PartOfSpeech code", [
         "Given a passage is displayed",
         "Then entries with the same PartOfSpeech code should have the same color",
@@ -38,7 +24,7 @@ module Told.GreekBible.UI.Tests {
 
                 for (var i = 0; i < entries.length; i++) {
                     if (firstColors[entries[i].partOfSpeech.partOfSpeechCode] == null) {
-                        firstColors[entries[i].partOfSpeech.partOfSpeechCode] = entries[i].partOfSpeech["color"];
+                        firstColors[entries[i].partOfSpeech.partOfSpeechCode] = entries[i].partOfSpeech.color;
                     }
                 }
 
@@ -46,7 +32,7 @@ module Told.GreekBible.UI.Tests {
                 var expected: string[] = [];
 
                 for (var i = 0; i < entries.length; i++) {
-                    actual[i] = entries[i].partOfSpeech["color"];
+                    actual[i] = entries[i].partOfSpeech.color;
                     expected[i] = firstColors[entries[i].partOfSpeech.partOfSpeechCode];
                 }
 
@@ -70,7 +56,7 @@ module Told.GreekBible.UI.Tests {
 
                 for (var i = 0; i < entries.length; i++) {
                     if (firstColors[entries[i].morph.morphCode] == null) {
-                        firstColors[entries[i].morph.morphCode] = entries[i].morph["color"];
+                        firstColors[entries[i].morph.morphCode] = entries[i].morph.color;
                     }
                 }
 
@@ -78,7 +64,7 @@ module Told.GreekBible.UI.Tests {
                 var expected: string[] = [];
 
                 for (var i = 0; i < entries.length; i++) {
-                    actual[i] = entries[i].morph["color"];
+                    actual[i] = entries[i].morph.color;
                     expected[i] = firstColors[entries[i].morph.morphCode];
                 }
 
@@ -103,13 +89,13 @@ module Told.GreekBible.UI.Tests {
 
                 for (var i = 0; i < entries.length; i++) {
                     if (firstColors[entries[i].partOfSpeech.partOfSpeechCode] == null) {
-                        firstColors[entries[i].partOfSpeech.partOfSpeechCode] = entries[i].partOfSpeech["color"];
+                        firstColors[entries[i].partOfSpeech.partOfSpeechCode] = entries[i].partOfSpeech.color;
                     }
                 }
 
 
                 for (var i = 0; i < entries.length; i++) {
-                    var entryColor = entries[i].partOfSpeech["color"];
+                    var entryColor = entries[i].partOfSpeech.color;
 
                     var otherColors = "";
 
@@ -147,13 +133,13 @@ module Told.GreekBible.UI.Tests {
 
                 for (var i = 0; i < entries.length; i++) {
                     if (firstColors[entries[i].morph.morphCode] == null) {
-                        firstColors[entries[i].morph.morphCode] = entries[i].morph["color"];
+                        firstColors[entries[i].morph.morphCode] = entries[i].morph.color;
                     }
                 }
 
 
                 for (var i = 0; i < entries.length; i++) {
-                    var entryColor = entries[i].morph["color"];
+                    var entryColor = entries[i].morph.color;
 
                     var otherColors = "";
 

@@ -72,6 +72,19 @@ var Told;
                     viewModel.displayPassage.showDefault(onReady, onError);
                 };
 
+                Tests.step_GivenAPassageIsDisplayed = function (step, onReady, onFail) {
+                    step("Given a passage is displayed");
+
+                    var sample = Tests.samples[0];
+                    var providers = Tests.getProvidersWithSample(sample);
+                    var viewModel = new Told.GreekBible.UI.MainViewModel(providers);
+
+                    Tests.step_WhenTheAppIsLoaded(viewModel, function () {
+                    }, function () {
+                        onReady(viewModel);
+                    }, onFail);
+                };
+
                 Tests.step_ThenTheFirstEntryShouldBeDisplayed = function (viewModel, sample, step) {
                     step("Then the first entry should be displayed");
 

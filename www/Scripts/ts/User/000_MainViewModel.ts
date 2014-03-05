@@ -1,9 +1,11 @@
 ﻿/// <reference path="../../typings/jQuery/jQuery.d.ts" />
 /// <reference path="../../typings/knockout/knockout.d.ts" />
 /// <reference path="../Support/AccessProviders.ts" />
+/// <reference path="_Model.ts" />
 /// <reference path="001_DisplayPassage.ts" />
 /// <reference path="002_ChangePassage.ts" />
 /// <reference path="003_DisplayEntryColorCoding.ts" />
+/// <reference path="004_DisplayEntryDetails.ts" />
 
 module Told.GreekBible.UI {
 
@@ -13,6 +15,7 @@ module Told.GreekBible.UI {
         public displayPassage: MainViewModel_DisplayPassage;
         public changePassage: MainViewModel_ChangePassage;
         public displayEntryColorCoding: MainViewModel_DisplayEntryColorCoding;
+        public displayEntryDetails: MainViewModel_DisplayEntryDetails;
 
         constructor(providers?: Data.IProviders) {
 
@@ -24,7 +27,10 @@ module Told.GreekBible.UI {
 
             this.displayEntryColorCoding = new MainViewModel_DisplayEntryColorCoding(this);
             this.displayPassage = new MainViewModel_DisplayPassage(this);
+
             this.changePassage = new MainViewModel_ChangePassage(this);
+
+            this.displayEntryDetails = new MainViewModel_DisplayEntryDetails(this);
         }
     }
 

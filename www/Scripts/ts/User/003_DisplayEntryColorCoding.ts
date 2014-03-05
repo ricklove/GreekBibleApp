@@ -13,15 +13,17 @@ module Told.GreekBible.UI {
             this.viewModel = viewModel;
         }
 
-        formatPassage(passage: Data.IPassage): Data.IPassage {
+        formatPassage(passage: IPassageUI): IPassageUI {
 
-            for (var i = 0; i < passage.entries.length; i++) {
-                var e = passage.entries[i];
-                e.partOfSpeech['color'] = this.getColorA(e.partOfSpeech.partOfSpeechCode);
-                e.morph['color'] = this.getColorB(e.morph.morphCode);
+            var p = passage;
+
+            for (var i = 0; i < p.entries.length; i++) {
+                var e = p.entries[i];
+                e.partOfSpeech.color = this.getColorA(e.partOfSpeech.partOfSpeechCode);
+                e.morph.color = this.getColorB(e.morph.morphCode);
             }
 
-            return passage;
+            return p;
         }
 
         static getUniqueColorA = Colors.createGetUniqueColor(150, 150);

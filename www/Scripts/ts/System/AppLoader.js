@@ -101,7 +101,8 @@
                 'Scripts/ts/User/000_MainViewModel.js',
                 'Scripts/ts/User/001_DisplayPassage.js',
                 'Scripts/ts/User/002_ChangePassage.js',
-                'Scripts/ts/User/003_DisplayEntryColorCoding.js'
+                'Scripts/ts/User/003_DisplayEntryColorCoding.js',
+                'Scripts/ts/User/004_DisplayEntryDetails.js'
             ];
 
             loadScripts(scriptList, onLoaded, onProgress);
@@ -127,7 +128,7 @@
                 'Scripts/ts/User/001_DisplayPassage_Tests.js',
                 'Scripts/ts/User/002_ChangePassage_Tests.js',
                 'Scripts/ts/User/003_DisplayEntryColorCoding_Tests.js',
-                'Scripts/ts/User/004_DisplayEntryDefinition_Tests.js'
+                'Scripts/ts/User/004_DisplayEntryDetails_Tests.js'
             ];
 
             loadScripts(scriptList, onLoaded, onProgress);

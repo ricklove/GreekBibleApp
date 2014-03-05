@@ -285,3 +285,6 @@ Display Entry Popup with definition and details
 
 #### Completed
 
+- Tweaked Verse Display
+- Add UI Model interfaces to enable typesafe ui only properties
+- Add DisplayEntryDetails structure

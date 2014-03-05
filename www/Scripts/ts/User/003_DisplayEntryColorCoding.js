@@ -17,13 +17,15 @@ var Told;
                 });
 
                 MainViewModel_DisplayEntryColorCoding.prototype.formatPassage = function (passage) {
-                    for (var i = 0; i < passage.entries.length; i++) {
-                        var e = passage.entries[i];
-                        e.partOfSpeech['color'] = this.getColorA(e.partOfSpeech.partOfSpeechCode);
-                        e.morph['color'] = this.getColorB(e.morph.morphCode);
+                    var p = passage;
+
+                    for (var i = 0; i < p.entries.length; i++) {
+                        var e = p.entries[i];
+                        e.partOfSpeech.color = this.getColorA(e.partOfSpeech.partOfSpeechCode);
+                        e.morph.color = this.getColorB(e.morph.morphCode);
                     }
 
-                    return passage;
+                    return p;
                 };
 
                 MainViewModel_DisplayEntryColorCoding.prototype.getColorA = function (text) {
