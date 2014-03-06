@@ -288,3 +288,14 @@ Display Entry Popup with definition and details
 - Tweaked Verse Display
 - Add UI Model interfaces to enable typesafe ui only properties
 - Add DisplayEntryDetails structure
+
+
+### V0.3 H4
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+Finish Display Entry Details
+
+#### Completed
+
+- View Model is loading details

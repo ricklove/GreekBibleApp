@@ -28,7 +28,10 @@ module Told.GreekBible.UI {
     }
 
     export interface IEntryDetailsUI {
+        isLoaded: boolean;
+        isLoading: boolean;
         isVisible: boolean;
+
         definition: string;
     }
 }

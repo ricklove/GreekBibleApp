@@ -104,6 +104,10 @@ module Told.AppLoader {
             'Scripts/ts/Core/Passage.js',
             'Scripts/ts/Support/LoadPassageText.js',
             'Scripts/ts/Support/ParsePassageText.js',
+
+            'Scripts/ts/Support/LoadDetailsText.js',
+            'Scripts/ts/Support/ParseDetailsText.js',
+
             'Scripts/ts/Support/Colors.js',
 
             'Scripts/ts/User/000_MainViewModel.js',
