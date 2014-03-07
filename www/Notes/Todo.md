@@ -155,7 +155,8 @@
 		- [ ] Show context from adjacent chapter
 
 - [ ] Display Entry Popup
-- [ ] Fix spacing between words
+	- [x] Replace dust template with knockout to support click event
+- [x] Fix spacing between words
 
 ---
 

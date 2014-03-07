@@ -20,40 +20,11 @@ module Told.GreekBible.UI {
 
 
         passageRaw = ko.observable<Data.IPassage>(null);
+        passageVisible = ko.observable<IPassageVersesUI>(null);
+
         book = ko.observable<string>(null);
         chapter = ko.observable<number>(null);
         verse = ko.observable<number>(null);
-
-        passageVisible = ko.computed<IPassageUI>({
-            read: function () {
-
-                var self = <MainViewModel_DisplayPassage> this;
-
-                var passageChapter = <IPassageUI> self.passageRaw();
-
-                var v = self.verse();
-                var entriesVerse = passageChapter.entries.filter(e=> e.passageRef.verse >= v - 2 && e.passageRef.verse <= v + 2);
-                var passageVerse = { entries: entriesVerse };
-
-                var passageFormatted = self.viewModel.displayEntryColorCoding.formatPassage(passageVerse);
-
-                // Format entries
-                for (var i = 0; i < entriesVerse.length; i++) {
-                    var entry = entriesVerse[i];
-
-                    if (entry.passageRef.verse === v) {
-                        entry.verseWrapperClassName = "verseWrapperMain";
-                    } else {
-                        entry.verseWrapperClassName = "verseWrapperContext";
-                    }
-                }
-
-                return passageFormatted;
-            },
-            owner: this,
-            deferEvaluation: true
-        });
-
 
         hasPassageLoadingFailed = ko.observable<boolean>(false);
 
@@ -79,6 +50,7 @@ module Told.GreekBible.UI {
 
             // Make Blank while waiting
             self.passageRaw({ entries: [] });
+            self.passageVisible({ verses: [], allEntries:[] });
             self.hasPassageLoadingFailed(false);
 
             // Set choice
@@ -103,6 +75,7 @@ module Told.GreekBible.UI {
                                 && verse === self.verse()) {
 
                                 self.passageRaw(Data.Parser.parsePassage(passageText));
+                                self.passageVisible(self.getPassageVisible());
 
                                 if (onLoad) { onLoad(); }
 
@@ -118,8 +91,8 @@ module Told.GreekBible.UI {
 
         isPassageLoaded = ko.computed<boolean>({
             read: function () {
-                var passage = this.passageVisible();
-                return passage != null && passage.entries != null && passage.entries.length > 0;
+                var passage = <IPassageVersesUI> this.passageVisible();
+                return passage != null && passage.verses != null && passage.verses.length > 0;
             },
             owner: this,
             deferEvaluation: true
@@ -133,6 +106,45 @@ module Told.GreekBible.UI {
             deferEvaluation: true
         });
 
+        getPassageVisible(): IPassageVersesUI {
+            var self = <MainViewModel_DisplayPassage> this;
+
+            var passageChapter = <IPassageUI> self.passageRaw();
+
+            var verseNum = self.verse();
+            var entriesVerse = passageChapter.entries.filter(e=> e.passageRef.verse >= verseNum - 2 && e.passageRef.verse <= verseNum + 2);
+            var passageVerse = { entries: entriesVerse };
+
+            var passageFormatted = self.viewModel.displayEntryColorCoding.formatPassage(passageVerse);
+
+            // Group in verses
+            var verses: IVerseUI[] = [];
+
+            for (var i = 0; i < entriesVerse.length; i++) {
+                var entry = entriesVerse[i];
+
+                var versesMatch: IVerseUI[] = verses.filter(v=>
+                    v.passageRef.bookNumber === entry.passageRef.bookNumber
+                    && v.passageRef.chapter === entry.passageRef.chapter
+                    && v.passageRef.verse === entry.passageRef.verse
+                    );
+                var verse = versesMatch.length > 0 ? versesMatch[0] : null;
+
+                if (verse === null) {
+                    verses.push({
+                        passageRef: entry.passageRef,
+                        verseWrapperClassName: entry.passageRef.verse === verseNum ? "verseWrapperMain" : "verseWrapperContext",
+                        entries: [],
+                    });
+
+                    verse = verses[verses.length - 1];
+                }
+
+                verse.entries.push(entry);
+            }
+
+            return { verses: verses, allEntries: entriesVerse };
+        }
     }
 
 }

@@ -298,4 +298,16 @@ Finish Display Entry Details
 
 #### Completed
 
-- View Model is loading details
+- Load Entry Details in View Model
+
+
+
+### V0.3 H5
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+Show details in UI
+
+#### Completed
+
+- Change back to Knockout with dustJS

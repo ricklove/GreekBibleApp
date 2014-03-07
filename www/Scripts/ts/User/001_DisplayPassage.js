@@ -10,43 +10,15 @@ var Told;
             var MainViewModel_DisplayPassage = (function () {
                 function MainViewModel_DisplayPassage(viewModel) {
                     this.passageRaw = ko.observable(null);
+                    this.passageVisible = ko.observable(null);
                     this.book = ko.observable(null);
                     this.chapter = ko.observable(null);
                     this.verse = ko.observable(null);
-                    this.passageVisible = ko.computed({
-                        read: function () {
-                            var self = this;
-
-                            var passageChapter = self.passageRaw();
-
-                            var v = self.verse();
-                            var entriesVerse = passageChapter.entries.filter(function (e) {
-                                return e.passageRef.verse >= v - 2 && e.passageRef.verse <= v + 2;
-                            });
-                            var passageVerse = { entries: entriesVerse };
-
-                            var passageFormatted = self.viewModel.displayEntryColorCoding.formatPassage(passageVerse);
-
-                            for (var i = 0; i < entriesVerse.length; i++) {
-                                var entry = entriesVerse[i];
-
-                                if (entry.passageRef.verse === v) {
-                                    entry.verseWrapperClassName = "verseWrapperMain";
-                                } else {
-                                    entry.verseWrapperClassName = "verseWrapperContext";
-                                }
-                            }
-
-                            return passageFormatted;
-                        },
-                        owner: this,
-                        deferEvaluation: true
-                    });
                     this.hasPassageLoadingFailed = ko.observable(false);
                     this.isPassageLoaded = ko.computed({
                         read: function () {
                             var passage = this.passageVisible();
-                            return passage != null && passage.entries != null && passage.entries.length > 0;
+                            return passage != null && passage.verses != null && passage.verses.length > 0;
                         },
                         owner: this,
                         deferEvaluation: true
@@ -96,6 +68,7 @@ var Told;
 
                     // Make Blank while waiting
                     self.passageRaw({ entries: [] });
+                    self.passageVisible({ verses: [], allEntries: [] });
                     self.hasPassageLoadingFailed(false);
 
                     // Set choice
@@ -115,6 +88,7 @@ var Told;
                                 // Ensure that this was the last chosen passage
                                 if (bookNumber === Told.GreekBible.Data.BookInfo.getBookNumber(self.book()) && chapter === self.chapter() && verse === self.verse()) {
                                     self.passageRaw(Told.GreekBible.Data.Parser.parsePassage(passageText));
+                                    self.passageVisible(self.getPassageVisible());
 
                                     if (onLoad) {
                                         onLoad();
@@ -128,6 +102,46 @@ var Told;
                             }
                         });
                     }, 0);
+                };
+
+                MainViewModel_DisplayPassage.prototype.getPassageVisible = function () {
+                    var self = this;
+
+                    var passageChapter = self.passageRaw();
+
+                    var verseNum = self.verse();
+                    var entriesVerse = passageChapter.entries.filter(function (e) {
+                        return e.passageRef.verse >= verseNum - 2 && e.passageRef.verse <= verseNum + 2;
+                    });
+                    var passageVerse = { entries: entriesVerse };
+
+                    var passageFormatted = self.viewModel.displayEntryColorCoding.formatPassage(passageVerse);
+
+                    // Group in verses
+                    var verses = [];
+
+                    for (var i = 0; i < entriesVerse.length; i++) {
+                        var entry = entriesVerse[i];
+
+                        var versesMatch = verses.filter(function (v) {
+                            return v.passageRef.bookNumber === entry.passageRef.bookNumber && v.passageRef.chapter === entry.passageRef.chapter && v.passageRef.verse === entry.passageRef.verse;
+                        });
+                        var verse = versesMatch.length > 0 ? versesMatch[0] : null;
+
+                        if (verse === null) {
+                            verses.push({
+                                passageRef: entry.passageRef,
+                                verseWrapperClassName: entry.passageRef.verse === verseNum ? "verseWrapperMain" : "verseWrapperContext",
+                                entries: []
+                            });
+
+                            verse = verses[verses.length - 1];
+                        }
+
+                        verse.entries.push(entry);
+                    }
+
+                    return { verses: verses, allEntries: entriesVerse };
                 };
                 return MainViewModel_DisplayPassage;
             })();

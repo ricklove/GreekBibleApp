@@ -15,6 +15,8 @@ module Told.GreekBible.UI {
             this.viewModel = viewModel;
         }
 
+        selectedEntry = ko.observable<IEntryUI>(null);
+
         private passageDetails: Data.IPassageDetails;
 
         showDetails(entry: IEntryUI) {
@@ -22,15 +24,41 @@ module Told.GreekBible.UI {
             var self = this;
 
             // Close all open details
-            var entries = self.viewModel.displayPassage.passageVisible().entries;
+            var verses = self.viewModel.displayPassage.passageVisible().verses;
 
-            for (var i = 0; i < entries.length; i++) {
-                entries[i].isSelected = false;
+            for (var iVerse = 0; iVerse < verses.length; iVerse++) {
+                var entries = verses[iVerse].entries;
 
-                if (entries[i].details != null) {
-                    entries[i].details.isVisible = false;
+                for (var i = 0; i < entries.length; i++) {
+                    entries[i].isSelected = false;
+
+                    if (entries[i].details != null) {
+                        entries[i].details.isVisible = false;
+                    }
                 }
             }
+
+            self.selectedEntry(null);
+
+            var showEntryDetails = function () {
+
+                var matches = self.passageDetails.entries.filter(e=> e.name === entry.lemma);
+
+                if (matches.length > 0) {
+                    entry.details.definition = matches[0].strongDefinition;
+                } else {
+                    entry.details.definition = "NOT FOUND";
+                }
+
+                entry.details.isLoaded = true;
+                entry.details.isVisible = true;
+
+                // Selected
+                entry.isSelected = true;
+                self.selectedEntry(entry);
+
+                console.log("Selected Entry = " + entry.lemma);
+            };
 
             // Load details
             if (entry.details == null) {
@@ -45,33 +73,20 @@ module Told.GreekBible.UI {
                 //loadDetails();
 
                 // TODO: Deal with race condition where multiple entries clicked quickly while details is still loading
-                var loadEntryDetails = function () {
-
-                    var matches = self.passageDetails.entries.filter(e=> e.name === entry.lemma);
-
-                    if (matches.length > 0) {
-                        entry.details.definition = matches[0].strongDefinition;
-                    } else {
-                        entry.details.definition = "NOT FOUND";
-                    }
-
-                    entry.details.isLoaded = true;
-                    entry.details.isVisible = true;
-                };
-
 
                 if (self.passageDetails == null) {
                     Data.Loader_Details.loadDetails((text) => {
                         self.passageDetails = Data.Parser_Details.parseDetails(text);
 
-                        loadEntryDetails();
+                        showEntryDetails();
                     });
                 } else {
-                    loadEntryDetails();
+                    showEntryDetails();
                 }
+            } else {
+                showEntryDetails();
             }
 
-            entry.isSelected = true;
         }
     }
 

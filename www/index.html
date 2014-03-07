@@ -56,7 +56,7 @@
             <!-- ko if: displayPassage.isPassageLoaded -->
             <h3><span data-bind="text: displayPassage.book() + ' ' + displayPassage.chapter()"></span></h3>
 
-            <div data-bind="dustTemplate: displayPassage.passageVisible">
+            <!--<div data-bind="dustTemplate: displayPassage.passageVisible">
                 <div>
                     {#entries}
                     {?isVerseStart}
@@ -64,19 +64,45 @@
                 <div class="{verseWrapperClassName}">
                     <div class="verse">{passageRef.verse}</div>
                     {/isVerseStart}
-                    <div class="entry">
+                    <div class="entry" onclick="window['viewModel'].displayEntryDetails.showEntryDetails('{entryID}')">
                         <div class="rawText">{rawText}</div>
                         <div class="partOfSpeechColor" style="background-color: {partOfSpeech.color}"></div>
                         <div class="morphColor" style="background-color: {morph.color}"></div>
                         <div class="lemma">{lemma}</div>
                         <div class="partOfSpeechCode" style="color: {partOfSpeech.color}">{partOfSpeech.partOfSpeechCode}</div>
                         <div class="morphCode" style="color: {morph.color}">{morph.morphCode}</div>
-                    &nbsp;
                     </div>
-                {/entries}
+                    {/entries}
                 </div>
+            </div>-->
+
+            <div>
+                <div data-bind="foreach: displayPassage.passageVisible().verses">
+
+                    <div class="verse" data-bind="text: passageRef.verse"></div>
+
+                    <div data-bind="foreach: entries, css: verseWrapperClassName">
+                        <div class="entry">
+                            <div class="rawText" data-bind="text: rawText"></div>
+                            <div class="partOfSpeechColor" data-bind="style: {backgroundColor: partOfSpeech.color}"></div>
+                            <div class="morphColor" data-bind="style: {backgroundColor: morph.color}"></div>
+                            <div class="lemma" data-bind="text: lemma"></div>
+                            <div class="partOfSpeechCode" data-bind="text: partOfSpeech.partOfSpeechCode, style: {color: partOfSpeech.color}"></div>
+                            <div class="morphCode" data-bind="text: morph.morphCode, style: {color: morph.color}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="entryDetailsPopup" data-bind="visible: displayEntryDetails.selectedEntry, with: displayEntryDetails.selectedEntry">
+                DETAILS TEST!
+
+                Definition:
+                <span data-bind="text: details.definition"></span>
 
             </div>
+
             <!-- /ko -->
         </div>
         <div data-role="footer">

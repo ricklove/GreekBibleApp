@@ -4,6 +4,18 @@
 
 module Told.GreekBible.UI {
 
+    export interface IPassageVersesUI {
+        verses: IVerseUI[];
+        allEntries: IEntryUI[];
+    }
+
+    export interface IVerseUI {
+        passageRef: Data.IPassageRef;
+        verseWrapperClassName: string;
+
+        entries: IEntryUI[];
+    }
+
     export interface IPassageUI extends Data.IPassage {
         entries: IEntryUI[];
     }
@@ -11,8 +23,6 @@ module Told.GreekBible.UI {
     export interface IEntryUI extends Data.IEntry {
         partOfSpeech: IPartOfSpeechUI;
         morph: IMorphUI;
-
-        verseWrapperClassName: string;
 
         isSelected: boolean;
 

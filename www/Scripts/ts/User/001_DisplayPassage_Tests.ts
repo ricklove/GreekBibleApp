@@ -95,28 +95,34 @@ module Told.GreekBible.UI.Tests {
     export var step_ThenTheFirstEntryShouldBeDisplayed = function (viewModel: UI.MainViewModel, sample: ISample, step: (title: string) => void) {
         step("Then the first entry should be displayed");
 
-        var entriesFiltered = viewModel.displayPassage.passageVisible().entries.filter(e=> e.passageRef.verse === sample.verse);
+        var verses = viewModel.displayPassage.passageVisible().verses;
+        var versesFiltered = verses.filter(v=> v.passageRef.verse === sample.verse);
 
-        ok(entriesFiltered.length > 0, "The correct verse is visible");
+        ok(versesFiltered.length === 1, "The correct verse is visible");
 
-        equal(entriesFiltered[0].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
-        equal(entriesFiltered[0].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
-        equal(entriesFiltered[0].passageRef.verse, sample.verse, "The correct Verse is displayed");
-        equal(entriesFiltered[0].rawText, sample.firstEntryText, "The first entry text is displayed");
+        var entries = versesFiltered[0].entries;
+
+        equal(entries[0].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
+        equal(entries[0].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
+        equal(entries[0].passageRef.verse, sample.verse, "The correct Verse is displayed");
+        equal(entries[0].rawText, sample.firstEntryText, "The first entry text is displayed");
     };
 
     export var step_AndTheLastEntryShouldBeDisplayed = function (viewModel: UI.MainViewModel, sample: ISample, step: (title: string) => void) {
         step("And the last entry should be displayed");
 
-        var entriesFiltered = viewModel.displayPassage.passageVisible().entries.filter(e=> e.passageRef.verse === sample.verse);
+        var verses = viewModel.displayPassage.passageVisible().verses;
+        var versesFiltered = verses.filter(v=> v.passageRef.verse === sample.verse);
 
-        ok(entriesFiltered.length > 0, "The correct verse is visible");
+        ok(versesFiltered.length === 1, "The correct verse is visible");
 
-        var iLast = entriesFiltered.length - 1;
-        equal(entriesFiltered[iLast].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
-        equal(entriesFiltered[iLast].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
-        equal(entriesFiltered[iLast].passageRef.verse, sample.verse, "The correct Verse is displayed");
-        equal(entriesFiltered[iLast].rawText, sample.lastEntryText, "The last entry text is displayed");
+        var entries = versesFiltered[0].entries;
+
+        var iLast = entries.length - 1;
+        equal(entries[iLast].passageRef.bookNumber, sample.bookNumber, "The correct Book is displayed");
+        equal(entries[iLast].passageRef.chapter, sample.chapter, "The correct Chapter is displayed");
+        equal(entries[iLast].passageRef.verse, sample.verse, "The correct Verse is displayed");
+        equal(entries[iLast].rawText, sample.lastEntryText, "The last entry text is displayed");
     };
 
     var f = new FeatureTests.Feature("001 - View a Greek Passage", [
@@ -136,8 +142,9 @@ module Told.GreekBible.UI.Tests {
                 step("Then a passage should be displayed");
 
                 ok(viewModel.displayPassage.passageVisible(), "The passage is displayed");
-                ok(viewModel.displayPassage.passageVisible().entries, "The entries are displayed");
-                ok(viewModel.displayPassage.passageVisible().entries[0].rawText, "An entry is displayed");
+                ok(viewModel.displayPassage.passageVisible().verses, "The verses are displayed");
+                ok(viewModel.displayPassage.passageVisible().verses[0].entries, "The entries are displayed");
+                ok(viewModel.displayPassage.passageVisible().verses[0].entries[0].rawText, "An entry is displayed");
 
                 done();
             }, done);
@@ -158,8 +165,9 @@ module Told.GreekBible.UI.Tests {
                 step("Then a default passage should be displayed");
 
                 ok(viewModel.displayPassage.passageVisible(), "The passage is displayed");
-                ok(viewModel.displayPassage.passageVisible().entries, "The entries are displayed");
-                ok(viewModel.displayPassage.passageVisible().entries[0].rawText, "An entry is displayed");
+                ok(viewModel.displayPassage.passageVisible().verses, "The verses are displayed");
+                ok(viewModel.displayPassage.passageVisible().verses[0].entries, "The entries are displayed");
+                ok(viewModel.displayPassage.passageVisible().verses[0].entries[0].rawText, "An entry is displayed");
 
                 done();
             }, done);

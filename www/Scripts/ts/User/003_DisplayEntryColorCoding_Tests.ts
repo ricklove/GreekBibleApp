@@ -18,7 +18,7 @@ module Told.GreekBible.UI.Tests {
 
             step_GivenAPassageIsDisplayed(step, function (viewModel) {
                 step("Then entries with the same PartOfSpeech code should have the same color");
-                var entries = viewModel.displayPassage.passageVisible().entries;
+                var entries = viewModel.displayPassage.passageVisible().allEntries;
 
                 var firstColors: { [key: string]: string } = {};
 
@@ -50,7 +50,7 @@ module Told.GreekBible.UI.Tests {
 
             step_GivenAPassageIsDisplayed(step, function (viewModel) {
                 step("Then entries with the same Morph code should have the same color");
-                var entries = viewModel.displayPassage.passageVisible().entries;
+                var entries = viewModel.displayPassage.passageVisible().allEntries;
 
                 var firstColors: { [key: string]: string } = {};
 
@@ -82,7 +82,7 @@ module Told.GreekBible.UI.Tests {
 
             step_GivenAPassageIsDisplayed(step, function (viewModel) {
                 step("Then entries with a different PartOfSpeech code should have a different color");
-                var entries = viewModel.displayPassage.passageVisible().entries;
+                var entries = viewModel.displayPassage.passageVisible().allEntries;
 
                 var firstColors: { [key: string]: string } = {};
                 var keys: string[] = [];
@@ -126,7 +126,7 @@ module Told.GreekBible.UI.Tests {
 
             step_GivenAPassageIsDisplayed(step, function (viewModel) {
                 step("Then entries with a different Morph code should have a different color");
-                var entries = viewModel.displayPassage.passageVisible().entries;
+                var entries = viewModel.displayPassage.passageVisible().allEntries;
 
                 var firstColors: { [key: string]: string } = {};
                 var keys: string[] = [];

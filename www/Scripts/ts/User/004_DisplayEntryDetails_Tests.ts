@@ -20,7 +20,7 @@ module Told.GreekBible.UI.Tests {
             step_GivenAPassageIsDisplayed(step, function (viewModel) {
                 step("When the user selects an entry");
 
-                var entries = viewModel.displayPassage.passageVisible().entries;
+                var entries = viewModel.displayPassage.passageVisible().verses[0].entries;
 
                 viewModel.displayEntryDetails.showDetails(entries[0]);
 
