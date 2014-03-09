@@ -82,7 +82,8 @@
                     <div class="verse" data-bind="text: passageRef.verse"></div>
 
                     <div data-bind="foreach: entries, css: verseWrapperClassName">
-                        <div class="entry">
+                        <div class="entry" data-bind="attr: {id: id}, click: function(data){ $root.displayEntryDetails.showDetails( data ) }">
+                            <!--<div class="entry" data-bind="click: $root.displayEntryDetails.showEntry.bind($data)">-->
                             <div class="rawText" data-bind="text: rawText"></div>
                             <div class="partOfSpeechColor" data-bind="style: {backgroundColor: partOfSpeech.color}"></div>
                             <div class="morphColor" data-bind="style: {backgroundColor: morph.color}"></div>
@@ -95,19 +96,67 @@
             </div>
 
 
-            <div class="entryDetailsPopup" data-bind="visible: displayEntryDetails.selectedEntry, with: displayEntryDetails.selectedEntry">
-                DETAILS TEST!
+            <div id="entryDetailsPopup" class="entryDetailsPopup" data-bind="visible: displayEntryDetails.selectedEntry, style: {top: displayEntryDetails.selectedEntryTop}, with: displayEntryDetails.selectedEntry, click: function(){ $root.displayEntryDetails.hideDetails() }">
+                <div class="entry">
+                    <div class="rawText" data-bind="text: rawText"></div>
+                    <div class="partOfSpeechColor" data-bind="style: {backgroundColor: partOfSpeech.color}"></div>
+                    <div class="morphColor" data-bind="style: {backgroundColor: morph.color}"></div>
+                    <div class="lemma" data-bind="text: lemma"></div>
+                </div>
+                <div>
+                    <div class="partOfSpeechCode" data-bind="text: partOfSpeech.partOfSpeechCode, style: {color: partOfSpeech.color}"></div>
+                    <span class="partOfSpeechCode" data-bind="text: partOfSpeech.mainPart, style: {color: partOfSpeech.color}"></span>
+                    <span class="partOfSpeechCode" data-bind="text: partOfSpeech.secondPart, style: {color: partOfSpeech.color}"></span>
+                </div>
+                <div>
+                    <div class="morphCode" data-bind="text: morph.morphCode, style: {color: morph.color}"></div>
+                    <span class="morphCode" data-bind="text: morph.mPerson, style: {color: morph.color}"></span>
+                    <span class="morphCode" data-bind="text: morph.mTense , style: {color: morph.color}"></span>
+                    <span class="morphCode" data-bind="text: morph.mVoice , style: {color: morph.color}"></span>
+                    <span class="morphCode" data-bind="text: morph.mMood  , style: {color: morph.color}"></span>
+                    <span class="morphCode" data-bind="text: morph.mCase  , style: {color: morph.color}"></span>
+                    <span class="morphCode" data-bind="text: morph.mNumber, style: {color: morph.color}"></span>
+                    <span class="morphCode" data-bind="text: morph.mGender, style: {color: morph.color}"></span>
+                    <span class="morphCode" data-bind="text: morph.mDegree, style: {color: morph.color}"></span>
+                </div>
+                <div class="strongs">
+                    <!-- ko if: details.isFound -->
+                    <div class="strongsDefinition">
+                        <span data-bind="text: details.data.strongDefinition"></span>
+                    </div>
+                    <div class="strongsExtra">
 
-                Definition:
-                <span data-bind="text: details.definition"></span>
+                        <div>
+                            KJV Definition: <span class="kjvDefinition" data-bind="text: details.data.kjvDefinition"></span>
+                        </div>
 
+                        <div>
+                            ID: <span data-bind="text: details.data.id"></span>
+                        </div>
+                        <div>
+                            Derivation: <span data-bind="text: details.data.strongDerivation"></span>
+                        </div>
+                        <div>
+                            References: <span data-bind="text: details.data.references"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: !details.isFound -->
+                    <div>Strong's Entry - Not Found</div>
+                    <!-- /ko -->
+                </div>
+            </div>
+
+            <div class="entryDetailsPopupSpaceFix" data-bind="blankSpace: displayEntryDetails.selectedEntry, blankSpaceTargetId: 'entryDetailsPopup'">
             </div>
 
             <!-- /ko -->
         </div>
-        <div data-role="footer">
-            <h4>&copy; Told - Rick Love - 2014</h4>
-        </div>
+
+    </div>
+    <div data-role="footer">
+        <h4>&copy; Told - Rick Love - 2014</h4>
+    </div>
     </div>
 
     <div id="test" style="display: none">

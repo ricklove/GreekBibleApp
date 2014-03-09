@@ -36,7 +36,7 @@ var Told;
                                     step("And the definition should be displayed");
 
                                     equal(entries[0].details.isVisible, true, "Details are displayed");
-                                    ok(entries[0].details.definition != "", "Definition is displayed");
+                                    ok(entries[0].details.data != null, "Definition is displayed");
                                     done();
                                 } else {
                                     setTimeout(checkAndCall, 100);

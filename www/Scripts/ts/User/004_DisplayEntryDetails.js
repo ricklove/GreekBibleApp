@@ -8,7 +8,9 @@ var Told;
         (function (UI) {
             var MainViewModel_DisplayEntryDetails = (function () {
                 function MainViewModel_DisplayEntryDetails(viewModel) {
+                    this._nextId = 1000;
                     this.selectedEntry = ko.observable(null);
+                    this.selectedEntryTop = ko.observable("0px");
                     this.viewModel = viewModel;
                 }
                 Object.defineProperty(MainViewModel_DisplayEntryDetails.prototype, "userSettings", {
@@ -19,7 +21,18 @@ var Told;
                     configurable: true
                 });
 
-                MainViewModel_DisplayEntryDetails.prototype.showDetails = function (entry) {
+                MainViewModel_DisplayEntryDetails.prototype.formatPassage = function (passage) {
+                    var p = passage;
+
+                    for (var i = 0; i < p.entries.length; i++) {
+                        var e = p.entries[i];
+                        e.id = "" + this._nextId++;
+                    }
+
+                    return p;
+                };
+
+                MainViewModel_DisplayEntryDetails.prototype.hideDetails = function (entry) {
                     var self = this;
 
                     // Close all open details
@@ -38,6 +51,12 @@ var Told;
                     }
 
                     self.selectedEntry(null);
+                };
+
+                MainViewModel_DisplayEntryDetails.prototype.showDetails = function (entry) {
+                    var self = this;
+
+                    self.hideDetails();
 
                     var showEntryDetails = function () {
                         var matches = self.passageDetails.entries.filter(function (e) {
@@ -45,9 +64,11 @@ var Told;
                         });
 
                         if (matches.length > 0) {
-                            entry.details.definition = matches[0].strongDefinition;
+                            entry.details.data = matches[0];
+                            entry.details.isFound = true;
                         } else {
-                            entry.details.definition = "NOT FOUND";
+                            entry.details.data = null;
+                            entry.details.isFound = false;
                         }
 
                         entry.details.isLoaded = true;
@@ -57,6 +78,10 @@ var Told;
                         entry.isSelected = true;
                         self.selectedEntry(entry);
 
+                        var top = Math.floor($("#" + entry.id).offset().top + ($("#" + entry.id).outerHeight(true)));
+
+                        self.selectedEntryTop(top + "px");
+
                         console.log("Selected Entry = " + entry.lemma);
                     };
 
@@ -64,9 +89,10 @@ var Told;
                     if (entry.details == null) {
                         entry.details = {
                             isLoading: true,
+                            isFound: true,
                             isLoaded: false,
                             isVisible: false,
-                            definition: ""
+                            data: null
                         };
 
                         //var loadDetails;
@@ -88,6 +114,31 @@ var Told;
                 return MainViewModel_DisplayEntryDetails;
             })();
             UI.MainViewModel_DisplayEntryDetails = MainViewModel_DisplayEntryDetails;
+
+            ko.bindingHandlers["blankSpace"] = {
+                init: function (element, valueAccessor, allBindings) {
+                    if (ko.unwrap(valueAccessor()) != null) {
+                        $(element).show();
+
+                        var targetId = allBindings.get("blankSpaceTargetId");
+                        var targetHeight = $("#" + targetId).outerHeight();
+                        $(element).height(targetHeight);
+                    } else {
+                        $(element).hide();
+                    }
+                },
+                update: function (element, valueAccessor, allBindings) {
+                    if (ko.unwrap(valueAccessor()) != null) {
+                        $(element).show();
+
+                        var targetId = allBindings.get("blankSpaceTargetId");
+                        var targetHeight = $("#" + targetId).outerHeight();
+                        $(element).height(targetHeight);
+                    } else {
+                        $(element).hide();
+                    }
+                }
+            };
         })(GreekBible.UI || (GreekBible.UI = {}));
         var UI = GreekBible.UI;
     })(Told.GreekBible || (Told.GreekBible = {}));

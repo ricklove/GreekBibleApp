@@ -311,3 +311,14 @@ Show details in UI
 #### Completed
 
 - Change back to Knockout with dustJS
+
+
+### V0.3 H6
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+Show details as popup
+
+#### Completed
+
+- Show details as popup

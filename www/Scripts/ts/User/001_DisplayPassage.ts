@@ -116,6 +116,7 @@ module Told.GreekBible.UI {
             var passageVerse = { entries: entriesVerse };
 
             var passageFormatted = self.viewModel.displayEntryColorCoding.formatPassage(passageVerse);
+            var passageFormatted = self.viewModel.displayEntryDetails.formatPassage(passageFormatted);
 
             // Group in verses
             var verses: IVerseUI[] = [];

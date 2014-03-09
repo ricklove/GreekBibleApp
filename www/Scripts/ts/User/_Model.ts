@@ -21,6 +21,8 @@ module Told.GreekBible.UI {
     }
 
     export interface IEntryUI extends Data.IEntry {
+        id: string;
+
         partOfSpeech: IPartOfSpeechUI;
         morph: IMorphUI;
 
@@ -41,7 +43,8 @@ module Told.GreekBible.UI {
         isLoaded: boolean;
         isLoading: boolean;
         isVisible: boolean;
+        isFound: boolean;
+        data: Data.IDetailsEntry;
 
-        definition: string;
     }
 }

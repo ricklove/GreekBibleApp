@@ -15,12 +15,26 @@ module Told.GreekBible.UI {
             this.viewModel = viewModel;
         }
 
+        formatPassage(passage: IPassageUI): IPassageUI {
+
+            var p = passage;
+
+            for (var i = 0; i < p.entries.length; i++) {
+                var e = p.entries[i];
+                e.id = "" + this._nextId++;
+            }
+
+            return p;
+        }
+
+        private _nextId = 1000;
+
         selectedEntry = ko.observable<IEntryUI>(null);
+        selectedEntryTop = ko.observable<string>("0px");
 
         private passageDetails: Data.IPassageDetails;
 
-        showDetails(entry: IEntryUI) {
-
+        hideDetails(entry: IEntryUI) {
             var self = this;
 
             // Close all open details
@@ -39,15 +53,25 @@ module Told.GreekBible.UI {
             }
 
             self.selectedEntry(null);
+        }
+
+        showDetails(entry: IEntryUI) {
+
+            var self = this;
+
+            self.hideDetails();
 
             var showEntryDetails = function () {
 
                 var matches = self.passageDetails.entries.filter(e=> e.name === entry.lemma);
 
                 if (matches.length > 0) {
-                    entry.details.definition = matches[0].strongDefinition;
+                    entry.details.data = matches[0];
+                    entry.details.isFound = true;
+
                 } else {
-                    entry.details.definition = "NOT FOUND";
+                    entry.details.data = null;
+                    entry.details.isFound = false;
                 }
 
                 entry.details.isLoaded = true;
@@ -57,6 +81,10 @@ module Told.GreekBible.UI {
                 entry.isSelected = true;
                 self.selectedEntry(entry);
 
+                var top = Math.floor($("#" + entry.id).offset().top + ($("#" + entry.id).outerHeight(true)));
+
+                self.selectedEntryTop(top + "px");
+
                 console.log("Selected Entry = " + entry.lemma);
             };
 
@@ -64,9 +92,10 @@ module Told.GreekBible.UI {
             if (entry.details == null) {
                 entry.details = {
                     isLoading: true,
+                    isFound: true,
                     isLoaded: false,
                     isVisible: false,
-                    definition: ""
+                    data: null
                 };
 
                 //var loadDetails;
@@ -89,5 +118,30 @@ module Told.GreekBible.UI {
 
         }
     }
+
+    ko.bindingHandlers["blankSpace"] = {
+        init: function (element, valueAccessor, allBindings) {
+            if (ko.unwrap(valueAccessor()) != null) {
+                $(element).show();
+
+                var targetId = allBindings.get("blankSpaceTargetId");
+                var targetHeight = $("#" + targetId).outerHeight();
+                $(element).height(targetHeight);
+            } else {
+                $(element).hide();
+            }
+        },
+        update: function (element, valueAccessor, allBindings) {
+            if (ko.unwrap(valueAccessor()) != null) {
+                $(element).show();
+
+                var targetId = allBindings.get("blankSpaceTargetId");
+                var targetHeight = $("#" + targetId).outerHeight();
+                $(element).height(targetHeight);
+            } else {
+                $(element).hide();
+            }
+        }
+    };
 
 }

@@ -156,6 +156,8 @@
 
 - [ ] Display Entry Popup
 	- [x] Replace dust template with knockout to support click event
+	- [x] Show details
+	- [ ] Show cross references
 - [x] Fix spacing between words
 
 ---
