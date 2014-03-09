@@ -44,7 +44,19 @@ module Told.GreekBible.UI {
         isLoading: boolean;
         isVisible: boolean;
         isFound: boolean;
-        data: Data.IDetailsEntry;
+        data: IDetailsEntryUI;
+    }
 
+    export interface IDetailsEntryUI extends Data.IDetailsEntry {
+        strongDefinitionParts: IReferencePart[];
+        kjvDefinitionParts: IReferencePart[];
+        strongDerivationParts: IReferencePart[];
+        referencesParts: IReferencePart[];
+    }
+
+    export interface IReferencePart {
+        isReference: boolean;
+        text: string;
+        referenceId: number;
     }
 }

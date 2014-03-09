@@ -154,10 +154,11 @@
 		- [x] Show context from current chapter
 		- [ ] Show context from adjacent chapter
 
-- [ ] Display Entry Popup
+- [x] Display Entry Popup
 	- [x] Replace dust template with knockout to support click event
 	- [x] Show details
-	- [ ] Show cross references
+	- [x] Remove extra spaces
+	- [x] Show cross references
 - [x] Fix spacing between words
 
 ---

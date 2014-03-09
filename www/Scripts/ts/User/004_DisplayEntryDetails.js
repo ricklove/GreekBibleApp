@@ -32,7 +32,7 @@ var Told;
                     return p;
                 };
 
-                MainViewModel_DisplayEntryDetails.prototype.hideDetails = function (entry) {
+                MainViewModel_DisplayEntryDetails.prototype.hideDetails = function () {
                     var self = this;
 
                     // Close all open details
@@ -53,6 +53,35 @@ var Told;
                     self.selectedEntry(null);
                 };
 
+                MainViewModel_DisplayEntryDetails.prototype.showDetails_Reference = function (referenceId) {
+                    console.log("called showDetails_Reference '" + referenceId + "'");
+
+                    var self = this;
+
+                    var matches = self.passageDetails.entries.filter(function (e) {
+                        return e.id === referenceId;
+                    });
+
+                    if (matches.length > 0) {
+                        var match = matches[0];
+                        var fakeEntry = {
+                            // Reuse id to keep in same place
+                            id: self.selectedEntry().id,
+                            details: { data: null, isFound: true, isLoaded: true, isLoading: false, isVisible: true },
+                            lemma: match.name,
+                            rawText: match.name,
+                            partOfSpeech: { color: "#FFFFFF", partOfSpeechCode: "", mainPart: "", secondPart: "" },
+                            morph: { color: "#FFFFFF", morphCode: "", mCase: "", mDegree: "", mGender: "", mMood: "", mNumber: "", mPerson: "", mTense: "", mVoice: "" },
+                            passageRef: null,
+                            isSelected: true,
+                            isVerseStart: false
+                        };
+
+                        self.showDetails(fakeEntry);
+                        console.log("show details " + fakeEntry.id);
+                    }
+                };
+
                 MainViewModel_DisplayEntryDetails.prototype.showDetails = function (entry) {
                     var self = this;
 
@@ -65,6 +94,12 @@ var Told;
 
                         if (matches.length > 0) {
                             entry.details.data = matches[0];
+
+                            entry.details.data.strongDefinitionParts = self.createRefParts(entry.details.data.strongDefinition);
+                            entry.details.data.kjvDefinitionParts = self.createRefParts(entry.details.data.kjvDefinition);
+                            entry.details.data.referencesParts = self.createRefParts(entry.details.data.references);
+                            entry.details.data.strongDerivationParts = self.createRefParts(entry.details.data.strongDerivation);
+
                             entry.details.isFound = true;
                         } else {
                             entry.details.data = null;
@@ -78,7 +113,7 @@ var Told;
                         entry.isSelected = true;
                         self.selectedEntry(entry);
 
-                        var top = Math.floor($("#" + entry.id).offset().top + ($("#" + entry.id).outerHeight(true)));
+                        var top = Math.floor($("#" + entry.id).offset().top + ($("#" + entry.id).outerHeight(false)));
 
                         self.selectedEntryTop(top + "px");
 
@@ -111,6 +146,48 @@ var Told;
                         showEntryDetails();
                     }
                 };
+
+                MainViewModel_DisplayEntryDetails.prototype.createRefParts = function (text) {
+                    var self = this;
+
+                    var regex = /([^\$]*)(\$G\d+)/mg;
+                    var parts = [];
+                    var m;
+                    var lastFoundIndex = -1;
+
+                    while (m = regex.exec(text)) {
+                        lastFoundIndex = regex.lastIndex;
+
+                        var t = m[1].trim();
+                        var reference = m[2].trim();
+
+                        if (t != "") {
+                            parts.push({ isReference: false, text: t, referenceId: -1 });
+                        }
+
+                        if (reference != "") {
+                            var refId = parseInt(/(\d+)/.exec(reference)[1]);
+
+                            var matches = self.passageDetails.entries.filter(function (e) {
+                                return e.id === refId;
+                            });
+
+                            if (matches.length > 0) {
+                                parts.push({ isReference: true, text: matches[0].name + "(#" + refId + ")", referenceId: refId });
+                            }
+                        }
+                    }
+
+                    if (regex.lastIndex >= lastFoundIndex) {
+                        var remaining = text.substr(regex.lastIndex);
+
+                        if (remaining != "") {
+                            parts.push({ isReference: false, text: remaining, referenceId: -1 });
+                        }
+                    }
+
+                    return parts;
+                };
                 return MainViewModel_DisplayEntryDetails;
             })();
             UI.MainViewModel_DisplayEntryDetails = MainViewModel_DisplayEntryDetails;
@@ -120,7 +197,7 @@ var Told;
                     if (ko.unwrap(valueAccessor()) != null) {
                         $(element).show();
 
-                        var targetId = allBindings.get("blankSpaceTargetId");
+                        var targetId = allBindings["get"]("blankSpaceTargetId");
                         var targetHeight = $("#" + targetId).outerHeight();
                         $(element).height(targetHeight);
                     } else {
@@ -131,7 +208,7 @@ var Told;
                     if (ko.unwrap(valueAccessor()) != null) {
                         $(element).show();
 
-                        var targetId = allBindings.get("blankSpaceTargetId");
+                        var targetId = allBindings["get"]("blankSpaceTargetId");
                         var targetHeight = $("#" + targetId).outerHeight();
                         $(element).height(targetHeight);
                     } else {

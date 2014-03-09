@@ -148,4 +148,13 @@ module Told.GreekBible.UI {
         }
     }
 
+    ko.bindingHandlers["removeSpace"] = {
+        init: function (element, valueAccessor, allBindings) {
+            $(element).contents().filter(function () { return this.nodeType === 3; }).remove();
+        },
+        update: function (element, valueAccessor, allBindings) {
+            $(element).contents().filter(function () { return this.nodeType === 3; }).remove();
+        }
+    };
+
 }

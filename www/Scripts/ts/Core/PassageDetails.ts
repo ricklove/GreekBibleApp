@@ -5,7 +5,7 @@
     }
 
     export interface IDetailsEntry {
-        id: string;
+        id: number;
         name: string;
         translit: string;
         pronunciation: string;

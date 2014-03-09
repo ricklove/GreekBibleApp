@@ -34,7 +34,7 @@ module Told.GreekBible.UI {
 
         private passageDetails: Data.IPassageDetails;
 
-        hideDetails(entry: IEntryUI) {
+        hideDetails() {
             var self = this;
 
             // Close all open details
@@ -55,6 +55,38 @@ module Told.GreekBible.UI {
             self.selectedEntry(null);
         }
 
+        showDetails_Reference(referenceId: number) {
+            console.log("called showDetails_Reference '" + referenceId + "'");
+
+            var self = this;
+
+            var matches = self.passageDetails.entries.filter(e=> e.id === referenceId);
+
+            if (matches.length > 0) {
+                var match = matches[0];
+                var fakeEntry: IEntryUI = {
+
+                    // Reuse id to keep in same place
+                    id: self.selectedEntry().id,
+
+                    details: { data: null, isFound: true, isLoaded: true, isLoading: false, isVisible: true },
+                    lemma: match.name,
+                    rawText: match.name,
+
+                    partOfSpeech: { color: "#FFFFFF", partOfSpeechCode: "", mainPart: "", secondPart: "" },
+                    morph: { color: "#FFFFFF", morphCode: "", mCase: "", mDegree: "", mGender: "", mMood: "", mNumber: "", mPerson: "", mTense: "", mVoice: "" },
+
+                    passageRef: null,
+
+                    isSelected: true,
+                    isVerseStart: false,
+                };
+
+                self.showDetails(fakeEntry);
+                console.log("show details " + fakeEntry.id);
+            }
+        }
+
         showDetails(entry: IEntryUI) {
 
             var self = this;
@@ -66,7 +98,13 @@ module Told.GreekBible.UI {
                 var matches = self.passageDetails.entries.filter(e=> e.name === entry.lemma);
 
                 if (matches.length > 0) {
-                    entry.details.data = matches[0];
+                    entry.details.data = <IDetailsEntryUI> matches[0];
+
+                    entry.details.data.strongDefinitionParts = self.createRefParts(entry.details.data.strongDefinition);
+                    entry.details.data.kjvDefinitionParts = self.createRefParts(entry.details.data.kjvDefinition);
+                    entry.details.data.referencesParts = self.createRefParts(entry.details.data.references);
+                    entry.details.data.strongDerivationParts = self.createRefParts(entry.details.data.strongDerivation);
+
                     entry.details.isFound = true;
 
                 } else {
@@ -81,7 +119,7 @@ module Told.GreekBible.UI {
                 entry.isSelected = true;
                 self.selectedEntry(entry);
 
-                var top = Math.floor($("#" + entry.id).offset().top + ($("#" + entry.id).outerHeight(true)));
+                var top = Math.floor($("#" + entry.id).offset().top + ($("#" + entry.id).outerHeight(false)));
 
                 self.selectedEntryTop(top + "px");
 
@@ -117,6 +155,49 @@ module Told.GreekBible.UI {
             }
 
         }
+
+        createRefParts(text: string): IReferencePart[] {
+
+            var self = this;
+
+            var regex = /([^\$]*)(\$G\d+)/mg;
+            var parts: IReferencePart[] = [];
+            var m: RegExpExecArray;
+            var lastFoundIndex = -1;
+
+            while (m = regex.exec(text)) {
+
+                lastFoundIndex = regex.lastIndex;
+
+                var t = m[1].trim();
+                var reference = m[2].trim();
+
+                if (t != "") {
+                    parts.push({ isReference: false, text: t, referenceId: -1 });
+                }
+
+                if (reference != "") {
+
+                    var refId = parseInt(/(\d+)/.exec(reference)[1]);
+
+                    var matches = self.passageDetails.entries.filter(e=> e.id === refId);
+
+                    if (matches.length > 0) {
+                        parts.push({ isReference: true, text: matches[0].name + "(#" + refId + ")", referenceId: refId });
+                    }
+                }
+            }
+
+            if (regex.lastIndex >= lastFoundIndex) {
+                var remaining = text.substr(regex.lastIndex);
+
+                if (remaining != "") {
+                    parts.push({ isReference: false, text: remaining, referenceId: -1 });
+                }
+            }
+
+            return parts;
+        }
     }
 
     ko.bindingHandlers["blankSpace"] = {
@@ -124,7 +205,7 @@ module Told.GreekBible.UI {
             if (ko.unwrap(valueAccessor()) != null) {
                 $(element).show();
 
-                var targetId = allBindings.get("blankSpaceTargetId");
+                var targetId = allBindings["get"]("blankSpaceTargetId");
                 var targetHeight = $("#" + targetId).outerHeight();
                 $(element).height(targetHeight);
             } else {
@@ -135,7 +216,7 @@ module Told.GreekBible.UI {
             if (ko.unwrap(valueAccessor()) != null) {
                 $(element).show();
 
-                var targetId = allBindings.get("blankSpaceTargetId");
+                var targetId = allBindings["get"]("blankSpaceTargetId");
                 var targetHeight = $("#" + targetId).outerHeight();
                 $(element).height(targetHeight);
             } else {

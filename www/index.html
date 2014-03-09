@@ -79,9 +79,10 @@
             <div>
                 <div data-bind="foreach: displayPassage.passageVisible().verses">
 
-                    <div class="verse" data-bind="text: passageRef.verse"></div>
-
-                    <div data-bind="foreach: entries, css: verseWrapperClassName">
+                    <div data-bind="foreach: entries, css: verseWrapperClassName, removeSpace: entries">
+                        <!-- ko if: isVerseStart -->
+                        <div class="verse" data-bind="text: passageRef.verse"></div>
+                        <!-- /ko -->
                         <div class="entry" data-bind="attr: {id: id}, click: function(data){ $root.displayEntryDetails.showDetails( data ) }">
                             <!--<div class="entry" data-bind="click: $root.displayEntryDetails.showEntry.bind($data)">-->
                             <div class="rawText" data-bind="text: rawText"></div>
@@ -122,22 +123,22 @@
                 <div class="strongs">
                     <!-- ko if: details.isFound -->
                     <div class="strongsDefinition">
-                        <span data-bind="text: details.data.strongDefinition"></span>
+                        <span data-bind="template: {name:'refTextTemplate', foreach: details.data.strongDefinitionParts}"></span>
                     </div>
                     <div class="strongsExtra">
 
                         <div>
-                            KJV Definition: <span class="kjvDefinition" data-bind="text: details.data.kjvDefinition"></span>
+                            KJV Definition: <span class="kjvDefinition" data-bind="template: {name:'refTextTemplate', foreach: details.data.kjvDefinitionParts}"></span>
                         </div>
 
                         <div>
                             ID: <span data-bind="text: details.data.id"></span>
                         </div>
                         <div>
-                            Derivation: <span data-bind="text: details.data.strongDerivation"></span>
+                            Derivation: <span data-bind="template: {name:'refTextTemplate', foreach: details.data.strongsDerivationParts}"></span>
                         </div>
                         <div>
-                            References: <span data-bind="text: details.data.references"></span>
+                            References: <span data-bind="template: {name:'refTextTemplate', foreach: details.data.referencesParts}"></span>
                         </div>
                     </div>
                     <!-- /ko -->
@@ -147,17 +148,27 @@
                 </div>
             </div>
 
+
+
             <div class="entryDetailsPopupSpaceFix" data-bind="blankSpace: displayEntryDetails.selectedEntry, blankSpaceTargetId: 'entryDetailsPopup'">
             </div>
 
             <!-- /ko -->
         </div>
 
+        <div data-role="footer">
+            <h4>&copy; Told - Rick Love - 2014</h4>
+        </div>
     </div>
-    <div data-role="footer">
-        <h4>&copy; Told - Rick Love - 2014</h4>
-    </div>
-    </div>
+
+    <script type="text/html" id="refTextTemplate">
+        <!-- ko if: isReference -->
+        <span class="strongsReference" data-bind="text: text, click: function(data){ $root.displayEntryDetails.showDetails_Reference(data.referenceId); }, clickBubble: false"></span>
+        <!-- /ko -->
+        <!-- ko if: !isReference -->
+        <span data-bind="text: text"></span>
+        <!-- /ko -->
+    </script>
 
     <div id="test" style="display: none">
         <div data-role="header">

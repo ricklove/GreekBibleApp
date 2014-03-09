@@ -322,3 +322,15 @@ Show details as popup
 #### Completed
 
 - Show details as popup
+
+
+### V0.3 H7
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+Link to references
+
+#### Completed
+
+- Show references in popup when clicked
+

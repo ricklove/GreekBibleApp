@@ -147,6 +147,19 @@ var Told;
                 return MainViewModel_DisplayPassage;
             })();
             UI.MainViewModel_DisplayPassage = MainViewModel_DisplayPassage;
+
+            ko.bindingHandlers["removeSpace"] = {
+                init: function (element, valueAccessor, allBindings) {
+                    $(element).contents().filter(function () {
+                        return this.nodeType === 3;
+                    }).remove();
+                },
+                update: function (element, valueAccessor, allBindings) {
+                    $(element).contents().filter(function () {
+                        return this.nodeType === 3;
+                    }).remove();
+                }
+            };
         })(GreekBible.UI || (GreekBible.UI = {}));
         var UI = GreekBible.UI;
     })(Told.GreekBible || (Told.GreekBible = {}));

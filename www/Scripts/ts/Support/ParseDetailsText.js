@@ -19,7 +19,7 @@ var Told;
 
                 Parser_Details.parseEntry = function (entryRaw) {
                     return {
-                        id: entryRaw[0],
+                        id: parseInt(entryRaw[0]),
                         name: entryRaw[1],
                         translit: entryRaw[2],
                         pronunciation: entryRaw[3],

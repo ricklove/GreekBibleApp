@@ -14,9 +14,9 @@
 .verseWrapperContext {
 }
 
-.verseWrapperContext > div {
-    background-color: lightgray;
-}
+    .verseWrapperContext > div {
+        background-color: lightgray;
+    }
 
 .book {
     font-size: 1.5em;
@@ -87,12 +87,20 @@
 }
 
 .strongsDefinition {
-    color:blue;
+    color: blue;
 }
 
 .strongsExtra {
     padding: 5px;
 }
+
+.strongsReference {
+    color: #ff00ff;
+}
+
+    .strongsReference:hover {
+        font-weight: bold;
+    }
 
 .kjvDefinition {
     color: blue;
