@@ -161,8 +161,11 @@
 	- [x] Show cross references
 - [x] Fix spacing between words
 
+- [x] Fix popup space at bottom of page
+
 ---
 
+- [ ] Navigate cross-references
 
 - [ ] Refactor Book and Chapter with Display Passage and Choose Passage
 

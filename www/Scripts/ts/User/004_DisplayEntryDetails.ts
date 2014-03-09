@@ -89,7 +89,13 @@ module Told.GreekBible.UI {
 
         showDetails(entry: IEntryUI) {
 
+
             var self = this;
+
+            if (self.selectedEntry() === entry) {
+                self.hideDetails();
+                return;
+            }
 
             self.hideDetails();
 
@@ -116,12 +122,11 @@ module Told.GreekBible.UI {
                 entry.details.isVisible = true;
 
                 // Selected
+                var top = Math.floor($("#" + entry.id).offset().top + ($("#" + entry.id).outerHeight(false)));
+                self.selectedEntryTop(top + "px");
+
                 entry.isSelected = true;
                 self.selectedEntry(entry);
-
-                var top = Math.floor($("#" + entry.id).offset().top + ($("#" + entry.id).outerHeight(false)));
-
-                self.selectedEntryTop(top + "px");
 
                 console.log("Selected Entry = " + entry.lemma);
             };
@@ -203,22 +208,40 @@ module Told.GreekBible.UI {
     ko.bindingHandlers["blankSpace"] = {
         init: function (element, valueAccessor, allBindings) {
             if (ko.unwrap(valueAccessor()) != null) {
+                $(element).height(0);
                 $(element).show();
 
                 var targetId = allBindings["get"]("blankSpaceTargetId");
                 var targetHeight = $("#" + targetId).outerHeight();
-                $(element).height(targetHeight);
+
+                var targetBottom = $("#" + targetId).offset().top + targetHeight;
+                var parentBottom = $(element).parent().offset().top + $(element).parent().height();
+
+                var neededRoom = targetBottom - parentBottom;
+
+                if (neededRoom > 0) {
+                    $(element).height(neededRoom + 5);
+                }
             } else {
                 $(element).hide();
             }
         },
         update: function (element, valueAccessor, allBindings) {
             if (ko.unwrap(valueAccessor()) != null) {
+                $(element).height(0);
                 $(element).show();
 
                 var targetId = allBindings["get"]("blankSpaceTargetId");
                 var targetHeight = $("#" + targetId).outerHeight();
-                $(element).height(targetHeight);
+
+                var targetBottom = $("#" + targetId).offset().top + targetHeight;
+                var parentBottom = $(element).parent().offset().top + $(element).parent().height();
+
+                var neededRoom = targetBottom - parentBottom;
+
+                if (neededRoom > 0) {
+                    $(element).height(neededRoom + 5);
+                }
             } else {
                 $(element).hide();
             }
