@@ -120,6 +120,12 @@
                     <span class="morphCode" data-bind="text: morph.mGender, style: {color: morph.color}"></span>
                     <span class="morphCode" data-bind="text: morph.mDegree, style: {color: morph.color}"></span>
                 </div>
+
+                <!-- ko if: details.isLoading -->
+                <div class="strongs">Loading details...</div>
+                <!-- /ko -->
+
+                <!-- ko if: !details.isLoading -->
                 <div class="strongs">
                     <!-- ko if: details.isFound -->
                     <div class="strongsDefinition">
@@ -146,6 +152,8 @@
                     <div>Strong's Entry - Not Found</div>
                     <!-- /ko -->
                 </div>
+                <!-- /ko -->
+
             </div>
 
 

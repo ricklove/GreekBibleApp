@@ -53,6 +53,20 @@ var Told;
                     self.selectedEntry(null);
                 };
 
+                MainViewModel_DisplayEntryDetails.prototype.createBlankEntry = function () {
+                    return {
+                        id: "0",
+                        details: { data: null, isFound: true, isLoaded: true, isLoading: false, isVisible: true },
+                        lemma: "",
+                        rawText: "",
+                        partOfSpeech: { color: "#FFFFFF", partOfSpeechCode: "", mainPart: "", secondPart: "" },
+                        morph: { color: "#FFFFFF", morphCode: "", mCase: "", mDegree: "", mGender: "", mMood: "", mNumber: "", mPerson: "", mTense: "", mVoice: "" },
+                        passageRef: null,
+                        isSelected: false,
+                        isVerseStart: false
+                    };
+                };
+
                 MainViewModel_DisplayEntryDetails.prototype.showDetails_Reference = function (referenceId) {
                     console.log("called showDetails_Reference '" + referenceId + "'");
 
@@ -64,18 +78,12 @@ var Told;
 
                     if (matches.length > 0) {
                         var match = matches[0];
-                        var fakeEntry = {
-                            // Reuse id to keep in same place
-                            id: self.selectedEntry().id,
-                            details: { data: null, isFound: true, isLoaded: true, isLoading: false, isVisible: true },
-                            lemma: match.name,
-                            rawText: match.name,
-                            partOfSpeech: { color: "#FFFFFF", partOfSpeechCode: "", mainPart: "", secondPart: "" },
-                            morph: { color: "#FFFFFF", morphCode: "", mCase: "", mDegree: "", mGender: "", mMood: "", mNumber: "", mPerson: "", mTense: "", mVoice: "" },
-                            passageRef: null,
-                            isSelected: true,
-                            isVerseStart: false
-                        };
+                        var fakeEntry = self.createBlankEntry();
+
+                        // Reuse id to keep in same place
+                        fakeEntry.id = self.selectedEntry().id;
+                        fakeEntry.lemma = match.name;
+                        fakeEntry.rawText = match.name;
 
                         self.showDetails(fakeEntry);
                         console.log("show details " + fakeEntry.id);
@@ -85,12 +93,25 @@ var Told;
                 MainViewModel_DisplayEntryDetails.prototype.showDetails = function (entry) {
                     var self = this;
 
+                    self._lastShowDetailsEntry = entry;
+
                     if (self.selectedEntry() === entry) {
                         self.hideDetails();
                         return;
                     }
 
                     self.hideDetails();
+
+                    var selectEntry = function (entryToSelect) {
+                        // Selected
+                        var top = Math.floor($("#" + entryToSelect.id).offset().top + ($("#" + entryToSelect.id).outerHeight(false)));
+                        self.selectedEntryTop(top + "px");
+
+                        entryToSelect.isSelected = true;
+                        self.selectedEntry(entryToSelect);
+
+                        console.log("Selected Entry = " + entryToSelect.lemma);
+                    };
 
                     var showEntryDetails = function () {
                         var matches = self.passageDetails.entries.filter(function (e) {
@@ -111,17 +132,11 @@ var Told;
                             entry.details.isFound = false;
                         }
 
+                        entry.details.isLoading = false;
                         entry.details.isLoaded = true;
                         entry.details.isVisible = true;
 
-                        // Selected
-                        var top = Math.floor($("#" + entry.id).offset().top + ($("#" + entry.id).outerHeight(false)));
-                        self.selectedEntryTop(top + "px");
-
-                        entry.isSelected = true;
-                        self.selectedEntry(entry);
-
-                        console.log("Selected Entry = " + entry.lemma);
+                        selectEntry(entry);
                     };
 
                     // Load details
@@ -134,15 +149,21 @@ var Told;
                             data: null
                         };
 
-                        //var loadDetails;
-                        //loadDetails();
-                        // TODO: Deal with race condition where multiple entries clicked quickly while details is still loading
                         if (self.passageDetails == null) {
                             Told.GreekBible.Data.Loader_Details.loadDetails(function (text) {
-                                self.passageDetails = Told.GreekBible.Data.Parser_Details.parseDetails(text);
+                                setTimeout(function () {
+                                    if (self.passageDetails == null) {
+                                        self.passageDetails = Told.GreekBible.Data.Parser_Details.parseDetails(text);
+                                    }
 
-                                showEntryDetails();
+                                    // Deal with race condition where multiple entries clicked quickly while details is still loading
+                                    if (entry === self._lastShowDetailsEntry) {
+                                        showEntryDetails();
+                                    }
+                                }, 500);
                             });
+
+                            selectEntry(entry);
                         } else {
                             showEntryDetails();
                         }

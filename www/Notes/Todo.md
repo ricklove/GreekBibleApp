@@ -144,15 +144,14 @@
 ### Greek Bible V0.3
 
 - [x] Delay loading of passage a split second to allow for loading... to display
-- [ ] Extend features: Add Verse to DisplayPassage and ChangePassage
+- [x] Extend features: Add Verse to DisplayPassage and ChangePassage
 	- [x] Show only one verse
 		- [x] Add verse to ViewModel
 		- [x] Modify tests to check for verse
 		- [x] Pass tests
 		- [x] Display verse choice on UI
-	- [ ] Show one verse with context (2 verses above and below)
+	- [x] Show one verse with context (2 verses above and below)
 		- [x] Show context from current chapter
-		- [ ] Show context from adjacent chapter
 
 - [x] Display Entry Popup
 	- [x] Replace dust template with knockout to support click event
@@ -163,9 +162,12 @@
 
 - [x] Fix popup space at bottom of page
 
+- [ ] Remove jQueryMobile and all unused resources
+
 ---
 
 - [ ] Navigate cross-references
+- [ ] Show context from adjacent chapter
 
 - [ ] Refactor Book and Chapter with Display Passage and Choose Passage
 

@@ -55,6 +55,24 @@ module Told.GreekBible.UI {
             self.selectedEntry(null);
         }
 
+        createBlankEntry(): IEntryUI {
+            return {
+                id: "0",
+
+                details: { data: null, isFound: true, isLoaded: true, isLoading: false, isVisible: true },
+                lemma: "",
+                rawText: "",
+
+                partOfSpeech: { color: "#FFFFFF", partOfSpeechCode: "", mainPart: "", secondPart: "" },
+                morph: { color: "#FFFFFF", morphCode: "", mCase: "", mDegree: "", mGender: "", mMood: "", mNumber: "", mPerson: "", mTense: "", mVoice: "" },
+
+                passageRef: null,
+
+                isSelected: false,
+                isVerseStart: false,
+            };
+        }
+
         showDetails_Reference(referenceId: number) {
             console.log("called showDetails_Reference '" + referenceId + "'");
 
@@ -64,33 +82,25 @@ module Told.GreekBible.UI {
 
             if (matches.length > 0) {
                 var match = matches[0];
-                var fakeEntry: IEntryUI = {
+                var fakeEntry: IEntryUI = self.createBlankEntry();
 
-                    // Reuse id to keep in same place
-                    id: self.selectedEntry().id,
-
-                    details: { data: null, isFound: true, isLoaded: true, isLoading: false, isVisible: true },
-                    lemma: match.name,
-                    rawText: match.name,
-
-                    partOfSpeech: { color: "#FFFFFF", partOfSpeechCode: "", mainPart: "", secondPart: "" },
-                    morph: { color: "#FFFFFF", morphCode: "", mCase: "", mDegree: "", mGender: "", mMood: "", mNumber: "", mPerson: "", mTense: "", mVoice: "" },
-
-                    passageRef: null,
-
-                    isSelected: true,
-                    isVerseStart: false,
-                };
+                // Reuse id to keep in same place
+                fakeEntry.id = self.selectedEntry().id;
+                fakeEntry.lemma = match.name;
+                fakeEntry.rawText = match.name;
 
                 self.showDetails(fakeEntry);
                 console.log("show details " + fakeEntry.id);
             }
         }
 
+        private _lastShowDetailsEntry: IEntryUI;
+
         showDetails(entry: IEntryUI) {
 
-
             var self = this;
+
+            self._lastShowDetailsEntry = entry;
 
             if (self.selectedEntry() === entry) {
                 self.hideDetails();
@@ -98,6 +108,18 @@ module Told.GreekBible.UI {
             }
 
             self.hideDetails();
+
+            var selectEntry = function (entryToSelect: IEntryUI) {
+
+                // Selected
+                var top = Math.floor($("#" + entryToSelect.id).offset().top + ($("#" + entryToSelect.id).outerHeight(false)));
+                self.selectedEntryTop(top + "px");
+
+                entryToSelect.isSelected = true;
+                self.selectedEntry(entryToSelect);
+
+                console.log("Selected Entry = " + entryToSelect.lemma);
+            };
 
             var showEntryDetails = function () {
 
@@ -118,17 +140,11 @@ module Told.GreekBible.UI {
                     entry.details.isFound = false;
                 }
 
+                entry.details.isLoading = false;
                 entry.details.isLoaded = true;
                 entry.details.isVisible = true;
 
-                // Selected
-                var top = Math.floor($("#" + entry.id).offset().top + ($("#" + entry.id).outerHeight(false)));
-                self.selectedEntryTop(top + "px");
-
-                entry.isSelected = true;
-                self.selectedEntry(entry);
-
-                console.log("Selected Entry = " + entry.lemma);
+                selectEntry(entry);
             };
 
             // Load details
@@ -141,17 +157,24 @@ module Told.GreekBible.UI {
                     data: null
                 };
 
-                //var loadDetails;
-                //loadDetails();
-
-                // TODO: Deal with race condition where multiple entries clicked quickly while details is still loading
-
                 if (self.passageDetails == null) {
-                    Data.Loader_Details.loadDetails((text) => {
-                        self.passageDetails = Data.Parser_Details.parseDetails(text);
 
-                        showEntryDetails();
+                    Data.Loader_Details.loadDetails((text) => {
+                        setTimeout(() => {
+                            if (self.passageDetails == null) {
+                                self.passageDetails = Data.Parser_Details.parseDetails(text);
+                            }
+
+                            // Deal with race condition where multiple entries clicked quickly while details is still loading
+                            if (entry === self._lastShowDetailsEntry) {
+                                showEntryDetails();
+                            }
+
+                        }, 500);
                     });
+
+                    selectEntry(entry);
+
                 } else {
                     showEntryDetails();
                 }
