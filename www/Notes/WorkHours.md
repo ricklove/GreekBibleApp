@@ -345,3 +345,6 @@ Remove jQueryMobile and other bloat libraries
 
 - Remove jQueryMobile references
 - Add skeleton css
+- Remove unneeded files
+- Fix orphaned verse number
+- 

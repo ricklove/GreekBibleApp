@@ -18,6 +18,10 @@
         background-color: lightgray;
     }
 
+.entryWrapper {
+    display: inline-block;
+}
+
 .book {
     font-size: 1.5em;
     margin-bottom: 10px;

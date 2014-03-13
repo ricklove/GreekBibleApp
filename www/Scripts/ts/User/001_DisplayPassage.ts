@@ -50,7 +50,7 @@ module Told.GreekBible.UI {
 
             // Make Blank while waiting
             self.passageRaw({ entries: [] });
-            self.passageVisible({ verses: [], allEntries:[] });
+            self.passageVisible({ verses: [], allEntries: [] });
             self.hasPassageLoadingFailed(false);
 
             // Set choice
@@ -156,5 +156,26 @@ module Told.GreekBible.UI {
             $(element).contents().filter(function () { return this.nodeType === 3; }).remove();
         }
     };
+
+    ko.bindingHandlers["alwaysShowScrollBar"] = {
+        init: function (element, valueAccessor, allBindings) {
+
+            var winHeight = $(window).height();
+            var docHeight = $(document).height();
+
+            if (winHeight > docHeight) {
+                $(document).css("minHeight", winHeight + 1);
+            }
+        },
+        update: function (element, valueAccessor, allBindings) {
+            var winHeight = $(window).height();
+            var docHeight = $(document).height();
+
+            if (winHeight > docHeight) {
+                $(document).css("minHeight", winHeight + 1);
+            }
+        }
+    };
+
 
 }
