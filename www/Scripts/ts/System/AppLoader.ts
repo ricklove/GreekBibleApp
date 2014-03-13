@@ -83,12 +83,16 @@ module Told.AppLoader {
 
     export function loadRequirements_Main(onLoaded?: () => void, onProgress?: (double) => void) {
 
-        loadCss('Styles/css/External/themes/default/jquery.mobile-1.4.0.min.css');
+        //loadCss('Styles/css/External/themes/default/jquery.mobile-1.4.0.min.css');
+        loadCss('Styles/css/External/base.css');
+        loadCss('Styles/css/External/skeleton.css');
+        loadCss('Styles/css/External/layout.css');
+        loadCss('Styles/css/Theme.css');
         loadCss('Styles/css/App.css');
 
         var scriptList = [
             'Scripts/js/External/jquery.min.js',
-            'Scripts/js/External/jquery.mobile-1.4.0.min.js',
+            //'Scripts/js/External/jquery.mobile-1.4.0.min.js',
             'Scripts/js/External/knockout-3.0.0.min.js',
 
         //'Scripts/js/External/dust-core-0.3.0.min.js',

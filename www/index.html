@@ -17,10 +17,10 @@
     </div>
 
     <div data-role="page" id="home" style="display: none">
-        <div data-role="header">
+        <div class="header" data-role="header">
             <h1>Greek Bible</h1>
         </div>
-        <div data-role="content">
+        <div class="content" data-role="content">
             <h3>Select Passage:</h3>
             <!--<select>
                 <option>1</option>
@@ -30,6 +30,7 @@
 
             <select data-bind="options: changePassage.bookChoices(), value:changePassage.book, refreshJQM:changePassage.book"></select>
             <select id="selChapter" data-bind="options: changePassage.chapterChoices(), value:changePassage.chapter, refreshJQM:changePassage.chapter, refreshJQM:changePassage.book, hasFocus: changePassage.isChapterFocused"></select>
+            :
             <select id="selVerse" data-bind="options: changePassage.verseChoices(), value:changePassage.verse, refreshJQM:changePassage.verse, refreshJQM:changePassage.chapter, refreshJQM:changePassage.book, hasFocus: changePassage.isVerseFocused"></select>
             <!--<h4><span data-bind="text: passage().entries.length"></span>&nbsp;Words</h4>-->
             <!-- ko if: displayPassage.isPassageLoading -->
@@ -164,7 +165,7 @@
             <!-- /ko -->
         </div>
 
-        <div data-role="footer">
+        <div class="footer" data-role="footer">
             <h4>&copy; Told - Rick Love - 2014</h4>
         </div>
     </div>

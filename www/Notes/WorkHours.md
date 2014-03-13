@@ -334,3 +334,14 @@ Link to references
 
 - Show references in popup when clicked
 
+
+### V0.3 H8
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+Remove jQueryMobile and other bloat libraries
+
+#### Completed
+
+- Remove jQueryMobile references
+- Add skeleton css

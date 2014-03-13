@@ -1,0 +1,49 @@
+﻿body, div, h1, h2, h3, h4, h5, h6 {
+    font-family: sans-serif;
+    line-height: normal;
+}
+
+select {
+    display:inline-block;
+    width:auto;
+}
+
+/*
+input[type="text"], input[type="password"], input[type="email"], textarea, select {
+    margin-left: auto;
+    margin-right: auto;
+}*/
+
+/*body {
+    margin: 0px;
+}*/
+
+.content {
+    margin: 8px;
+}
+
+.header, .footer {
+    background: #e9e9e9;
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+    line-height: normal;
+    text-shadow: 0.1em 0.1em 6px gray;
+}
+
+    .header > h1, .footer > h4 {
+        color: #333;
+        font-weight: bold;
+        line-height: normal;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .header > h1 {
+        font-size: 28px;
+        letter-spacing: 0.4em;
+    }
+
+    .footer > h4 {
+        font-size: 14px;
+    }
