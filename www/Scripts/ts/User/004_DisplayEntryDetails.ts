@@ -111,9 +111,11 @@ module Told.GreekBible.UI {
 
             var selectEntry = function (entryToSelect: IEntryUI) {
 
-                // Selected
-                var top = Math.floor($("#" + entryToSelect.id).offset().top + ($("#" + entryToSelect.id).outerHeight(false)));
-                self.selectedEntryTop(top + "px");
+                // Allow for headless testing 
+                if ($("#" + entryToSelect.id).length > 0) {
+                    var top = Math.floor($("#" + entryToSelect.id).offset().top + ($("#" + entryToSelect.id).outerHeight(false)));
+                    self.selectedEntryTop(top + "px");
+                }
 
                 entryToSelect.isSelected = true;
                 self.selectedEntry(entryToSelect);
