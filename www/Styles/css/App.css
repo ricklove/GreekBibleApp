@@ -7,6 +7,16 @@ html {
     overflow-y: scroll;
 }
 
+.nextVerse, .previousVerse {
+    font-weight: bold;
+    font-size: 1.1em;
+    background-color:lightgray;
+    border: 1px solid gray;
+    margin: 5px;
+    padding: 3px;
+    display: inline-block;
+}
+
 .entries {
     margin-bottom: 200px;
 }

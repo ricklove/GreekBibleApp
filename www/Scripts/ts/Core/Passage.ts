@@ -54,6 +54,11 @@
         //    //return this.booksWithAbbreviations[bookNumber - 1].chapterCount;
         //}
 
+        static isValidBookNumber(bookNumber: number) {
+            return bookNumber >= this.booksWithAbbreviations[0].bookNumber
+                && bookNumber <= this.booksWithAbbreviations[this.booksWithAbbreviations.length - 1].bookNumber;
+        }
+
         static getBookName(bookNumber: number) {
             return this.booksWithAbbreviations[bookNumber - 1].book;
         }

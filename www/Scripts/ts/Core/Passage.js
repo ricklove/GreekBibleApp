@@ -19,6 +19,10 @@
                 //    return 100;
                 //    //return this.booksWithAbbreviations[bookNumber - 1].chapterCount;
                 //}
+                BookInfo.isValidBookNumber = function (bookNumber) {
+                    return bookNumber >= this.booksWithAbbreviations[0].bookNumber && bookNumber <= this.booksWithAbbreviations[this.booksWithAbbreviations.length - 1].bookNumber;
+                };
+
                 BookInfo.getBookName = function (bookNumber) {
                     return this.booksWithAbbreviations[bookNumber - 1].book;
                 };

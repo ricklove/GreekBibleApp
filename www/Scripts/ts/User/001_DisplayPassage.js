@@ -66,15 +66,38 @@ var Told;
                 MainViewModel_DisplayPassage.prototype.showPassage = function (bookNumber, chapter, verse, onLoad, onError) {
                     var self = this;
 
-                    // Make Blank while waiting
-                    self.passageRaw({ entries: [] });
-                    self.passageVisible({ verses: [], allEntries: [] });
-                    self.hasPassageLoadingFailed(false);
-
                     // Set choice
                     this.userSettings.bookChoice = bookNumber.toString();
                     this.userSettings.chapterChoice = chapter.toString();
                     this.userSettings.verseChoice = verse.toString();
+
+                    // if same book and chapter, then change visibility only
+                    if (self.book() === Told.GreekBible.Data.BookInfo.getBookName(bookNumber) && self.chapter() === chapter) {
+                        self.verse(verse);
+
+                        self.passageVisible({ verses: [], allEntries: [] });
+                        self.passageVisible(self.getPassageVisible());
+
+                        // Make sure it is loaded before calling load
+                        var checkForLoaded = function () {
+                            if (self.isPassageLoaded()) {
+                                if (onLoad) {
+                                    onLoad();
+                                }
+                            } else {
+                                setTimeout(checkForLoaded, 100);
+                            }
+                        };
+
+                        checkForLoaded();
+
+                        return;
+                    }
+
+                    // Make Blank while waiting
+                    self.passageRaw({ entries: [] });
+                    self.passageVisible({ verses: [], allEntries: [] });
+                    self.hasPassageLoadingFailed(false);
 
                     self.book(Told.GreekBible.Data.BookInfo.getBookName(bookNumber));
                     self.chapter(chapter);
@@ -158,6 +181,29 @@ var Told;
                     $(element).contents().filter(function () {
                         return this.nodeType === 3;
                     }).remove();
+                }
+            };
+
+            ko.bindingHandlers["hideExtraContext"] = {
+                init: function (element, valueAccessor, allBindings) {
+                },
+                update: function (element, valueAccessor, allBindings) {
+                    var mainEntries = $(element).children().filter(function () {
+                        return $(this).hasClass("verseWrapperMain");
+                    }).children();
+                    var contextEntries = $(element).children().filter(function () {
+                        return $(this).hasClass("verseWrapperContext");
+                    }).children();
+
+                    var mPosFirst = mainEntries.first().offset().top;
+                    var mPosLast = mainEntries.last().offset().top;
+
+                    var toHide = contextEntries.filter(function () {
+                        var ePos = $(this).offset().top;
+                        return ePos < mPosFirst || ePos > mPosLast;
+                    });
+
+                    toHide.hide();
                 }
             };
         })(GreekBible.UI || (GreekBible.UI = {}));

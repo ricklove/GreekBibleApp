@@ -122,6 +122,59 @@ module Told.GreekBible.UI {
 
         isChapterFocused = ko.observable<boolean>(false);
         isVerseFocused = ko.observable<boolean>(false);
+
+        public nextVerse() {
+            console.log("nextVerse");
+
+            var self = this;
+
+            var vNext = self.verseNumber() + 1;
+            var cNext = self.chapterNumber() + 1;
+            var bNext = self.bookNumber() + 1;
+
+            if (self.verseChoices().some((v) => v === vNext)) {
+                self.verse(vNext);
+            } else if (self.chapterChoices().some((c) => c === cNext)) {
+                self.chapter(cNext);
+            } else if (Data.BookInfo.isValidBookNumber(bNext)) {
+                self.book(Data.BookInfo.getBookName(bNext));
+            } else {
+                self.book(self.bookChoices()[0]);
+            }
+        }
+
+        public previousVerse() {
+            console.log("previousVerse");
+
+            var self = this;
+
+            var vNext = self.verseNumber() - 1;
+            var cNext = self.chapterNumber() - 1;
+            var bNext = self.bookNumber() - 1;
+
+            if (self.verseChoices().some((v) => v === vNext)) {
+                self.verse(vNext);
+                return;
+            } else if (self.chapterChoices().some((c) => c === cNext)) {
+                self.chapter(cNext);
+            } else if (Data.BookInfo.isValidBookNumber(bNext)) {
+                self.book(Data.BookInfo.getBookName(bNext));
+                self.chapter(Data.BookInfo.getChapterCount(bNext));
+            } else {
+                self.book(self.bookChoices()[self.bookChoices().length - 1]);
+                self.chapter(Data.BookInfo.getChapterCount(bNext));
+            }
+
+            // Goto last verse on load
+            var vm = <MainViewModel>this.owner;
+            vm.displayPassage.showPassage(self.bookNumber(), self.chapterNumber(), 1, () => {
+                var chapterEntries = vm.displayPassage.passageRaw().entries;
+                var verseCount = chapterEntries[chapterEntries.length - 1].passageRef.verse;
+
+                self.verse(verseCount);
+            });
+
+        }
     }
 
 }

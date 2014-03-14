@@ -358,4 +358,4 @@ Implement navigation to next verse
 #### Completed
 
 - Fix scroll bar always visible
-- 
+- Goto next and previous verses

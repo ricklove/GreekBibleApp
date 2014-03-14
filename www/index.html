@@ -78,7 +78,10 @@
             </div>-->
 
             <div>
-                <div data-bind="foreach: displayPassage.passageVisible().verses, removeSpace: displayPassage.passageVisible">
+
+                <div class="previousVerse" data-bind="click: function(){changePassage.previousVerse();}">Previous Verse</div>
+
+                <div data-bind="foreach: displayPassage.passageVisible().verses, removeSpace: displayPassage.passageVisible, hideExtraContext: displayPassage.passageVisible().verses">
 
                     <div data-bind="foreach: entries, css: verseWrapperClassName, removeSpace: entries">
                         <div class="entryWrapper">
@@ -97,6 +100,8 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="nextVerse" data-bind="click: function(){changePassage.nextVerse();}">Next Verse</div>
             </div>
 
 

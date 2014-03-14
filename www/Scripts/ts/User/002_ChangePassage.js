@@ -108,6 +108,65 @@ var Told;
                     this.chapterNumber(this.owner.displayPassage.chapter());
                     this.verseNumber(this.owner.displayPassage.verse());
                 }
+                MainViewModel_ChangePassage.prototype.nextVerse = function () {
+                    console.log("nextVerse");
+
+                    var self = this;
+
+                    var vNext = self.verseNumber() + 1;
+                    var cNext = self.chapterNumber() + 1;
+                    var bNext = self.bookNumber() + 1;
+
+                    if (self.verseChoices().some(function (v) {
+                        return v === vNext;
+                    })) {
+                        self.verse(vNext);
+                    } else if (self.chapterChoices().some(function (c) {
+                        return c === cNext;
+                    })) {
+                        self.chapter(cNext);
+                    } else if (Told.GreekBible.Data.BookInfo.isValidBookNumber(bNext)) {
+                        self.book(Told.GreekBible.Data.BookInfo.getBookName(bNext));
+                    } else {
+                        self.book(self.bookChoices()[0]);
+                    }
+                };
+
+                MainViewModel_ChangePassage.prototype.previousVerse = function () {
+                    console.log("previousVerse");
+
+                    var self = this;
+
+                    var vNext = self.verseNumber() - 1;
+                    var cNext = self.chapterNumber() - 1;
+                    var bNext = self.bookNumber() - 1;
+
+                    if (self.verseChoices().some(function (v) {
+                        return v === vNext;
+                    })) {
+                        self.verse(vNext);
+                        return;
+                    } else if (self.chapterChoices().some(function (c) {
+                        return c === cNext;
+                    })) {
+                        self.chapter(cNext);
+                    } else if (Told.GreekBible.Data.BookInfo.isValidBookNumber(bNext)) {
+                        self.book(Told.GreekBible.Data.BookInfo.getBookName(bNext));
+                        self.chapter(Told.GreekBible.Data.BookInfo.getChapterCount(bNext));
+                    } else {
+                        self.book(self.bookChoices()[self.bookChoices().length - 1]);
+                        self.chapter(Told.GreekBible.Data.BookInfo.getChapterCount(bNext));
+                    }
+
+                    // Goto last verse on load
+                    var vm = this.owner;
+                    vm.displayPassage.showPassage(self.bookNumber(), self.chapterNumber(), 1, function () {
+                        var chapterEntries = vm.displayPassage.passageRaw().entries;
+                        var verseCount = chapterEntries[chapterEntries.length - 1].passageRef.verse;
+
+                        self.verse(verseCount);
+                    });
+                };
                 return MainViewModel_ChangePassage;
             })();
             UI.MainViewModel_ChangePassage = MainViewModel_ChangePassage;
