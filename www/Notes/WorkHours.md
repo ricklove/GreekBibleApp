@@ -347,4 +347,15 @@ Remove jQueryMobile and other bloat libraries
 - Add skeleton css
 - Remove unneeded files
 - Fix orphaned verse number
+
+
+### V0.3 H9
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+Implement navigation to next verse
+
+#### Completed
+
+- Fix scroll bar always visible
 - 

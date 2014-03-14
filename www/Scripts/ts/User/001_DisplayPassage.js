@@ -160,25 +160,6 @@ var Told;
                     }).remove();
                 }
             };
-
-            ko.bindingHandlers["alwaysShowScrollBar"] = {
-                init: function (element, valueAccessor, allBindings) {
-                    var winHeight = $(window).height();
-                    var docHeight = $(document).height();
-
-                    if (winHeight > docHeight) {
-                        $(document).css("minHeight", winHeight + 1);
-                    }
-                },
-                update: function (element, valueAccessor, allBindings) {
-                    var winHeight = $(window).height();
-                    var docHeight = $(document).height();
-
-                    if (winHeight > docHeight) {
-                        $(document).css("minHeight", winHeight + 1);
-                    }
-                }
-            };
         })(GreekBible.UI || (GreekBible.UI = {}));
         var UI = GreekBible.UI;
     })(Told.GreekBible || (Told.GreekBible = {}));

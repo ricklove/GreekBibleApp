@@ -3,6 +3,10 @@
     white-space: pre;
 }
 
+html {
+    overflow-y: scroll;
+}
+
 .entries {
     margin-bottom: 200px;
 }
