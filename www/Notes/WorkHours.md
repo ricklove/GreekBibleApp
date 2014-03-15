@@ -359,3 +359,13 @@ Implement navigation to next verse
 
 - Fix scroll bar always visible
 - Goto next and previous verses
+
+
+### V0.3 H9
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+Publish the results
+
+#### Completed
+

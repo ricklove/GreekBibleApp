@@ -30,6 +30,7 @@ var Told;
                         owner: this,
                         deferEvaluation: true
                     });
+                    this._contextVerseCount = 1;
                     this.viewModel = viewModel;
                     this.showDefault();
                 }
@@ -72,7 +73,7 @@ var Told;
                     this.userSettings.verseChoice = verse.toString();
 
                     // if same book and chapter, then change visibility only
-                    if (self.book() === Told.GreekBible.Data.BookInfo.getBookName(bookNumber) && self.chapter() === chapter) {
+                    if (self.isPassageLoaded() && self.book() === Told.GreekBible.Data.BookInfo.getBookName(bookNumber) && self.chapter() === chapter) {
                         self.verse(verse);
 
                         self.passageVisible({ verses: [], allEntries: [] });
@@ -134,7 +135,7 @@ var Told;
 
                     var verseNum = self.verse();
                     var entriesVerse = passageChapter.entries.filter(function (e) {
-                        return e.passageRef.verse >= verseNum - 2 && e.passageRef.verse <= verseNum + 2;
+                        return e.passageRef.verse >= verseNum - self._contextVerseCount && e.passageRef.verse <= verseNum + self._contextVerseCount;
                     });
                     var passageVerse = { entries: entriesVerse };
 

@@ -54,7 +54,8 @@ module Told.GreekBible.UI {
             this.userSettings.verseChoice = verse.toString();
 
             // if same book and chapter, then change visibility only
-            if (self.book() === Data.BookInfo.getBookName(bookNumber)
+            if (self.isPassageLoaded()
+                && self.book() === Data.BookInfo.getBookName(bookNumber)
                 && self.chapter() === chapter) {
 
                 self.verse(verse);
@@ -131,13 +132,15 @@ module Told.GreekBible.UI {
             deferEvaluation: true
         });
 
+        private _contextVerseCount = 1;
+
         getPassageVisible(): IPassageVersesUI {
             var self = <MainViewModel_DisplayPassage> this;
 
             var passageChapter = <IPassageUI> self.passageRaw();
 
             var verseNum = self.verse();
-            var entriesVerse = passageChapter.entries.filter(e=> e.passageRef.verse >= verseNum - 2 && e.passageRef.verse <= verseNum + 2);
+            var entriesVerse = passageChapter.entries.filter(e=> e.passageRef.verse >= verseNum - self._contextVerseCount && e.passageRef.verse <= verseNum + self._contextVerseCount);
             var passageVerse = { entries: entriesVerse };
 
             var passageFormatted = self.viewModel.displayEntryColorCoding.formatPassage(passageVerse);

@@ -81,7 +81,8 @@
 
                 <div class="previousVerse" data-bind="click: function(){changePassage.previousVerse();}">Previous Verse</div>
 
-                <div data-bind="foreach: displayPassage.passageVisible().verses, removeSpace: displayPassage.passageVisible, hideExtraContext: displayPassage.passageVisible().verses">
+                <!--, hideExtraContext: displayPassage.passageVisible().verses-->
+                <div data-bind="foreach: displayPassage.passageVisible().verses, removeSpace: displayPassage.passageVisible">
 
                     <div data-bind="foreach: entries, css: verseWrapperClassName, removeSpace: entries">
                         <div class="entryWrapper">
@@ -211,7 +212,7 @@
             var viewModel = new Told.GreekBible.UI.MainViewModel();
             ko.applyBindings(viewModel);
 
-            window['viewModel'] = viewModel;
+            window['mainViewModel'] = viewModel;
 
             var hash = location.hash;
             if ($(hash).length === 0) { hash = "#home"; }

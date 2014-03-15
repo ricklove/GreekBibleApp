@@ -162,34 +162,22 @@
 
 - [x] Fix popup space at bottom of page
 
-- [ ] Remove jQueryMobile and all unused resources
+- [x] Navigate cross-references
+
+- [x] Remove jQueryMobile and all unused resources
+- [x] Tweak UI
+- [x] FIX: Bug when choosing different verse in same chapter quickly
+
+- [ ] Publish
+	- [ ] WebApp
+		- [ ] Make ScreenShots
+	- [ ] PhoneGap
+	- [ ] GitHub
+	- [ ] Blog
 
 ---
 
-- [ ] Navigate cross-references
 - [ ] Show context from adjacent chapter
-
-- [ ] Refactor Book and Chapter with Display Passage and Choose Passage
-
-- [ ] BUG: Chapter is not returning to "1" after change of book (after Set "deferEvaluation: true")
-	- [ ] RefreshJQM is not being called at the right time
-
-- [ ] Display Entry Details (James 1)
-	- [ ] User Features:
-		- [ ] DisplayPassage
-			- [ ] DisplayEntryConcordancePopup
-	- [ ] Support Features:
-		- [ ] LoadConcordance
-	- [ ] Core:
-		- [ ] Concordance Definitions
-	- [ ] Tasks
-		- [x] Create Tests for ParsePassageText
-			- [ ] Test that the codes are parsed correctly
-
-
-- [ ] Create Tests for Every Feature
-	- [ ] BDD Tests for every user feature
-	- [ ] TDD Tests for every system feature
 
 - [ ] Create Documentation for Every Feature
 	- [ ] Create tool to extract Documentation from .feature files

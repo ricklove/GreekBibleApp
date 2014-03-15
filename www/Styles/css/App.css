@@ -8,13 +8,16 @@ html {
 }
 
 .nextVerse, .previousVerse {
-    font-weight: bold;
+    /*font-weight: bold;*/
     font-size: 1.1em;
-    background-color:lightgray;
-    border: 1px solid gray;
+    background-color: #e9e9e9;
+    text-shadow: 0.1em 0.1em 1px gray;
     margin: 5px;
     padding: 3px;
     display: inline-block;
+    border: 1px solid gray;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .entries {
@@ -22,10 +25,11 @@ html {
 }
 
 .verseWrapperMain, .verseWrapperContext {
-    display: inline;
+    /*display: inline;*/
 }
 
 .verseWrapperContext {
+    background-color: lightgray;
 }
 
     .verseWrapperContext > div {
