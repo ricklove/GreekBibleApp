@@ -365,7 +365,10 @@ Implement navigation to next verse
 
 #### What is the most important thing I can accomplish in this hour for this app?
 
-Publish the results
+Upload the results for testing
 
 #### Completed
 
+- Tweak UI
+- Fix failing tests
+- Upload to website

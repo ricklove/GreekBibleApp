@@ -6,7 +6,7 @@ Greek Bible Web App
 
 Greek Bible displays the Greek New Testament with color coded morphology. 
 
-The color cording allows the reader to quickly see associated words in the greek text.
+The color coding allows the reader to quickly see associated words in the greek text.
 
 ### Features
 - Read the Greek of any New Testament Book from the SBL Greek New Testament
