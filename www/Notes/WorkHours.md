@@ -372,3 +372,10 @@ Upload the results for testing
 - Tweak UI
 - Fix failing tests
 - Upload to website
+
+
+### V0.3 H10
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+?Finish blog entry

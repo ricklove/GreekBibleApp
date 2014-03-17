@@ -1,10 +1,10 @@
-Announcing the release of Greek Bible (Version 2):
+Announcing the release of Greek Bible (Version 0_2):
 
 Feature-wise, there is not much different about this release. However, it should perform better and without bugs.
 
 ### Developer Notes
 
-**Greek Bible V2 - Lessons Learned**
+**Greek Bible V0_2 - Lessons Learned**
 
 Well mark this one down as a failure in project and time management. I
 added essentially no user features and spent almost 20 hours working
