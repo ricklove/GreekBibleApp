@@ -1,3 +1,42 @@
+### Publishing
+
+#### Required Splash Screens
+
+	http://phonegap.com/blog/build/new-apple-app-store-submittal-rules/
+
+	<gap:splash src="splash/ios/Default.png" width="320" height="480" />
+	<gap:splash src="splash/ios/Default_at_2x.png" width="640" height="960" />
+	<gap:splash src="splash/ios/Default_iphone5.png" width="640" height="1136" />
+	<gap:splash src="splash/ios/Default-Landscape.png" width="1024" height="768" />
+	<gap:splash src="splash/ios/Default-Portrait.png" width="768" height="1024" />
+	<gap:splash src="splash/ios/Default-Landscape_at_2x.png" width="2048" height="1496" />
+	<gap:splash src="splash/ios/Default-Portrait_at_2x.png" width="1536" height="2008" />
+
+	<icon src="icons/ios/classic.png" gap:platform="ios" width="57" height="57" />
+	<icon src="icons/ios/ipad.png" gap:platform="ios" width="72" height="72" />
+	<icon src="icons/ios/retina.png" gap:platform="ios" width="114" height="114" />
+	<icon src="icons/ios/retina_ipad.png" gap:platform="ios" width="144" height="144" />
+
+#### Screen Shots
+
+
+	iOS Screenshot Specifications
+
+	You should know this already, but when it comes to creating your screenshots here's a quick refresher on what's required. For a retina universal app you'll need to prepare the following sizes of screenshots:
+
+	Screenshots for 3.5-inch iPhone and iPod touch: 960x640 pixels.
+	Screenshots for 4-inch iPhone 5 and iPod touch (5th gen): 1136x640 pixels.
+	Screenshots for iPad: 1536x2048 pixels.
+
+Use iPhone5 size screen shots (at half resolution): 320x568.
+
+Using google chrome, inspect the page, and then change the content size to 337x568 (to give room for the scroll bar).
+
+Then, crop the image to the right size.
+
+#### 
+
+
 ### Testing Organization
 
 #### Types

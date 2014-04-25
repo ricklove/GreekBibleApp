@@ -379,3 +379,25 @@ Upload the results for testing
 #### What is the most important thing I can accomplish in this hour for this app?
 
 ?Finish blog entry
+
+
+### V1.0 H1
+
+#### What is the most important thing I can accomplish in this hour for this app?
+
+Prepare to Publish to AppStore
+
+
+#### Tasks
+
+- Make Screen Shots
+- Review summary & description
+
+
+### V1.0 H2
+
+#### What is the most important thing to do?
+
+Apply some shine to the UI:
+
+- Improve styling for previous & next buttons

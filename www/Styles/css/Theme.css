@@ -1,15 +1,92 @@
 ﻿body, div, h1, h2, h3, h4, h5, h6 {
-    font-family: sans-serif;
+    font-family: arial, helvetica, sans-serif;
     line-height: normal;
+    color: #434343;
+}
+
+h1, h2, h3, h4, h5 {
+    color: #424242;
+    /*font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;*/
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+    font-variant: small-caps;
+}
+
+.nextVerse, .previousVerse {
+    /*vertical-align: top;
+    display: inline-block;
+    padding: 4px;
+    font-size: 22px;
+    color: white;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    background: #454545;
+    border: 0;
+    border-bottom: 2px solid #2f2e2e;
+    cursor: pointer;
+    -webkit-box-shadow: inset 0 -2px #2f2e2e;
+    box-shadow: inset 0 -2px #2f2e2e;*/
+    font-size: 1.3em;
+    background-color: #e9e9e9;
+    margin: 5px;
+    padding: 3px;
+    border: 1px solid gray;
+    display: block;
+    text-align: center;
+    /*-webkit-border-radius: 5px;
+    border-radius: 5px;*/
+    background-image: -webkit-linear-gradient(top, rgb(250, 251, 253), rgb(220, 230, 239));
+    color: rgb(65, 131, 196);
+}
+
+.previousVerse {
+    border-bottom: 4px solid rgb(65, 131, 196);
+}
+
+.nextVerse {
+    border-top: 4px solid rgb(65, 131, 196);
 }
 
 select {
-    display:inline-block;
-    width:auto;
+    display: inline-block;
+    width: auto;
 }
 
+select {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-padding-end: 20px;
+    -moz-padding-end: 20px;
+    -webkit-padding-start: 2px;
+    -moz-padding-start: 2px;
+}
+
+selectOFF {
+    background-color: #F07575; /* fallback color if gradients are not supported */
+    background-image: url(../images/select-arrow.png), -webkit-linear-gradient(top, #E5E5E5, #F4F4F4); /* For Chrome and Safari */
+    background-image: url(../images/select-arrow.png), -moz-linear-gradient(top, #E5E5E5, #F4F4F4); /* For old Fx (3.6 to 15) */
+    background-image: url(../images/select-arrow.png), -ms-linear-gradient(top, #E5E5E5, #F4F4F4); /* For pre-releases of IE 10*/
+    background-image: url(../images/select-arrow.png), -o-linear-gradient(top, #E5E5E5, #F4F4F4); /* For old Opera (11.1 to 12.0) */
+    background-image: url(../images/select-arrow.png), linear-gradient(to bottom, #E5E5E5, #F4F4F4); /* Standard syntax; must be last */
+    background-position: center right;
+    background-repeat: no-repeat;
+    border: 1px solid #AAA;
+    border-radius: 2px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    color: #555;
+    font-size: inherit;
+    margin: 0;
+    overflow: hidden;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
 body {
-    
 }
 
 /*
@@ -51,3 +128,7 @@ input[type="text"], input[type="password"], input[type="email"], textarea, selec
     .footer > h4 {
         font-size: 14px;
     }
+
+h3 {
+    font-size: 22px;
+}
