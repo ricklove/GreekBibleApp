@@ -167,11 +167,19 @@ h3 {
         top: 5px;
     }
 
-#about h3 {
+#about h3, #about h4, #about h5 {
+    text-align: center;
+}
+
+#about .logo {
     text-align: center;
 }
 
 #about ul {
     list-style: circle;
     padding: 10px;
+}
+
+#about p {
+    text-align: justify;
 }
