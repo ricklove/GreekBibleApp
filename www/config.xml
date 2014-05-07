@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns   = "http://www.w3.org/ns/widgets"
     xmlns:gap   = "http://phonegap.com/ns/1.0"
-    id          = "com.phonegap.example"
-    version     = "0.3.7" >
+    id          = "com.toldpro.greekbible"
+    version     = "1.0" >
 
-  <name>Greek Bible</name>
+  <name>TOLD Greek Bible</name>
 
   <description>
-    Greek Bible displays the Greek New Testament with color coded morphology.
+    TOLD Greek Bible displays the Greek New Testament with color coded morphology.
   </description>
 
   <author href="https://toldpro.com" email="admin@toldpro.com">
-    Rick Love - Told
+    TOLD - Rick Love
   </author>
 
   <icon src="icon.png" />

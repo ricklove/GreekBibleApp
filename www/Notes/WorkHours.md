@@ -418,5 +418,7 @@ Apply some shine to the UI:
 - Rebuild with PhoneGapBuild
 - Submit to Google Play
 - Submit to InMobi Publish
+- Create Blog Post
+
 - Submit to Windows Store
 - Submit to Apple Store
