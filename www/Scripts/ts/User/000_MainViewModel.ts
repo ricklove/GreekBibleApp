@@ -16,6 +16,7 @@ module Told.GreekBible.UI {
         public changePassage: MainViewModel_ChangePassage;
         public displayEntryColorCoding: MainViewModel_DisplayEntryColorCoding;
         public displayEntryDetails: MainViewModel_DisplayEntryDetails;
+        public navigate: MainViewModel_Navigate;
 
         constructor(providers?: Data.IProviders) {
 
@@ -31,6 +32,27 @@ module Told.GreekBible.UI {
             this.changePassage = new MainViewModel_ChangePassage(this);
 
             this.displayEntryDetails = new MainViewModel_DisplayEntryDetails(this);
+
+            this.navigate = new MainViewModel_Navigate(this);
+        }
+    }
+
+    export class MainViewModel_Navigate {
+
+        private owner: MainViewModel;
+
+        constructor(owner: MainViewModel) {
+            this.owner = owner;
+        }
+
+        about() {
+            $("div.page").hide();
+            $("#about").show();
+        }
+
+        home() {
+            $("div.page").hide();
+            $("#home").show();
         }
     }
 

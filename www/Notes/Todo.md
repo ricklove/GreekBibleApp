@@ -169,6 +169,8 @@
 - [x] FIX: Bug when choosing different verse in same chapter quickly
 
 - [ ] Publish
+	- [ ] Review summary & description
+	- [ ] Add Credits for license
 	- [ ] WebApp
 		- [ ] Make ScreenShots
 	- [ ] PhoneGap

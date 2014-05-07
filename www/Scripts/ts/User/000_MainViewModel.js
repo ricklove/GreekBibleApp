@@ -24,10 +24,29 @@ var Told;
                     this.changePassage = new Told.GreekBible.UI.MainViewModel_ChangePassage(this);
 
                     this.displayEntryDetails = new Told.GreekBible.UI.MainViewModel_DisplayEntryDetails(this);
+
+                    this.navigate = new MainViewModel_Navigate(this);
                 }
                 return MainViewModel;
             })();
             UI.MainViewModel = MainViewModel;
+
+            var MainViewModel_Navigate = (function () {
+                function MainViewModel_Navigate(owner) {
+                    this.owner = owner;
+                }
+                MainViewModel_Navigate.prototype.about = function () {
+                    $("div.page").hide();
+                    $("#about").show();
+                };
+
+                MainViewModel_Navigate.prototype.home = function () {
+                    $("div.page").hide();
+                    $("#home").show();
+                };
+                return MainViewModel_Navigate;
+            })();
+            UI.MainViewModel_Navigate = MainViewModel_Navigate;
 
             ko.bindingHandlers["refreshJQM"] = {
                 update: function (element, valueAccessor) {

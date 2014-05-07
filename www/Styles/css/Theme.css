@@ -12,6 +12,8 @@ h1, h2, h3, h4, h5 {
     font-variant: small-caps;
 }
 
+
+
 .nextVerse, .previousVerse {
     /*vertical-align: top;
     display: inline-block;
@@ -125,10 +127,51 @@ input[type="text"], input[type="password"], input[type="email"], textarea, selec
         letter-spacing: 0.4em;
     }
 
+    .header > h1 {
+        margin-left: 80px;
+        margin-right: 80px;
+    }
+
     .footer > h4 {
         font-size: 14px;
     }
 
 h3 {
     font-size: 22px;
+}
+
+.headerButton {
+    font-size: 1.3em;
+    background-color: #e9e9e9;
+    margin: 5px;
+    padding: 3px;
+    border: 1px solid gray;
+    display: block;
+    text-align: center;
+    background-image: -webkit-linear-gradient(top, rgb(250, 251, 253), rgb(220, 230, 239));
+    color: rgb(65, 131, 196);
+    text-shadow: none;
+}
+
+    .headerButton.right {
+        /*float: right;*/
+        position: absolute;
+        right: 2px;
+        top: 5px;
+    }
+
+    .headerButton.left {
+        /*float: left;*/
+        position: absolute;
+        left: 2px;
+        top: 5px;
+    }
+
+#about h3 {
+    text-align: center;
+}
+
+#about ul {
+    list-style: circle;
+    padding: 10px;
 }

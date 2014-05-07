@@ -1,6 +1,6 @@
 ﻿### Title
 
-Greek Bible App
+TOLD Greek Bible
 
 ### Links
 
@@ -9,7 +9,7 @@ Greek Bible App
 
 ### Summary
 
-Greek Bible App displays the Greek New Testament with color coded morphology. 
+TOLD Greek Bible displays the Greek New Testament with color coded morphology. 
 
 The color coding allows the reader to quickly see associated words in the greek text.
 
@@ -23,7 +23,7 @@ The color coding allows the reader to quickly see associated words in the greek 
 
 ### Open Source
 
-The Greek Bible App is an open source app built on other open source projects. The source code is available at:
+TOLD Greek Bible is an open source app built on other open source projects. The source code is available at:
 <https://github.com/ricklove/GreekBibleApp>
 
 #### MorphGNT
@@ -51,14 +51,14 @@ More information about the SBL Greek New Testament is found at:
 
 ### Author
 
-The Greek Bible App was created by Rick Love who develops under the name TOLD:
+TOLD Greek Bible was created by TOLD - Rick Love:
 <http://www.toldpro.com>
 
 ### License
 
 #### Attribution
 - MorphGNT
-	- MorphGNT.org
+	- MorphGNT.org: <http://MorphGNT.org>
 - SBL Greek New Testament
 	- Copyright 2010 by the Society of Biblical Literature and Logos Bible Software
 	- SBL Greek New Testament: <http://sblgnt.com>

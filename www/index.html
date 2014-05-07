@@ -3,24 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Greek Bible</title>
+    <title>TOLD Greek Bible</title>
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="Styles/css/Loading.css">
 </head>
 <body class="loadingScreen">
 
-    <div id="loadingScreen" class="loadingScreen">
+    <div id="loadingScreen" class="loadingScreen page">
         <div style="height: 50px"></div>
         <img src="Assets/images/mainLoader.gif" />
         <div>Loading...</div>
         <div id="loadingProgress"></div>
     </div>
 
-    <div data-role="page" id="home" style="display: none">
-        <div class="header" data-role="header">
+    <div id="home" class="page" style="display: none">
+        <div class="header">
+            <div class="headerButton right" data-bind="click: function(){mainViewModel.navigate.about();}">About</div>
             <h1>Greek Bible</h1>
         </div>
-        <div class="content" data-role="content">
+        <div class="content">
             <h3>Select Passage:</h3>
             <!--<select>
                 <option>1</option>
@@ -175,9 +176,86 @@
             <div class="push"></div>
         </div>
 
-    <div class="footer" data-role="footer">
-        <h4>&copy; Told - Rick Love - 2014</h4>
+        <div class="footer">
+            <h4>&copy; Told - Rick Love - 2014</h4>
+        </div>
     </div>
+
+    <div id="about" class="page" style="display: none">
+        <div class="header">
+            <div class="headerButton left" data-bind="click: function(){mainViewModel.navigate.home();}">Back</div>
+            <h1>About</h1>
+        </div>
+        <div class="content">
+            <h3>Summary</h3>
+            <p>TOLD Greek Bible displays the Greek New Testament with color coded morphology. </p>
+            <p>The color coding allows the reader to quickly see associated words in the greek text.</p>
+            <h3>Features</h3>
+            <ul>
+                <li>Read the Greek of any New Testament Book from the SBL Greek New Testament</li>
+                <li>View the details of each word:
+                    <ul>
+                        <li>View the Lemma (the root word)</li>
+                        <li>View the Part of Speech</li>
+                        <li>View the Morphology</li>
+                    </ul>
+                </li>
+                <li>View the color coding for the Part of Speech and Morpology to quickly see associated words</li>
+            </ul>
+            <h3>Open Source</h3>
+            <p>
+                TOLD Greek Bible is an open source app built on other open source projects. The source code is available at:
+                <a href="https://github.com/ricklove/GreekBibleApp" target="_blank">https://github.com/ricklove/GreekBibleApp</a>
+            </p>
+            <h4>MorphGNT</h4>
+            <p>The Greek Bible App uses the MorphGNT parsing which is an open source parsing of the NT Greek:</p>
+            <p>
+                The MorphGNT includes a parsed morphological tagging of the SBL Greek New Testament. 
+This work was created by James Tauber as part of his doctorite in linguistics.
+            </p>
+            <p>
+                More information about MorphGNT is found at:
+                <a href="http://morphgnt.org" target="_blank">http://morphgnt.org</a>
+            </p>
+            <h4>The SBL Greek New Testament</h4>
+            <p>The Greek Bible App uses SNLGNT as its text:</p>
+            <pre><code>With the work of textual criticism far from complete, there is a continual need for fresh research and analysis. 
+The SBLGNT, edited by Michael W. Holmes, utilizes a wide range of printed editions, all the major critical apparatuses, 
+and the latest technical resources and manuscript discoveries to establish the text. 
+
+The result is a critically edited text that differs from the Nestle-Aland/United Bible Societies text in more than 540 variation units.
+</code></pre>
+
+            <p>
+                More information about the SBL Greek New Testament is found at:
+                <a href="http://sblgnt.com" target="_blank">http://sblgnt.com</a>
+            </p>
+            <h3>Author</h3>
+            <p>
+                TOLD Greek Bible was created by TOLD - Rick Love:
+                <a href="http://www.toldpro.com" target="_blank">http://www.toldpro.com</a>
+            </p>
+            <h3>License</h3>
+            <h4>Attribution</h4>
+            <ul>
+                <li>MorphGNT
+                    <ul>
+                        <li>MorphGNT.org: <a href="http://MorphGNT.org" target="_blank">http://MorphGNT.org</a></li>
+                    </ul>
+                </li>
+                <li>SBL Greek New Testament
+                    <ul>
+                        <li>Copyright 2010 by the Society of Biblical Literature and Logos Bible Software</li>
+                        <li>SBL Greek New Testament: <a href="http://sblgnt.com" target="_blank">http://sblgnt.com</a></li>
+                        <li>Society of Biblical Literature: <a href="http://www.sbl-site.org" target="_blank">http://www.sbl-site.org</a></li>
+                        <li>Logos Bible Software: <a href="http://www.logos.com" target="_blank">http://www.logos.com</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="footer">
+            <h4>&copy; Told - Rick Love - 2014</h4>
+        </div>
     </div>
 
     <script type="text/html" id="refTextTemplate">

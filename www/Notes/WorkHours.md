@@ -391,7 +391,6 @@ Prepare to Publish to AppStore
 #### Tasks
 
 - Make Screen Shots
-- Review summary & description
 
 
 ### V1.0 H2
@@ -401,3 +400,23 @@ Prepare to Publish to AppStore
 Apply some shine to the UI:
 
 - Improve styling for previous & next buttons
+
+
+### V1.0 H3
+
+#### What is the most important thing to do?
+
+- Review Summary
+- Create About page
+
+
+### NEXT
+
+- Add Icons to About Page
+- Create ScreenShots
+- Sync with Github
+- Rebuild with PhoneGapBuild
+- Submit to Google Play
+- Submit to InMobi Publish
+- Submit to Windows Store
+- Submit to Apple Store
