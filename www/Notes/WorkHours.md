@@ -410,13 +410,18 @@ Apply some shine to the UI:
 - Create About page
 
 
-### NEXT
+### V1.0 H4
+
+#### What is the most important thing to do?
 
 - Add Icons to About Page
-- Create ScreenShots
+- Save Screenshots
 - Sync with Github
 - Rebuild with PhoneGapBuild
-- Submit to Google Play
+- Publish to Google Play
+
+### NEXT
+
 - Submit to InMobi Publish
 - Create Blog Post
 
