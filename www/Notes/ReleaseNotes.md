@@ -19,6 +19,7 @@ The color coding allows the reader to quickly see associated words in the greek 
 	- View the Lemma (the root word)
 	- View the Part of Speech
 	- View the Morphology
+	- View the english definition from Strong's Exhaustive Greek Concordance
 - View the color coding for the Part of Speech and Morpology to quickly see associated words
 
 ### Open Source
@@ -38,7 +39,7 @@ More information about MorphGNT is found at:
 
 #### The SBL Greek New Testament
 
-The Greek Bible App uses SNLGNT as its text:
+The Greek Bible App uses SNLGNT (Society of Biblical Literature Greek New Testament) as its text:
 
 	With the work of textual criticism far from complete, there is a continual need for fresh research and analysis. 
 	The SBLGNT, edited by Michael W. Holmes, utilizes a wide range of printed editions, all the major critical apparatuses, 
