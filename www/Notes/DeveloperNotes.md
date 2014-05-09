@@ -1,5 +1,19 @@
 ### Publishing
 
+#### Process
+
+- Create screen shots (using screen shot tool that I created - resize second monitor to oversize and rotate to fit large screenshots)
+- Create icon at multiple resolutions
+- Create feature graphic for Google App Store (1024x500)
+- Create simple description and copy to config.xml for PhoneGap
+- Copy description to Google Play (format with simple html tags)
+- Create a privacy policy (Google: app privacy policy) https://www.docracy.com/6016/mobile-privacy-policy
+- Fill out all Google Play information
+- Build with phonegap
+- Upload apk from phonegap to Google Play
+- 
+
+
 #### Required Splash Screens
 
 	http://phonegap.com/blog/build/new-apple-app-store-submittal-rules/

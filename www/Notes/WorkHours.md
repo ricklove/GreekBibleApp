@@ -417,8 +417,14 @@ Apply some shine to the UI:
 - Add Icons to About Page
 - Save Screenshots
 - Sync with Github
-- Rebuild with PhoneGapBuild
+- Fill out Google Play Info
+
+### V1.0 H5
+
+#### What is the most important thing to do?
+
 - Publish to Google Play
+
 
 ### NEXT
 
