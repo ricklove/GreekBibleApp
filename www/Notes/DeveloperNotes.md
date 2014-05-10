@@ -1,16 +1,32 @@
 ### Publishing
 
-#### Process
+#### Google Play Process
 
 - Create screen shots (using screen shot tool that I created - resize second monitor to oversize and rotate to fit large screenshots)
 - Create icon at multiple resolutions
-- Create feature graphic for Google App Store (1024x500)
+- Create feature graphic for Google Play Store (1024x500)
+- Create promo graphic for Google Play Store
 - Create simple description and copy to config.xml for PhoneGap
 - Copy description to Google Play (format with simple html tags)
 - Create a privacy policy (Google: app privacy policy) https://www.docracy.com/6016/mobile-privacy-policy
 - Fill out all Google Play information
+- Create a signing key using the keytool java tool 
+	- Find keytool.exe: C:\Program Files (x86)\Java\jre6\bin
+	- Run keytool.exe:
+		- keytool -genkey -v -keystore C:\DIR\APPNAME.keystore -alias APPNAME -keyalg RSA -keysize 2048 -validity 10000
+	- i.e.
+		- cd  C:\Program Files (x86)\Java\jre6\bin
+		- keytool -genkey -v -keystore D:\UserData\Projects\5HourApps\GreekBible\Releases\TOLDGreekBible.keystore -alias TOLDGreekBible -keyalg RSA -keysize 2048 -validity 10000
+- Upload the key to phonegap
 - Build with phonegap
 - Upload apk from phonegap to Google Play
+- Finish the questions on Google Play
+- Hit Publish!
+
+#### InMobi Process
+
+This should be completed after Google Play App is published
+
 - 
 
 

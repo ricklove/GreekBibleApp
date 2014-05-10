@@ -425,11 +425,33 @@ Apply some shine to the UI:
 
 - Publish to Google Play
 
+#### Completed
+
+- Created a signing key and built a release build on PhoneGapBuild
+
+### V1.0 H6 (1st 30 Min)
+
+#### What is the most important thing to do?
+
+- Publish to Google Play
+	- Upload apk to Google Play
+	- Finish completing the Distribution agreements
+	- Hit Publish!
+	- Celebrate!
+
+
 
 ### NEXT
 
+- Confirm app submission to Google Play
+
 - Submit to InMobi Publish
+- Confirm app submission to InMobi
+
 - Create Blog Post
+- Update GitHub Readme info
+- Update My Profile on Careers 2.0
+
 
 - Submit to Windows Store
 - Submit to Apple Store

@@ -169,13 +169,17 @@
 - [x] FIX: Bug when choosing different verse in same chapter quickly
 
 - [ ] Publish
-	- [ ] Review summary & description
-	- [ ] Add Credits for license
-	- [ ] WebApp
-		- [ ] Make ScreenShots
+	- [x] Review summary & description
+	- [x] Add Credits for license
+	- [x] Make ScreenShots
 	- [ ] PhoneGap
 	- [ ] GitHub
 	- [ ] Blog
+
+- [ ] Bug List
+	- [ ] About screen text is going off the edge of the screen on Kindle
+	- [ ] Clicking related words is hard to hit on kindle
+	- [ ] Going back a verse from next chapter causes it to flash up verse 1 before moving to the last verse
 
 ---
 
