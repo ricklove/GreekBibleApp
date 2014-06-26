@@ -1,4 +1,15 @@
-﻿
+﻿@font-face {
+    font-family: 'Tinos';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Tinos'), url(Tinos.woff) format('woff');
+}
+
+.rawText, .lemma, .strongsReference {
+    font-family: 'Tinos', serif;
+}
+
+
 #qunit-tests li li.pass {
     white-space: pre;
 }
@@ -21,9 +32,6 @@ html {
     color: rgb(65, 131, 196);
 
     box-shadow: rgb(175, 175, 175) 0px -2px 0px 0px inset;*/
-
-
-
 }
 
 .entries {

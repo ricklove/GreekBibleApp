@@ -186,6 +186,7 @@
 	- [ ] Add more context verses on tablets
 
 - [ ] Features
+	- [ ] Add Google Analytics
 	- [ ] Adjustable font size
 
 

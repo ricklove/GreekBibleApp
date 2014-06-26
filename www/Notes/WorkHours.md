@@ -445,7 +445,16 @@ Apply some shine to the UI:
 
 I will fix the font problem on older Android
 
-### 6:06-
+### 6:06-6:30
+
+- Researching Fonts
+- Add Google Analytics
+
+### 6:40-6:55
+
+- Add Font for Greek
+
+
 
 
 
