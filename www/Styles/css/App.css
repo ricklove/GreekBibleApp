@@ -1,12 +1,13 @@
-﻿@font-face {
+﻿/* http://www.fontspring.com/blog/the-new-bulletproof-font-face-syntax */
+@font-face {
     font-family: 'Tinos';
+    src: url('Tinos.eot?iefix') format('embedded-opentype'), url('Tinos.woff') format('woff'), url('Tinos.ttf') format('truetype'), url('Tinos.svg#Tinos') format('svg');
     font-style: normal;
     font-weight: 400;
-    src: local('Tinos'), url(Tinos.woff) format('woff');
 }
 
 .rawText, .lemma, .strongsReference {
-    font-family: 'Tinos', serif;
+    font-family: 'Tinos' !important;
 }
 
 
