@@ -439,6 +439,14 @@ Apply some shine to the UI:
 	- Hit Publish!
 	- Celebrate!
 
+## V1.1
+
+### 2014-06-26 6:04-6:05 Plan
+
+I will fix the font problem on older Android
+
+### 6:06-
+
 
 
 ### NEXT

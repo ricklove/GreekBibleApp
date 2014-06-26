@@ -168,18 +168,26 @@
 - [x] Tweak UI
 - [x] FIX: Bug when choosing different verse in same chapter quickly
 
-- [ ] Publish
+- [x] Publish
 	- [x] Review summary & description
 	- [x] Add Credits for license
 	- [x] Make ScreenShots
-	- [ ] PhoneGap
-	- [ ] GitHub
-	- [ ] Blog
+	- [x] PhoneGap
+	- [x] GitHub
+
+### Greek Bible V1.0
 
 - [ ] Bug List
+	- [ ] Fix Font on older Android devices
 	- [ ] About screen text is going off the edge of the screen on Kindle
+	- [ ] Links to website are not allowed in InMobi publish
 	- [ ] Clicking related words is hard to hit on kindle
 	- [ ] Going back a verse from next chapter causes it to flash up verse 1 before moving to the last verse
+	- [ ] Add more context verses on tablets
+
+- [ ] Features
+	- [ ] Adjustable font size
+
 
 ---
 

@@ -27,7 +27,10 @@
 
 This should be completed after Google Play App is published
 
-- 
+- Use the id to find the Free app on google play
+	- com.toldpro.greekbible
+- ERROR: Must remove links to website in about page
+
 
 
 #### Required Splash Screens
