@@ -336,10 +336,18 @@ The result is a critically edited text that differs from the Nestle-Aland/United
 
                     console.log("Loaded Unit Tests");
 
-                    $(document).ready(function () {
-                        //QUnit.load();
-                        QUnit.start();
-                    });
+                    $("#home").hide();
+
+                    setTimeout(function () {
+                        $(document).ready(function () {
+                            //QUnit.load();
+                            QUnit.start();
+
+                            $("#loadingScreen").hide();
+                            $("#home").hide();
+                            $("#test").show();
+                        });
+                    }, 1000);
                 });
             });
         }
